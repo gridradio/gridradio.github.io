@@ -3,7 +3,7 @@
   "short_name": "Radio Locator",
   "description": "A web app to determine OS grid references, WAB squares, and Maidenhead locators for amateur radio operators.",
   "start_url": "/",
-  "display": "standalone",
+  "display": "fullscreen",
   "background_color": "#f8f9fa",
   "theme_color": "#007bff",
   "orientation": "portrait",
