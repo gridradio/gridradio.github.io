@@ -25,6 +25,7 @@
         }
         .loading-screen {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -34,6 +35,15 @@
             top: 0;
             left: 0;
             z-index: 1000;
+            text-align: center;
+        }
+        .loading-screen h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .loading-screen p {
+            margin-top: 10px;
+            font-size: 1.2em;
         }
         .content {
             display: none;
@@ -117,8 +127,9 @@
         .high-contrast .card-text {
             font-size: 1.5em !important;
         }
-        .high-contrast .btn {
-            color: #000 !important;
+        .high-contrast .btn-primary,
+        .high-contrast .btn-secondary {
+            color: #fff !important;
         }
         .toggle-buttons {
             display: flex;
@@ -142,9 +153,12 @@
 </head>
 <body>
     <div class="loading-screen">
+        <h1>grid.radio - Amateur Radio Locator</h1>
         <div class="spinner-border" role="status">
             <span class="sr-only">Loading...</span>
         </div>
+        <p>Allow access to location to use this site, this is not sent over the Internet</p>
+        <button class="btn btn-secondary mt-3" onclick="showGeolocationError()">Select Location Manually</button>
     </div>
     <div class="container content">
         <h1>Amateur Radio Locator</h1>
@@ -360,6 +374,7 @@
         function refreshLocation() {
             document.querySelector('.loading-screen').style.display = 'flex';
             document.querySelector('.content').style.display = 'none';
+            document.getElementById('geolocation-alert').style.display = 'none';
 
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
