@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amateur Radio Locator</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Amateur Radio Locator">
+    <meta name="application-name" content="Amateur Radio Locator">
+    <link rel="apple-touch-icon" href="icon-192-cropped.png">
+    <link rel="icon" sizes="192x192" href="icon-192-cropped.png">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .loading-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            background-color: #f8f9fa;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        .content {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .card {
+            margin-top: 20px;
+            position: relative;
+        }
+        .alert {
+            margin-top: 20px;
+            display: none;
+        }
+        .copy-icon-container {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .copy-icon {
+            font-size: 20px;
+        }
+        .copied-popup {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #28a745;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 14px;
+            display: none;
+            z-index: 10;
+        }
+        .failed-popup {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 14px;
+            display: none;
+            z-index: 10;
+        }
+        .vertical-separator {
+            border-left: 1px solid #ddd;
+            height: 100%;
+            position: absolute;
+            right: 50px;
+            top: 0;
+        }
+        #map {
+            height: 400px;
+            width: 100%;
+            margin-top: 20px;
+            display: none;
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        .high-contrast {
+            background-color: #000 !important;
+            color: #ff0 !important;
+        }
+        .high-contrast .card {
+            background-color: #333 !important;
+            color: #ff0 !important;
+        }
+        .high-contrast .card-text {
+            font-size: 1.5em !important;
+        }
+        .high-contrast .btn {
+            color: #000 !important;
+        }
+        .toggle-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .btn-high-contrast {
+            background-color: #ff0;
+            color: #000;
+        }
+        @media (max-width: 576px) {
+            .copy-icon-container {
+                width: 30px;
+            }
+            .vertical-separator {
+                right: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-screen">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <div class="container content">
+        <h1>Amateur Radio Locator</h1>
+        <div class="alert alert-warning" role="alert" id="geolocation-alert">
+            Geolocation could not be completed. Please use the map to select a location.
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Maidenhead Locator</h5>
+                <p class="card-text" id="maidenhead-locator">Loading...</p>
+                <div class="vertical-separator"></div>
+                <div class="copy-icon-container" onclick="copyToClipboard('maidenhead-locator')">
+                    <span class="copy-icon">📋</span>
+                </div>
+                <div class="copied-popup">Copied!</div>
+                <div class="failed-popup">Failed!</div>
+            </div>
+        </div>
+        <div class="card" id="wab-square-card">
+            <div class="card-body">
+                <h5 class="card-title">WAB Square</h5>
+                <p class="card-text" id="wab-square">Loading...</p>
+                <div class="vertical-separator"></div>
+                <div class="copy-icon-container" onclick="copyToClipboard('wab-square')">
+                    <span class="copy-icon">📋</span>
+                </div>
+                <div class="copied-popup">Copied!</div>
+                <div class="failed-popup">Failed!</div>
+            </div>
+        </div>
+        <div class="card" id="os-grid-card">
+            <div class="card-body">
+                <h5 class="card-title">OS Grid Reference</h5>
+                <p class="card-text" id="os-grid">Loading...</p>
+                <div class="vertical-separator"></div>
+                <div class="copy-icon-container" onclick="copyToClipboard('os-grid')">
+                    <span class="copy-icon">📋</span>
+                </div>
+                <div class="copied-popup">Copied!</div>
+                <div class="failed-popup">Failed!</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Latitude and Longitude</h5>
+                <p class="card-text" id="latitude-longitude">Loading...</p>
+                <div class="vertical-separator"></div>
+                <div class="copy-icon-container" onclick="copyToClipboard('latitude-longitude')">
+                    <span class="copy-icon">📋</span>
+                </div>
+                <div class="copied-popup">Copied!</div>
+                <div class="failed-popup">Failed!</div>
+            </div>
+        </div>
+        <div class="card" id="altitude-card">
+            <div class="card-body">
+                <h5 class="card-title">Altitude</h5>
+                <p class="card-text" id="altitude-values">Loading...</p>
+                <div class="vertical-separator"></div>
+                <div class="copy-icon-container" onclick="copyToClipboard('altitude-values')">
+                    <span class="copy-icon">📋</span>
+                </div>
+                <div class="copied-popup">Copied!</div>
+                <div class="failed-popup">Failed!</div>
+            </div>
+        </div>
+        <div class="toggle-buttons">
+            <button class="btn btn-primary" onclick="refreshLocation()">Refresh Location</button>
+            <button class="btn btn-secondary" onclick="toggleMap()">Toggle Map</button>
+            <button class="btn btn-high-contrast" onclick="toggleHighContrast()">High Contrast</button>
+        </div>
+        <div id="map"></div>
+    </div>
+    <footer>
+        <p>Made by Rose <a href="https://www.qrz.com/db/2E0RXO" target="_blank">2E0RXO</a> 💖</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        function degToRad(deg) {
+            return deg * Math.PI / 180;
+        }
+
+        function latLonToOSGB(lat, lon) {
+            if (lat < 49.0 || lat > 61.0 || lon < -8.0 || lon > 2.0) {
+                return null;
+            }
+
+            const a = 6377563.396;
+            const b = 6356256.909;
+            const F0 = 0.9996012717;
+            const lat0 = 49 * Math.PI / 180;
+            const lon0 = -2 * Math.PI / 180;
+            const N0 = -100000;
+            const E0 = 400000;
+            const e2 = 1 - (b * b) / (a * a);
+            const n = (a - b) / (a + b);
+            const n2 = n * n;
+            const n3 = n * n * n;
+
+            const phi = degToRad(lat);
+            const lambda = degToRad(lon);
+
+            const sinPhi = Math.sin(phi);
+            const cosPhi = Math.cos(phi);
+            const tanPhi = Math.tan(phi);
+
+            const nu = a * F0 / Math.sqrt(1 - e2 * sinPhi * sinPhi);
+            const rho = a * F0 * (1 - e2) / Math.pow(1 - e2 * sinPhi * sinPhi, 1.5);
+            const eta2 = nu / rho - 1;
+
+            const M = b * F0 * (
+                (1 + n + (5 / 4) * (n2 + n3)) * (phi - lat0)
+                - (3 * (n + n2 + (7 / 8) * n3)) * Math.sin(phi - lat0) * Math.cos(phi + lat0)
+                + (15 / 8) * (n2 + n3) * Math.sin(2 * (phi - lat0)) * Math.cos(2 * (phi + lat0))
+                - (35 / 24) * n3 * Math.sin(3 * (phi - lat0)) * Math.cos(3 * (phi + lat0))
+            );
+
+            const I = M + N0;
+            const II = (nu / 2) * sinPhi * cosPhi;
+            const III = (nu / 24) * sinPhi * cosPhi * cosPhi * cosPhi * (5 - tanPhi * tanPhi + 9 * eta2);
+            const IIIA = (nu / 720) * sinPhi * cosPhi * cosPhi * cosPhi * cosPhi * cosPhi * (61 - 58 * tanPhi * tanPhi + tanPhi * tanPhi * tanPhi * tanPhi);
+            const IV = nu * cosPhi;
+            const V = (nu / 6) * cosPhi * cosPhi * cosPhi * (nu / rho - tanPhi * tanPhi);
+            const VI = (nu / 120) * cosPhi * cosPhi * cosPhi * cosPhi * cosPhi * (5 - 18 * tanPhi * tanPhi + tanPhi * tanPhi * tanPhi * tanPhi + 14 * eta2 - 58 * tanPhi * tanPhi * eta2);
+
+            const deltaLambda = lambda - lon0;
+            const deltaLambda2 = deltaLambda * deltaLambda;
+            const deltaLambda3 = deltaLambda2 * deltaLambda;
+            const deltaLambda4 = deltaLambda3 * deltaLambda;
+            const deltaLambda5 = deltaLambda4 * deltaLambda;
+            const deltaLambda6 = deltaLambda5 * deltaLambda;
+
+            const northing = I + II * deltaLambda2 + III * deltaLambda4 + IIIA * deltaLambda6;
+            const easting = E0 + IV * deltaLambda + V * deltaLambda3 + VI * deltaLambda5;
+
+            return { easting: easting, northing: northing };
+        }
+
+        function toOSGridReference(easting, northing) {
+            const e100k = Math.floor(easting / 100000);
+            const n100k = Math.floor(northing / 100000);
+
+            const gridLetters = [
+                ['SV', 'SW', 'SX', 'SY', 'SZ', 'TV', 'TW'],
+                ['SQ', 'SR', 'SS', 'ST', 'SU', 'TQ', 'TR'],
+                ['SL', 'SM', 'SN', 'SO', 'SP', 'TL', 'TM'],
+                ['SF', 'SG', 'SH', 'SJ', 'SK', 'TF', 'TG'],
+                ['SA', 'SB', 'SC', 'SD', 'SE', 'TA', 'TB'],
+                ['NV', 'NW', 'NX', 'NY', 'NZ', 'OV', 'OW'],
+                ['NQ', 'NR', 'NS', 'NT', 'NU', 'OQ', 'OR'],
+                ['NL', 'NM', 'NN', 'NO', 'NP', 'OL', 'OM'],
+                ['NF', 'NG', 'NH', 'NJ', 'NK', 'OF', 'OG'],
+                ['NA', 'NB', 'NC', 'ND', 'NE', 'OA', 'OB'],
+                ['HV', 'HW', 'HX', 'HY', 'HZ', 'JV', 'JW'],
+                ['HQ', 'HR', 'HS', 'HT', 'HU', 'JQ', 'JR'],
+                ['HL', 'HM', 'HN', 'HO', 'HP', 'JL', 'JM']
+            ];
+
+            const l1 = Math.floor(e100k);
+            const l2 = Math.floor(n100k);
+            const gridSquare = gridLetters[l2][l1];
+
+            const eastingWithin = Math.floor(easting % 100000);
+            const northingWithin = Math.floor(northing % 100000);
+
+            const easting6 = Math.floor(eastingWithin / 100).toString().padStart(3, '0');
+            const northing6 = Math.floor(northingWithin / 100).toString().padStart(3, '0');
+
+            return gridSquare + " " + easting6 + " " + northing6;
+        }
+
+        function osGridReferenceToWAB(gridReference) {
+            const letters = gridReference.slice(0, 2);
+            const eastingNorthing = gridReference.slice(2).replace(/\s+/g, '');
+
+            if (eastingNorthing.length !== 6) {
+                throw new Error('Grid reference must be a six-figure grid reference.');
+            }
+
+            const e1 = eastingNorthing[0];
+            const n1 = eastingNorthing[3];
+
+            const wabSquare = letters + e1 + n1;
+
+            return wabSquare;
+        }
+
+        function latLonToMaidenhead(lat, lon) {
+            lon = lon + 180;
+            lat = lat + 90;
+
+            const A = String.fromCharCode(Math.floor(lon / 20) + 65);
+            const B = String.fromCharCode(Math.floor(lat / 10) + 65);
+
+            lon = lon % 20;
+            lat = lat % 10;
+
+            const C = Math.floor(lon / 2);
+            const D = Math.floor(lat / 1);
+
+            lon = lon % 2;
+            lat = lat % 1;
+
+            const E = String.fromCharCode(Math.floor(lon * 12) + 97);
+            const F = String.fromCharCode(Math.floor(lat * 24) + 97);
+
+            const maidenheadLocator = `${A}${B}${C}${D}${E}${F}`;
+
+            return maidenheadLocator;
+        }
+
+        function refreshLocation() {
+            document.querySelector('.loading-screen').style.display = 'flex';
+            document.querySelector('.content').style.display = 'none';
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    const altitudeMeters = position.coords.altitude ? position.coords.altitude.toFixed(2) : 'N/A';
+                    const altitudeFeet = altitudeMeters !== 'N/A' ? (altitudeMeters * 3.28084).toFixed(2) : 'N/A';
+                    const pressure = position.coords.altitudeAccuracy ? `${position.coords.altitudeAccuracy.toFixed(2)} hPa` : 'N/A';
+
+                    updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure);
+                    document.querySelector('.loading-screen').style.display = 'none';
+                    document.querySelector('.content').style.display = 'block';
+
+                    updateMap(lat, lon);
+                }, (error) => {
+                    showGeolocationError();
+                }, {
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                    maximumAge: 0
+                });
+            } else {
+                showGeolocationError();
+            }
+        }
+
+        function showGeolocationError() {
+            const defaultLat = 52.3555;
+            const defaultLon = -1.1743;
+            updateDisplay(defaultLat, defaultLon, 'N/A', 'N/A', 'N/A');
+            document.querySelector('.loading-screen').style.display = 'none';
+            document.querySelector('.content').style.display = 'block';
+            document.getElementById('map').style.display = 'block';
+            document.getElementById('geolocation-alert').style.display = 'block';
+            updateMap(defaultLat, defaultLon, 6); // More zoomed out
+        }
+
+        function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure) {
+            document.getElementById('latitude-longitude').innerText = `${lat.toFixed(6)}, ${lon.toFixed(6)}`;
+
+            let altitudeText = `${altitudeFeet} ft | ${altitudeMeters} m`;
+            if (pressure !== 'N/A') {
+                altitudeText += ` | ${pressure}`;
+            }
+
+            document.getElementById('altitude-values').innerText = altitudeText;
+            document.getElementById('altitude-card').style.display = altitudeMeters !== 'N/A' ? 'block' : 'none';
+
+            const osgb = latLonToOSGB(lat, lon);
+            if (osgb) {
+                const osGridReference = toOSGridReference(osgb.easting, osgb.northing);
+                const wabSquare = osGridReferenceToWAB(osGridReference);
+
+                document.getElementById('os-grid').innerText = osGridReference;
+                document.getElementById('wab-square').innerText = wabSquare;
+
+                document.getElementById('os-grid-card').style.display = 'block';
+                document.getElementById('wab-square-card').style.display = 'block';
+            } else {
+                document.getElementById('os-grid-card').style.display = 'none';
+                document.getElementById('wab-square-card').style.display = 'none';
+            }
+
+            const maidenheadLocator = latLonToMaidenhead(lat, lon);
+            document.getElementById('maidenhead-locator').innerText = maidenheadLocator;
+        }
+
+        function toggleMap() {
+            const mapElement = document.getElementById('map');
+            if (mapElement.style.display === 'none' || mapElement.style.display === '') {
+                mapElement.style.display = 'block';
+                if (mapElement._leaflet_map) {
+                    mapElement._leaflet_map.invalidateSize();
+                }
+            } else {
+                mapElement.style.display = 'none';
+            }
+        }
+
+        function toggleHighContrast() {
+            document.body.classList.toggle('high-contrast');
+        }
+
+        function normalizeLatLng(latlng) {
+            let lat = latlng.lat;
+            let lon = latlng.lng;
+
+            lat = Math.max(-90, Math.min(90, lat));
+            while (lon < -180) lon += 360;
+            while (lon > 180) lon -= 360;
+
+            return { lat: lat, lng: lon };
+        }
+
+        function updateMap(lat, lon, zoom = null) {
+            const mapElement = document.getElementById('map');
+            const currentZoom = zoom || (mapElement._leaflet_map ? mapElement._leaflet_map.getZoom() : 13);
+
+            if (mapElement._leaflet_map) {
+                mapElement._leaflet_map.setView([lat, lon], currentZoom);
+                if (mapElement._leaflet_marker) {
+                    mapElement._leaflet_marker.setLatLng([lat, lon]);
+                }
+            } else {
+                const map = L.map('map', { doubleClickZoom: false }).setView([lat, lon], currentZoom);
+                mapElement._leaflet_map = map;
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                }).addTo(map);
+
+                const marker = L.marker([lat, lon], { draggable: true }).addTo(map);
+                mapElement._leaflet_marker = marker;
+
+                marker.on('dragend', function(event) {
+                    const newLatLng = normalizeLatLng(event.target.getLatLng());
+                    updateDisplay(newLatLng.lat, newLatLng.lng, 'N/A', 'N/A', 'N/A');
+                    mapElement._leaflet_map.setView(newLatLng, currentZoom);
+                });
+
+                map.on('dblclick', function(event) {
+                    const newLatLng = normalizeLatLng(event.latlng);
+                    marker.setLatLng(newLatLng);
+                    updateDisplay(newLatLng.lat, newLatLng.lng, 'N/A', 'N/A', 'N/A');
+                });
+            }
+        }
+
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                showPopup(elementId, 'copied');
+            }).catch(err => {
+                showPopup(elementId, 'failed');
+            });
+        }
+
+        function showPopup(elementId, type) {
+            const element = document.getElementById(elementId).parentElement;
+            const popup = type === 'copied' ? element.querySelector('.copied-popup') : element.querySelector('.failed-popup');
+            popup.style.display = 'block';
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 2000);
+        }
+
+        window.onload = refreshLocation;
+    </script>
+</body>
+</html>
