@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amateur Radio Locator</title>
+    <meta name="description" content="A web app to determine OS grid references, WAB squares, and Maidenhead locators for amateur radio operators.">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <meta name="mobile-web-app-capable" content="yes">
@@ -205,6 +206,7 @@
             <div class="card-body">
                 <h5 class="card-title">Latitude and Longitude</h5>
                 <p class="card-text" id="latitude-longitude">Loading...</p>
+                <p class="card-text" id="location-accuracy">Accuracy: Loading...</p>
                 <div class="vertical-separator"></div>
                 <div class="copy-icon-container" onclick="copyToClipboard('latitude-longitude')">
                     <span class="copy-icon">📋</span>
@@ -383,8 +385,9 @@
                     const altitudeMeters = position.coords.altitude ? position.coords.altitude.toFixed(2) : 'N/A';
                     const altitudeFeet = altitudeMeters !== 'N/A' ? (altitudeMeters * 3.28084).toFixed(2) : 'N/A';
                     const pressure = position.coords.altitudeAccuracy ? `${position.coords.altitudeAccuracy.toFixed(2)} hPa` : 'N/A';
+                    const accuracy = position.coords.accuracy ? `${position.coords.accuracy.toFixed(2)} meters` : 'N/A';
 
-                    updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure);
+                    updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accuracy);
                     document.querySelector('.loading-screen').style.display = 'none';
                     document.querySelector('.content').style.display = 'block';
 
@@ -404,7 +407,7 @@
         function showGeolocationError() {
             const defaultLat = 52.3555;
             const defaultLon = -1.1743;
-            updateDisplay(defaultLat, defaultLon, 'N/A', 'N/A', 'N/A');
+            updateDisplay(defaultLat, defaultLon, 'N/A', 'N/A', 'N/A', 'N/A');
             document.querySelector('.loading-screen').style.display = 'none';
             document.querySelector('.content').style.display = 'block';
             document.getElementById('map').style.display = 'block';
@@ -412,8 +415,10 @@
             updateMap(defaultLat, defaultLon, 6); // More zoomed out
         }
 
-        function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure) {
+        function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accuracy) {
             document.getElementById('latitude-longitude').innerText = `${lat.toFixed(6)}, ${lon.toFixed(6)}`;
+            document.getElementById('location-accuracy').innerText = `Accuracy: ${accuracy}`;
+            document.getElementById('location-accuracy').style.display = accuracy !== 'N/A' ? 'block' : 'none';
 
             let altitudeText = `${altitudeFeet} ft | ${altitudeMeters} m`;
             if (pressure !== 'N/A') {
@@ -491,14 +496,14 @@
 
                 marker.on('dragend', function(event) {
                     const newLatLng = normalizeLatLng(event.target.getLatLng());
-                    updateDisplay(newLatLng.lat, newLatLng.lng, 'N/A', 'N/A', 'N/A');
+                    updateDisplay(newLatLng.lat, newLatLng.lng, 'N/A', 'N/A', 'N/A', 'N/A');
                     mapElement._leaflet_map.setView(newLatLng, currentZoom);
                 });
 
                 map.on('dblclick', function(event) {
                     const newLatLng = normalizeLatLng(event.latlng);
                     marker.setLatLng(newLatLng);
-                    updateDisplay(newLatLng.lat, newLatLng.lng, 'N/A', 'N/A', 'N/A');
+                    updateDisplay(newLatLng.lat, newLatLng.lng, 'N/A', 'N/A', 'N/A', 'N/A');
                 });
             }
         }
