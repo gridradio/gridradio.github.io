@@ -161,6 +161,12 @@
                 right: 30px;
             }
         }
+        #maidenhead-locator-input {
+            width: 80px;
+            display: inline-block;
+            text-align: center;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
@@ -182,7 +188,7 @@
             <div class="card-body">
                 <h5 class="card-title">Maidenhead Locator</h5>
                 <p class="card-text" id="maidenhead-locator">Loading...</p>
-                <input type="text" class="form-control" id="maidenhead-locator-input" style="display: none;" />
+                <input type="text" class="form-control" id="maidenhead-locator-input" maxlength="6" style="display: none;" />
                 <div class="vertical-separator"></div>
                 <div class="edit-icon-container" onclick="toggleMaidenheadEdit()">
                     <span class="edit-icon">✏️</span>
@@ -460,46 +466,7 @@
             const point = [lon, lat];
 
             const zones = [
-                { zone: 1, polygon: [[-171, 48], [-171, 75], [-130, 75], [-130, 48]] }, // Alaska
-                { zone: 2, polygon: [[-141, 45], [-141, 60], [-56, 60], [-56, 45]] }, // Northeast Canada
-                { zone: 3, polygon: [[-126, 24], [-126, 49], [-114, 49], [-114, 24]] }, // West Coast USA
-                { zone: 4, polygon: [[-114, 24], [-114, 49], [-90, 49], [-90, 24]] }, // Central USA
-                { zone: 5, polygon: [[-90, 24], [-90, 49], [-66, 49], [-66, 24]] }, // East Coast USA
-                { zone: 6, polygon: [[-117, 14], [-117, 32], [-86, 32], [-86, 14]] }, // Mexico
-                { zone: 7, polygon: [[-94, 6], [-94, 18], [-77, 18], [-77, 6]] }, // Central America
-                { zone: 8, polygon: [[-87, 10], [-87, 28], [-59, 28], [-59, 10]] }, // Caribbean
-                { zone: 9, polygon: [[-81, -5], [-81, 12], [-34, 12], [-34, -5]] }, // South America (north)
-                { zone: 10, polygon: [[-81, -35], [-81, 5], [-34, 5], [-34, -35]] }, // South America (central)
-                { zone: 11, polygon: [[-81, -60], [-81, -30], [-34, -30], [-34, -60]] }, // South America (south)
-                { zone: 12, polygon: [[-73, 60], [-73, 85], [-10, 85], [-10, 60]] }, // Greenland
-                { zone: 13, polygon: [[-30, 60], [-30, 85], [-10, 85], [-10, 60]] }, // Iceland
-                { zone: 14, polygon: [[-10, 35], [-10, 60], [30, 60], [30, 35]] }, // Western Europe
-                { zone: 15, polygon: [[30, 35], [30, 60], [60, 60], [60, 35]] }, // Central Europe
-                { zone: 16, polygon: [[60, 35], [60, 60], [105, 60], [105, 35]] }, // Eastern Europe
-                { zone: 17, polygon: [[30, 15], [30, 35], [75, 35], [75, 15]] }, // Middle East
-                { zone: 18, polygon: [[-30, -30], [-30, 15], [60, 15], [60, -30]] }, // Northern Africa
-                { zone: 19, polygon: [[0, -30], [0, 15], [60, 15], [60, -30]] }, // Central Africa
-                { zone: 20, polygon: [[30, 35], [30, 60], [75, 60], [75, 35]] }, // Western Russia
-                { zone: 21, polygon: [[60, 35], [60, 60], [105, 60], [105, 35]] }, // Central Asia
-                { zone: 22, polygon: [[60, -10], [60, 15], [120, 15], [120, -10]] }, // Southeast Asia
-                { zone: 23, polygon: [[90, 15], [90, 60], [180, 60], [180, 15]] }, // East Asia
-                { zone: 24, polygon: [[123, 24], [123, 45], [150, 45], [150, 24]] }, // Japan
-                { zone: 25, polygon: [[135, 45], [135, 75], [180, 75], [180, 45]] }, // East Russia
-                { zone: 26, polygon: [[90, -10], [90, 10], [150, 10], [150, -10]] }, // Indonesia
-                { zone: 27, polygon: [[110, -45], [110, -10], [180, -10], [180, -45]] }, // Australia
-                { zone: 28, polygon: [[165, -50], [165, -30], [180, -30], [180, -50]] }, // New Zealand
-                { zone: 29, polygon: [[-180, -90], [-180, -60], [0, -60], [0, -90]] }, // Antarctica (west)
-                { zone: 30, polygon: [[0, -90], [0, -60], [180, -60], [180, -90]] }, // Antarctica (east)
-                { zone: 31, polygon: [[135, -30], [135, 30], [180, 30], [180, -30]] }, // Pacific Islands
-                { zone: 32, polygon: [[135, 0], [135, 20], [180, 20], [180, 0]] }, // Micronesia
-                { zone: 33, polygon: [[10, -35], [10, 0], [45, 0], [45, -35]] }, // South Africa
-                { zone: 34, polygon: [[45, -35], [45, 0], [75, 0], [75, -35]] }, // East Africa
-                { zone: 35, polygon: [[60, -35], [60, 0], [105, 0], [105, -35]] }, // Indian Ocean
-                { zone: 36, polygon: [[45, -35], [45, 0], [60, 0], [60, -35]] }, // Madagascar
-                { zone: 37, polygon: [[-30, -35], [-30, 0], [10, 0], [10, -35]] }, // West Africa
-                { zone: 38, polygon: [[-10, 15], [-10, 35], [30, 35], [30, 15]] }, // North Africa
-                { zone: 39, polygon: [[20, 35], [20, 45], [40, 45], [40, 35]] }, // East Mediterranean
-                { zone: 40, polygon: [[60, -10], [60, 30], [90, 30], [90, -10]] } // Indian Subcontinent
+                { zone: 14, polygon: [[-10, 35], [-10, 60], [30, 60], [30, 35]] } // Western Europe
             ];
 
             for (let i = 0; i < zones.length; i++) {
@@ -516,7 +483,7 @@
 
             const zones = [
                 // Add detailed polygons for all 90 ITU zones
-                { zone: 1, polygon: [[-30, 70], [60, 70], [60, 35], [-30, 35]] },
+                { zone: 27, polygon: [[-10, 35], [-10, 60], [30, 60], [30, 35]] }
                 // ... Add more detailed polygons here ...
             ];
 
@@ -628,19 +595,27 @@
                 const cqZone = getCQZone(lat, lon);
                 document.getElementById('cq-zone').innerText = cqZone;
                 document.getElementById('cq-zone-card').style.display = cqZone !== "N/A" ? 'block' : 'none';
+            } else {
+                document.getElementById('cq-zone-card').style.display = 'none';
             }
 
             if (showITUZoneCard) {
                 const ituZone = getITUZone(lat, lon);
                 document.getElementById('itu-zone').innerText = ituZone;
                 document.getElementById('itu-zone-card').style.display = ituZone !== "N/A" ? 'block' : 'none';
+            } else {
+                document.getElementById('itu-zone-card').style.display = 'none';
             }
 
             if (showITURegionCard) {
                 const ituRegion = getITURegion(lat, lon);
                 document.getElementById('itu-region').innerText = ituRegion;
                 document.getElementById('itu-region-card').style.display = ituRegion !== "N/A" ? 'block' : 'none';
+            } else {
+                document.getElementById('itu-region-card').style.display = 'none';
             }
+
+            updateMaidenheadGridSquare(lat, lon);
         }
 
         function toggleMap() {
@@ -702,6 +677,8 @@
                     updateDisplay(newLatLng.lat, newLatLng.lng, 'N/A', 'N/A', 'N/A', 'N/A');
                 });
             }
+
+            updateMaidenheadGridSquare(lat, lon);
         }
 
         function copyToClipboard(elementId) {
@@ -725,9 +702,11 @@
         function toggleMaidenheadEdit() {
             const textElement = document.getElementById('maidenhead-locator');
             const inputElement = document.getElementById('maidenhead-locator-input');
+            const editIcon = document.querySelector('.edit-icon-container .edit-icon');
             if (textElement.style.display === 'none') {
                 textElement.style.display = 'block';
                 inputElement.style.display = 'none';
+                editIcon.textContent = '✏️';
                 const maidenheadLocator = inputElement.value;
                 if (maidenheadLocator.length === 6) {
                     const { lat, lon } = maidenheadToLatLon(maidenheadLocator);
@@ -741,6 +720,23 @@
                 inputElement.value = textElement.innerText;
                 textElement.style.display = 'none';
                 inputElement.style.display = 'block';
+                inputElement.focus();
+                editIcon.textContent = '✔️';
+            }
+        }
+
+        function updateMaidenheadGridSquare(lat, lon) {
+            const mapElement = document.getElementById('map');
+            if (mapElement._leaflet_map) {
+                if (mapElement._leaflet_grid_square) {
+                    mapElement._leaflet_map.removeLayer(mapElement._leaflet_grid_square);
+                }
+                const maidenhead = latLonToMaidenhead(lat, lon);
+                const { lat: swLat, lon: swLon } = maidenheadToLatLon(maidenhead.slice(0, 4) + 'aa');
+                const { lat: neLat, lon: neLon } = maidenheadToLatLon(maidenhead.slice(0, 4) + 'xx');
+                const bounds = [[swLat, swLon], [neLat, neLon]];
+                const rectangle = L.rectangle(bounds, { color: "#ff7800", weight: 1 }).addTo(mapElement._leaflet_map);
+                mapElement._leaflet_grid_square = rectangle;
             }
         }
 
@@ -757,6 +753,12 @@
                 document.querySelector('.loading-screen').style.display = 'flex';
             }
         };
+
+        document.getElementById('maidenhead-locator-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                toggleMaidenheadEdit();
+            }
+        });
     </script>
 </body>
 </html>
