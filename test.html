@@ -318,7 +318,7 @@
             <button class="btn btn-secondary" onclick="toggleMap()">Toggle Map</button>
             <button class="btn btn-high-contrast" onclick="toggleHighContrast()">High Contrast</button>
         </div>
-        <button class="btn btn-secondary mt-3" id="toggle-maidenhead-btn" onclick="toggleMaidenheadGridSquare()" style="display: none;">Toggle Maidenhead Grid</button>
+        <button class="btn btn-secondary mt-3" id="toggle-maidenhead-btn" onclick="toggleMaidenheadGridSquare()" style="display: none;">Show Maidenhead Grid</button>
         <div id="map"></div>
     </div>
     <footer>
@@ -736,6 +736,7 @@
             const textElement = document.getElementById('maidenhead-locator');
             const inputElement = document.getElementById('maidenhead-locator-input');
             const editIcon = document.querySelector('.edit-icon-container .maidenhead-edit-icon');
+
             if (textElement.style.display === 'none') {
                 textElement.style.display = 'block';
                 inputElement.style.display = 'none';
@@ -750,6 +751,9 @@
                     updateMap(lat, lon);
                 }
             } else {
+                if (document.getElementById('latitude-longitude').style.display === 'none') {
+                    toggleLatLonEdit(); // Close the latitude/longitude editor if it's open
+                }
                 inputElement.value = textElement.innerText;
                 textElement.style.display = 'none';
                 inputElement.style.display = 'block';
@@ -765,6 +769,7 @@
             const lonInput = document.getElementById('longitude-input');
             const editIcon = document.querySelector('.edit-icon-container .lat-lon-edit-icon');
             const accuracyElement = document.getElementById('location-accuracy');
+
             if (textElement.style.display === 'none') {
                 const lat = parseFloat(latInput.value);
                 const lon = parseFloat(lonInput.value);
@@ -778,6 +783,9 @@
                 editIcon.textContent = '✏️';
                 accuracyElement.style.display = 'block';
             } else {
+                if (document.getElementById('maidenhead-locator').style.display === 'none') {
+                    toggleMaidenheadEdit(); // Close the maidenhead editor if it's open
+                }
                 const [lat, lon] = textElement.innerText.split(', ').map(Number);
                 latInput.value = lat.toFixed(6);
                 lonInput.value = lon.toFixed(6);
