@@ -159,6 +159,7 @@
             <span class="sr-only">Loading...</span>
         </div>
         <p>Allow access to location to use this site, this is not sent over the Internet</p>
+        <button class="btn btn-primary mt-3" onclick="requestLocationAccess()">Allow Access to Location</button>
         <button class="btn btn-secondary mt-3" onclick="showGeolocationError()">Select Location Manually</button>
     </div>
     <div class="container content">
@@ -404,6 +405,10 @@
             }
         }
 
+        function requestLocationAccess() {
+            refreshLocation();
+        }
+
         function showGeolocationError() {
             const defaultLat = 52.3555;
             const defaultLon = -1.1743;
@@ -526,7 +531,19 @@
             }, 2000);
         }
 
-        window.onload = refreshLocation;
+        window.onload = function() {
+            if (navigator.permissions) {
+                navigator.permissions.query({ name: 'geolocation' }).then(function(result) {
+                    if (result.state === 'granted') {
+                        refreshLocation();
+                    } else {
+                        document.querySelector('.loading-screen').style.display = 'flex';
+                    }
+                });
+            } else {
+                document.querySelector('.loading-screen').style.display = 'flex';
+            }
+        };
     </script>
 </body>
 </html>
