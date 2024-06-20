@@ -70,7 +70,18 @@
             align-items: center;
             cursor: pointer;
         }
-        .copy-icon {
+        .edit-icon-container {
+            position: absolute;
+            top: 0;
+            right: 50px;
+            bottom: 0;
+            width: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .copy-icon, .edit-icon {
             font-size: 20px;
         }
         .copied-popup {
@@ -143,7 +154,7 @@
             color: #000;
         }
         @media (max-width: 576px) {
-            .copy-icon-container {
+            .copy-icon-container, .edit-icon-container {
                 width: 30px;
             }
             .vertical-separator {
@@ -171,7 +182,11 @@
             <div class="card-body">
                 <h5 class="card-title">Maidenhead Locator</h5>
                 <p class="card-text" id="maidenhead-locator">Loading...</p>
+                <input type="text" class="form-control" id="maidenhead-locator-input" style="display: none;" />
                 <div class="vertical-separator"></div>
+                <div class="edit-icon-container" onclick="toggleMaidenheadEdit()">
+                    <span class="edit-icon">✏️</span>
+                </div>
                 <div class="copy-icon-container" onclick="copyToClipboard('maidenhead-locator')">
                     <span class="copy-icon">📋</span>
                 </div>
@@ -277,6 +292,10 @@
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
+        const showCQZoneCard = false;
+        const showITUZoneCard = false;
+        const showITURegionCard = false;
+
         function degToRad(deg) {
             return deg * Math.PI / 180;
         }
@@ -410,6 +429,20 @@
             return maidenheadLocator;
         }
 
+        function maidenheadToLatLon(maidenhead) {
+            const A = maidenhead.charCodeAt(0) - 65;
+            const B = maidenhead.charCodeAt(1) - 65;
+            const C = parseInt(maidenhead.charAt(2));
+            const D = parseInt(maidenhead.charAt(3));
+            const E = maidenhead.charCodeAt(4) - 97;
+            const F = maidenhead.charCodeAt(5) - 97;
+
+            const lon = A * 20 - 180 + C * 2 + E / 12;
+            const lat = B * 10 - 90 + D + F / 24;
+
+            return { lat: lat, lon: lon };
+        }
+
         function pointInPolygon(point, polygon) {
             let x = point[0], y = point[1];
             let inside = false;
@@ -482,10 +515,9 @@
             const point = [lon, lat];
 
             const zones = [
-                // Simplified polygons for ITU zones
-                { zone: 1, polygon: [[-180, -90], [180, -90], [180, 90], [-180, 90]] },
-                { zone: 2, polygon: [[-180, -90], [180, -90], [180, 90], [-180, 90]] }
-                // Add all 90 ITU zones with detailed polygons
+                // Add detailed polygons for all 90 ITU zones
+                { zone: 1, polygon: [[-30, 70], [60, 70], [60, 35], [-30, 35]] },
+                // ... Add more detailed polygons here ...
             ];
 
             for (let i = 0; i < zones.length; i++) {
@@ -592,17 +624,23 @@
             const maidenheadLocator = latLonToMaidenhead(lat, lon);
             document.getElementById('maidenhead-locator').innerText = maidenheadLocator;
 
-            const cqZone = getCQZone(lat, lon);
-            document.getElementById('cq-zone').innerText = cqZone;
-            document.getElementById('cq-zone-card').style.display = cqZone !== "N/A" ? 'block' : 'none';
+            if (showCQZoneCard) {
+                const cqZone = getCQZone(lat, lon);
+                document.getElementById('cq-zone').innerText = cqZone;
+                document.getElementById('cq-zone-card').style.display = cqZone !== "N/A" ? 'block' : 'none';
+            }
 
-            const ituZone = getITUZone(lat, lon);
-            document.getElementById('itu-zone').innerText = ituZone;
-            document.getElementById('itu-zone-card').style.display = ituZone !== "N/A" ? 'block' : 'none';
+            if (showITUZoneCard) {
+                const ituZone = getITUZone(lat, lon);
+                document.getElementById('itu-zone').innerText = ituZone;
+                document.getElementById('itu-zone-card').style.display = ituZone !== "N/A" ? 'block' : 'none';
+            }
 
-            const ituRegion = getITURegion(lat, lon);
-            document.getElementById('itu-region').innerText = ituRegion;
-            document.getElementById('itu-region-card').style.display = ituRegion !== "N/A" ? 'block' : 'none';
+            if (showITURegionCard) {
+                const ituRegion = getITURegion(lat, lon);
+                document.getElementById('itu-region').innerText = ituRegion;
+                document.getElementById('itu-region-card').style.display = ituRegion !== "N/A" ? 'block' : 'none';
+            }
         }
 
         function toggleMap() {
@@ -682,6 +720,28 @@
             setTimeout(() => {
                 popup.style.display = 'none';
             }, 2000);
+        }
+
+        function toggleMaidenheadEdit() {
+            const textElement = document.getElementById('maidenhead-locator');
+            const inputElement = document.getElementById('maidenhead-locator-input');
+            if (textElement.style.display === 'none') {
+                textElement.style.display = 'block';
+                inputElement.style.display = 'none';
+                const maidenheadLocator = inputElement.value;
+                if (maidenheadLocator.length === 6) {
+                    const { lat, lon } = maidenheadToLatLon(maidenheadLocator);
+                    updateDisplay(lat, lon, 'N/A', 'N/A', 'N/A', 'N/A');
+                    if (document.getElementById('map').style.display === 'none') {
+                        toggleMap();
+                    }
+                    updateMap(lat, lon);
+                }
+            } else {
+                inputElement.value = textElement.innerText;
+                textElement.style.display = 'none';
+                inputElement.style.display = 'block';
+            }
         }
 
         window.onload = function() {
