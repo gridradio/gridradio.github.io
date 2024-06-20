@@ -732,8 +732,8 @@
                     mapElement._leaflet_map.removeLayer(mapElement._leaflet_grid_square);
                 }
                 const maidenhead = latLonToMaidenhead(lat, lon);
-                const { lat: swLat, lon: swLon } = maidenheadToLatLon(maidenhead.slice(0, 6) + 'aa');
-                const { lat: neLat, lon: neLon } = maidenheadToLatLon(maidenhead.slice(0, 6) + 'ff');
+                const { lat: swLat, lon: swLon } = maidenheadToLatLon(maidenhead.slice(0, 4) + 'aa');
+                const { lat: neLat, lon: neLon } = maidenheadToLatLon(maidenhead.slice(0, 4) + 'xx');
                 const bounds = [[swLat, swLon], [neLat, neLon]];
                 const rectangle = L.rectangle(bounds, { color: "#ff7800", weight: 1 }).addTo(mapElement._leaflet_map);
                 mapElement._leaflet_grid_square = rectangle;
