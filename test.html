@@ -443,8 +443,8 @@
             const E = maidenhead.charCodeAt(4) - 97;
             const F = maidenhead.charCodeAt(5) - 97;
 
-            const lon = A * 20 - 180 + C * 2 + E / 12;
-            const lat = B * 10 - 90 + D + F / 24;
+            const lon = A * 20 - 180 + C * 2 + E / 12 + 1/24;
+            const lat = B * 10 - 90 + D + F / 24 + 1/48;
 
             return { lat: lat, lon: lon };
         }
@@ -707,8 +707,8 @@
                 textElement.style.display = 'block';
                 inputElement.style.display = 'none';
                 editIcon.textContent = '✏️';
-                const maidenheadLocator = inputElement.value;
-                if (maidenheadLocator.length === 6) {
+                const maidenheadLocator = inputElement.value.trim().toUpperCase().slice(0, 4) + inputElement.value.trim().toLowerCase().slice(4);
+                if (/^[A-R]{2}\d{2}[a-x]{2}$/.test(maidenheadLocator)) {
                     const { lat, lon } = maidenheadToLatLon(maidenheadLocator);
                     updateDisplay(lat, lon, 'N/A', 'N/A', 'N/A', 'N/A');
                     if (document.getElementById('map').style.display === 'none') {
@@ -732,8 +732,8 @@
                     mapElement._leaflet_map.removeLayer(mapElement._leaflet_grid_square);
                 }
                 const maidenhead = latLonToMaidenhead(lat, lon);
-                const { lat: swLat, lon: swLon } = maidenheadToLatLon(maidenhead.slice(0, 4) + 'aa');
-                const { lat: neLat, lon: neLon } = maidenheadToLatLon(maidenhead.slice(0, 4) + 'xx');
+                const { lat: swLat, lon: swLon } = maidenheadToLatLon(maidenhead.slice(0, 6) + 'aa');
+                const { lat: neLat, lon: neLon } = maidenheadToLatLon(maidenhead.slice(0, 6) + 'ff');
                 const bounds = [[swLat, swLon], [neLat, neLon]];
                 const rectangle = L.rectangle(bounds, { color: "#ff7800", weight: 1 }).addTo(mapElement._leaflet_map);
                 mapElement._leaflet_grid_square = rectangle;
