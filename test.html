@@ -188,6 +188,11 @@
             align-items: center;
             margin-top: 10px;
         }
+        .toggle-maidenhead-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -318,7 +323,9 @@
             <button class="btn btn-secondary" onclick="toggleMap()">Toggle Map</button>
             <button class="btn btn-high-contrast" onclick="toggleHighContrast()">High Contrast</button>
         </div>
-        <button class="btn btn-secondary mt-3" id="toggle-maidenhead-btn" onclick="toggleMaidenheadGridSquare()" style="display: none;">Show Maidenhead Grid</button>
+        <div class="toggle-maidenhead-container">
+            <button class="btn btn-secondary mt-3" id="toggle-maidenhead-btn" style="display: none;" onclick="toggleMaidenheadGridSquare()">Show Maidenhead Square</button>
+        </div>
         <div id="map"></div>
     </div>
     <footer>
@@ -561,7 +568,7 @@
                     document.querySelector('.loading-screen').style.display = 'none';
                     document.querySelector('.content').style.display = 'block';
 
-                    updateMap(lat, lon);
+                    updateMap(lat, lon, 11); // Zoomed out by a couple of levels
                 }, (error) => {
                     showGeolocationError();
                 }, {
@@ -645,7 +652,9 @@
                 document.getElementById('itu-region-card').style.display = 'none';
             }
 
-            updateMaidenheadGridSquare(lat, lon);
+            if (document.getElementById('toggle-maidenhead-btn').innerText === 'Hide Maidenhead Square') {
+                updateMaidenheadGridSquare(lat, lon);
+            }
         }
 
         function toggleMap() {
@@ -680,7 +689,7 @@
 
         function updateMap(lat, lon, zoom = null) {
             const mapElement = document.getElementById('map');
-            const currentZoom = zoom || (mapElement._leaflet_map ? mapElement._leaflet_map.getZoom() : 13);
+            const currentZoom = zoom || (mapElement._leaflet_map ? mapElement._leaflet_map.getZoom() : 11); // Set default zoom to 11
 
             if (mapElement._leaflet_map) {
                 mapElement._leaflet_map.setView([lat, lon], currentZoom);
@@ -701,7 +710,8 @@
                 marker.on('dragend', function(event) {
                     const newLatLng = normalizeLatLng(event.target.getLatLng());
                     updateDisplay(newLatLng.lat, newLatLng.lng, 'N/A', 'N/A', 'N/A', 'N/A');
-                    mapElement._leaflet_map.setView(newLatLng, currentZoom);
+                    // Reset the view to the new lat/lon without changing the zoom level
+                    mapElement._leaflet_map.setView(newLatLng, mapElement._leaflet_map.getZoom());
                 });
 
                 map.on('dblclick', function(event) {
@@ -710,8 +720,6 @@
                     updateDisplay(newLatLng.lat, newLatLng.lng, 'N/A', 'N/A', 'N/A', 'N/A');
                 });
             }
-
-            updateMaidenheadGridSquare(lat, lon);
         }
 
         function copyToClipboard(elementId) {
@@ -781,7 +789,7 @@
                 textElement.style.display = 'block';
                 latLonInputs.style.display = 'none';
                 editIcon.textContent = '✏️';
-                accuracyElement.style.display = 'block';
+                accuracyElement.style.display = 'none';
             } else {
                 if (document.getElementById('maidenhead-locator').style.display === 'none') {
                     toggleMaidenheadEdit(); // Close the maidenhead editor if it's open
@@ -800,28 +808,33 @@
         function updateMaidenheadGridSquare(lat, lon) {
             const mapElement = document.getElementById('map');
             if (mapElement._leaflet_map) {
-                if (mapElement._leaflet_grid_square) {
-                    mapElement._leaflet_map.removeLayer(mapElement._leaflet_grid_square);
-                }
                 const maidenhead = latLonToMaidenhead(lat, lon);
                 const { lat: swLat, lon: swLon } = maidenheadToLatLon(maidenhead.slice(0, 4) + 'aa');
                 const { lat: neLat, lon: neLon } = maidenheadToLatLon(maidenhead.slice(0, 4) + 'xx');
                 const bounds = [[swLat, swLon], [neLat, neLon]];
-                const rectangle = L.rectangle(bounds, { color: "#ff7800", weight: 1 }).addTo(mapElement._leaflet_map);
+                const rectangle = L.rectangle(bounds, { color: "#0000FF", weight: 1 });
                 mapElement._leaflet_grid_square = rectangle;
+                if (document.getElementById('toggle-maidenhead-btn').innerText === 'Hide Maidenhead Square') {
+                    mapElement._leaflet_map.addLayer(rectangle);
+                }
             }
         }
 
         function toggleMaidenheadGridSquare() {
             const mapElement = document.getElementById('map');
             const maidenheadToggleBtn = document.getElementById('toggle-maidenhead-btn');
-            if (mapElement._leaflet_grid_square) {
-                if (maidenheadToggleBtn.innerText === 'Hide Maidenhead Grid') {
-                    mapElement._leaflet_map.removeLayer(mapElement._leaflet_grid_square);
-                    maidenheadToggleBtn.innerText = 'Show Maidenhead Grid';
+            if (mapElement._leaflet_map) {
+                if (maidenheadToggleBtn.innerText === 'Hide Maidenhead Square') {
+                    if (mapElement._leaflet_grid_square) {
+                        mapElement._leaflet_map.removeLayer(mapElement._leaflet_grid_square);
+                        maidenheadToggleBtn.innerText = 'Show Maidenhead Square';
+                    }
                 } else {
+                    if (!mapElement._leaflet_grid_square) {
+                        updateMaidenheadGridSquare(mapElement._leaflet_marker.getLatLng().lat, mapElement._leaflet_marker.getLatLng().lng);
+                    }
                     mapElement._leaflet_map.addLayer(mapElement._leaflet_grid_square);
-                    maidenheadToggleBtn.innerText = 'Hide Maidenhead Grid';
+                    maidenheadToggleBtn.innerText = 'Hide Maidenhead Square';
                 }
             }
         }
@@ -856,6 +869,14 @@
             if (event.key === 'Enter') {
                 toggleLatLonEdit();
             }
+        });
+
+        document.getElementById('latitude-input').addEventListener('input', function(event) {
+            this.value = this.value.replace(/[^\d.-]/g, '');
+        });
+
+        document.getElementById('longitude-input').addEventListener('input', function(event) {
+            this.value = this.value.replace(/[^\d.-]/g, '');
         });
     </script>
 </body>
