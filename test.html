@@ -808,6 +808,9 @@
         function updateMaidenheadGridSquare(lat, lon) {
             const mapElement = document.getElementById('map');
             if (mapElement._leaflet_map) {
+                if (mapElement._leaflet_grid_square) {
+                    mapElement._leaflet_map.removeLayer(mapElement._leaflet_grid_square);
+                }
                 const maidenhead = latLonToMaidenhead(lat, lon);
                 const { lat: swLat, lon: swLon } = maidenheadToLatLon(maidenhead.slice(0, 4) + 'aa');
                 const { lat: neLat, lon: neLon } = maidenheadToLatLon(maidenhead.slice(0, 4) + 'xx');
@@ -824,15 +827,13 @@
             const mapElement = document.getElementById('map');
             const maidenheadToggleBtn = document.getElementById('toggle-maidenhead-btn');
             if (mapElement._leaflet_map) {
+                if (!mapElement._leaflet_grid_square) {
+                    updateMaidenheadGridSquare(mapElement._leaflet_marker.getLatLng().lat, mapElement._leaflet_marker.getLatLng().lng);
+                }
                 if (maidenheadToggleBtn.innerText === 'Hide Maidenhead Square') {
-                    if (mapElement._leaflet_grid_square) {
-                        mapElement._leaflet_map.removeLayer(mapElement._leaflet_grid_square);
-                        maidenheadToggleBtn.innerText = 'Show Maidenhead Square';
-                    }
+                    mapElement._leaflet_map.removeLayer(mapElement._leaflet_grid_square);
+                    maidenheadToggleBtn.innerText = 'Show Maidenhead Square';
                 } else {
-                    if (!mapElement._leaflet_grid_square) {
-                        updateMaidenheadGridSquare(mapElement._leaflet_marker.getLatLng().lat, mapElement._leaflet_marker.getLatLng().lng);
-                    }
                     mapElement._leaflet_map.addLayer(mapElement._leaflet_grid_square);
                     maidenheadToggleBtn.innerText = 'Hide Maidenhead Square';
                 }
