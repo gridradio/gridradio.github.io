@@ -122,6 +122,7 @@
             width: 100%;
             margin-top: 20px;
             display: none;
+            position: relative;
         }
         footer {
             margin-top: 20px;
@@ -142,6 +143,13 @@
         .high-contrast .btn-primary,
         .high-contrast .btn-secondary {
             color: #fff !important;
+        }
+        .high-contrast .map-checkbox-card {
+            background-color: #333;
+            color: #ff0;
+            border-color: #555;
+            border-radius: 3px;
+            padding: 5px;
         }
         .toggle-buttons {
             display: flex;
@@ -167,6 +175,19 @@
             text-align: center;
             margin: 0 auto;
         }
+        #latitude-input,
+        #longitude-input {
+            width: 100px;
+            display: inline-block;
+            text-align: center;
+            margin: 0 5px;
+        }
+        .latitude-longitude-inputs {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -191,7 +212,7 @@
                 <input type="text" class="form-control" id="maidenhead-locator-input" maxlength="6" style="display: none;" />
                 <div class="vertical-separator"></div>
                 <div class="edit-icon-container" onclick="toggleMaidenheadEdit()">
-                    <span class="edit-icon">✏️</span>
+                    <span class="edit-icon maidenhead-edit-icon">✏️</span>
                 </div>
                 <div class="copy-icon-container" onclick="copyToClipboard('maidenhead-locator')">
                     <span class="copy-icon">📋</span>
@@ -264,8 +285,15 @@
             <div class="card-body">
                 <h5 class="card-title">Latitude and Longitude</h5>
                 <p class="card-text" id="latitude-longitude">Loading...</p>
+                <div class="latitude-longitude-inputs" style="display: none;">
+                    <input type="text" class="form-control" id="latitude-input" placeholder="Latitude">
+                    <input type="text" class="form-control" id="longitude-input" placeholder="Longitude">
+                </div>
                 <p class="card-text" id="location-accuracy">Accuracy: Loading...</p>
                 <div class="vertical-separator"></div>
+                <div class="edit-icon-container" onclick="toggleLatLonEdit()">
+                    <span class="edit-icon lat-lon-edit-icon">✏️</span>
+                </div>
                 <div class="copy-icon-container" onclick="copyToClipboard('latitude-longitude')">
                     <span class="copy-icon">📋</span>
                 </div>
@@ -290,6 +318,7 @@
             <button class="btn btn-secondary" onclick="toggleMap()">Toggle Map</button>
             <button class="btn btn-high-contrast" onclick="toggleHighContrast()">High Contrast</button>
         </div>
+        <button class="btn btn-secondary mt-3" id="toggle-maidenhead-btn" onclick="toggleMaidenheadGridSquare()" style="display: none;">Toggle Maidenhead Grid</button>
         <div id="map"></div>
     </div>
     <footer>
@@ -556,6 +585,7 @@
             document.querySelector('.loading-screen').style.display = 'none';
             document.querySelector('.content').style.display = 'block';
             document.getElementById('map').style.display = 'block';
+            document.getElementById('toggle-maidenhead-btn').style.display = 'block';
             document.getElementById('geolocation-alert').style.display = 'block';
             updateMap(defaultLat, defaultLon, 6); // More zoomed out
         }
@@ -620,13 +650,16 @@
 
         function toggleMap() {
             const mapElement = document.getElementById('map');
+            const maidenheadToggleBtn = document.getElementById('toggle-maidenhead-btn');
             if (mapElement.style.display === 'none' || mapElement.style.display === '') {
                 mapElement.style.display = 'block';
+                maidenheadToggleBtn.style.display = 'block';
                 if (mapElement._leaflet_map) {
                     mapElement._leaflet_map.invalidateSize();
                 }
             } else {
                 mapElement.style.display = 'none';
+                maidenheadToggleBtn.style.display = 'none';
             }
         }
 
@@ -702,7 +735,7 @@
         function toggleMaidenheadEdit() {
             const textElement = document.getElementById('maidenhead-locator');
             const inputElement = document.getElementById('maidenhead-locator-input');
-            const editIcon = document.querySelector('.edit-icon-container .edit-icon');
+            const editIcon = document.querySelector('.edit-icon-container .maidenhead-edit-icon');
             if (textElement.style.display === 'none') {
                 textElement.style.display = 'block';
                 inputElement.style.display = 'none';
@@ -725,6 +758,37 @@
             }
         }
 
+        function toggleLatLonEdit() {
+            const textElement = document.getElementById('latitude-longitude');
+            const latLonInputs = document.querySelector('.latitude-longitude-inputs');
+            const latInput = document.getElementById('latitude-input');
+            const lonInput = document.getElementById('longitude-input');
+            const editIcon = document.querySelector('.edit-icon-container .lat-lon-edit-icon');
+            const accuracyElement = document.getElementById('location-accuracy');
+            if (textElement.style.display === 'none') {
+                const lat = parseFloat(latInput.value);
+                const lon = parseFloat(lonInput.value);
+                if (!isNaN(lat) && !isNaN(lon) && lat >= -90 && lat <= 90 && lon >= -180 && lon <= 180) {
+                    textElement.innerText = `${lat.toFixed(6)}, ${lon.toFixed(6)}`;
+                    updateDisplay(lat, lon, 'N/A', 'N/A', 'N/A', 'N/A');
+                    updateMap(lat, lon);
+                }
+                textElement.style.display = 'block';
+                latLonInputs.style.display = 'none';
+                editIcon.textContent = '✏️';
+                accuracyElement.style.display = 'block';
+            } else {
+                const [lat, lon] = textElement.innerText.split(', ').map(Number);
+                latInput.value = lat.toFixed(6);
+                lonInput.value = lon.toFixed(6);
+                textElement.style.display = 'none';
+                latLonInputs.style.display = 'block';
+                latInput.focus();
+                editIcon.textContent = '✔️';
+                accuracyElement.style.display = 'none';
+            }
+        }
+
         function updateMaidenheadGridSquare(lat, lon) {
             const mapElement = document.getElementById('map');
             if (mapElement._leaflet_map) {
@@ -737,6 +801,20 @@
                 const bounds = [[swLat, swLon], [neLat, neLon]];
                 const rectangle = L.rectangle(bounds, { color: "#ff7800", weight: 1 }).addTo(mapElement._leaflet_map);
                 mapElement._leaflet_grid_square = rectangle;
+            }
+        }
+
+        function toggleMaidenheadGridSquare() {
+            const mapElement = document.getElementById('map');
+            const maidenheadToggleBtn = document.getElementById('toggle-maidenhead-btn');
+            if (mapElement._leaflet_grid_square) {
+                if (maidenheadToggleBtn.innerText === 'Hide Maidenhead Grid') {
+                    mapElement._leaflet_map.removeLayer(mapElement._leaflet_grid_square);
+                    maidenheadToggleBtn.innerText = 'Show Maidenhead Grid';
+                } else {
+                    mapElement._leaflet_map.addLayer(mapElement._leaflet_grid_square);
+                    maidenheadToggleBtn.innerText = 'Hide Maidenhead Grid';
+                }
             }
         }
 
@@ -757,6 +835,18 @@
         document.getElementById('maidenhead-locator-input').addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
                 toggleMaidenheadEdit();
+            }
+        });
+
+        document.getElementById('latitude-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                toggleLatLonEdit();
+            }
+        });
+
+        document.getElementById('longitude-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                toggleLatLonEdit();
             }
         });
     </script>
