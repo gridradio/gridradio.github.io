@@ -70,7 +70,18 @@
             align-items: center;
             cursor: pointer;
         }
-        .copy-icon {
+        .edit-icon-container {
+            position: absolute;
+            top: 0;
+            right: 50px;
+            bottom: 0;
+            width: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .copy-icon, .edit-icon {
             font-size: 20px;
         }
         .copied-popup {
@@ -111,6 +122,7 @@
             width: 100%;
             margin-top: 20px;
             display: none;
+            position: relative;
         }
         footer {
             margin-top: 20px;
@@ -132,6 +144,13 @@
         .high-contrast .btn-secondary {
             color: #fff !important;
         }
+        .high-contrast .map-checkbox-card {
+            background-color: #333;
+            color: #ff0;
+            border-color: #555;
+            border-radius: 3px;
+            padding: 5px;
+        }
         .toggle-buttons {
             display: flex;
             gap: 10px;
@@ -143,12 +162,36 @@
             color: #000;
         }
         @media (max-width: 576px) {
-            .copy-icon-container {
+            .copy-icon-container, .edit-icon-container {
                 width: 30px;
             }
             .vertical-separator {
                 right: 30px;
             }
+        }
+        #maidenhead-locator-input {
+            width: 80px;
+            display: inline-block;
+            text-align: center;
+            margin: 0 auto;
+        }
+        #latitude-input,
+        #longitude-input {
+            width: 100px;
+            display: inline-block;
+            text-align: center;
+            margin: 0 5px;
+        }
+        .latitude-longitude-inputs {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .toggle-maidenhead-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -171,7 +214,11 @@
             <div class="card-body">
                 <h5 class="card-title">Maidenhead Locator</h5>
                 <p class="card-text" id="maidenhead-locator">Loading...</p>
+                <input type="text" class="form-control" id="maidenhead-locator-input" maxlength="6" style="display: none;" />
                 <div class="vertical-separator"></div>
+                <div class="edit-icon-container" onclick="toggleMaidenheadEdit()">
+                    <span class="edit-icon maidenhead-edit-icon">✏️</span>
+                </div>
                 <div class="copy-icon-container" onclick="copyToClipboard('maidenhead-locator')">
                     <span class="copy-icon">📋</span>
                 </div>
@@ -203,12 +250,55 @@
                 <div class="failed-popup">Failed!</div>
             </div>
         </div>
+        <div class="card" id="cq-zone-card">
+            <div class="card-body">
+                <h5 class="card-title">CQ Zone</h5>
+                <p class="card-text" id="cq-zone">Loading...</p>
+                <div class="vertical-separator"></div>
+                <div class="copy-icon-container" onclick="copyToClipboard('cq-zone')">
+                    <span class="copy-icon">📋</span>
+                </div>
+                <div class="copied-popup">Copied!</div>
+                <div class="failed-popup">Failed!</div>
+            </div>
+        </div>
+        <div class="card" id="itu-zone-card">
+            <div class="card-body">
+                <h5 class="card-title">ITU Zone</h5>
+                <p class="card-text" id="itu-zone">Loading...</p>
+                <div class="vertical-separator"></div>
+                <div class="copy-icon-container" onclick="copyToClipboard('itu-zone')">
+                    <span class="copy-icon">📋</span>
+                </div>
+                <div class="copied-popup">Copied!</div>
+                <div class="failed-popup">Failed!</div>
+            </div>
+        </div>
+        <div class="card" id="itu-region-card">
+            <div class="card-body">
+                <h5 class="card-title">ITU Region</h5>
+                <p class="card-text" id="itu-region">Loading...</p>
+                <div class="vertical-separator"></div>
+                <div class="copy-icon-container" onclick="copyToClipboard('itu-region')">
+                    <span class="copy-icon">📋</span>
+                </div>
+                <div class="copied-popup">Copied!</div>
+                <div class="failed-popup">Failed!</div>
+            </div>
+        </div>
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Latitude and Longitude</h5>
                 <p class="card-text" id="latitude-longitude">Loading...</p>
+                <div class="latitude-longitude-inputs" style="display: none;">
+                    <input type="text" class="form-control" id="latitude-input" placeholder="Latitude">
+                    <input type="text" class="form-control" id="longitude-input" placeholder="Longitude">
+                </div>
                 <p class="card-text" id="location-accuracy">Accuracy: Loading...</p>
                 <div class="vertical-separator"></div>
+                <div class="edit-icon-container" onclick="toggleLatLonEdit()">
+                    <span class="edit-icon lat-lon-edit-icon">✏️</span>
+                </div>
                 <div class="copy-icon-container" onclick="copyToClipboard('latitude-longitude')">
                     <span class="copy-icon">📋</span>
                 </div>
@@ -233,6 +323,9 @@
             <button class="btn btn-secondary" onclick="toggleMap()">Toggle Map</button>
             <button class="btn btn-high-contrast" onclick="toggleHighContrast()">High Contrast</button>
         </div>
+        <div class="toggle-maidenhead-container">
+            <button class="btn btn-secondary mt-3" id="toggle-maidenhead-btn" style="display: none;" onclick="toggleMaidenheadGridSquare()">Show Maidenhead Square</button>
+        </div>
         <div id="map"></div>
     </div>
     <footer>
@@ -241,6 +334,10 @@
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
+        const showCQZoneCard = false;
+        const showITUZoneCard = false;
+        const showITURegionCard = false;
+
         function degToRad(deg) {
             return deg * Math.PI / 180;
         }
@@ -374,6 +471,85 @@
             return maidenheadLocator;
         }
 
+        function maidenheadToLatLon(maidenhead) {
+            const A = maidenhead.charCodeAt(0) - 65;
+            const B = maidenhead.charCodeAt(1) - 65;
+            const C = parseInt(maidenhead.charAt(2));
+            const D = parseInt(maidenhead.charAt(3));
+            const E = maidenhead.charCodeAt(4) - 97;
+            const F = maidenhead.charCodeAt(5) - 97;
+
+            const lon = A * 20 - 180 + C * 2 + E / 12 + 1/24;
+            const lat = B * 10 - 90 + D + F / 24 + 1/48;
+
+            return { lat: lat, lon: lon };
+        }
+
+        function pointInPolygon(point, polygon) {
+            let x = point[0], y = point[1];
+            let inside = false;
+            for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+                let xi = polygon[i][0], yi = polygon[i][1];
+                let xj = polygon[j][0], yj = polygon[j][1];
+
+                let intersect = ((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+                if (intersect) inside = !inside;
+            }
+            return inside;
+        }
+
+        function getCQZone(lat, lon) {
+            const point = [lon, lat];
+
+            const zones = [
+                { zone: 14, polygon: [[-10, 35], [-10, 60], [30, 60], [30, 35]] } // Western Europe
+            ];
+
+            for (let i = 0; i < zones.length; i++) {
+                if (pointInPolygon(point, zones[i].polygon)) {
+                    return zones[i].zone;
+                }
+            }
+
+            return "N/A"; // Default if no match
+        }
+
+        function getITUZone(lat, lon) {
+            const point = [lon, lat];
+
+            const zones = [
+                // Add detailed polygons for all 90 ITU zones
+                { zone: 27, polygon: [[-10, 35], [-10, 60], [30, 60], [30, 35]] }
+                // ... Add more detailed polygons here ...
+            ];
+
+            for (let i = 0; i < zones.length; i++) {
+                if (pointInPolygon(point, zones[i].polygon)) {
+                    return zones[i].zone;
+                }
+            }
+
+            return "N/A"; // Default if no match
+        }
+
+        function getITURegion(lat, lon) {
+            const point = [lon, lat];
+
+            const regions = [
+                { region: 'Region 1', polygon: [[-30, 70], [60, 70], [60, -35], [-30, -35]] }, // ITU Region 1
+                { region: 'Region 2', polygon: [[-180, 70], [-30, 70], [-30, -60], [-180, -60]] }, // ITU Region 2
+                { region: 'Region 3', polygon: [[60, 70], [180, 70], [180, -35], [60, -35]] } // ITU Region 3
+            ];
+
+            for (let i = 0; i < regions.length; i++) {
+                if (pointInPolygon(point, regions[i].polygon)) {
+                    return regions[i].region;
+                }
+            }
+
+            return "N/A"; // Default if no match
+        }
+
         function refreshLocation() {
             document.querySelector('.loading-screen').style.display = 'flex';
             document.querySelector('.content').style.display = 'none';
@@ -392,7 +568,7 @@
                     document.querySelector('.loading-screen').style.display = 'none';
                     document.querySelector('.content').style.display = 'block';
 
-                    updateMap(lat, lon);
+                    updateMap(lat, lon, 11); // Zoomed out by a couple of levels
                 }, (error) => {
                     showGeolocationError();
                 }, {
@@ -416,6 +592,7 @@
             document.querySelector('.loading-screen').style.display = 'none';
             document.querySelector('.content').style.display = 'block';
             document.getElementById('map').style.display = 'block';
+            document.getElementById('toggle-maidenhead-btn').style.display = 'block';
             document.getElementById('geolocation-alert').style.display = 'block';
             updateMap(defaultLat, defaultLon, 6); // More zoomed out
         }
@@ -450,17 +627,48 @@
 
             const maidenheadLocator = latLonToMaidenhead(lat, lon);
             document.getElementById('maidenhead-locator').innerText = maidenheadLocator;
+
+            if (showCQZoneCard) {
+                const cqZone = getCQZone(lat, lon);
+                document.getElementById('cq-zone').innerText = cqZone;
+                document.getElementById('cq-zone-card').style.display = cqZone !== "N/A" ? 'block' : 'none';
+            } else {
+                document.getElementById('cq-zone-card').style.display = 'none';
+            }
+
+            if (showITUZoneCard) {
+                const ituZone = getITUZone(lat, lon);
+                document.getElementById('itu-zone').innerText = ituZone;
+                document.getElementById('itu-zone-card').style.display = ituZone !== "N/A" ? 'block' : 'none';
+            } else {
+                document.getElementById('itu-zone-card').style.display = 'none';
+            }
+
+            if (showITURegionCard) {
+                const ituRegion = getITURegion(lat, lon);
+                document.getElementById('itu-region').innerText = ituRegion;
+                document.getElementById('itu-region-card').style.display = ituRegion !== "N/A" ? 'block' : 'none';
+            } else {
+                document.getElementById('itu-region-card').style.display = 'none';
+            }
+
+            if (document.getElementById('toggle-maidenhead-btn').innerText === 'Hide Maidenhead Square') {
+                updateMaidenheadGridSquare(lat, lon);
+            }
         }
 
         function toggleMap() {
             const mapElement = document.getElementById('map');
+            const maidenheadToggleBtn = document.getElementById('toggle-maidenhead-btn');
             if (mapElement.style.display === 'none' || mapElement.style.display === '') {
                 mapElement.style.display = 'block';
+                maidenheadToggleBtn.style.display = 'block';
                 if (mapElement._leaflet_map) {
                     mapElement._leaflet_map.invalidateSize();
                 }
             } else {
                 mapElement.style.display = 'none';
+                maidenheadToggleBtn.style.display = 'none';
             }
         }
 
@@ -481,7 +689,7 @@
 
         function updateMap(lat, lon, zoom = null) {
             const mapElement = document.getElementById('map');
-            const currentZoom = zoom || (mapElement._leaflet_map ? mapElement._leaflet_map.getZoom() : 13);
+            const currentZoom = zoom || (mapElement._leaflet_map ? mapElement._leaflet_map.getZoom() : 11); // Set default zoom to 11
 
             if (mapElement._leaflet_map) {
                 mapElement._leaflet_map.setView([lat, lon], currentZoom);
@@ -502,7 +710,8 @@
                 marker.on('dragend', function(event) {
                     const newLatLng = normalizeLatLng(event.target.getLatLng());
                     updateDisplay(newLatLng.lat, newLatLng.lng, 'N/A', 'N/A', 'N/A', 'N/A');
-                    mapElement._leaflet_map.setView(newLatLng, currentZoom);
+                    // Reset the view to the new lat/lon without changing the zoom level
+                    mapElement._leaflet_map.setView(newLatLng, mapElement._leaflet_map.getZoom());
                 });
 
                 map.on('dblclick', function(event) {
@@ -531,6 +740,106 @@
             }, 2000);
         }
 
+        function toggleMaidenheadEdit() {
+            const textElement = document.getElementById('maidenhead-locator');
+            const inputElement = document.getElementById('maidenhead-locator-input');
+            const editIcon = document.querySelector('.edit-icon-container .maidenhead-edit-icon');
+
+            if (textElement.style.display === 'none') {
+                textElement.style.display = 'block';
+                inputElement.style.display = 'none';
+                editIcon.textContent = '✏️';
+                const maidenheadLocator = inputElement.value.trim().toUpperCase().slice(0, 4) + inputElement.value.trim().toLowerCase().slice(4);
+                if (/^[A-R]{2}\d{2}[a-x]{2}$/.test(maidenheadLocator)) {
+                    const { lat, lon } = maidenheadToLatLon(maidenheadLocator);
+                    updateDisplay(lat, lon, 'N/A', 'N/A', 'N/A', 'N/A');
+                    if (document.getElementById('map').style.display === 'none') {
+                        toggleMap();
+                    }
+                    updateMap(lat, lon);
+                }
+            } else {
+                if (document.getElementById('latitude-longitude').style.display === 'none') {
+                    toggleLatLonEdit(); // Close the latitude/longitude editor if it's open
+                }
+                inputElement.value = textElement.innerText;
+                textElement.style.display = 'none';
+                inputElement.style.display = 'block';
+                inputElement.focus();
+                editIcon.textContent = '✔️';
+            }
+        }
+
+        function toggleLatLonEdit() {
+            const textElement = document.getElementById('latitude-longitude');
+            const latLonInputs = document.querySelector('.latitude-longitude-inputs');
+            const latInput = document.getElementById('latitude-input');
+            const lonInput = document.getElementById('longitude-input');
+            const editIcon = document.querySelector('.edit-icon-container .lat-lon-edit-icon');
+            const accuracyElement = document.getElementById('location-accuracy');
+
+            if (textElement.style.display === 'none') {
+                const lat = parseFloat(latInput.value);
+                const lon = parseFloat(lonInput.value);
+                if (!isNaN(lat) && !isNaN(lon) && lat >= -90 && lat <= 90 && lon >= -180 && lon <= 180) {
+                    textElement.innerText = `${lat.toFixed(6)}, ${lon.toFixed(6)}`;
+                    updateDisplay(lat, lon, 'N/A', 'N/A', 'N/A', 'N/A');
+                    updateMap(lat, lon);
+                }
+                textElement.style.display = 'block';
+                latLonInputs.style.display = 'none';
+                editIcon.textContent = '✏️';
+                accuracyElement.style.display = 'none';
+            } else {
+                if (document.getElementById('maidenhead-locator').style.display === 'none') {
+                    toggleMaidenheadEdit(); // Close the maidenhead editor if it's open
+                }
+                const [lat, lon] = textElement.innerText.split(', ').map(Number);
+                latInput.value = lat.toFixed(6);
+                lonInput.value = lon.toFixed(6);
+                textElement.style.display = 'none';
+                latLonInputs.style.display = 'block';
+                latInput.focus();
+                editIcon.textContent = '✔️';
+                accuracyElement.style.display = 'none';
+            }
+        }
+
+        function updateMaidenheadGridSquare(lat, lon) {
+            const mapElement = document.getElementById('map');
+            if (mapElement._leaflet_map) {
+                if (mapElement._leaflet_grid_square) {
+                    mapElement._leaflet_map.removeLayer(mapElement._leaflet_grid_square);
+                }
+                const maidenhead = latLonToMaidenhead(lat, lon);
+                const { lat: swLat, lon: swLon } = maidenheadToLatLon(maidenhead.slice(0, 4) + 'aa');
+                const { lat: neLat, lon: neLon } = maidenheadToLatLon(maidenhead.slice(0, 4) + 'xx');
+                const bounds = [[swLat, swLon], [neLat, neLon]];
+                const rectangle = L.rectangle(bounds, { color: "#0000FF", weight: 1 });
+                mapElement._leaflet_grid_square = rectangle;
+                if (document.getElementById('toggle-maidenhead-btn').innerText === 'Hide Maidenhead Square') {
+                    mapElement._leaflet_map.addLayer(rectangle);
+                }
+            }
+        }
+
+        function toggleMaidenheadGridSquare() {
+            const mapElement = document.getElementById('map');
+            const maidenheadToggleBtn = document.getElementById('toggle-maidenhead-btn');
+            if (mapElement._leaflet_map) {
+                if (!mapElement._leaflet_grid_square) {
+                    updateMaidenheadGridSquare(mapElement._leaflet_marker.getLatLng().lat, mapElement._leaflet_marker.getLatLng().lng);
+                }
+                if (maidenheadToggleBtn.innerText === 'Hide Maidenhead Square') {
+                    mapElement._leaflet_map.removeLayer(mapElement._leaflet_grid_square);
+                    maidenheadToggleBtn.innerText = 'Show Maidenhead Square';
+                } else {
+                    mapElement._leaflet_map.addLayer(mapElement._leaflet_grid_square);
+                    maidenheadToggleBtn.innerText = 'Hide Maidenhead Square';
+                }
+            }
+        }
+
         window.onload = function() {
             if (navigator.permissions) {
                 navigator.permissions.query({ name: 'geolocation' }).then(function(result) {
@@ -544,6 +853,32 @@
                 document.querySelector('.loading-screen').style.display = 'flex';
             }
         };
+
+        document.getElementById('maidenhead-locator-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                toggleMaidenheadEdit();
+            }
+        });
+
+        document.getElementById('latitude-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                toggleLatLonEdit();
+            }
+        });
+
+        document.getElementById('longitude-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                toggleLatLonEdit();
+            }
+        });
+
+        document.getElementById('latitude-input').addEventListener('input', function(event) {
+            this.value = this.value.replace(/[^\d.-]/g, '');
+        });
+
+        document.getElementById('longitude-input').addEventListener('input', function(event) {
+            this.value = this.value.replace(/[^\d.-]/g, '');
+        });
     </script>
 </body>
 </html>
