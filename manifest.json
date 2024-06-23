@@ -1,7 +1,7 @@
 {
   "name": "Amateur Radio Locator",
   "short_name": "grid.radio",
-  "description": "A web app to determine OS grid references, WAB squares, and Maidenhead locators for amateur radio operators.",
+  "description": "An app to determine OS grid references, WAB squares, and Maidenhead locators for amateur radio operators.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f8f9fa",
