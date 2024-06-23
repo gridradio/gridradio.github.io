@@ -9,6 +9,9 @@
   "theme_color": "#007bff",
   "handle_links": "auto",
   "orientation": "portrait",
+  "display_override": [
+    "window-controls-overlay"
+  ],
    "icons": [
   {
    "src": "\/android-icon-36x36.png",
@@ -49,7 +52,8 @@
   {
    "src": "\/android-icon-512x512.png",
    "sizes": "512x512",
-   "type": "image\/png"
+   "type": "image\/png",
+   "purpose": "any"
   },
   {
    "src": "\/android-icon-512x512.png",
