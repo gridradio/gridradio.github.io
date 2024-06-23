@@ -6,14 +6,7 @@
   "display": "standalone",
   "background_color": "#f8f9fa",
   "theme_color": "#007bff",
-  "url_handlers": [
-    {
-      "origin": "https://grid.radio?latlong=*"
-    },
-    {
-      "origin": "https://grid.radio?grid=*"
-    }
-  ],
+  "handle_links": "auto",
   "orientation": "portrait",
    "icons": [
   {
