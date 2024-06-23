@@ -202,6 +202,9 @@
         .kofi-widget {
             margin-top: 10px;
         }
+        .copy-location-button {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -336,6 +339,7 @@
             <button class="btn btn-secondary mt-3" id="toggle-maidenhead-btn" style="display: none;" onclick="toggleMaidenheadGridSquare()">Show Maidenhead Square</button>
         </div>
         <div id="map"></div>
+        <button class="btn btn-secondary copy-location-button" onclick="copyLocationToClipboard()">Copy Location to Clipboard</button>
     </div>
     <footer>
         <div class="footer-container">
@@ -774,6 +778,16 @@
             });
         }
 
+        function copyLocationToClipboard() {
+            const latLon = document.getElementById('latitude-longitude').innerText;
+            const url = `https://grid.radio?latlong=${latLon}`;
+            navigator.clipboard.writeText(url).then(() => {
+                alert('Location URL copied to clipboard!');
+            }).catch(err => {
+                alert('Failed to copy location URL!');
+            });
+        }
+
         function showPopup(elementId, type) {
             const element = document.getElementById(elementId).parentElement;
             const popup = type === 'copied' ? element.querySelector('.copied-popup') : element.querySelector('.failed-popup');
@@ -887,6 +901,34 @@
             }
         }
 
+        function getQueryStringParams() {
+            const params = new URLSearchParams(window.location.search);
+            const grid = params.get('grid');
+            const latlong = params.get('latlong');
+            return { grid, latlong };
+        }
+
+        function initFromQueryString() {
+            const { grid, latlong } = getQueryStringParams();
+            if (grid) {
+                const { lat, lon } = maidenheadToLatLon(grid);
+                updateDisplay(lat, lon, 'N/A', 'N/A', 'N/A', 'N/A');
+                document.querySelector('.loading-screen').style.display = 'none';
+                document.querySelector('.content').style.display = 'block';
+                updateMap(lat, lon, 11);
+                toggleMap();
+            } else if (latlong) {
+                const [lat, lon] = latlong.split(',').map(Number);
+                if (!isNaN(lat) && !isNaN(lon)) {
+                    updateDisplay(lat, lon, 'N/A', 'N/A', 'N/A', 'N/A');
+                    document.querySelector('.loading-screen').style.display = 'none';
+                    document.querySelector('.content').style.display = 'block';
+                    updateMap(lat, lon, 11);
+                    toggleMap();
+                }
+            }
+        }
+
         window.onload = function() {
             if (navigator.permissions) {
                 navigator.permissions.query({ name: 'geolocation' }).then(function(result) {
@@ -894,10 +936,12 @@
                         refreshLocation();
                     } else {
                         document.querySelector('.loading-screen').style.display = 'flex';
+                        initFromQueryString();
                     }
                 });
             } else {
                 document.querySelector('.loading-screen').style.display = 'flex';
+                initFromQueryString();
             }
         };
 
