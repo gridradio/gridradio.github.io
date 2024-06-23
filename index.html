@@ -1017,6 +1017,11 @@
         document.getElementById('longitude-input').addEventListener('input', function(event) {
             this.value = this.value.replace(/[^\d.-]/g, '');
         });
+        
+        if (typeof navigator.serviceWorker !== 'undefined') {
+            navigator.serviceWorker.register('sw.js')
+        }
+        
     </script>
 <!-- 100% privacy-first analytics -->
 <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
