@@ -960,18 +960,21 @@
         }
 
         window.onload = function() {
-            if (navigator.permissions) {
-                navigator.permissions.query({ name: 'geolocation' }).then(function(result) {
-                    if (result.state === 'granted') {
-                        refreshLocation();
-                    } else {
-                        document.querySelector('.loading-screen').style.display = 'flex';
-                        initFromQueryString();
-                    }
-                });
-            } else {
-                document.querySelector('.loading-screen').style.display = 'flex';
+            const { grid, latlong } = getQueryStringParams();
+            if (grid || latlong) {
                 initFromQueryString();
+            } else {
+                if (navigator.permissions) {
+                    navigator.permissions.query({ name: 'geolocation' }).then(function(result) {
+                        if (result.state === 'granted') {
+                            refreshLocation();
+                        } else {
+                            document.querySelector('.loading-screen').style.display = 'flex';
+                        }
+                    });
+                } else {
+                    document.querySelector('.loading-screen').style.display = 'flex';
+                }
             }
         };
 
