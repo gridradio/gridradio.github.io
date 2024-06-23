@@ -1,4 +1,5 @@
 {
+  "id": "grid1",
   "name": "Amateur Radio Locator",
   "short_name": "grid.radio",
   "description": "An app to determine OS grid references, WAB squares, and Maidenhead locators for amateur radio operators.",
