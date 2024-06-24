@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BOTA Map</title>
+    <title>Amateur Radio Map</title>
     <link rel="stylesheet" href="/leaflet.css" />
     <link rel="stylesheet" href="/Control.FullScreen.css" />
-    <link rel="stylesheet" href="/easy-button.css">
     <style>
         body {
             margin: 0;
@@ -27,7 +26,6 @@
     <script src="/leaflet.js"></script>
     <script src="/L.Maidenhead.js"></script>
     <script src="/Control.FullScreen.js"></script>
-    <script src="/easy-button.js"></script>
     <script src="/L.KML.js"></script>
     <script>
         let botaLayer; // Add a variable to store the BOTA layer state
@@ -41,6 +39,11 @@
                 fullscreenControlOptions: {
                     position: 'topleft'
                 },
+                maxBounds: [
+                    [40.0, -10.0], // Southwest corner of bounds (latitude, longitude)
+                    [60.0, 10.0]   // Northeast corner of bounds (latitude, longitude)
+                ],
+                maxBoundsViscosity: 1.0 // Ensures the map cannot be dragged outside the bounds
             }).setView([lat, lon], zoom);
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
