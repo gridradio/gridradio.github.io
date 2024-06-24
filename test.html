@@ -393,6 +393,7 @@
     <script src="/L.Maidenhead.js"></script>
     <script src="/Control.FullScreen.js"></script>
     <script src="/easy-button.js"></script>
+    <script src="/L.KML.js"></script>
     <script>
         // Redirect to HTTPS if not already using HTTPS
         if (location.protocol !== 'https:') {
@@ -832,6 +833,21 @@
                     const newLatLng = normalizeLatLng(event.latlng);
                     marker.setLatLng(newLatLng);
                     updateDisplay(newLatLng.lat, newLatLng.lng, 'N/A', 'N/A', 'N/A', 'N/A');
+                });
+
+		                // Load kml file
+            fetch('bota.kml')
+                .then(res => res.text())
+                .then(kmltext => {
+                    // Create new kml overlay
+                    const parser = new DOMParser();
+                    const kml = parser.parseFromString(kmltext, 'text/xml');
+                    const track = new L.KML(kml);
+                    map.addLayer(track);
+
+                    // Adjust map to show the kml
+                    const bounds = track.getBounds();
+                    map.fitBounds(bounds);
                 });
             }
         }
