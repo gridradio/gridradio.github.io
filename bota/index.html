@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amateur Radio Map</title>
+    <title>BOTA Map</title>
     <link rel="stylesheet" href="/leaflet.css" />
     <link rel="stylesheet" href="/Control.FullScreen.css" />
     <style>
@@ -31,6 +31,7 @@
         let botaLayer; // Add a variable to store the BOTA layer state
         let botaKmlLayer; // Add a variable to store the parsed BOTA KML layer
         let maidenheadLayer; // Add a variable to store the Maidenhead layer
+        let userMarker; // Add a variable to store the user's marker
 
         function initMap(lat, lon, zoom = 9) { // Default zoom level set to 9
             const map = L.map('map', { 
@@ -41,7 +42,7 @@
                 },
                 maxBounds: [
                     [40.0, -14.0], // Southwest corner of bounds (latitude, longitude)
-                    [62.6, 10.0]   // Northeast corner of bounds (latitude, longitude)
+                    [64.0, 10.0]   // Northeast corner of bounds (latitude, longitude)
                 ],
                 maxBoundsViscosity: 1.0 // Ensures the map cannot be dragged outside the bounds
             }).setView([lat, lon], zoom);
@@ -55,7 +56,7 @@
             maidenheadLayer = L.maidenhead({ color: 'rgba(255, 0, 0, 0.4)' }).addTo(map);
 
             // Load BOTA KML layer by default
-            fetch('bota.kml')
+            fetch('/bota.kml')
                 .then(res => res.text())
                 .then(kmltext => {
                     const parser = new DOMParser();
@@ -64,6 +65,28 @@
                     map.addLayer(botaKmlLayer);
                     botaLayer = botaKmlLayer;
                 });
+
+            // Geolocation to get the user's current position
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        const userLat = position.coords.latitude;
+                        const userLon = position.coords.longitude;
+                        map.setView([userLat, userLon], 13); // Zoom to user's location
+
+                        // Add a marker at the user's location
+                        if (userMarker) {
+                            map.removeLayer(userMarker);
+                        }
+                        userMarker = L.marker([userLat, userLon]).addTo(map)
+                    },
+                    () => {
+                        alert('Geolocation failed. Default location will be used.');
+                    }
+                );
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
 
             return map;
         }
