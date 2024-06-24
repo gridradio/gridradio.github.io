@@ -7,6 +7,7 @@
     <meta name="description" content="An app to determine OS grid references, WAB squares, and Maidenhead locators for amateur radio operators.">
     <link href="/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/leaflet.css" />
+    <link rel="stylesheet" href="/Control.FullScreen.css" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="grid.radio">
@@ -389,6 +390,7 @@
 
     <script src="/leaflet.js"></script>
     <script src="/L.Maidenhead.js"></script>
+    <script src="/Control.FullScreen.js"></script>
     <script>
         // Redirect to HTTPS if not already using HTTPS
         if (location.protocol !== 'https:') {
@@ -801,6 +803,10 @@
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 19,
                     minZoom: 2,
+                    fullscreenControl: true,
+	                fullscreenControlOptions: {
+		                position: 'topleft'
+	                },
                 }).addTo(map);
 
                 const marker = L.marker([lat, lon], { draggable: true }).addTo(map);
