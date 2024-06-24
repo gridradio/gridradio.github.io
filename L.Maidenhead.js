@@ -29,14 +29,12 @@ L.Maidenhead = L.LayerGroup.extend({
 	},
 	
 	onRemove: function (map) {
-		this._map = map;
 		// remove layer listeners and elements
 		map.off('viewreset '+ this.options.redraw, this.map);
 		this.eachLayer(this.removeLayer, this);
 	},
 
 	redraw: function () {
-		this._map = map;
 		var d3 =         new Array(20,10,10,10,10,10,1 ,1 ,1 ,1 ,1/24,1/24,1/24,1/24,1/24,1/240,1/240,1/240,1/240/24,1/240/24,1/240/24 );
 		var lat_cor =    new Array(0 ,8 ,8 ,8 ,10,14,6 ,8 ,8 ,8 ,1.4 ,2.5 ,3   ,3.5 ,4   ,4    ,3.5  ,3.5  ,1.47    ,1.8     ,1.6      );
 		var bounds = map.getBounds();
@@ -68,7 +66,6 @@ L.Maidenhead = L.LayerGroup.extend({
 	},
     	
 	_getLabel: function(lon,lat) {
-	this._map = map;
 	  var title_size = new Array(0 ,10,12,16,20,26,12,16,24,36,12  ,14  ,20  ,36  ,60  ,12   ,20   ,36   ,8   ,12      ,24       );
 	  var zoom = map.getZoom();
 	  var size = title_size[zoom]+'px';
