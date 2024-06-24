@@ -33,6 +33,7 @@
     <meta property="og:description" content="An app to determine OS grid references, WAB squares, and Maidenhead locators for amateur radio operators." />
     <meta property="og:image" content="https://grid.radio/og-image.png" />
     <meta property="og:url" content="https://grid.radio" />
+    <meta property="og:type" content="apps.saves" />
     <style>
         body {
             display: flex;
@@ -201,7 +202,7 @@
         }
         #latitude-input,
         #longitude-input {
-            width: 100px;
+            width: 110px;
             display: inline-block;
             text-align: center;
             margin: 0 5px;
@@ -388,6 +389,7 @@
     </footer>
 
     <script src="/leaflet.js"></script>
+    <script src="/L.Maidenhead.js"></script>
     <script>
         // Redirect to HTTPS if not already using HTTPS
         if (location.protocol !== 'https:') {
@@ -397,6 +399,7 @@
         const showCQZoneCard = false;
         const showITUZoneCard = false;
         const showITURegionCard = false;
+        let maidenheadLayer; // Add a variable to store the Maidenhead layer
 
         function degToRad(deg) {
             return deg * Math.PI / 180;
@@ -930,29 +933,10 @@
                 if (mapElement._leaflet_grid_square) {
                     mapElement._leaflet_map.removeLayer(mapElement._leaflet_grid_square);
                 }
-                if (mapElement._leaflet_subsquare) {
-                    mapElement._leaflet_map.removeLayer(mapElement._leaflet_subsquare);
-                }
-                const maidenhead = latLonToMaidenhead(lat, lon);
-                const { lat: swLat, lon: swLon } = maidenheadToLatLon(maidenhead.slice(0, 4) + 'aa');
-                const { lat: neLat, lon: neLon } = maidenheadToLatLon(maidenhead.slice(0, 4) + 'xx');
-                const bounds = [[swLat, swLon], [neLat, neLon]];
-                const rectangle = L.rectangle(bounds, { color: "#0000FF", weight: 1 });
-                mapElement._leaflet_grid_square = rectangle;
-
-                const subsquare = maidenhead.slice(0, 4);
-                const subLat = lat;
-                const subLon = lon;
-                const subBounds = [
-                    [subLat - (1 / 24), subLon - (2 / 12)],
-                    [subLat + (1 / 24), subLon + (2 / 12)]
-                ];
-                const subrectangle = L.rectangle(subBounds, { color: "#FF0000", weight: 1 });
-                mapElement._leaflet_subsquare = subrectangle;
-
+                maidenheadLayer = L.maidenhead({ color: 'rgba(255, 0, 0, 0.4)' }).addTo(mapElement._leaflet_map); // Add the Maidenhead layer
+                mapElement._leaflet_grid_square = maidenheadLayer;
                 if (document.getElementById('toggle-maidenhead-btn').innerText === 'Hide Maidenhead Square') {
-                    mapElement._leaflet_map.addLayer(rectangle);
-                    mapElement._leaflet_map.addLayer(subrectangle);
+                    mapElement._leaflet_map.addLayer(maidenheadLayer);
                 }
             }
         }
@@ -961,16 +945,14 @@
             const mapElement = document.getElementById('map');
             const maidenheadToggleBtn = document.getElementById('toggle-maidenhead-btn');
             if (mapElement._leaflet_map) {
-                if (!mapElement._leaflet_grid_square) {
+                if (!maidenheadLayer) {
                     updateMaidenheadGridSquare(mapElement._leaflet_marker.getLatLng().lat, mapElement._leaflet_marker.getLatLng().lng);
                 }
                 if (maidenheadToggleBtn.innerText === 'Hide Maidenhead Square') {
-                    mapElement._leaflet_map.removeLayer(mapElement._leaflet_grid_square);
-                    mapElement._leaflet_map.removeLayer(mapElement._leaflet_subsquare);
+                    mapElement._leaflet_map.removeLayer(maidenheadLayer);
                     maidenheadToggleBtn.innerText = 'Show Maidenhead Square';
                 } else {
-                    mapElement._leaflet_map.addLayer(mapElement._leaflet_grid_square);
-                    mapElement._leaflet_map.addLayer(mapElement._leaflet_subsquare);
+                    mapElement._leaflet_map.addLayer(maidenheadLayer);
                     maidenheadToggleBtn.innerText = 'Hide Maidenhead Square';
                 }
             }
