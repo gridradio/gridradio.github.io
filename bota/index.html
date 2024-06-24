@@ -79,8 +79,6 @@
                             map.removeLayer(userMarker);
                         }
                         userMarker = L.marker([userLat, userLon]).addTo(map)
-                            .bindPopup('You are here!')
-                            .openPopup();
                     },
                     () => {
                         alert('Geolocation failed. Default location will be used.');
