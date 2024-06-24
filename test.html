@@ -32,8 +32,7 @@
     <meta property="og:title" content="grid.radio - Amateur Radio Locator" />
     <meta property="og:description" content="An app to determine OS grid references, WAB squares, and Maidenhead locators for amateur radio operators." />
     <meta property="og:image" content="https://grid.radio/og-image.png" />
-    <meta property="og:type" content="https://grid.radio" />
-    <meta property="og:type" content="apps.saves" />
+    <meta property="og:url" content="https://grid.radio" />
     <style>
         body {
             display: flex;
@@ -931,14 +930,28 @@
                 if (mapElement._leaflet_grid_square) {
                     mapElement._leaflet_map.removeLayer(mapElement._leaflet_grid_square);
                 }
+                if (mapElement._leaflet_subsquare) {
+                    mapElement._leaflet_map.removeLayer(mapElement._leaflet_subsquare);
+                }
                 const maidenhead = latLonToMaidenhead(lat, lon);
                 const { lat: swLat, lon: swLon } = maidenheadToLatLon(maidenhead.slice(0, 4) + 'aa');
                 const { lat: neLat, lon: neLon } = maidenheadToLatLon(maidenhead.slice(0, 4) + 'xx');
                 const bounds = [[swLat, swLon], [neLat, neLon]];
                 const rectangle = L.rectangle(bounds, { color: "#0000FF", weight: 1 });
                 mapElement._leaflet_grid_square = rectangle;
+
+                const subsquare = maidenhead.slice(0, 4);
+                const subswLat = swLat + 1;
+                const subswLon = swLon + 0.5;
+                const subneLat = swLat + 1 + 4;
+                const subneLon = swLon + 0.5 + 6;
+                const subbounds = [[subswLat, subswLon], [subneLat, subneLon]];
+                const subrectangle = L.rectangle(subbounds, { color: "#FF0000", weight: 1 });
+                mapElement._leaflet_subsquare = subrectangle;
+
                 if (document.getElementById('toggle-maidenhead-btn').innerText === 'Hide Maidenhead Square') {
                     mapElement._leaflet_map.addLayer(rectangle);
+                    mapElement._leaflet_map.addLayer(subrectangle);
                 }
             }
         }
@@ -952,9 +965,11 @@
                 }
                 if (maidenheadToggleBtn.innerText === 'Hide Maidenhead Square') {
                     mapElement._leaflet_map.removeLayer(mapElement._leaflet_grid_square);
+                    mapElement._leaflet_map.removeLayer(mapElement._leaflet_subsquare);
                     maidenheadToggleBtn.innerText = 'Show Maidenhead Square';
                 } else {
                     mapElement._leaflet_map.addLayer(mapElement._leaflet_grid_square);
+                    mapElement._leaflet_map.addLayer(mapElement._leaflet_subsquare);
                     maidenheadToggleBtn.innerText = 'Hide Maidenhead Square';
                 }
             }
