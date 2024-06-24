@@ -800,7 +800,7 @@
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 19,
                 }).addTo(map);
-
+                 L.maidenhead({color : 'rgba(255, 0, 0, 0.4)'}).addTo(map);
                 const marker = L.marker([lat, lon], { draggable: true }).addTo(map);
                 mapElement._leaflet_marker = marker;
 
