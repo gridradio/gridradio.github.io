@@ -1,0 +1,4589 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>ABHQ Locations</name>
+	<open>1</open>
+	<LookAt>
+		<longitude>-1.471986000000012</longitude>
+		<latitude>55.213461</latitude>
+		<altitude>0</altitude>
+		<heading>0</heading>
+		<tilt>45</tilt>
+		<range>1838524.68182319</range>
+	</LookAt>
+	<Style>
+		<ListStyle>
+			<listItemType>check</listItemType>
+			<bgColor>00ffffff</bgColor>
+			<maxSnippetLines>2</maxSnippetLines>
+		</ListStyle>
+	</Style>
+	<Schema name="ABHQ Locations" id="S_ABHQ_Locations_SSSSDDSSSS">
+		<SimpleField type="string" name="UKBOTA_Reference"><displayName>&lt;b&gt;UKBOTA Reference&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="Bunker_Name"><displayName>&lt;b&gt;Bunker Name&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="Type"><displayName>&lt;b&gt;Type&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="Area"><displayName>&lt;b&gt;Area&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="double" name="Latitude"><displayName>&lt;b&gt;Latitude&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="double" name="Longitude"><displayName>&lt;b&gt;Longitude&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="OSGR"><displayName>&lt;b&gt;OSGR&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="WAB"><displayName>&lt;b&gt;WAB&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="Nearest_Postcode"><displayName>&lt;b&gt;Nearest Postcode&lt;/b&gt;</displayName>
+</SimpleField>
+		<SimpleField type="string" name="Maidenhead"><displayName>&lt;b&gt;Maidenhead&lt;/b&gt;</displayName>
+</SimpleField>
+	</Schema>
+	<Style id="hlightPointStyle">
+		<IconStyle>
+			<color>ff0000ff</color>
+			<scale>2</scale>
+			<Icon>
+				<href>C:/Users/Fix it up/Downloads/clipart-plane-ww2-6.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<color>ff00ffff</color>
+		</LabelStyle>
+		<BalloonStyle>
+			<text><![CDATA[<table border="0">
+  <tr><td><b>UKBOTA Reference</b></td><td>$[ABHQ Locations/UKBOTA_Reference]</td></tr>
+  <tr><td><b>Bunker Name</b></td><td>$[ABHQ Locations/Bunker_Name]</td></tr>
+  <tr><td><b>Type</b></td><td>$[ABHQ Locations/Type]</td></tr>
+  <tr><td><b>Area</b></td><td>$[ABHQ Locations/Area]</td></tr>
+  <tr><td><b>Latitude</b></td><td>$[ABHQ Locations/Latitude]</td></tr>
+  <tr><td><b>Longitude</b></td><td>$[ABHQ Locations/Longitude]</td></tr>
+  <tr><td><b>OSGR</b></td><td>$[ABHQ Locations/OSGR]</td></tr>
+  <tr><td><b>WAB</b></td><td>$[ABHQ Locations/WAB]</td></tr>
+  <tr><td><b>Nearest Postcode</b></td><td>$[ABHQ Locations/Nearest_Postcode]</td></tr>
+  <tr><td><b>Maidenhead</b></td><td>$[ABHQ Locations/Maidenhead]</td></tr>
+</table>]]></text>
+		</BalloonStyle>
+		<ListStyle>
+		</ListStyle>
+	</Style>
+	<Style id="normPointStyle">
+		<IconStyle>
+			<color>ff0000ff</color>
+			<scale>2</scale>
+			<Icon>
+				<href>C:/Users/Fix it up/Downloads/clipart-plane-ww2-6.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<color>ff00ffff</color>
+		</LabelStyle>
+		<BalloonStyle>
+			<text><![CDATA[<table border="0">
+  <tr><td><b>UKBOTA Reference</b></td><td>$[ABHQ Locations/UKBOTA_Reference]</td></tr>
+  <tr><td><b>Bunker Name</b></td><td>$[ABHQ Locations/Bunker_Name]</td></tr>
+  <tr><td><b>Type</b></td><td>$[ABHQ Locations/Type]</td></tr>
+  <tr><td><b>Area</b></td><td>$[ABHQ Locations/Area]</td></tr>
+  <tr><td><b>Latitude</b></td><td>$[ABHQ Locations/Latitude]</td></tr>
+  <tr><td><b>Longitude</b></td><td>$[ABHQ Locations/Longitude]</td></tr>
+  <tr><td><b>OSGR</b></td><td>$[ABHQ Locations/OSGR]</td></tr>
+  <tr><td><b>WAB</b></td><td>$[ABHQ Locations/WAB]</td></tr>
+  <tr><td><b>Nearest Postcode</b></td><td>$[ABHQ Locations/Nearest_Postcode]</td></tr>
+  <tr><td><b>Maidenhead</b></td><td>$[ABHQ Locations/Maidenhead]</td></tr>
+</table>]]></text>
+		</BalloonStyle>
+		<ListStyle>
+		</ListStyle>
+	</Style>
+	<StyleMap id="pointStyleMap">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#normPointStyle</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#hlightPointStyle</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Folder id="layer 0">
+		<name>ABHQ Locations</name>
+		<open>1</open>
+		<Placemark>
+			<name>B/G-1189</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1189</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Atcham</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Shropshire</SimpleData>
+					<SimpleData name="Latitude">52.6854</SimpleData>
+					<SimpleData name="Longitude">-2.626</SimpleData>
+					<SimpleData name="OSGR">SJ 5778 0993</SimpleData>
+					<SimpleData name="WAB">SJ50</SimpleData>
+					<SimpleData name="Nearest_Postcode">SY4 4UL</SimpleData>
+					<SimpleData name="Maidenhead">IO82QQ</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.626003999999988,52.68540600000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1190</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1190</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Acaster Malbis</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">North Yorkshire</SimpleData>
+					<SimpleData name="Latitude">53.8873</SimpleData>
+					<SimpleData name="Longitude">-1.12149</SimpleData>
+					<SimpleData name="OSGR">SE 5784 4382</SimpleData>
+					<SimpleData name="WAB">SE54</SimpleData>
+					<SimpleData name="Nearest_Postcode">YO23 2PY</SimpleData>
+					<SimpleData name="Maidenhead">IO93KV</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.121489000000002,53.887348,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1191</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1191</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Akeman Street</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Oxfordshire</SimpleData>
+					<SimpleData name="Latitude">51.8234</SimpleData>
+					<SimpleData name="Longitude">-1.51535</SimpleData>
+					<SimpleData name="OSGR">SP 3350 1398</SimpleData>
+					<SimpleData name="WAB">SP31</SimpleData>
+					<SimpleData name="Nearest_Postcode">OX29 9XY</SimpleData>
+					<SimpleData name="Maidenhead">IO91FT</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.51534799999999,51.82344299999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1192</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1192</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Alconbury</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Cambridgeshire</SimpleData>
+					<SimpleData name="Latitude">52.3734</SimpleData>
+					<SimpleData name="Longitude">-0.220063</SimpleData>
+					<SimpleData name="OSGR">TL 2127 7653</SimpleData>
+					<SimpleData name="WAB">TL27</SimpleData>
+					<SimpleData name="Nearest_Postcode">PE28 4PP</SimpleData>
+					<SimpleData name="Maidenhead">IO92VI</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.2200630000000192,52.37339900000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1193</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1193</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Alton Barnes</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Wiltshire</SimpleData>
+					<SimpleData name="Latitude">51.3612</SimpleData>
+					<SimpleData name="Longitude">-1.85819</SimpleData>
+					<SimpleData name="OSGR">SU 0997 6247</SimpleData>
+					<SimpleData name="WAB">SU06</SimpleData>
+					<SimpleData name="Nearest_Postcode">SN8 4LB</SimpleData>
+					<SimpleData name="Maidenhead">IO91BI</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.858192000000001,51.36121199999998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1194</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1194</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Ashbourne</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Derbyshire</SimpleData>
+					<SimpleData name="Latitude">53.0106</SimpleData>
+					<SimpleData name="Longitude">-1.69905</SimpleData>
+					<SimpleData name="OSGR">SK 2029 4596</SimpleData>
+					<SimpleData name="WAB">SK24</SimpleData>
+					<SimpleData name="Nearest_Postcode">DE6 1LL</SimpleData>
+					<SimpleData name="Maidenhead">IO93DA</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.699046000000008,53.01056799999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1195</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1195</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Attlebridge</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Norfolk</SimpleData>
+					<SimpleData name="Latitude">52.6876</SimpleData>
+					<SimpleData name="Longitude">1.11484</SimpleData>
+					<SimpleData name="OSGR">TG 1062 1454</SimpleData>
+					<SimpleData name="WAB">TG11</SimpleData>
+					<SimpleData name="Nearest_Postcode">NR9 5LB</SimpleData>
+					<SimpleData name="Maidenhead">JO02NQ</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>1.114843999999993,52.68757700000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1196</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1196</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Baginton</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Warwickshire</SimpleData>
+					<SimpleData name="Latitude">52.3653</SimpleData>
+					<SimpleData name="Longitude">-1.49725</SimpleData>
+					<SimpleData name="OSGR">SP 3433 7426</SimpleData>
+					<SimpleData name="WAB">SP37</SimpleData>
+					<SimpleData name="Nearest_Postcode">CV8 3LB</SimpleData>
+					<SimpleData name="Maidenhead">IO92GI</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.497254000000008,52.365323,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1197</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1197</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Balderton</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Nottinghamshire</SimpleData>
+					<SimpleData name="Latitude">53.036</SimpleData>
+					<SimpleData name="Longitude">-0.771269</SimpleData>
+					<SimpleData name="OSGR">SK 8249 4945</SimpleData>
+					<SimpleData name="WAB">SK84</SimpleData>
+					<SimpleData name="Nearest_Postcode">NG24 3JW</SimpleData>
+					<SimpleData name="Maidenhead">IO93OA</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.77126899999999,53.03597699999998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1198</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1198</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Bardney</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Lincolnshire</SimpleData>
+					<SimpleData name="Latitude">53.2278</SimpleData>
+					<SimpleData name="Longitude">-0.281158</SimpleData>
+					<SimpleData name="OSGR">TF 1484 7146</SimpleData>
+					<SimpleData name="WAB">TF17</SimpleData>
+					<SimpleData name="Nearest_Postcode">LN3 5TP</SimpleData>
+					<SimpleData name="Maidenhead">IO93UF</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.2811580000000058,53.227777,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1199</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1199</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Barford St John</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Oxfordshire</SimpleData>
+					<SimpleData name="Latitude">52.0027</SimpleData>
+					<SimpleData name="Longitude">-1.36046</SimpleData>
+					<SimpleData name="OSGR">SP 4400 3400</SimpleData>
+					<SimpleData name="WAB">SP43</SimpleData>
+					<SimpleData name="Nearest_Postcode">OX15 0PP</SimpleData>
+					<SimpleData name="Maidenhead">IO92HA</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.360459999999988,52.002703,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1200</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1200</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Barrow</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Cumbria</SimpleData>
+					<SimpleData name="Latitude">54.1246</SimpleData>
+					<SimpleData name="Longitude">-3.26401</SimpleData>
+					<SimpleData name="OSGR">SD 1749 7060</SimpleData>
+					<SimpleData name="WAB">SD17</SimpleData>
+					<SimpleData name="Nearest_Postcode">LA14 3YS</SimpleData>
+					<SimpleData name="Maidenhead">IO84IC</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-3.264005999999997,54.12461100000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1201</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1201</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Beccles</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Suffolk</SimpleData>
+					<SimpleData name="Latitude">52.4368</SimpleData>
+					<SimpleData name="Longitude">1.60306</SimpleData>
+					<SimpleData name="OSGR">TM 4500 8820</SimpleData>
+					<SimpleData name="WAB">TM48</SimpleData>
+					<SimpleData name="Nearest_Postcode">NR34 7XD</SimpleData>
+					<SimpleData name="Maidenhead">JO02TK</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>1.603057999999993,52.436814,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1202</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1202</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Benson</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Oxfordshire</SimpleData>
+					<SimpleData name="Latitude">51.6143</SimpleData>
+					<SimpleData name="Longitude">-1.09008</SimpleData>
+					<SimpleData name="OSGR">SU 6310 9100</SimpleData>
+					<SimpleData name="WAB">SU69</SimpleData>
+					<SimpleData name="Nearest_Postcode">OX10 6AA</SimpleData>
+					<SimpleData name="Maidenhead">IO91KO</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.090078000000005,51.61430100000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1203</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1203</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Bicester</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Oxfordshire</SimpleData>
+					<SimpleData name="Latitude">51.9159</SimpleData>
+					<SimpleData name="Longitude">-1.13634</SimpleData>
+					<SimpleData name="OSGR">SP 5950 2450</SimpleData>
+					<SimpleData name="WAB">SP52</SimpleData>
+					<SimpleData name="Nearest_Postcode">OX27 8AL</SimpleData>
+					<SimpleData name="Maidenhead">IO91KV</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.136337999999997,51.91585900000003,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1204</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1204</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Binbrook</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Lincolnshire</SimpleData>
+					<SimpleData name="Latitude">53.444</SimpleData>
+					<SimpleData name="Longitude">-0.217936</SimpleData>
+					<SimpleData name="OSGR">TF 1846 9561</SimpleData>
+					<SimpleData name="WAB">TF19</SimpleData>
+					<SimpleData name="Nearest_Postcode">LN8 3ZW</SimpleData>
+					<SimpleData name="Maidenhead">IO93VK</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.2179360000000097,53.44395399999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1205</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1205</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Blyton</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Lincolnshire</SimpleData>
+					<SimpleData name="Latitude">53.4485</SimpleData>
+					<SimpleData name="Longitude">-0.693143</SimpleData>
+					<SimpleData name="OSGR">SK 8689 9543</SimpleData>
+					<SimpleData name="WAB">SK89</SimpleData>
+					<SimpleData name="Nearest_Postcode">DN21 3PF</SimpleData>
+					<SimpleData name="Maidenhead">IO93PK</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.693142999999985,53.44848000000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1206</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1206</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Bodney</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Norfolk</SimpleData>
+					<SimpleData name="Latitude">52.5589</SimpleData>
+					<SimpleData name="Longitude">0.719712</SimpleData>
+					<SimpleData name="OSGR">TL 8446 9915</SimpleData>
+					<SimpleData name="WAB">TL89</SimpleData>
+					<SimpleData name="Nearest_Postcode">IP26 5BX</SimpleData>
+					<SimpleData name="Maidenhead">JO02IN</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.7197119999999924,52.558915,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1207</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1207</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Bottisham</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Cambridgeshire</SimpleData>
+					<SimpleData name="Latitude">52.2118</SimpleData>
+					<SimpleData name="Longitude">0.261338</SimpleData>
+					<SimpleData name="OSGR">TL 5460 5947</SimpleData>
+					<SimpleData name="WAB">TL55</SimpleData>
+					<SimpleData name="Nearest_Postcode">CB25 9BU</SimpleData>
+					<SimpleData name="Maidenhead">JO02DF</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.2613379999999799,52.21176299999998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1208</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1208</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Bourn</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Cambridgeshire</SimpleData>
+					<SimpleData name="Latitude">52.213</SimpleData>
+					<SimpleData name="Longitude">-0.032534</SimpleData>
+					<SimpleData name="OSGR">TL 3452 5902</SimpleData>
+					<SimpleData name="WAB">TL35</SimpleData>
+					<SimpleData name="Nearest_Postcode">CB23 7FL</SimpleData>
+					<SimpleData name="Maidenhead">IO92XF</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.03253399999998852,52.212983,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1209</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1209</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Bovingdon</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Buckinghamshire</SimpleData>
+					<SimpleData name="Latitude">51.7328</SimpleData>
+					<SimpleData name="Longitude">-0.545106</SimpleData>
+					<SimpleData name="OSGR">TL 0057 0479</SimpleData>
+					<SimpleData name="WAB">TL00</SimpleData>
+					<SimpleData name="Nearest_Postcode">HP5 3RW</SimpleData>
+					<SimpleData name="Maidenhead">IO91RR</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.5451060000000107,51.73281100000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1210</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1210</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Bradwell Bay</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Essex</SimpleData>
+					<SimpleData name="Latitude">51.7362</SimpleData>
+					<SimpleData name="Longitude">0.896123</SimpleData>
+					<SimpleData name="OSGR">TM 0007 0813</SimpleData>
+					<SimpleData name="WAB">TM00</SimpleData>
+					<SimpleData name="Nearest_Postcode">CM0 7HW</SimpleData>
+					<SimpleData name="Maidenhead">JO01KR</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.8961229999999798,51.73615800000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1211</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1211</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Bramcote</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Warwickshire</SimpleData>
+					<SimpleData name="Latitude">52.4803</SimpleData>
+					<SimpleData name="Longitude">-1.39552</SimpleData>
+					<SimpleData name="OSGR">SP 4115 8710</SimpleData>
+					<SimpleData name="WAB">SP48</SimpleData>
+					<SimpleData name="Nearest_Postcode">CV12 9JX</SimpleData>
+					<SimpleData name="Maidenhead">IO92HL</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.395525,52.48028,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1212</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1212</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Braunstone</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Leicestershire</SimpleData>
+					<SimpleData name="Latitude">52.4987</SimpleData>
+					<SimpleData name="Longitude">-1.10906</SimpleData>
+					<SimpleData name="OSGR">SP 6058 8935</SimpleData>
+					<SimpleData name="WAB">SP68</SimpleData>
+					<SimpleData name="Nearest_Postcode">LE17 5QN</SimpleData>
+					<SimpleData name="Maidenhead">IO92KL</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.109056000000008,52.498699,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1213</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1213</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Burscough (HMS Ringtail)</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Lancashire</SimpleData>
+					<SimpleData name="Latitude">53.5881</SimpleData>
+					<SimpleData name="Longitude">-2.86542</SimpleData>
+					<SimpleData name="OSGR">SD 4281 1052</SimpleData>
+					<SimpleData name="WAB">SD41</SimpleData>
+					<SimpleData name="Nearest_Postcode">L40 8AD</SimpleData>
+					<SimpleData name="Maidenhead">IO83NO</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.865421000000006,53.58812799999998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1214</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1214</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Caistor</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Lincolnshire</SimpleData>
+					<SimpleData name="Latitude">53.5006</SimpleData>
+					<SimpleData name="Longitude">-0.361661</SimpleData>
+					<SimpleData name="OSGR">TA 0877 0168</SimpleData>
+					<SimpleData name="WAB">TA00</SimpleData>
+					<SimpleData name="Nearest_Postcode">LN7 6HH</SimpleData>
+					<SimpleData name="Maidenhead">IO93TM</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.361661000000002,53.50057799999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1215</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1215</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Cammeringham</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Lincolnshire</SimpleData>
+					<SimpleData name="Latitude">53.3449</SimpleData>
+					<SimpleData name="Longitude">-0.553606</SimpleData>
+					<SimpleData name="OSGR">SK 9639 8409</SimpleData>
+					<SimpleData name="WAB">SK98</SimpleData>
+					<SimpleData name="Nearest_Postcode">LN1 2YQ</SimpleData>
+					<SimpleData name="Maidenhead">IO93RI</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.5536060000000065,53.344932,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1216</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1216</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Cark</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Cumbria</SimpleData>
+					<SimpleData name="Latitude">54.1651</SimpleData>
+					<SimpleData name="Longitude">-2.96304</SimpleData>
+					<SimpleData name="OSGR">SD 3722 7479</SimpleData>
+					<SimpleData name="WAB">SD37</SimpleData>
+					<SimpleData name="Nearest_Postcode">LA11 7LS</SimpleData>
+					<SimpleData name="Maidenhead">IO84MD</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.963039000000016,54.165055,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1217</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1217</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Catfoss</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">East Riding of Yorkshire</SimpleData>
+					<SimpleData name="Latitude">53.9138</SimpleData>
+					<SimpleData name="Longitude">-0.274274</SimpleData>
+					<SimpleData name="OSGR">TA 1345 4778</SimpleData>
+					<SimpleData name="WAB">TA14</SimpleData>
+					<SimpleData name="Nearest_Postcode">YO25 8ES</SimpleData>
+					<SimpleData name="Maidenhead">IO93UV</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.2742739999999855,53.913756,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1218</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1218</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Charlton Horethorne</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Somerset</SimpleData>
+					<SimpleData name="Latitude">51.0203</SimpleData>
+					<SimpleData name="Longitude">-2.5018</SimpleData>
+					<SimpleData name="OSGR">ST 6490 2467</SimpleData>
+					<SimpleData name="WAB">ST62</SimpleData>
+					<SimpleData name="Nearest_Postcode">DT9 4LZ</SimpleData>
+					<SimpleData name="Maidenhead">IO81RA</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.501797000000014,51.02032400000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1219</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1219</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Charmy Down</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Somerset</SimpleData>
+					<SimpleData name="Latitude">51.429</SimpleData>
+					<SimpleData name="Longitude">-2.35494</SimpleData>
+					<SimpleData name="OSGR">ST 7542 7006</SimpleData>
+					<SimpleData name="WAB">ST77</SimpleData>
+					<SimpleData name="Nearest_Postcode">BA1 8AF</SimpleData>
+					<SimpleData name="Maidenhead">IO81TK</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.354943999999983,51.42900600000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1220</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1220</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Chedworth</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Gloucestershire</SimpleData>
+					<SimpleData name="Latitude">51.8108</SimpleData>
+					<SimpleData name="Longitude">-1.93961</SimpleData>
+					<SimpleData name="OSGR">SP 0426 1246</SimpleData>
+					<SimpleData name="WAB">SP01</SimpleData>
+					<SimpleData name="Nearest_Postcode">GL54 4NU</SimpleData>
+					<SimpleData name="Maidenhead">IO91AT</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.939612000000011,51.81075899999998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1221</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1221</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Chelveston</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Bedfordshire</SimpleData>
+					<SimpleData name="Latitude">52.2958</SimpleData>
+					<SimpleData name="Longitude">-0.531276</SimpleData>
+					<SimpleData name="OSGR">TL 0026 6742</SimpleData>
+					<SimpleData name="WAB">TL06</SimpleData>
+					<SimpleData name="Nearest_Postcode">MK44 1AP</SimpleData>
+					<SimpleData name="Maidenhead">IO92RH</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.5312759999999961,52.295769,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1222</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1222</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Chilbolton</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Hampshire</SimpleData>
+					<SimpleData name="Latitude">51.1475</SimpleData>
+					<SimpleData name="Longitude">-1.44254</SimpleData>
+					<SimpleData name="OSGR">SU 3909 3884</SimpleData>
+					<SimpleData name="WAB">SU33</SimpleData>
+					<SimpleData name="Nearest_Postcode">SO20 6AN</SimpleData>
+					<SimpleData name="Maidenhead">IO91GD</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.442541000000013,51.14749400000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1223</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1223</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Church Fenton</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">North Yorkshire</SimpleData>
+					<SimpleData name="Latitude">53.8413</SimpleData>
+					<SimpleData name="Longitude">-1.19768</SimpleData>
+					<SimpleData name="OSGR">SE 5289 3864</SimpleData>
+					<SimpleData name="WAB">SE53</SimpleData>
+					<SimpleData name="Nearest_Postcode">LS24 9DX</SimpleData>
+					<SimpleData name="Maidenhead">IO93JU</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.197681999999982,53.84132299999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1224</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1224</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Church Lawford</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Warwickshire</SimpleData>
+					<SimpleData name="Latitude">52.3495</SimpleData>
+					<SimpleData name="Longitude">-1.34783</SimpleData>
+					<SimpleData name="OSGR">SP 4452 7258</SimpleData>
+					<SimpleData name="WAB">SP47</SimpleData>
+					<SimpleData name="Nearest_Postcode">CV23 9JJ</SimpleData>
+					<SimpleData name="Maidenhead">IO92HI</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.347834999999995,52.349489,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1225</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1225</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Cleave</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Cornwall</SimpleData>
+					<SimpleData name="Latitude">50.8908</SimpleData>
+					<SimpleData name="Longitude">-4.54703</SimpleData>
+					<SimpleData name="OSGR">SS 2096 1324</SimpleData>
+					<SimpleData name="WAB">SS21</SimpleData>
+					<SimpleData name="Nearest_Postcode">EX23 9JH</SimpleData>
+					<SimpleData name="Maidenhead">IO70RV</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-4.547030000000016,50.89082400000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1226</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1226</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Clyffe Pypard</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Wiltshire</SimpleData>
+					<SimpleData name="Latitude">51.4824</SimpleData>
+					<SimpleData name="Longitude">-1.89022</SimpleData>
+					<SimpleData name="OSGR">SU 0772 7594</SimpleData>
+					<SimpleData name="WAB">SU07</SimpleData>
+					<SimpleData name="Nearest_Postcode">SN4 7PY</SimpleData>
+					<SimpleData name="Maidenhead">IO91BL</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.890219000000006,51.482363,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1227</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1227</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Condover</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Shropshire</SimpleData>
+					<SimpleData name="Latitude">52.6339</SimpleData>
+					<SimpleData name="Longitude">-2.72944</SimpleData>
+					<SimpleData name="OSGR">SJ 5073 0427</SimpleData>
+					<SimpleData name="WAB">SJ50</SimpleData>
+					<SimpleData name="Nearest_Postcode">SY5 7NN</SimpleData>
+					<SimpleData name="Maidenhead">IO82PP</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.729439000000005,52.63393200000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1228</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1228</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Cranage</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Cheshire</SimpleData>
+					<SimpleData name="Latitude">53.2215</SimpleData>
+					<SimpleData name="Longitude">-2.4024</SimpleData>
+					<SimpleData name="OSGR">SJ 7323 6946</SimpleData>
+					<SimpleData name="WAB">SJ76</SimpleData>
+					<SimpleData name="Nearest_Postcode">CW10 9LT</SimpleData>
+					<SimpleData name="Maidenhead">IO83TF</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.402397000000003,53.22150900000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1229</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1229</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Cranfield</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Bedfordshire</SimpleData>
+					<SimpleData name="Latitude">52.0772</SimpleData>
+					<SimpleData name="Longitude">-0.617989</SimpleData>
+					<SimpleData name="OSGR">SP 9481 4299</SimpleData>
+					<SimpleData name="WAB">SP94</SimpleData>
+					<SimpleData name="Nearest_Postcode">MK43 0AH</SimpleData>
+					<SimpleData name="Maidenhead">IO92QB</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.617989000000001,52.07716400000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1230</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1230</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Croft</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">North Yorkshire</SimpleData>
+					<SimpleData name="Latitude">54.4598</SimpleData>
+					<SimpleData name="Longitude">-1.54599</SimpleData>
+					<SimpleData name="OSGR">NZ 2953 0725</SimpleData>
+					<SimpleData name="WAB">NZ20</SimpleData>
+					<SimpleData name="Nearest_Postcode">DL2 2PL</SimpleData>
+					<SimpleData name="Maidenhead">IO94FL</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.545988000000003,54.45977899999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1231</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1231</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Crosby on Eden</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Cumbria</SimpleData>
+					<SimpleData name="Latitude">54.9411</SimpleData>
+					<SimpleData name="Longitude">-2.79449</SimpleData>
+					<SimpleData name="OSGR">NY 4920 6100</SimpleData>
+					<SimpleData name="WAB">NY46</SimpleData>
+					<SimpleData name="Nearest_Postcode">CA6 4NH</SimpleData>
+					<SimpleData name="Maidenhead">IO84OW</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.794493999999985,54.94106299999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1232</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1232</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Croughton</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Northamptonshire</SimpleData>
+					<SimpleData name="Latitude">51.9935</SimpleData>
+					<SimpleData name="Longitude">-1.18436</SimpleData>
+					<SimpleData name="OSGR">SP 5610 3310</SimpleData>
+					<SimpleData name="WAB">SP53</SimpleData>
+					<SimpleData name="Nearest_Postcode">NN13 5XP</SimpleData>
+					<SimpleData name="Maidenhead">IO91JX</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.184362999999982,51.99352300000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1233</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1233</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Culmhead</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Somerset</SimpleData>
+					<SimpleData name="Latitude">50.9232</SimpleData>
+					<SimpleData name="Longitude">-3.1289</SimpleData>
+					<SimpleData name="OSGR">ST 2075 1436</SimpleData>
+					<SimpleData name="WAB">ST21</SimpleData>
+					<SimpleData name="Nearest_Postcode">TA3 7DW</SimpleData>
+					<SimpleData name="Maidenhead">IO80KW</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-3.128899999999994,50.92323300000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1234</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1234</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Derby</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Derbyshire</SimpleData>
+					<SimpleData name="Latitude">52.8746</SimpleData>
+					<SimpleData name="Longitude">-1.57043</SimpleData>
+					<SimpleData name="OSGR">SK 2901 3088</SimpleData>
+					<SimpleData name="WAB">SK23</SimpleData>
+					<SimpleData name="Nearest_Postcode">DE1 9TA</SimpleData>
+					<SimpleData name="Maidenhead">IO92FU</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.57042999999998,52.87461399999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1235</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1235</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Desborough</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Northamptonshire</SimpleData>
+					<SimpleData name="Latitude">52.474</SimpleData>
+					<SimpleData name="Longitude">-0.792573</SimpleData>
+					<SimpleData name="OSGR">SP 8211 8692</SimpleData>
+					<SimpleData name="WAB">SP88</SimpleData>
+					<SimpleData name="Nearest_Postcode">LE16 8FE</SimpleData>
+					<SimpleData name="Maidenhead">IO92OL</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.7925730000000009,52.47404599999997,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1236</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1236</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Detling</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Kent</SimpleData>
+					<SimpleData name="Latitude">51.311</SimpleData>
+					<SimpleData name="Longitude">0.607939</SimpleData>
+					<SimpleData name="OSGR">TQ 8186 6011</SimpleData>
+					<SimpleData name="WAB">TQ86</SimpleData>
+					<SimpleData name="Nearest_Postcode">ME14 3HX</SimpleData>
+					<SimpleData name="Maidenhead">JO01HH</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.6079389999999751,51.31104099999996,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1237</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1237</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Digby</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Lincolnshire</SimpleData>
+					<SimpleData name="Latitude">53.1058</SimpleData>
+					<SimpleData name="Longitude">-0.445421</SimpleData>
+					<SimpleData name="OSGR">TF 0417 5764</SimpleData>
+					<SimpleData name="WAB">TF05</SimpleData>
+					<SimpleData name="Nearest_Postcode">LN4 3DL</SimpleData>
+					<SimpleData name="Maidenhead">IO93SC</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.4454210000000192,53.10579300000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1238</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1238</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Downham Market</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Norfolk</SimpleData>
+					<SimpleData name="Latitude">52.6138</SimpleData>
+					<SimpleData name="Longitude">0.40151</SimpleData>
+					<SimpleData name="OSGR">TF 6269 0449</SimpleData>
+					<SimpleData name="WAB">TF60</SimpleData>
+					<SimpleData name="Nearest_Postcode">PE34 3QN</SimpleData>
+					<SimpleData name="Maidenhead">JO02EO</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.4015100000000205,52.61381600000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1239</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1239</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Dunkeswell</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Devon</SimpleData>
+					<SimpleData name="Latitude">50.8683</SimpleData>
+					<SimpleData name="Longitude">-3.23245</SimpleData>
+					<SimpleData name="OSGR">ST 1337 0837</SimpleData>
+					<SimpleData name="WAB">ST10</SimpleData>
+					<SimpleData name="Nearest_Postcode">EX14 4AH</SimpleData>
+					<SimpleData name="Maidenhead">IO80JU</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-3.232451999999999,50.868318,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1240</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1240</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Dunsfold</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Surrey</SimpleData>
+					<SimpleData name="Latitude">51.1117</SimpleData>
+					<SimpleData name="Longitude">-0.545265</SimpleData>
+					<SimpleData name="OSGR">TQ 0193 3572</SimpleData>
+					<SimpleData name="WAB">TQ03</SimpleData>
+					<SimpleData name="Nearest_Postcode">GU8 4NP</SimpleData>
+					<SimpleData name="Maidenhead">IO91RC</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.545264999999997,51.11172000000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1241</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1241</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Duxford</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Cambridgeshire</SimpleData>
+					<SimpleData name="Latitude">52.0823</SimpleData>
+					<SimpleData name="Longitude">0.059646</SimpleData>
+					<SimpleData name="OSGR">TL 4123 4466</SimpleData>
+					<SimpleData name="WAB">TL44</SimpleData>
+					<SimpleData name="Nearest_Postcode">SG8 7SH</SimpleData>
+					<SimpleData name="Maidenhead">JO02AB</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.05964599999999987,52.082287,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1242</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1242</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Earls Colne</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Essex</SimpleData>
+					<SimpleData name="Latitude">51.9111</SimpleData>
+					<SimpleData name="Longitude">0.693614</SimpleData>
+					<SimpleData name="OSGR">TL 8537 2705</SimpleData>
+					<SimpleData name="WAB">TL82</SimpleData>
+					<SimpleData name="Nearest_Postcode">CO6 2JU</SimpleData>
+					<SimpleData name="Maidenhead">JO01IV</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.6936139999999869,51.91113,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1243</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1243</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Eastchurch</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Kent</SimpleData>
+					<SimpleData name="Latitude">51.3957</SimpleData>
+					<SimpleData name="Longitude">0.845804</SimpleData>
+					<SimpleData name="OSGR">TQ 9807 7014</SimpleData>
+					<SimpleData name="WAB">TQ97</SimpleData>
+					<SimpleData name="Nearest_Postcode">ME12 4AA</SimpleData>
+					<SimpleData name="Maidenhead">JO01KJ</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.8458039999999967,51.39571100000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1244</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1244</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Elmdon</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">West Midlands</SimpleData>
+					<SimpleData name="Latitude">52.4496</SimpleData>
+					<SimpleData name="Longitude">-1.75879</SimpleData>
+					<SimpleData name="OSGR">SP 1649 8354</SimpleData>
+					<SimpleData name="WAB">SP18</SimpleData>
+					<SimpleData name="Nearest_Postcode">B92 9DF</SimpleData>
+					<SimpleData name="Maidenhead">IO92CK</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.758793999999995,52.44957299999998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1245</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1245</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Exeter</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Devon</SimpleData>
+					<SimpleData name="Latitude">50.7403</SimpleData>
+					<SimpleData name="Longitude">-3.40695</SimpleData>
+					<SimpleData name="OSGR">SY 0082 9435</SimpleData>
+					<SimpleData name="WAB">SY09</SimpleData>
+					<SimpleData name="Nearest_Postcode">EX5 2GA</SimpleData>
+					<SimpleData name="Maidenhead">IO80HR</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-3.406951999999983,50.740261,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1246</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1246</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Fairlop</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Greater London</SimpleData>
+					<SimpleData name="Latitude">51.5904</SimpleData>
+					<SimpleData name="Longitude">0.100264</SimpleData>
+					<SimpleData name="OSGR">TQ 4559 9004</SimpleData>
+					<SimpleData name="WAB">TQ49</SimpleData>
+					<SimpleData name="Nearest_Postcode">IG2 7TE</SimpleData>
+					<SimpleData name="Maidenhead">JO01BO</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.1002639999999966,51.59040699999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1247</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1247</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Feltwell</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Norfolk</SimpleData>
+					<SimpleData name="Latitude">52.4707</SimpleData>
+					<SimpleData name="Longitude">0.503113</SimpleData>
+					<SimpleData name="OSGR">TL 7012 8881</SimpleData>
+					<SimpleData name="WAB">TL78</SimpleData>
+					<SimpleData name="Nearest_Postcode">IP26 4JN</SimpleData>
+					<SimpleData name="Maidenhead">JO02GL</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.503113000000015,52.47071600000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1248</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1248</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Filton</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Gloucestershire</SimpleData>
+					<SimpleData name="Latitude">51.5124</SimpleData>
+					<SimpleData name="Longitude">-2.58126</SimpleData>
+					<SimpleData name="OSGR">ST 5976 7943</SimpleData>
+					<SimpleData name="WAB">ST57</SimpleData>
+					<SimpleData name="Nearest_Postcode">BS34 7QS</SimpleData>
+					<SimpleData name="Maidenhead">IO81RM</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.581254999999998,51.512353,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1249</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1249</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Finmere</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Oxfordshire</SimpleData>
+					<SimpleData name="Latitude">51.9837</SimpleData>
+					<SimpleData name="Longitude">-1.07475</SimpleData>
+					<SimpleData name="OSGR">SP 6364 3210</SimpleData>
+					<SimpleData name="WAB">SP63</SimpleData>
+					<SimpleData name="Nearest_Postcode">MK18 4AQ</SimpleData>
+					<SimpleData name="Maidenhead">IO91LX</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.074749999999987,51.98372300000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1250</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1250</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Fiskerton</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Lincolnshire</SimpleData>
+					<SimpleData name="Latitude">53.2403</SimpleData>
+					<SimpleData name="Longitude">-0.430812</SimpleData>
+					<SimpleData name="OSGR">TF 0482 7262</SimpleData>
+					<SimpleData name="WAB">TF07</SimpleData>
+					<SimpleData name="Nearest_Postcode">LN3 4GE</SimpleData>
+					<SimpleData name="Maidenhead">IO93SF</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.4308119999999982,53.24026900000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1251</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1251</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Fowlmere</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Cambridgeshire</SimpleData>
+					<SimpleData name="Latitude">52.0824</SimpleData>
+					<SimpleData name="Longitude">0.05965</SimpleData>
+					<SimpleData name="OSGR">TL 4123 4467</SimpleData>
+					<SimpleData name="WAB">TL44</SimpleData>
+					<SimpleData name="Nearest_Postcode">SG8 7SH</SimpleData>
+					<SimpleData name="Maidenhead">JO02AB</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.05965000000001108,52.08237600000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1252</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1252</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Goxhill</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Lincolnshire</SimpleData>
+					<SimpleData name="Latitude">53.6709</SimpleData>
+					<SimpleData name="Longitude">-0.324328</SimpleData>
+					<SimpleData name="OSGR">TA 1080 2069</SimpleData>
+					<SimpleData name="WAB">TA12</SimpleData>
+					<SimpleData name="Nearest_Postcode">DN19 7LU</SimpleData>
+					<SimpleData name="Maidenhead">IO93UQ</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.3243280000000048,53.670949,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1253</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1253</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Grafton Underwood</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Northamptonshire</SimpleData>
+					<SimpleData name="Latitude">52.4185</SimpleData>
+					<SimpleData name="Longitude">-0.635429</SimpleData>
+					<SimpleData name="OSGR">SP 9290 8093</SimpleData>
+					<SimpleData name="WAB">SP98</SimpleData>
+					<SimpleData name="Nearest_Postcode">NN14 3AB</SimpleData>
+					<SimpleData name="Maidenhead">IO92QK</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.6354289999999874,52.41848399999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1254</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1254</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Great Ashfield</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Suffolk</SimpleData>
+					<SimpleData name="Latitude">52.2608</SimpleData>
+					<SimpleData name="Longitude">0.937824</SimpleData>
+					<SimpleData name="OSGR">TM 0059 6658</SimpleData>
+					<SimpleData name="WAB">TM06</SimpleData>
+					<SimpleData name="Nearest_Postcode">IP31 3HP</SimpleData>
+					<SimpleData name="Maidenhead">JO02LG</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.937824000000016,52.26079499999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1255</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1255</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Grove</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Oxfordshire</SimpleData>
+					<SimpleData name="Latitude">51.5994</SimpleData>
+					<SimpleData name="Longitude">-1.45017</SimpleData>
+					<SimpleData name="OSGR">SU 3818 8909</SimpleData>
+					<SimpleData name="WAB">SU38</SimpleData>
+					<SimpleData name="Nearest_Postcode">OX12 9WQ</SimpleData>
+					<SimpleData name="Maidenhead">IO91GO</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.450166999999996,51.59936500000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1256</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1256</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Hamble</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Hampshire</SimpleData>
+					<SimpleData name="Latitude">50.868</SimpleData>
+					<SimpleData name="Longitude">-1.32679</SimpleData>
+					<SimpleData name="OSGR">SU 4747 0783</SimpleData>
+					<SimpleData name="WAB">SU40</SimpleData>
+					<SimpleData name="Nearest_Postcode">SO31 4HU</SimpleData>
+					<SimpleData name="Maidenhead">IO90IU</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.326794000000002,50.868032,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1257</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1257</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Harrowbeer(1)</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Devon</SimpleData>
+					<SimpleData name="Latitude">50.4941</SimpleData>
+					<SimpleData name="Longitude">-4.10262</SimpleData>
+					<SimpleData name="OSGR">SX 5096 6815</SimpleData>
+					<SimpleData name="WAB">SX56</SimpleData>
+					<SimpleData name="Nearest_Postcode">PL20 6EL</SimpleData>
+					<SimpleData name="Maidenhead">IO70WL</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-4.102617000000006,50.49414499999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1258</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1258</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Harrowbeer(2)</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Devon</SimpleData>
+					<SimpleData name="Latitude">50.4829</SimpleData>
+					<SimpleData name="Longitude">-4.09422</SimpleData>
+					<SimpleData name="OSGR">SX 5152 6688</SimpleData>
+					<SimpleData name="WAB">SX56</SimpleData>
+					<SimpleData name="Nearest_Postcode">PL20 6BN</SimpleData>
+					<SimpleData name="Maidenhead">IO70WL</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-4.094222000000006,50.482874,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1259</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1259</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Hawkinge(1)</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Kent</SimpleData>
+					<SimpleData name="Latitude">51.1092</SimpleData>
+					<SimpleData name="Longitude">1.14951</SimpleData>
+					<SimpleData name="OSGR">TR 2056 3915</SimpleData>
+					<SimpleData name="WAB">TR23</SimpleData>
+					<SimpleData name="Nearest_Postcode">CT18 7SD</SimpleData>
+					<SimpleData name="Maidenhead">JO01NC</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>1.149505999999993,51.10918800000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1260</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1260</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Hawkinge(2)</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Kent</SimpleData>
+					<SimpleData name="Latitude">51.1095</SimpleData>
+					<SimpleData name="Longitude">1.14895</SimpleData>
+					<SimpleData name="OSGR">TR 2052 3918</SimpleData>
+					<SimpleData name="WAB">TR23</SimpleData>
+					<SimpleData name="Nearest_Postcode">CT18 7SD</SimpleData>
+					<SimpleData name="Maidenhead">JO01NC</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>1.148954000000004,51.10947199999998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1261</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1261</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Hawkinge(3)</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Kent</SimpleData>
+					<SimpleData name="Latitude">51.1088</SimpleData>
+					<SimpleData name="Longitude">1.14862</SimpleData>
+					<SimpleData name="OSGR">TR 2050 3910</SimpleData>
+					<SimpleData name="WAB">TR23</SimpleData>
+					<SimpleData name="Nearest_Postcode">CT18 7SD</SimpleData>
+					<SimpleData name="Maidenhead">JO01NC</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>1.148619999999987,51.10876200000003,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1262</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1262</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Hibaldstowe</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Lincolnshire</SimpleData>
+					<SimpleData name="Latitude">53.4984</SimpleData>
+					<SimpleData name="Longitude">-0.525472</SimpleData>
+					<SimpleData name="OSGR">SE 9791 0120</SimpleData>
+					<SimpleData name="WAB">SE90</SimpleData>
+					<SimpleData name="Nearest_Postcode">DN20 9NN</SimpleData>
+					<SimpleData name="Maidenhead">IO93RL</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.5254720000000068,53.49839600000003,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1263</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1263</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - High Ercall</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Shropshire</SimpleData>
+					<SimpleData name="Latitude">52.7564</SimpleData>
+					<SimpleData name="Longitude">-2.58183</SimpleData>
+					<SimpleData name="OSGR">SJ 6083 1780</SimpleData>
+					<SimpleData name="WAB">SJ61</SimpleData>
+					<SimpleData name="Nearest_Postcode">TF6 6JB</SimpleData>
+					<SimpleData name="Maidenhead">IO82RS</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.581829000000009,52.75638,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1264</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1264</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Hinton in the Hedges</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Northamptonshire</SimpleData>
+					<SimpleData name="Latitude">52.029</SimpleData>
+					<SimpleData name="Longitude">-1.19902</SimpleData>
+					<SimpleData name="OSGR">SP 5505 3703</SimpleData>
+					<SimpleData name="WAB">SP53</SimpleData>
+					<SimpleData name="Nearest_Postcode">NN13 5LF</SimpleData>
+					<SimpleData name="Maidenhead">IO92JA</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.199024000000009,52.02895800000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1265</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1265</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Hixon</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Staffordshire</SimpleData>
+					<SimpleData name="Latitude">52.8434</SimpleData>
+					<SimpleData name="Longitude">-1.99803</SimpleData>
+					<SimpleData name="OSGR">SK 0023 2732</SimpleData>
+					<SimpleData name="WAB">SK02</SimpleData>
+					<SimpleData name="Nearest_Postcode">ST18 0GL</SimpleData>
+					<SimpleData name="Maidenhead">IO92AU</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.998027999999998,52.84338799999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1266</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1266</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Holmsley South</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Hampshire</SimpleData>
+					<SimpleData name="Latitude">50.7953</SimpleData>
+					<SimpleData name="Longitude">-1.70752</SimpleData>
+					<SimpleData name="OSGR">SZ 2071 9957</SimpleData>
+					<SimpleData name="WAB">SZ29</SimpleData>
+					<SimpleData name="Nearest_Postcode">BH23 8DX</SimpleData>
+					<SimpleData name="Maidenhead">IO90DT</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.707524000000002,50.795328,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1267</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1267</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Honeybourne</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Worcestershire</SimpleData>
+					<SimpleData name="Latitude">52.089</SimpleData>
+					<SimpleData name="Longitude">-1.83591</SimpleData>
+					<SimpleData name="OSGR">SP 1134 4342</SimpleData>
+					<SimpleData name="WAB">SP14</SimpleData>
+					<SimpleData name="Nearest_Postcode">WR11 7PG</SimpleData>
+					<SimpleData name="Maidenhead">IO92BC</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.835905999999994,52.089015,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1268</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1268</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Hooton Park</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Cheshire</SimpleData>
+					<SimpleData name="Latitude">53.3018</SimpleData>
+					<SimpleData name="Longitude">-2.9399</SimpleData>
+					<SimpleData name="OSGR">SJ 3746 7873</SimpleData>
+					<SimpleData name="WAB">SJ37</SimpleData>
+					<SimpleData name="Nearest_Postcode">CH65 1BJ</SimpleData>
+					<SimpleData name="Maidenhead">IO83MH</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.939899999999995,53.30180999999997,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1269</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1269</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Hornchurch</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Greater London</SimpleData>
+					<SimpleData name="Latitude">51.5329</SimpleData>
+					<SimpleData name="Longitude">0.208498</SimpleData>
+					<SimpleData name="OSGR">TQ 5328 8387</SimpleData>
+					<SimpleData name="WAB">TQ58</SimpleData>
+					<SimpleData name="Nearest_Postcode">RM13 7YH</SimpleData>
+					<SimpleData name="Maidenhead">JO01CM</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.2084980000000014,51.53293300000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1270</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1270</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Hucknall</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Nottinghamshire</SimpleData>
+					<SimpleData name="Latitude">53.0223</SimpleData>
+					<SimpleData name="Longitude">-1.22757</SimpleData>
+					<SimpleData name="OSGR">SK 5191 4750</SimpleData>
+					<SimpleData name="WAB">SK54</SimpleData>
+					<SimpleData name="Nearest_Postcode">NG15 6FT</SimpleData>
+					<SimpleData name="Maidenhead">IO93JA</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.227565999999993,53.022285,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1271</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1271</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Hunmanby</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">North Yorkshire</SimpleData>
+					<SimpleData name="Latitude">54.1792</SimpleData>
+					<SimpleData name="Longitude">-0.327442</SimpleData>
+					<SimpleData name="OSGR">TA 0926 7723</SimpleData>
+					<SimpleData name="WAB">TA07</SimpleData>
+					<SimpleData name="Nearest_Postcode">YO14 0JG</SimpleData>
+					<SimpleData name="Maidenhead">IO94UE</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.3274419999999845,54.17922699999998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1272</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1272</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Hunsdon</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Hertfordshire</SimpleData>
+					<SimpleData name="Latitude">51.7998</SimpleData>
+					<SimpleData name="Longitude">0.065457</SimpleData>
+					<SimpleData name="OSGR">TL 4252 1326</SimpleData>
+					<SimpleData name="WAB">TL41</SimpleData>
+					<SimpleData name="Nearest_Postcode">CM20 2RA</SimpleData>
+					<SimpleData name="Maidenhead">JO01AT</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.06545700000002874,51.79983,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1273</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1273</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Hutton Cranswick</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">East Riding of Yorkshire</SimpleData>
+					<SimpleData name="Latitude">53.9502</SimpleData>
+					<SimpleData name="Longitude">-0.452742</SimpleData>
+					<SimpleData name="OSGR">TA 0164 5156</SimpleData>
+					<SimpleData name="WAB">TA05</SimpleData>
+					<SimpleData name="Nearest_Postcode">YO25 9QE</SimpleData>
+					<SimpleData name="Maidenhead">IO93SW</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.452742000000006,53.95016599999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1274</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1274</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Ibsley</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Hampshire</SimpleData>
+					<SimpleData name="Latitude">50.8786</SimpleData>
+					<SimpleData name="Longitude">-1.76883</SimpleData>
+					<SimpleData name="OSGR">SU 1636 0881</SimpleData>
+					<SimpleData name="WAB">SU10</SimpleData>
+					<SimpleData name="Nearest_Postcode">BH24 3NF</SimpleData>
+					<SimpleData name="Maidenhead">IO90CV</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.768833999999992,50.87855600000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1275</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1275</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Keevil</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Wiltshire</SimpleData>
+					<SimpleData name="Latitude">51.3147</SimpleData>
+					<SimpleData name="Longitude">-2.12334</SimpleData>
+					<SimpleData name="OSGR">ST 9150 5730</SimpleData>
+					<SimpleData name="WAB">ST95</SimpleData>
+					<SimpleData name="Nearest_Postcode">BA14 6ER</SimpleData>
+					<SimpleData name="Maidenhead">IO81WH</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.123344000000005,51.31474600000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1276</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1276</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Kemble</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Wiltshire</SimpleData>
+					<SimpleData name="Latitude">51.6673</SimpleData>
+					<SimpleData name="Longitude">-2.04767</SimpleData>
+					<SimpleData name="OSGR">ST 9680 9650</SimpleData>
+					<SimpleData name="WAB">ST99</SimpleData>
+					<SimpleData name="Nearest_Postcode">GL7 6AY</SimpleData>
+					<SimpleData name="Maidenhead">IO81XQ</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.047666999999993,51.66726700000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1277</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1277</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Kidlington</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Oxfordshire</SimpleData>
+					<SimpleData name="Latitude">51.8351</SimpleData>
+					<SimpleData name="Longitude">-1.31001</SimpleData>
+					<SimpleData name="OSGR">SP 4764 1539</SimpleData>
+					<SimpleData name="WAB">SP41</SimpleData>
+					<SimpleData name="Nearest_Postcode">OX5 1RB</SimpleData>
+					<SimpleData name="Maidenhead">IO91IU</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.310009000000014,51.835096,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1278</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1278</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Kings Cliffe(1)</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Northamptonshire</SimpleData>
+					<SimpleData name="Latitude">52.562</SimpleData>
+					<SimpleData name="Longitude">-0.484632</SimpleData>
+					<SimpleData name="OSGR">TL 0282 9710</SimpleData>
+					<SimpleData name="WAB">TL09</SimpleData>
+					<SimpleData name="Nearest_Postcode">PE8 5DW</SimpleData>
+					<SimpleData name="Maidenhead">IO92SN</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.4846320000000071,52.56202799999998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1279</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1279</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Kings Cliffe(2)</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Northamptonshire</SimpleData>
+					<SimpleData name="Latitude">52.5681</SimpleData>
+					<SimpleData name="Longitude">-0.480881</SimpleData>
+					<SimpleData name="OSGR">TL 0306 9778</SimpleData>
+					<SimpleData name="WAB">TL09</SimpleData>
+					<SimpleData name="Nearest_Postcode">PE8 6NU</SimpleData>
+					<SimpleData name="Maidenhead">IO92SN</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.4808810000000197,52.568094,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1280</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1280</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Kirmington</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Lincolnshire</SimpleData>
+					<SimpleData name="Latitude">53.5729</SimpleData>
+					<SimpleData name="Longitude">-0.348444</SimpleData>
+					<SimpleData name="OSGR">TA 0946 0975</SimpleData>
+					<SimpleData name="WAB">TA00</SimpleData>
+					<SimpleData name="Nearest_Postcode">DN39 6YG</SimpleData>
+					<SimpleData name="Maidenhead">IO93TN</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.3484440000000077,53.572941,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1281</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1281</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Langham</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Norfolk</SimpleData>
+					<SimpleData name="Latitude">52.9375</SimpleData>
+					<SimpleData name="Longitude">0.971276</SimpleData>
+					<SimpleData name="OSGR">TF 9977 4192</SimpleData>
+					<SimpleData name="WAB">TF94</SimpleData>
+					<SimpleData name="Nearest_Postcode">NR25 7BP</SimpleData>
+					<SimpleData name="Maidenhead">JO02LW</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.9712759999999809,52.937486,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1282</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1282</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Little Horwood</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Buckinghamshire</SimpleData>
+					<SimpleData name="Latitude">51.9645</SimpleData>
+					<SimpleData name="Longitude">-0.86264</SimpleData>
+					<SimpleData name="OSGR">SP 7824 3017</SimpleData>
+					<SimpleData name="WAB">SP73</SimpleData>
+					<SimpleData name="Nearest_Postcode">MK17 0PD</SimpleData>
+					<SimpleData name="Maidenhead">IO91NX</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.8626400000000078,51.96451300000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1283</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1283</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Little Snoring</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Norfolk</SimpleData>
+					<SimpleData name="Latitude">52.8598</SimpleData>
+					<SimpleData name="Longitude">0.906976</SimpleData>
+					<SimpleData name="OSGR">TF 9580 3310</SimpleData>
+					<SimpleData name="WAB">TF93</SimpleData>
+					<SimpleData name="Nearest_Postcode">NR21 0JJ</SimpleData>
+					<SimpleData name="Maidenhead">JO02KU</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.9069759999999993,52.85976399999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1284</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1284</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Little Staughton</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Cambridgeshire</SimpleData>
+					<SimpleData name="Latitude">52.2457</SimpleData>
+					<SimpleData name="Longitude">-0.351738</SimpleData>
+					<SimpleData name="OSGR">TL 1263 6211</SimpleData>
+					<SimpleData name="WAB">TL16</SimpleData>
+					<SimpleData name="Nearest_Postcode">PE19 5BW</SimpleData>
+					<SimpleData name="Maidenhead">IO92TF</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.3517380000000125,52.24565699999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1285</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1285</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Long Marston</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Warwickshire</SimpleData>
+					<SimpleData name="Latitude">52.1449</SimpleData>
+					<SimpleData name="Longitude">-1.74583</SimpleData>
+					<SimpleData name="OSGR">SP 1749 4965</SimpleData>
+					<SimpleData name="WAB">SP14</SimpleData>
+					<SimpleData name="Nearest_Postcode">CV37 8LN</SimpleData>
+					<SimpleData name="Maidenhead">IO92DD</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.745828999999988,52.14486599999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1286</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1286</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Lulsgate Bottom</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Somerset</SimpleData>
+					<SimpleData name="Latitude">51.3841</SimpleData>
+					<SimpleData name="Longitude">-2.71384</SimpleData>
+					<SimpleData name="OSGR">ST 5042 6525</SimpleData>
+					<SimpleData name="WAB">ST56</SimpleData>
+					<SimpleData name="Nearest_Postcode">BS48 3DY</SimpleData>
+					<SimpleData name="Maidenhead">IO81PJ</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.713843999999996,51.38411899999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1287</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1287</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Luton</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Bedfordshire</SimpleData>
+					<SimpleData name="Latitude">51.887</SimpleData>
+					<SimpleData name="Longitude">-0.366199</SimpleData>
+					<SimpleData name="OSGR">TL 1254 2220</SimpleData>
+					<SimpleData name="WAB">TL12</SimpleData>
+					<SimpleData name="Nearest_Postcode">LU2 9JB</SimpleData>
+					<SimpleData name="Maidenhead">IO91TV</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.3661989999999982,51.88700800000003,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1288</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1288</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Lympne</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Kent</SimpleData>
+					<SimpleData name="Latitude">51.0857</SimpleData>
+					<SimpleData name="Longitude">1.00924</SimpleData>
+					<SimpleData name="OSGR">TR 1085 3613</SimpleData>
+					<SimpleData name="WAB">TR13</SimpleData>
+					<SimpleData name="Nearest_Postcode">TN25 6DB</SimpleData>
+					<SimpleData name="Maidenhead">JO01MC</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>1.009238000000003,51.085721,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1289</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1289</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Madley</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Herefordshire</SimpleData>
+					<SimpleData name="Latitude">52.0343</SimpleData>
+					<SimpleData name="Longitude">-2.85448</SimpleData>
+					<SimpleData name="OSGR">SO 4148 3767</SimpleData>
+					<SimpleData name="WAB">SO43</SimpleData>
+					<SimpleData name="Nearest_Postcode">HR2 9LX</SimpleData>
+					<SimpleData name="Maidenhead">IO82NA</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.854479999999999,52.03433300000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1290</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1290</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Manston</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Kent</SimpleData>
+					<SimpleData name="Latitude">51.3502</SimpleData>
+					<SimpleData name="Longitude">1.35332</SimpleData>
+					<SimpleData name="OSGR">TR 3360 6657</SimpleData>
+					<SimpleData name="WAB">TR36</SimpleData>
+					<SimpleData name="Nearest_Postcode">CT12 5DF</SimpleData>
+					<SimpleData name="Maidenhead">JO01QI</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>1.353322999999977,51.35016300000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1291</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1291</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Market Harbrough</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Leicestershire</SimpleData>
+					<SimpleData name="Latitude">52.4997</SimpleData>
+					<SimpleData name="Longitude">-0.944194</SimpleData>
+					<SimpleData name="OSGR">SP 7177 8961</SimpleData>
+					<SimpleData name="WAB">SP78</SimpleData>
+					<SimpleData name="Nearest_Postcode">LE16 7QB</SimpleData>
+					<SimpleData name="Maidenhead">IO92ML</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.9441940000000137,52.49968,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1292</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1292</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Martlesham Heath</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Suffolk</SimpleData>
+					<SimpleData name="Latitude">52.0697</SimpleData>
+					<SimpleData name="Longitude">1.2777</SimpleData>
+					<SimpleData name="OSGR">TM 2474 4633</SimpleData>
+					<SimpleData name="WAB">TM24</SimpleData>
+					<SimpleData name="Nearest_Postcode">IP12 4UQ</SimpleData>
+					<SimpleData name="Maidenhead">JO02PB</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>1.277702999999986,52.06971099999997,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1293</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1293</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Matlaske</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Norfolk</SimpleData>
+					<SimpleData name="Latitude">52.8646</SimpleData>
+					<SimpleData name="Longitude">1.18532</SimpleData>
+					<SimpleData name="OSGR">TG 1451 3443</SimpleData>
+					<SimpleData name="WAB">TG13</SimpleData>
+					<SimpleData name="Nearest_Postcode">NR11 7LE</SimpleData>
+					<SimpleData name="Maidenhead">JO02OU</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>1.185322000000033,52.86457799999998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1294</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1294</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Meir</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Staffordshire</SimpleData>
+					<SimpleData name="Latitude">52.9647</SimpleData>
+					<SimpleData name="Longitude">-2.10373</SimpleData>
+					<SimpleData name="OSGR">SJ 9313 4082</SimpleData>
+					<SimpleData name="WAB">SJ94</SimpleData>
+					<SimpleData name="Nearest_Postcode">ST3 7BH</SimpleData>
+					<SimpleData name="Maidenhead">IO82WX</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.103730000000017,52.96469800000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1295</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1295</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Merston</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">West Sussex</SimpleData>
+					<SimpleData name="Latitude">50.817</SimpleData>
+					<SimpleData name="Longitude">-0.737991</SimpleData>
+					<SimpleData name="OSGR">SU 8900 0270</SimpleData>
+					<SimpleData name="WAB">SU82</SimpleData>
+					<SimpleData name="Nearest_Postcode">PO20 1LG</SimpleData>
+					<SimpleData name="Maidenhead">IO90PT</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.7379909999999934,50.81701799999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1296</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1296</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Methwold</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Norfolk</SimpleData>
+					<SimpleData name="Latitude">52.5061</SimpleData>
+					<SimpleData name="Longitude">0.560385</SimpleData>
+					<SimpleData name="OSGR">TL 7387 9288</SimpleData>
+					<SimpleData name="WAB">TL79</SimpleData>
+					<SimpleData name="Nearest_Postcode">IP26 4RJ</SimpleData>
+					<SimpleData name="Maidenhead">JO02GM</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.5603849999999921,52.50608800000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1297</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1297</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Middleton St. George(1)</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">County Durham</SimpleData>
+					<SimpleData name="Latitude">54.5143</SimpleData>
+					<SimpleData name="Longitude">-1.42784</SimpleData>
+					<SimpleData name="OSGR">NZ 3714 1337</SimpleData>
+					<SimpleData name="WAB">NZ31</SimpleData>
+					<SimpleData name="Nearest_Postcode">DL2 1NJ</SimpleData>
+					<SimpleData name="Maidenhead">IO94GM</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.427837000000005,54.514279,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1298</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1298</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Middleton St. George(2)</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">County Durham</SimpleData>
+					<SimpleData name="Latitude">54.5147</SimpleData>
+					<SimpleData name="Longitude">-1.41254</SimpleData>
+					<SimpleData name="OSGR">NZ 3813 1343</SimpleData>
+					<SimpleData name="WAB">NZ31</SimpleData>
+					<SimpleData name="Nearest_Postcode">DL2 1NL</SimpleData>
+					<SimpleData name="Maidenhead">IO94HM</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.412538000000008,54.51474400000003,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1299</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1299</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Montford Bridge</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Shropshire</SimpleData>
+					<SimpleData name="Latitude">52.753</SimpleData>
+					<SimpleData name="Longitude">-2.84551</SimpleData>
+					<SimpleData name="OSGR">SJ 4303 1760</SimpleData>
+					<SimpleData name="WAB">SJ41</SimpleData>
+					<SimpleData name="Nearest_Postcode">SY4 1HD</SimpleData>
+					<SimpleData name="Maidenhead">IO82NS</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.845513000000013,52.75299500000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1300</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1300</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Mount Farm</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Oxfordshire</SimpleData>
+					<SimpleData name="Latitude">51.6627</SimpleData>
+					<SimpleData name="Longitude">-1.15215</SimpleData>
+					<SimpleData name="OSGR">SU 5874 9633</SimpleData>
+					<SimpleData name="WAB">SU59</SimpleData>
+					<SimpleData name="Nearest_Postcode">OX10 7BJ</SimpleData>
+					<SimpleData name="Maidenhead">IO91KP</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.152145999999983,51.66269000000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1301</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1301</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - North Luffenham</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Rutland</SimpleData>
+					<SimpleData name="Latitude">52.6287</SimpleData>
+					<SimpleData name="Longitude">-0.602896</SimpleData>
+					<SimpleData name="OSGR">SK 9466 0435</SimpleData>
+					<SimpleData name="WAB">SK90</SimpleData>
+					<SimpleData name="Nearest_Postcode">LE15 8JT</SimpleData>
+					<SimpleData name="Maidenhead">IO92QP</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.6028959999999817,52.62866399999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1302</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1302</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Oakington</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Cambridgeshire</SimpleData>
+					<SimpleData name="Latitude">52.2659</SimpleData>
+					<SimpleData name="Longitude">0.070636</SimpleData>
+					<SimpleData name="OSGR">TL 4140 6510</SimpleData>
+					<SimpleData name="WAB">TL46</SimpleData>
+					<SimpleData name="Nearest_Postcode">CB24 3AU</SimpleData>
+					<SimpleData name="Maidenhead">JO02AG</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.07063600000000392,52.265888,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1303</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1303</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Oakley</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Buckinghamshire</SimpleData>
+					<SimpleData name="Latitude">51.7778</SimpleData>
+					<SimpleData name="Longitude">-1.0723</SimpleData>
+					<SimpleData name="OSGR">SP 6410 0920</SimpleData>
+					<SimpleData name="WAB">SP60</SimpleData>
+					<SimpleData name="Nearest_Postcode">HP18 9JT</SimpleData>
+					<SimpleData name="Maidenhead">IO91LS</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.072298999999988,51.77780600000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1304</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1304</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Old Sarum</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Wiltshire</SimpleData>
+					<SimpleData name="Latitude">51.0934</SimpleData>
+					<SimpleData name="Longitude">-1.80204</SimpleData>
+					<SimpleData name="OSGR">SU 1396 3270</SimpleData>
+					<SimpleData name="WAB">SU13</SimpleData>
+					<SimpleData name="Nearest_Postcode">SP1 3SD</SimpleData>
+					<SimpleData name="Maidenhead">IO91CC</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.802035999999996,51.09344200000003,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1305</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1305</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Ossington</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Nottinghamshire</SimpleData>
+					<SimpleData name="Latitude">53.1782</SimpleData>
+					<SimpleData name="Longitude">-0.893196</SimpleData>
+					<SimpleData name="OSGR">SK 7407 6514</SimpleData>
+					<SimpleData name="WAB">SK76</SimpleData>
+					<SimpleData name="Nearest_Postcode">NG23 6ND</SimpleData>
+					<SimpleData name="Maidenhead">IO93NE</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.893195999999985,53.17821899999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1306</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1306</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Pendeford</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">West Midlands</SimpleData>
+					<SimpleData name="Latitude">52.6265</SimpleData>
+					<SimpleData name="Longitude">-2.15626</SimpleData>
+					<SimpleData name="OSGR">SJ 8952 0320</SimpleData>
+					<SimpleData name="WAB">SJ80</SimpleData>
+					<SimpleData name="Nearest_Postcode">WV9 5SH</SimpleData>
+					<SimpleData name="Maidenhead">IO82WP</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.156258,52.626456,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1307</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1307</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Perranporth</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Cornwall</SimpleData>
+					<SimpleData name="Latitude">50.3301</SimpleData>
+					<SimpleData name="Longitude">-5.18357</SimpleData>
+					<SimpleData name="OSGR">SW 7352 5265</SimpleData>
+					<SimpleData name="WAB">SW75</SimpleData>
+					<SimpleData name="Nearest_Postcode">TR5 0XS</SimpleData>
+					<SimpleData name="Maidenhead">IO70JH</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-5.183572000000007,50.330146,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1308</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1308</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Pershore</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Worcestershire</SimpleData>
+					<SimpleData name="Latitude">52.1406</SimpleData>
+					<SimpleData name="Longitude">-2.02859</SimpleData>
+					<SimpleData name="OSGR">SO 9814 4915</SimpleData>
+					<SimpleData name="WAB">SO94</SimpleData>
+					<SimpleData name="Nearest_Postcode">WR10 2JY</SimpleData>
+					<SimpleData name="Maidenhead">IO82XD</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.028594000000004,52.14064100000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1309</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1309</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Peterborough</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Cambridgeshire</SimpleData>
+					<SimpleData name="Latitude">52.5833</SimpleData>
+					<SimpleData name="Longitude">-0.268692</SimpleData>
+					<SimpleData name="OSGR">TL 1740 9980</SimpleData>
+					<SimpleData name="WAB">TL19</SimpleData>
+					<SimpleData name="Nearest_Postcode">PE3 9TR</SimpleData>
+					<SimpleData name="Maidenhead">IO92UO</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.2686919999999793,52.583343,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1310</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1310</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Pocklington</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">East Riding of Yorkshire</SimpleData>
+					<SimpleData name="Latitude">53.9199</SimpleData>
+					<SimpleData name="Longitude">-0.794953</SimpleData>
+					<SimpleData name="OSGR">SE 7924 4776</SimpleData>
+					<SimpleData name="WAB">SE74</SimpleData>
+					<SimpleData name="Nearest_Postcode">YO42 1AD</SimpleData>
+					<SimpleData name="Maidenhead">IO93OW</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.7949530000000005,53.91993000000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1311</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1311</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Podington</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Bedfordshire</SimpleData>
+					<SimpleData name="Latitude">52.2358</SimpleData>
+					<SimpleData name="Longitude">-0.596227</SimpleData>
+					<SimpleData name="OSGR">SP 9596 6066</SimpleData>
+					<SimpleData name="WAB">SP96</SimpleData>
+					<SimpleData name="Nearest_Postcode">NN29 7JQ</SimpleData>
+					<SimpleData name="Maidenhead">IO92QF</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.5962270000000047,52.23578000000003,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1312</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1312</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Polebrook</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Northamptonshire</SimpleData>
+					<SimpleData name="Latitude">52.4696</SimpleData>
+					<SimpleData name="Longitude">-0.381074</SimpleData>
+					<SimpleData name="OSGR">TL 1007 8697</SimpleData>
+					<SimpleData name="WAB">TL18</SimpleData>
+					<SimpleData name="Nearest_Postcode">PE8 5LZ</SimpleData>
+					<SimpleData name="Maidenhead">IO92TL</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.3810740000000057,52.46958,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1313</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1313</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Predannack</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Cornwall</SimpleData>
+					<SimpleData name="Latitude">49.997</SimpleData>
+					<SimpleData name="Longitude">-5.22388</SimpleData>
+					<SimpleData name="OSGR">SW 6905 1574</SimpleData>
+					<SimpleData name="WAB">SW61</SimpleData>
+					<SimpleData name="Nearest_Postcode">TR12 7LH</SimpleData>
+					<SimpleData name="Maidenhead">IN79JX</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-5.223879000000011,49.99698899999997,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1314</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1314</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Ramsbury</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Wiltshire</SimpleData>
+					<SimpleData name="Latitude">51.4258</SimpleData>
+					<SimpleData name="Longitude">-1.61176</SimpleData>
+					<SimpleData name="OSGR">SU 2709 6971</SimpleData>
+					<SimpleData name="WAB">SU26</SimpleData>
+					<SimpleData name="Nearest_Postcode">SN8 2HN</SimpleData>
+					<SimpleData name="Maidenhead">IO91EK</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.611759000000013,51.425755,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1315</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1315</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Redhill</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Surrey</SimpleData>
+					<SimpleData name="Latitude">51.2179</SimpleData>
+					<SimpleData name="Longitude">-0.13497</SimpleData>
+					<SimpleData name="OSGR">TQ 3035 4817</SimpleData>
+					<SimpleData name="WAB">TQ34</SimpleData>
+					<SimpleData name="Nearest_Postcode">RH1 5YP</SimpleData>
+					<SimpleData name="Maidenhead">IO91WF</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.1349700000000009,51.21785800000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1316</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1316</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Rednal</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Shropshire</SimpleData>
+					<SimpleData name="Latitude">52.8412</SimpleData>
+					<SimpleData name="Longitude">-2.94536</SimpleData>
+					<SimpleData name="OSGR">SJ 3642 2750</SimpleData>
+					<SimpleData name="WAB">SJ32</SimpleData>
+					<SimpleData name="Nearest_Postcode">SY11 4HN</SimpleData>
+					<SimpleData name="Maidenhead">IO82MU</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.945361999999985,52.84124,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1317</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1317</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Rochford</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Essex</SimpleData>
+					<SimpleData name="Latitude">51.5683</SimpleData>
+					<SimpleData name="Longitude">0.6922</SimpleData>
+					<SimpleData name="OSGR">TQ 8668 8893</SimpleData>
+					<SimpleData name="WAB">TQ88</SimpleData>
+					<SimpleData name="Nearest_Postcode">SS2 6XL</SimpleData>
+					<SimpleData name="Maidenhead">JO01IN</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.6922000000000184,51.568334,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1318</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1318</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Rougham</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Suffolk</SimpleData>
+					<SimpleData name="Latitude">52.2435</SimpleData>
+					<SimpleData name="Longitude">0.776845</SimpleData>
+					<SimpleData name="OSGR">TL 8968 6422</SimpleData>
+					<SimpleData name="WAB">TL86</SimpleData>
+					<SimpleData name="Nearest_Postcode">IP30 9ND</SimpleData>
+					<SimpleData name="Maidenhead">JO02JF</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.7768450000000193,52.24347000000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1319</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1319</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Sawbridgeworth</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Hertfordshire</SimpleData>
+					<SimpleData name="Latitude">51.8433</SimpleData>
+					<SimpleData name="Longitude">0.123485</SimpleData>
+					<SimpleData name="OSGR">TL 4638 1821</SimpleData>
+					<SimpleData name="WAB">TL41</SimpleData>
+					<SimpleData name="Nearest_Postcode">CM21 0LT</SimpleData>
+					<SimpleData name="Maidenhead">JO01BU</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.1234850000000076,51.84330900000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1320</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1320</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Seighford</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Staffordshire</SimpleData>
+					<SimpleData name="Latitude">52.8249</SimpleData>
+					<SimpleData name="Longitude">-2.20936</SimpleData>
+					<SimpleData name="OSGR">SJ 8599 2528</SimpleData>
+					<SimpleData name="WAB">SJ82</SimpleData>
+					<SimpleData name="Nearest_Postcode">ST18 9GZ</SimpleData>
+					<SimpleData name="Maidenhead">IO82VT</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.209356000000022,52.824865,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1321</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1321</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Shawbury</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Shropshire</SimpleData>
+					<SimpleData name="Latitude">52.8018</SimpleData>
+					<SimpleData name="Longitude">-2.67484</SimpleData>
+					<SimpleData name="OSGR">SJ 5460 2291</SimpleData>
+					<SimpleData name="WAB">SJ52</SimpleData>
+					<SimpleData name="Nearest_Postcode">SY4 4DR</SimpleData>
+					<SimpleData name="Maidenhead">IO82PT</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.674844000000001,52.80182500000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1322</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1322</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Shellingford</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Oxfordshire</SimpleData>
+					<SimpleData name="Latitude">51.6421</SimpleData>
+					<SimpleData name="Longitude">-1.52263</SimpleData>
+					<SimpleData name="OSGR">SU 3313 9381</SimpleData>
+					<SimpleData name="WAB">SU39</SimpleData>
+					<SimpleData name="Nearest_Postcode">SN7 8LD</SimpleData>
+					<SimpleData name="Maidenhead">IO91FP</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.522629999999987,51.64212100000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1323</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1323</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Shobdon</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Herefordshire</SimpleData>
+					<SimpleData name="Latitude">52.2472</SimpleData>
+					<SimpleData name="Longitude">-2.88024</SimpleData>
+					<SimpleData name="OSGR">SO 4000 6137</SimpleData>
+					<SimpleData name="WAB">SO46</SimpleData>
+					<SimpleData name="Nearest_Postcode">HR6 9NR</SimpleData>
+					<SimpleData name="Maidenhead">IO82NF</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.880244000000007,52.24722400000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1324</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1324</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Shoreham</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">West Sussex</SimpleData>
+					<SimpleData name="Latitude">50.841</SimpleData>
+					<SimpleData name="Longitude">-0.298464</SimpleData>
+					<SimpleData name="OSGR">TQ 1990 0599</SimpleData>
+					<SimpleData name="WAB">TQ10</SimpleData>
+					<SimpleData name="Nearest_Postcode">BN15 0RL</SimpleData>
+					<SimpleData name="Maidenhead">IO90UU</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.2984639999999961,50.84102399999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1325</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1325</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Silloth</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Cumbria</SimpleData>
+					<SimpleData name="Latitude">54.8832</SimpleData>
+					<SimpleData name="Longitude">-3.37432</SimpleData>
+					<SimpleData name="OSGR">NY 1193 5514</SimpleData>
+					<SimpleData name="WAB">NY15</SimpleData>
+					<SimpleData name="Nearest_Postcode">CA7 4QJ</SimpleData>
+					<SimpleData name="Maidenhead">IO84HV</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-3.374317999999994,54.88322500000003,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1326</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1326</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Spittlegate</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Lincolnshire</SimpleData>
+					<SimpleData name="Latitude">52.907</SimpleData>
+					<SimpleData name="Longitude">-0.607042</SimpleData>
+					<SimpleData name="OSGR">SK 9378 3531</SimpleData>
+					<SimpleData name="WAB">SK93</SimpleData>
+					<SimpleData name="Nearest_Postcode">NG31 9ET</SimpleData>
+					<SimpleData name="Maidenhead">IO92QV</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.6070419999999976,52.90704999999997,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1327</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1327</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Stapleford Tawney</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Essex</SimpleData>
+					<SimpleData name="Latitude">51.6509</SimpleData>
+					<SimpleData name="Longitude">0.163196</SimpleData>
+					<SimpleData name="OSGR">TQ 4975 9689</SimpleData>
+					<SimpleData name="WAB">TQ49</SimpleData>
+					<SimpleData name="Nearest_Postcode">RM4 1RR</SimpleData>
+					<SimpleData name="Maidenhead">JO01BP</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.1631960000000188,51.65086400000003,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1328</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1328</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Stoke Orchard</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Gloucestershire</SimpleData>
+					<SimpleData name="Latitude">51.9477</SimpleData>
+					<SimpleData name="Longitude">-2.09783</SimpleData>
+					<SimpleData name="OSGR">SO 9337 2770</SimpleData>
+					<SimpleData name="WAB">SO92</SimpleData>
+					<SimpleData name="Nearest_Postcode">GL52 7RS</SimpleData>
+					<SimpleData name="Maidenhead">IO81WW</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.097835000000012,51.947743,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1329</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1329</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Stratford</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Warwickshire</SimpleData>
+					<SimpleData name="Latitude">52.1656</SimpleData>
+					<SimpleData name="Longitude">-1.69103</SimpleData>
+					<SimpleData name="OSGR">SP 2123 5197</SimpleData>
+					<SimpleData name="WAB">SP25</SimpleData>
+					<SimpleData name="Nearest_Postcode">CV37 8BE</SimpleData>
+					<SimpleData name="Maidenhead">IO92DD</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.691032000000017,52.16559400000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1330</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1330</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Stretton (HMS Blackcap)</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Cheshire</SimpleData>
+					<SimpleData name="Latitude">53.3494</SimpleData>
+					<SimpleData name="Longitude">-2.52243</SimpleData>
+					<SimpleData name="OSGR">SJ 6532 8374</SimpleData>
+					<SimpleData name="WAB">SJ68</SimpleData>
+					<SimpleData name="Nearest_Postcode">WA4 4RF</SimpleData>
+					<SimpleData name="Maidenhead">IO83RI</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.522425999999991,53.34940399999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1331</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1331</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Swinderby</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Lincolnshire</SimpleData>
+					<SimpleData name="Latitude">53.1421</SimpleData>
+					<SimpleData name="Longitude">-0.674652</SimpleData>
+					<SimpleData name="OSGR">SK 8875 6137</SimpleData>
+					<SimpleData name="WAB">SK86</SimpleData>
+					<SimpleData name="Nearest_Postcode">LN6 9QF</SimpleData>
+					<SimpleData name="Maidenhead">IO93PD</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.6746520000000089,53.14209700000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1332</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1332</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Sywell</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Northamptonshire</SimpleData>
+					<SimpleData name="Latitude">52.3041</SimpleData>
+					<SimpleData name="Longitude">-0.777989</SimpleData>
+					<SimpleData name="OSGR">SP 8342 6803</SimpleData>
+					<SimpleData name="WAB">SP86</SimpleData>
+					<SimpleData name="Nearest_Postcode">NN6 0FL</SimpleData>
+					<SimpleData name="Maidenhead">IO92OH</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.77798899999999,52.30406399999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1333</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1333</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Tatenhill</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Staffordshire</SimpleData>
+					<SimpleData name="Latitude">52.8149</SimpleData>
+					<SimpleData name="Longitude">-1.77043</SimpleData>
+					<SimpleData name="OSGR">SK 1557 2418</SimpleData>
+					<SimpleData name="WAB">SK12</SimpleData>
+					<SimpleData name="Nearest_Postcode">DE13 8SN</SimpleData>
+					<SimpleData name="Maidenhead">IO92CT</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.770429000000009,52.81493999999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1334</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1334</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Ternhill</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Shropshire</SimpleData>
+					<SimpleData name="Latitude">52.939</SimpleData>
+					<SimpleData name="Longitude">-2.65436</SimpleData>
+					<SimpleData name="OSGR">SJ 5612 3816</SimpleData>
+					<SimpleData name="WAB">SJ53</SimpleData>
+					<SimpleData name="Nearest_Postcode">SY13 4BT</SimpleData>
+					<SimpleData name="Maidenhead">IO82QW</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.654359999999991,52.93902900000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1335</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1335</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Thorpe Abbots</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Norfolk</SimpleData>
+					<SimpleData name="Latitude">52.3863</SimpleData>
+					<SimpleData name="Longitude">1.2172</SimpleData>
+					<SimpleData name="OSGR">TM 1903 8135</SimpleData>
+					<SimpleData name="WAB">TM18</SimpleData>
+					<SimpleData name="Nearest_Postcode">IP21 4HY</SimpleData>
+					<SimpleData name="Maidenhead">JO02OJ</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>1.217195000000006,52.38634499999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1336</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1336</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Tibenham</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Norfolk</SimpleData>
+					<SimpleData name="Latitude">52.4521</SimpleData>
+					<SimpleData name="Longitude">1.15501</SimpleData>
+					<SimpleData name="OSGR">TM 1448 8848</SimpleData>
+					<SimpleData name="WAB">TM18</SimpleData>
+					<SimpleData name="Nearest_Postcode">NR15 2EN</SimpleData>
+					<SimpleData name="Maidenhead">JO02NK</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>1.155014000000012,52.45214699999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1337</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1337</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Twinwood farm</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Bedfordshire</SimpleData>
+					<SimpleData name="Latitude">52.1833</SimpleData>
+					<SimpleData name="Longitude">-0.496661</SimpleData>
+					<SimpleData name="OSGR">TL 0288 5496</SimpleData>
+					<SimpleData name="WAB">TL05</SimpleData>
+					<SimpleData name="Nearest_Postcode">MK41 6BL</SimpleData>
+					<SimpleData name="Maidenhead">IO92SE</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.4966609999999871,52.18330499999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1338</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1338</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Warboys</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Cambridgeshire</SimpleData>
+					<SimpleData name="Latitude">52.4</SimpleData>
+					<SimpleData name="Longitude">-0.098163</SimpleData>
+					<SimpleData name="OSGR">TL 2949 7970</SimpleData>
+					<SimpleData name="WAB">TL27</SimpleData>
+					<SimpleData name="Nearest_Postcode">PE28 2RU</SimpleData>
+					<SimpleData name="Maidenhead">IO92WJ</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.098163,52.40000300000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1339</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1339</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Warton</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Lancashire</SimpleData>
+					<SimpleData name="Latitude">53.7463</SimpleData>
+					<SimpleData name="Longitude">-2.88656</SimpleData>
+					<SimpleData name="OSGR">SD 4163 2813</SimpleData>
+					<SimpleData name="WAB">SD42</SimpleData>
+					<SimpleData name="Nearest_Postcode">PR4 1AX</SimpleData>
+					<SimpleData name="Maidenhead">IO83NR</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.886560999999996,53.74625999999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1340</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1340</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Waterbeach</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Cambridgeshire</SimpleData>
+					<SimpleData name="Latitude">52.2782</SimpleData>
+					<SimpleData name="Longitude">0.184091</SimpleData>
+					<SimpleData name="OSGR">TL 4910 6670</SimpleData>
+					<SimpleData name="WAB">TL46</SimpleData>
+					<SimpleData name="Nearest_Postcode">CB25 9GU</SimpleData>
+					<SimpleData name="Maidenhead">JO02CG</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.1840909999999818,52.27823,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1341</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1341</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Wellesbourne Mountford</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Warwickshire</SimpleData>
+					<SimpleData name="Latitude">52.1905</SimpleData>
+					<SimpleData name="Longitude">-1.61874</SimpleData>
+					<SimpleData name="OSGR">SP 2616 5476</SimpleData>
+					<SimpleData name="WAB">SP25</SimpleData>
+					<SimpleData name="Nearest_Postcode">CV35 9EU</SimpleData>
+					<SimpleData name="Maidenhead">IO92EE</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.618741999999991,52.19046600000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1342</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1342</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Wellingore</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Lincolnshire</SimpleData>
+					<SimpleData name="Latitude">53.0791</SimpleData>
+					<SimpleData name="Longitude">-0.51834</SimpleData>
+					<SimpleData name="OSGR">SK 9935 5457</SimpleData>
+					<SimpleData name="WAB">SK95</SimpleData>
+					<SimpleData name="Nearest_Postcode">LN5 0DF</SimpleData>
+					<SimpleData name="Maidenhead">IO93RB</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.5183399999999905,53.079124,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1343</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1343</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Wendling</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Norfolk</SimpleData>
+					<SimpleData name="Latitude">52.7043</SimpleData>
+					<SimpleData name="Longitude">0.846884</SimpleData>
+					<SimpleData name="OSGR">TF 9244 1565</SimpleData>
+					<SimpleData name="WAB">TF91</SimpleData>
+					<SimpleData name="Nearest_Postcode">PE32 2NH</SimpleData>
+					<SimpleData name="Maidenhead">JO02KQ</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.8468839999999878,52.704302,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1344</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1344</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - West Malling</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Kent</SimpleData>
+					<SimpleData name="Latitude">51.2651</SimpleData>
+					<SimpleData name="Longitude">0.402487</SimpleData>
+					<SimpleData name="OSGR">TQ 6771 5451</SimpleData>
+					<SimpleData name="WAB">TQ65</SimpleData>
+					<SimpleData name="Nearest_Postcode">ME19 4GF</SimpleData>
+					<SimpleData name="Maidenhead">JO01EG</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.4024870000000025,51.26507500000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1345</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1345</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - West Raynham</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Norfolk</SimpleData>
+					<SimpleData name="Latitude">52.7874</SimpleData>
+					<SimpleData name="Longitude">0.750708</SimpleData>
+					<SimpleData name="OSGR">TF 8559 2464</SimpleData>
+					<SimpleData name="WAB">TF82</SimpleData>
+					<SimpleData name="Nearest_Postcode">NR21 7JT</SimpleData>
+					<SimpleData name="Maidenhead">JO02JS</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>0.7507079999999844,52.78741500000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1346</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1346</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Wickenby</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Lincolnshire</SimpleData>
+					<SimpleData name="Latitude">53.3086</SimpleData>
+					<SimpleData name="Longitude">-0.346656</SimpleData>
+					<SimpleData name="OSGR">TF 1026 8035</SimpleData>
+					<SimpleData name="WAB">TF18</SimpleData>
+					<SimpleData name="Nearest_Postcode">LN3 5AX</SimpleData>
+					<SimpleData name="Maidenhead">IO93TH</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.3466559999999896,53.30862300000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1347</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1347</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Windrush</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Gloucestershire</SimpleData>
+					<SimpleData name="Latitude">51.8067</SimpleData>
+					<SimpleData name="Longitude">-1.73683</SimpleData>
+					<SimpleData name="OSGR">SP 1824 1203</SimpleData>
+					<SimpleData name="WAB">SP11</SimpleData>
+					<SimpleData name="Nearest_Postcode">OX18 4TP</SimpleData>
+					<SimpleData name="Maidenhead">IO91DT</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.736826,51.80668600000003,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1348</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1348</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Woodford(1)</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Greater Manchester</SimpleData>
+					<SimpleData name="Latitude">53.3393</SimpleData>
+					<SimpleData name="Longitude">-2.15916</SimpleData>
+					<SimpleData name="OSGR">SJ 8950 8250</SimpleData>
+					<SimpleData name="WAB">SJ88</SimpleData>
+					<SimpleData name="Nearest_Postcode">SK7 1SR</SimpleData>
+					<SimpleData name="Maidenhead">IO83WI</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.159155999999993,53.33929599999998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1349</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1349</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Woodford(2)</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Greater Manchester</SimpleData>
+					<SimpleData name="Latitude">53.3332</SimpleData>
+					<SimpleData name="Longitude">-2.16469</SimpleData>
+					<SimpleData name="OSGR">SJ 8913 8182</SimpleData>
+					<SimpleData name="WAB">SJ88</SimpleData>
+					<SimpleData name="Nearest_Postcode">SK7 1RN</SimpleData>
+					<SimpleData name="Maidenhead">IO83WH</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.164689000000002,53.33317600000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1350</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1350</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Woodley</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Berkshire</SimpleData>
+					<SimpleData name="Latitude">51.4561</SimpleData>
+					<SimpleData name="Longitude">-0.883089</SimpleData>
+					<SimpleData name="OSGR">SU 7770 7361</SimpleData>
+					<SimpleData name="WAB">SU77</SimpleData>
+					<SimpleData name="Nearest_Postcode">RG5 4SR</SimpleData>
+					<SimpleData name="Maidenhead">IO91NK</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-0.8830890000000191,51.45614699999998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1351</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1351</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Worthy Down</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Hampshire</SimpleData>
+					<SimpleData name="Latitude">51.1072</SimpleData>
+					<SimpleData name="Longitude">-1.32918</SimpleData>
+					<SimpleData name="OSGR">SU 4706 3443</SimpleData>
+					<SimpleData name="WAB">SU43</SimpleData>
+					<SimpleData name="Nearest_Postcode">SO21 2QW</SimpleData>
+					<SimpleData name="Maidenhead">IO91IC</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.329183000000007,51.10724299999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1352</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1352</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Wymeswold</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Leicestershire</SimpleData>
+					<SimpleData name="Latitude">52.8002</SimpleData>
+					<SimpleData name="Longitude">-1.12412</SimpleData>
+					<SimpleData name="OSGR">SK 5915 2287</SimpleData>
+					<SimpleData name="WAB">SK52</SimpleData>
+					<SimpleData name="Nearest_Postcode">LE12 5HH</SimpleData>
+					<SimpleData name="Maidenhead">IO92KT</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.124120000000006,52.80015499999998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/G-1353</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/G-1353</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Hawarden</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Warwickshire</SimpleData>
+					<SimpleData name="Latitude">52.2762</SimpleData>
+					<SimpleData name="Longitude">-1.50427</SimpleData>
+					<SimpleData name="OSGR">SP 3392 6434</SimpleData>
+					<SimpleData name="WAB">SP36</SimpleData>
+					<SimpleData name="Nearest_Postcode">CV31 1TL</SimpleData>
+					<SimpleData name="Maidenhead">IO92FG</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.504271999999984,52.27616900000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GD-0009</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GD-0009</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Andreas</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Isle of Man</SimpleData>
+					<SimpleData name="Latitude">54.3744</SimpleData>
+					<SimpleData name="Longitude">-4.42501</SimpleData>
+					<SimpleData name="OSGR">NX 4258 0037</SimpleData>
+					<SimpleData name="WAB">NX40</SimpleData>
+					<SimpleData name="Nearest_Postcode">IM</SimpleData>
+					<SimpleData name="Maidenhead">IO74SI</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-4.425007999999995,54.37443800000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GI-0068</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GI-0068</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - St Angelo</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Fermanagh</SimpleData>
+					<SimpleData name="Latitude">54.3996</SimpleData>
+					<SimpleData name="Longitude">-7.64791</SimpleData>
+					<SimpleData name="OSGR">H 2292 5013</SimpleData>
+					<SimpleData name="WAB">H25</SimpleData>
+					<SimpleData name="Nearest_Postcode">BT</SimpleData>
+					<SimpleData name="Maidenhead">IO64EJ</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-7.647910999999993,54.39963599999997,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0379</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0379</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Wigtown</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Dumfries and Galloway</SimpleData>
+					<SimpleData name="Latitude">54.8515</SimpleData>
+					<SimpleData name="Longitude">-4.45122</SimpleData>
+					<SimpleData name="OSGR">NX 4273 5350</SimpleData>
+					<SimpleData name="WAB">NX45</SimpleData>
+					<SimpleData name="Nearest_Postcode">DG8 9AG</SimpleData>
+					<SimpleData name="Maidenhead">IO74SU</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-4.451221000000003,54.851517,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0380</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0380</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Annan</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Dumfries and Galloway</SimpleData>
+					<SimpleData name="Latitude">55.0185</SimpleData>
+					<SimpleData name="Longitude">-3.22441</SimpleData>
+					<SimpleData name="OSGR">NY 2181 7001</SimpleData>
+					<SimpleData name="WAB">NY27</SimpleData>
+					<SimpleData name="Nearest_Postcode">DG12 6RF</SimpleData>
+					<SimpleData name="Maidenhead">IO85JA</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-3.224411000000011,55.01846399999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0381</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0381</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Ayr</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">South Ayrshire</SimpleData>
+					<SimpleData name="Latitude">55.4844</SimpleData>
+					<SimpleData name="Longitude">-4.58425</SimpleData>
+					<SimpleData name="OSGR">NS 3680 2421</SimpleData>
+					<SimpleData name="WAB">NS32</SimpleData>
+					<SimpleData name="Nearest_Postcode">KA6 5HQ</SimpleData>
+					<SimpleData name="Maidenhead">IO75QL</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-4.584248999999994,55.48437499999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0382</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0382</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Castle Kennedy</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Dumfries and Galloway</SimpleData>
+					<SimpleData name="Latitude">54.8942</SimpleData>
+					<SimpleData name="Longitude">-4.93982</SimpleData>
+					<SimpleData name="OSGR">NX 1157 5946</SimpleData>
+					<SimpleData name="WAB">NX15</SimpleData>
+					<SimpleData name="Nearest_Postcode">DG9 8SQ</SimpleData>
+					<SimpleData name="Maidenhead">IO74MV</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-4.939821999999989,54.894245,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0383</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0383</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Castletown</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Highland</SimpleData>
+					<SimpleData name="Latitude">58.5752</SimpleData>
+					<SimpleData name="Longitude">-3.35253</SimpleData>
+					<SimpleData name="OSGR">ND 2144 6604</SimpleData>
+					<SimpleData name="WAB">ND26</SimpleData>
+					<SimpleData name="Nearest_Postcode">KW14 8TB</SimpleData>
+					<SimpleData name="Maidenhead">IO88HN</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-3.352526000000013,58.57524999999998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0384</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0384</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Dalcross</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Highland</SimpleData>
+					<SimpleData name="Latitude">57.537</SimpleData>
+					<SimpleData name="Longitude">-4.0609</SimpleData>
+					<SimpleData name="OSGR">NH 7672 5152</SimpleData>
+					<SimpleData name="WAB">NH75</SimpleData>
+					<SimpleData name="Nearest_Postcode">IV2 7BL</SimpleData>
+					<SimpleData name="Maidenhead">IO77XM</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-4.060901999999991,57.53696100000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0385</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0385</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Drem</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">East Lothian</SimpleData>
+					<SimpleData name="Latitude">56.0169</SimpleData>
+					<SimpleData name="Longitude">-2.80955</SimpleData>
+					<SimpleData name="OSGR">NT 4963 8074</SimpleData>
+					<SimpleData name="WAB">NT48</SimpleData>
+					<SimpleData name="Nearest_Postcode">EH39 5AE</SimpleData>
+					<SimpleData name="Maidenhead">IO86OA</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.809547000000012,56.016919,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0386</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0386</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Dumfries</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Dumfries and Galloway</SimpleData>
+					<SimpleData name="Latitude">55.1021</SimpleData>
+					<SimpleData name="Longitude">-3.5837</SimpleData>
+					<SimpleData name="OSGR">NX 9905 7978</SimpleData>
+					<SimpleData name="WAB">NX97</SimpleData>
+					<SimpleData name="Nearest_Postcode">DG1 1XA</SimpleData>
+					<SimpleData name="Maidenhead">IO85EC</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-3.583700999999999,55.10212300000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0387</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0387</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - East Fortune</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">East Lothian</SimpleData>
+					<SimpleData name="Latitude">55.9966</SimpleData>
+					<SimpleData name="Longitude">-2.73265</SimpleData>
+					<SimpleData name="OSGR">NT 5440 7842</SimpleData>
+					<SimpleData name="WAB">NT57</SimpleData>
+					<SimpleData name="Nearest_Postcode">EH39 5LE</SimpleData>
+					<SimpleData name="Maidenhead">IO85PX</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.732645999999985,55.99655500000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0388</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0388</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Fearn</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Highland</SimpleData>
+					<SimpleData name="Latitude">57.7616</SimpleData>
+					<SimpleData name="Longitude">-3.93499</SimpleData>
+					<SimpleData name="OSGR">NH 8497 7630</SimpleData>
+					<SimpleData name="WAB">NH87</SimpleData>
+					<SimpleData name="Nearest_Postcode">IV20 1XW</SimpleData>
+					<SimpleData name="Maidenhead">IO87AS</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-3.934994999999986,57.761589,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0389</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0389</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Findo Gask</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Perth and Kinross</SimpleData>
+					<SimpleData name="Latitude">56.3695</SimpleData>
+					<SimpleData name="Longitude">-3.61354</SimpleData>
+					<SimpleData name="OSGR">NO 0043 2086</SimpleData>
+					<SimpleData name="WAB">NO02</SimpleData>
+					<SimpleData name="Nearest_Postcode">PH1 1QS</SimpleData>
+					<SimpleData name="Maidenhead">IO86EI</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-3.61354199999999,56.36952800000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0390</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0390</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Fraserburgh</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Aberdeenshire</SimpleData>
+					<SimpleData name="Latitude">57.6707</SimpleData>
+					<SimpleData name="Longitude">-1.95623</SimpleData>
+					<SimpleData name="OSGR">NK 0271 6454</SimpleData>
+					<SimpleData name="WAB">NK06</SimpleData>
+					<SimpleData name="Nearest_Postcode">AB43 8TQ</SimpleData>
+					<SimpleData name="Maidenhead">IO97AQ</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.956232999999998,57.67072699999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0391</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0391</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Inverness</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Highland</SimpleData>
+					<SimpleData name="Latitude">57.4866</SimpleData>
+					<SimpleData name="Longitude">-4.21806</SimpleData>
+					<SimpleData name="OSGR">NH 6713 4621</SimpleData>
+					<SimpleData name="WAB">NH64</SimpleData>
+					<SimpleData name="Nearest_Postcode">IV1 1SF</SimpleData>
+					<SimpleData name="Maidenhead">IO77VL</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-4.218062999999992,57.48658399999998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0392</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0392</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Kinloss</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Moray</SimpleData>
+					<SimpleData name="Latitude">57.6461</SimpleData>
+					<SimpleData name="Longitude">-3.54966</SimpleData>
+					<SimpleData name="OSGR">NJ 0760 6286</SimpleData>
+					<SimpleData name="WAB">NJ06</SimpleData>
+					<SimpleData name="Nearest_Postcode">IV36 3UJ</SimpleData>
+					<SimpleData name="Maidenhead">IO87FP</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-3.549664000000012,57.64614900000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0393</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0393</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Kinnel</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Angus</SimpleData>
+					<SimpleData name="Latitude">56.6526</SimpleData>
+					<SimpleData name="Longitude">-2.64567</SimpleData>
+					<SimpleData name="OSGR">NO 6051 5139</SimpleData>
+					<SimpleData name="WAB">NO65</SimpleData>
+					<SimpleData name="Nearest_Postcode">DD11 4UB</SimpleData>
+					<SimpleData name="Maidenhead">IO86QP</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.645671999999988,56.65263400000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0394</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0394</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Lossiemouth</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Moray</SimpleData>
+					<SimpleData name="Latitude">57.7162</SimpleData>
+					<SimpleData name="Longitude">-3.30471</SimpleData>
+					<SimpleData name="OSGR">NJ 2237 7035</SimpleData>
+					<SimpleData name="WAB">NJ27</SimpleData>
+					<SimpleData name="Nearest_Postcode">IV31 6TE</SimpleData>
+					<SimpleData name="Maidenhead">IO87IR</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-3.304712999999984,57.71619800000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0395</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0395</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Milltown</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Moray</SimpleData>
+					<SimpleData name="Latitude">57.6645</SimpleData>
+					<SimpleData name="Longitude">-3.2343</SimpleData>
+					<SimpleData name="OSGR">NJ 2646 6452</SimpleData>
+					<SimpleData name="WAB">NJ26</SimpleData>
+					<SimpleData name="Nearest_Postcode">IV30 8NE</SimpleData>
+					<SimpleData name="Maidenhead">IO87JP</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-3.234298,57.66453300000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0396</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0396</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Montrose(1)</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Angus</SimpleData>
+					<SimpleData name="Latitude">56.7275</SimpleData>
+					<SimpleData name="Longitude">-2.44464</SimpleData>
+					<SimpleData name="OSGR">NO 7289 5962</SimpleData>
+					<SimpleData name="WAB">NO75</SimpleData>
+					<SimpleData name="Nearest_Postcode">DD10 9XA</SimpleData>
+					<SimpleData name="Maidenhead">IO86SR</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.44464,56.727452,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0397</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0397</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Montrose(2)</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Angus</SimpleData>
+					<SimpleData name="Latitude">56.7305</SimpleData>
+					<SimpleData name="Longitude">-2.45677</SimpleData>
+					<SimpleData name="OSGR">NO 7215 5996</SimpleData>
+					<SimpleData name="WAB">NO75</SimpleData>
+					<SimpleData name="Nearest_Postcode">DD10 9XA</SimpleData>
+					<SimpleData name="Maidenhead">IO86SR</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.456770000000004,56.730462,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0398</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0398</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Perth</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Perth and Kinross</SimpleData>
+					<SimpleData name="Latitude">56.4407</SimpleData>
+					<SimpleData name="Longitude">-3.36368</SimpleData>
+					<SimpleData name="OSGR">NO 1602 2845</SimpleData>
+					<SimpleData name="WAB">NO12</SimpleData>
+					<SimpleData name="Nearest_Postcode">PH2 6NR</SimpleData>
+					<SimpleData name="Maidenhead">IO86HK</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-3.363678999999995,56.44072600000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0399</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0399</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Peterhead(1)</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Aberdeenshire</SimpleData>
+					<SimpleData name="Latitude">57.5129</SimpleData>
+					<SimpleData name="Longitude">-1.86746</SimpleData>
+					<SimpleData name="OSGR">NK 0804 4698</SimpleData>
+					<SimpleData name="WAB">NK04</SimpleData>
+					<SimpleData name="Nearest_Postcode">AB42 3LB</SimpleData>
+					<SimpleData name="Maidenhead">IO97BM</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.867456000000001,57.51293500000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0400</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0400</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Peterhead(2)</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Aberdeenshire</SimpleData>
+					<SimpleData name="Latitude">57.5067</SimpleData>
+					<SimpleData name="Longitude">-1.87632</SimpleData>
+					<SimpleData name="OSGR">NK 0751 4629</SimpleData>
+					<SimpleData name="WAB">NK04</SimpleData>
+					<SimpleData name="Nearest_Postcode">AB42 3LD</SimpleData>
+					<SimpleData name="Maidenhead">IO97BM</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.876324000000009,57.50674600000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0401</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0401</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Port Ellen</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Argyll and Bute</SimpleData>
+					<SimpleData name="Latitude">55.6881</SimpleData>
+					<SimpleData name="Longitude">-6.2469</SimpleData>
+					<SimpleData name="OSGR">NR 3318 5202</SimpleData>
+					<SimpleData name="WAB">NR35</SimpleData>
+					<SimpleData name="Nearest_Postcode">PA42 7AS</SimpleData>
+					<SimpleData name="Maidenhead">IO65VQ</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-6.246903000000006,55.68805299999998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0402</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0402</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Scatsta</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Shetland Islands</SimpleData>
+					<SimpleData name="Latitude">60.4299</SimpleData>
+					<SimpleData name="Longitude">-1.28997</SimpleData>
+					<SimpleData name="OSGR">HU 3919 7200</SimpleData>
+					<SimpleData name="WAB">HU37</SimpleData>
+					<SimpleData name="Nearest_Postcode">ZE2 9UP</SimpleData>
+					<SimpleData name="Maidenhead">IP90IK</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.289966999999985,60.42993300000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0403</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0403</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Skeabrae</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Orkney Islands</SimpleData>
+					<SimpleData name="Latitude">59.0714</SimpleData>
+					<SimpleData name="Longitude">-3.27257</SimpleData>
+					<SimpleData name="OSGR">HY 2714 2119</SimpleData>
+					<SimpleData name="WAB">HY22</SimpleData>
+					<SimpleData name="Nearest_Postcode">KW17 2JQ</SimpleData>
+					<SimpleData name="Maidenhead">IO89IB</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-3.272567000000004,59.07140499999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0404</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0404</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Sumburgh</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Shetland Islands</SimpleData>
+					<SimpleData name="Latitude">59.8767</SimpleData>
+					<SimpleData name="Longitude">-1.30161</SimpleData>
+					<SimpleData name="OSGR">HU 3920 1038</SimpleData>
+					<SimpleData name="WAB">HU31</SimpleData>
+					<SimpleData name="Nearest_Postcode">ZE3 9JP</SimpleData>
+					<SimpleData name="Maidenhead">IO99IV</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-1.301613999999993,59.87670099999998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0405</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0405</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Tain</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Highland</SimpleData>
+					<SimpleData name="Latitude">57.8029</SimpleData>
+					<SimpleData name="Longitude">-3.96498</SimpleData>
+					<SimpleData name="OSGR">NH 8332 8095</SimpleData>
+					<SimpleData name="WAB">NH88</SimpleData>
+					<SimpleData name="Nearest_Postcode">IV20 1RT</SimpleData>
+					<SimpleData name="Maidenhead">IO87AT</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-3.964976000000009,57.802905,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0406</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0406</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Tealing</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Angus</SimpleData>
+					<SimpleData name="Latitude">56.526</SimpleData>
+					<SimpleData name="Longitude">-2.96375</SimpleData>
+					<SimpleData name="OSGR">NO 4081 3752</SimpleData>
+					<SimpleData name="WAB">NO43</SimpleData>
+					<SimpleData name="Nearest_Postcode">DD4 0RD</SimpleData>
+					<SimpleData name="Maidenhead">IO86MM</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.963749000000009,56.525966,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0407</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0407</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Wick</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Highland</SimpleData>
+					<SimpleData name="Latitude">58.4611</SimpleData>
+					<SimpleData name="Longitude">-3.09395</SimpleData>
+					<SimpleData name="OSGR">ND 3627 5306</SimpleData>
+					<SimpleData name="WAB">ND35</SimpleData>
+					<SimpleData name="Nearest_Postcode">KW1 4QR</SimpleData>
+					<SimpleData name="Maidenhead">IO88KL</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-3.093953999999997,58.46112800000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GM-0408</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GM-0408</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Winfield</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Scottish Borders</SimpleData>
+					<SimpleData name="Latitude">55.7479</SimpleData>
+					<SimpleData name="Longitude">-2.17186</SimpleData>
+					<SimpleData name="OSGR">NT 8931 5052</SimpleData>
+					<SimpleData name="WAB">NT85</SimpleData>
+					<SimpleData name="Nearest_Postcode">TD15 1XH</SimpleData>
+					<SimpleData name="Maidenhead">IO85VR</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.171857999999982,55.74793499999997,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GW-0158</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GW-0158</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Angle</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Dyfed</SimpleData>
+					<SimpleData name="Latitude">51.6754</SimpleData>
+					<SimpleData name="Longitude">-5.08672</SimpleData>
+					<SimpleData name="OSGR">SM 8668 0192</SimpleData>
+					<SimpleData name="WAB">SM80</SimpleData>
+					<SimpleData name="Nearest_Postcode">SA71 5AL</SimpleData>
+					<SimpleData name="Maidenhead">IO71KQ</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-5.086722000000012,51.67543499999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GW-0159</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GW-0159</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Dale</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Dyfed</SimpleData>
+					<SimpleData name="Latitude">51.7111</SimpleData>
+					<SimpleData name="Longitude">-5.18355</SimpleData>
+					<SimpleData name="OSGR">SM 8016 0617</SimpleData>
+					<SimpleData name="WAB">SM80</SimpleData>
+					<SimpleData name="Nearest_Postcode">SA62 3RJ</SimpleData>
+					<SimpleData name="Maidenhead">IO71JR</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-5.183546999999997,51.71107400000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GW-0160</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GW-0160</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Llanbedr(1)</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Gwynedd</SimpleData>
+					<SimpleData name="Latitude">52.8189</SimpleData>
+					<SimpleData name="Longitude">-4.12272</SimpleData>
+					<SimpleData name="OSGR">SH 5705 2671</SimpleData>
+					<SimpleData name="WAB">SH52</SimpleData>
+					<SimpleData name="Nearest_Postcode">LL45 2PX</SimpleData>
+					<SimpleData name="Maidenhead">IO72WT</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-4.122718999999984,52.818918,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GW-0161</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GW-0161</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Llandow</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">South Glamorgan</SimpleData>
+					<SimpleData name="Latitude">51.4411</SimpleData>
+					<SimpleData name="Longitude">-3.50637</SimpleData>
+					<SimpleData name="OSGR">SS 9540 7242</SimpleData>
+					<SimpleData name="WAB">SS97</SimpleData>
+					<SimpleData name="Nearest_Postcode">CF71 7PA</SimpleData>
+					<SimpleData name="Maidenhead">IO81FK</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-3.506372999999994,51.44108299999997,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GW-0162</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GW-0162</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Valley</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Gwynedd</SimpleData>
+					<SimpleData name="Latitude">53.2568</SimpleData>
+					<SimpleData name="Longitude">-4.54046</SimpleData>
+					<SimpleData name="OSGR">SH 3063 7632</SimpleData>
+					<SimpleData name="WAB">SH37</SimpleData>
+					<SimpleData name="Nearest_Postcode">LL65 3NX</SimpleData>
+					<SimpleData name="Maidenhead">IO73RG</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-4.540461000000001,53.256778,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GW-0163</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GW-0163</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Carew Cheriton</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Dyfed</SimpleData>
+					<SimpleData name="Latitude">51.6836</SimpleData>
+					<SimpleData name="Longitude">-4.81599</SimpleData>
+					<SimpleData name="OSGR">SN 0543 0207</SimpleData>
+					<SimpleData name="WAB">SN00</SimpleData>
+					<SimpleData name="Nearest_Postcode">SA70 8NX</SimpleData>
+					<SimpleData name="Maidenhead">IO71OQ</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-4.815988000000003,51.683592,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GW-0164</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GW-0164</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Llanbedr(2)</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Gwynedd</SimpleData>
+					<SimpleData name="Latitude">52.8187</SimpleData>
+					<SimpleData name="Longitude">-4.10831</SimpleData>
+					<SimpleData name="OSGR">SH 5802 2666</SimpleData>
+					<SimpleData name="WAB">SH52</SimpleData>
+					<SimpleData name="Nearest_Postcode">LL45 2DZ</SimpleData>
+					<SimpleData name="Maidenhead">IO72WT</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-4.108314000000015,52.818725,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GW-0165</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GW-0165</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Llandwrog</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Gwynedd</SimpleData>
+					<SimpleData name="Latitude">53.1018</SimpleData>
+					<SimpleData name="Longitude">-4.33009</SimpleData>
+					<SimpleData name="OSGR">SH 4410 5861</SimpleData>
+					<SimpleData name="WAB">SH45</SimpleData>
+					<SimpleData name="Nearest_Postcode">LL54 5TP</SimpleData>
+					<SimpleData name="Maidenhead">IO73UC</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-4.330084999999988,53.10184700000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GW-0166</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GW-0166</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Pembrey</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Dyfed</SimpleData>
+					<SimpleData name="Latitude">51.7016</SimpleData>
+					<SimpleData name="Longitude">-4.31503</SimpleData>
+					<SimpleData name="OSGR">SN 4012 0286</SimpleData>
+					<SimpleData name="WAB">SN40</SimpleData>
+					<SimpleData name="Nearest_Postcode">SA16 0HJ</SimpleData>
+					<SimpleData name="Maidenhead">IO71UQ</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-4.315025000000001,51.70164499999998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GW-0167</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GW-0167</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Penrhos</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Gwynedd</SimpleData>
+					<SimpleData name="Latitude">52.8805</SimpleData>
+					<SimpleData name="Longitude">-4.47946</SimpleData>
+					<SimpleData name="OSGR">SH 3325 3433</SimpleData>
+					<SimpleData name="WAB">SH33</SimpleData>
+					<SimpleData name="Nearest_Postcode">LL53 7HN</SimpleData>
+					<SimpleData name="Maidenhead">IO72SV</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-4.479457999999992,52.88051399999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GW-0168</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GW-0168</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Sealand</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Clwyd</SimpleData>
+					<SimpleData name="Latitude">53.2204</SimpleData>
+					<SimpleData name="Longitude">-3.02154</SimpleData>
+					<SimpleData name="OSGR">SJ 3189 6975</SimpleData>
+					<SimpleData name="WAB">SJ36</SimpleData>
+					<SimpleData name="Nearest_Postcode">CH5 2NL</SimpleData>
+					<SimpleData name="Maidenhead">IO83LF</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-3.021541000000005,53.22041599999998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GW-0169</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GW-0169</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - St Athan</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">South Glamorgan</SimpleData>
+					<SimpleData name="Latitude">51.4152</SimpleData>
+					<SimpleData name="Longitude">-3.43722</SimpleData>
+					<SimpleData name="OSGR">ST 0015 6945</SimpleData>
+					<SimpleData name="WAB">ST06</SimpleData>
+					<SimpleData name="Nearest_Postcode">CF62 4QP</SimpleData>
+					<SimpleData name="Maidenhead">IO81GJ</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-3.437215000000018,51.41524499999998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GW-0170</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GW-0170</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Templeton</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Dyfed</SimpleData>
+					<SimpleData name="Latitude">51.7647</SimpleData>
+					<SimpleData name="Longitude">-4.7603</SimpleData>
+					<SimpleData name="OSGR">SN 0962 1094</SimpleData>
+					<SimpleData name="WAB">SN01</SimpleData>
+					<SimpleData name="Nearest_Postcode">SA67 8BZ</SimpleData>
+					<SimpleData name="Maidenhead">IO71OS</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-4.760303999999982,51.764688,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GW-0171</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GW-0171</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Tywyn</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Gwynedd</SimpleData>
+					<SimpleData name="Latitude">52.5959</SimpleData>
+					<SimpleData name="Longitude">-4.1317</SimpleData>
+					<SimpleData name="OSGR">SH 5571 0192</SimpleData>
+					<SimpleData name="WAB">SH50</SimpleData>
+					<SimpleData name="Nearest_Postcode">LL36 9AU</SimpleData>
+					<SimpleData name="Maidenhead">IO72WO</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-4.131701999999995,52.59586300000002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GW-0172</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GW-0172</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - Wrexham</SimpleData>
+					<SimpleData name="Type">WW2 Airfield BHQ</SimpleData>
+					<SimpleData name="Area">Clwyd</SimpleData>
+					<SimpleData name="Latitude">53.0728</SimpleData>
+					<SimpleData name="Longitude">-2.95207</SimpleData>
+					<SimpleData name="OSGR">SJ 3631 5326</SimpleData>
+					<SimpleData name="WAB">SJ35</SimpleData>
+					<SimpleData name="Nearest_Postcode">LL13 9TL</SimpleData>
+					<SimpleData name="Maidenhead">IO83MB</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-2.952068000000005,53.07275800000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>B/GW-0175</name>
+			<styleUrl>#pointStyleMap</styleUrl>
+			<ExtendedData>
+				<SchemaData schemaUrl="#S_ABHQ_Locations_SSSSDDSSSS">
+					<SimpleData name="UKBOTA_Reference">B/GW-0175</SimpleData>
+					<SimpleData name="Bunker_Name">Airfield BHQ - RAF Fairwood Common</SimpleData>
+					<SimpleData name="Type">WW2 Airfield Battle HQ</SimpleData>
+					<SimpleData name="Area">Dyfed</SimpleData>
+					<SimpleData name="Latitude">51.6071</SimpleData>
+					<SimpleData name="Longitude">-4.07246</SimpleData>
+					<SimpleData name="OSGR">SS56589185</SimpleData>
+					<SimpleData name="WAB">SS59</SimpleData>
+					<SimpleData name="Nearest_Postcode">SA2 7JR</SimpleData>
+					<SimpleData name="Maidenhead">IO71XO</SimpleData>
+				</SchemaData>
+			</ExtendedData>
+			<Point>
+				<coordinates>-4.072461999999994,51.60713400000002,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+</Document>
+</kml>
