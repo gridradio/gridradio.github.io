@@ -81,11 +81,11 @@
                         userMarker = L.marker([userLat, userLon]).addTo(map)
                     },
                     () => {
-                        alert('Geolocation failed. Default location will be used.');
+                        //alert('Geolocation failed. Default location will be used.');
                     }
                 );
             } else {
-                alert('Geolocation is not supported by this browser.');
+                //alert('Geolocation is not supported by this browser.');
             }
 
             return map;
