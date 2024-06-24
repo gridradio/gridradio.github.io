@@ -868,6 +868,7 @@
                 const maidenheadLocator = inputElement.value.trim().toUpperCase().slice(0, 2) + inputElement.value.trim().slice(2, 4).toUpperCase() + inputElement.value.trim().toLowerCase().slice(4);
                 if (/^[A-R]{2}\d{2}([a-x]{2})?$/.test(maidenheadLocator)) {
                     const { lat, lon } = maidenheadToLatLon(maidenheadLocator);
+                    textElement.innerText = maidenheadLocator; // Display the entered locator
                     updateDisplay(lat, lon, 'N/A', 'N/A', 'N/A', 'N/A');
                     if (document.getElementById('map').style.display === 'none') {
                         toggleMap();
@@ -972,6 +973,7 @@
                 const formattedGrid = grid.toUpperCase().slice(0, 2) + grid.slice(2, 4).toUpperCase() + (grid.length > 4 ? grid.slice(4).toLowerCase() : '');
                 if (/^[A-R]{2}\d{2}([a-x]{2})?$/.test(formattedGrid)) {
                     const { lat, lon } = maidenheadToLatLon(formattedGrid);
+                    document.getElementById('maidenhead-locator').innerText = formattedGrid; // Display the entered locator
                     updateDisplay(lat, lon, 'N/A', 'N/A', 'N/A', 'N/A');
                     document.querySelector('.loading-screen').style.display = 'none';
                     document.querySelector('.content').style.display = 'block';
