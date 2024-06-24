@@ -268,7 +268,7 @@
                 </div>
                 <div class="vertical-separator vertical-separator-left"></div>
                 <div class="copy-icon-container" onclick="copyToClipboard('maidenhead-locator')">
-                    <span class="copy-icon">📋</span>
+                    <span class="copy-icon">�</span>
                 </div>
                 <div class="copied-popup">Copied!</div>
                 <div class="failed-popup">Failed!</div>
@@ -280,7 +280,7 @@
                 <p class="card-text" id="wab-square">Loading...</p>
                 <div class="vertical-separator vertical-separator-left"></div>
                 <div class="copy-icon-container" onclick="copyToClipboard('wab-square')">
-                    <span class="copy-icon">📋</span>
+                    <span class="copy-icon">�</span>
                 </div>
                 <div class="copied-popup">Copied!</div>
                 <div class="failed-popup">Failed!</div>
@@ -292,7 +292,7 @@
                 <p class="card-text" id="os-grid">Loading...</p>
                 <div class="vertical-separator vertical-separator-left"></div>
                 <div class="copy-icon-container" onclick="copyToClipboard('os-grid')">
-                    <span class="copy-icon">📋</span>
+                    <span class="copy-icon">�</span>
                 </div>
                 <div class="copied-popup">Copied!</div>
                 <div class="failed-popup">Failed!</div>
@@ -304,7 +304,7 @@
                 <p class="card-text" id="cq-zone">Loading...</p>
                 <div class="vertical-separator vertical-separator-left"></div>
                 <div class="copy-icon-container" onclick="copyToClipboard('cq-zone')">
-                    <span class="copy-icon">📋</span>
+                    <span class="copy-icon">�</span>
                 </div>
                 <div class="copied-popup">Copied!</div>
                 <div class="failed-popup">Failed!</div>
@@ -316,7 +316,7 @@
                 <p class="card-text" id="itu-zone">Loading...</p>
                 <div class="vertical-separator vertical-separator-left"></div>
                 <div class="copy-icon-container" onclick="copyToClipboard('itu-zone')">
-                    <span class="copy-icon">📋</span>
+                    <span class="copy-icon">�</span>
                 </div>
                 <div class="copied-popup">Copied!</div>
                 <div class="failed-popup">Failed!</div>
@@ -328,7 +328,7 @@
                 <p class="card-text" id="itu-region">Loading...</p>
                 <div class="vertical-separator vertical-separator-left"></div>
                 <div class="copy-icon-container" onclick="copyToClipboard('itu-region')">
-                    <span class="copy-icon">📋</span>
+                    <span class="copy-icon">�</span>
                 </div>
                 <div class="copied-popup">Copied!</div>
                 <div class="failed-popup">Failed!</div>
@@ -348,7 +348,7 @@
                 </div>
                 <div class="vertical-separator vertical-separator-left"></div>
                 <div class="copy-icon-container" onclick="copyToClipboard('latitude-longitude')">
-                    <span class="copy-icon">📋</span>
+                    <span class="copy-icon">�</span>
                 </div>
                 <div class="copied-popup">Copied!</div>
                 <div class="failed-popup">Failed!</div>
@@ -360,10 +360,23 @@
                 <p class="card-text" id="altitude-values">Loading...</p>
                 <div class="vertical-separator vertical-separator-left"></div>
                 <div class="copy-icon-container" onclick="copyToClipboard('altitude-values')">
-                    <span class="copy-icon">📋</span>
+                    <span class="copy-icon">�</span>
                 </div>
                 <div class="copied-popup">Copied!</div>
                 <div class="failed-popup">Failed!</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Enter Maidenhead Locator</h5>
+                <p class="card-text" id="entered-maidenhead-locator">Enter a 4 or 6 character Maidenhead locator.</p>
+                <input type="text" class="form-control" id="entered-maidenhead-locator-input" maxlength="6" style="display: none;" />
+                <div class="edit-icon-container" onclick="toggleEnteredMaidenheadEdit()">
+                    <span class="edit-icon entered-maidenhead-edit-icon">✏️</span>
+                </div>
+                <div class="vertical-separator vertical-separator-left"></div>
+                <button class="btn btn-danger mt-3" onclick="clearEnteredMaidenhead()">Clear Point</button>
+                <p class="card-text" id="distance-bearing">Distance: N/A | Bearing: N/A</p>
             </div>
         </div>
         <div class="toggle-buttons">
@@ -382,7 +395,7 @@
     </div>
     <footer>
         <div class="footer-container">
-            <p>Made by Rose <a href="https://www.qrz.com/db/2E0RXO" target="_blank">2E0RXO</a> 💖</p>
+            <p>Made by Rose <a href="https://www.qrz.com/db/2E0RXO" target="_blank">2E0RXO</a> �</p>
             <div class="kofi-widget">
                <a href='https://ko-fi.com/Z8Z8ZKG4B' target='_blank'><img height='36' style='border:0px;height:36px;' src='/kofi4.webp' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
             </div>
@@ -404,9 +417,37 @@
         const showITUZoneCard = false;
         const showITURegionCard = false;
         let maidenheadLayer; // Add a variable to store the Maidenhead layer
+        let enteredMarker;
+        let enteredLine;
 
         function degToRad(deg) {
             return deg * Math.PI / 180;
+        }
+
+        function radToDeg(rad) {
+            return rad * 180 / Math.PI;
+        }
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Radius of the Earth in kilometers
+            const dLat = degToRad(lat2 - lat1);
+            const dLon = degToRad(lon2 - lon1);
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                      Math.cos(degToRad(lat1)) * Math.cos(degToRad(lat2)) *
+                      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            const distanceKm = R * c;
+            const distanceMi = distanceKm * 0.621371; // Convert to miles
+            return { distanceKm, distanceMi };
+        }
+
+        function calculateBearing(lat1, lon1, lat2, lon2) {
+            const dLon = degToRad(lon2 - lon1);
+            const y = Math.sin(dLon) * Math.cos(degToRad(lat2));
+            const x = Math.cos(degToRad(lat1)) * Math.sin(degToRad(lat2)) -
+                      Math.sin(degToRad(lat1)) * Math.cos(degToRad(lat2)) * Math.cos(dLon);
+            const bearing = (radToDeg(Math.atan2(y, x)) + 360) % 360;
+            return bearing;
         }
 
         function latLonToOSGB(lat, lon) {
@@ -758,6 +799,8 @@
             if (document.getElementById('toggle-maidenhead-btn').innerText === 'Hide Maidenhead Square') {
                 updateMaidenheadGridSquare(lat, lon);
             }
+
+            updateEnteredMaidenhead();
         }
 
         function toggleMap() {
@@ -972,6 +1015,84 @@ function updateMap(lat, lon, zoom = null) {
             }
         }
 
+        function toggleEnteredMaidenheadEdit() {
+            const textElement = document.getElementById('entered-maidenhead-locator');
+            const inputElement = document.getElementById('entered-maidenhead-locator-input');
+            const editIcon = document.querySelector('.edit-icon-container .entered-maidenhead-edit-icon');
+
+            if (textElement.style.display === 'none') {
+                textElement.style.display = 'block';
+                inputElement.style.display = 'none';
+                editIcon.textContent = '✏️';
+                editIcon.style.color = ''; // Reset color
+                const maidenheadLocator = inputElement.value.trim().toUpperCase().slice(0, 2) + inputElement.value.trim().slice(2, 4).toUpperCase() + inputElement.value.trim().toLowerCase().slice(4);
+                if (/^[A-R]{2}\d{2}([a-x]{2})?$/.test(maidenheadLocator)) {
+                    const { lat, lon } = maidenheadToLatLon(maidenheadLocator);
+                    textElement.innerText = maidenheadLocator; // Display the entered locator
+                    if (document.getElementById('map').style.display === 'none') {
+                        toggleMap();
+                    }
+                    updateEnteredMaidenhead();
+                }
+            } else {
+                inputElement.value = textElement.innerText;
+                textElement.style.display = 'none';
+                inputElement.style.display = 'block';
+                inputElement.focus();
+                editIcon.textContent = '✅';
+                editIcon.style.color = 'green'; // Change the tick to green
+            }
+        }
+
+        function updateEnteredMaidenhead() {
+            const currentLatLon = document.getElementById('latitude-longitude').innerText.split(',').map(Number);
+            const currentLat = currentLatLon[0];
+            const currentLon = currentLatLon[1];
+            const enteredMaidenhead = document.getElementById('entered-maidenhead-locator').innerText;
+
+            if (/^[A-R]{2}\d{2}([a-x]{2})?$/.test(enteredMaidenhead)) {
+                const { lat, lon } = maidenheadToLatLon(enteredMaidenhead);
+
+                const { distanceKm, distanceMi } = calculateDistance(currentLat, currentLon, lat, lon);
+                const bearing = calculateBearing(currentLat, currentLon, lat, lon);
+
+                document.getElementById('distance-bearing').innerText = `Distance: ${distanceKm.toFixed(2)} km | ${distanceMi.toFixed(2)} mi | Bearing: ${bearing.toFixed(2)}°`;
+
+                if (enteredMarker) {
+                    enteredMarker.setLatLng([lat, lon]);
+                } else {
+                    enteredMarker = L.marker([lat, lon], { draggable: true }).addTo(mapElement._leaflet_map);
+                    enteredMarker.on('dragend', function(event) {
+                        const newLatLng = normalizeLatLng(event.target.getLatLng());
+                        const newMaidenhead = latLonToMaidenhead(newLatLng.lat, newLatLng.lng);
+                        document.getElementById('entered-maidenhead-locator').innerText = newMaidenhead;
+                        updateEnteredMaidenhead();
+                    });
+                }
+
+                if (enteredLine) {
+                    mapElement._leaflet_map.removeLayer(enteredLine);
+                }
+
+                enteredLine = L.polyline([[currentLat, currentLon], [lat, lon]], { color: 'red' }).addTo(mapElement._leaflet_map);
+            } else {
+                document.getElementById('distance-bearing').innerText = 'Distance: N/A | Bearing: N/A';
+            }
+        }
+
+        function clearEnteredMaidenhead() {
+            document.getElementById('entered-maidenhead-locator').innerText = 'Enter a 4 or 6 character Maidenhead locator.';
+            document.getElementById('distance-bearing').innerText = 'Distance: N/A | Bearing: N/A';
+            if (enteredMarker) {
+                mapElement._leaflet_map.removeLayer(enteredMarker);
+                enteredMarker = null;
+            }
+            if (enteredLine) {
+                mapElement._leaflet_map.removeLayer(enteredLine);
+                enteredLine = null;
+            }
+        }
+
         function updateMaidenheadGridSquare(lat, lon) {
             const mapElement = document.getElementById('map');
             if (mapElement._leaflet_map) {
@@ -1080,6 +1201,12 @@ function updateMap(lat, lon, zoom = null) {
             this.value = this.value.replace(/[^\d.-]/g, '');
         });
         
+        document.getElementById('entered-maidenhead-locator-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                toggleEnteredMaidenheadEdit();
+            }
+        });
+
         if (typeof navigator.serviceWorker !== 'undefined') {
             navigator.serviceWorker.register('sw.js')
         }
