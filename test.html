@@ -797,16 +797,18 @@
                     mapElement._leaflet_marker.setLatLng([lat, lon]);
                 }
             } else {
-                const map = L.map('map', { doubleClickZoom: false }).setView([lat, lon], currentZoom);
+                const map = L.map('map', { 
+			doubleClickZoom: false,
+			fullscreenControl: true,
+	                fullscreenControlOptions: {
+		                position: 'topleft'
+	                },
+		}).setView([lat, lon], currentZoom);
                 mapElement._leaflet_map = map;
 
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 19,
                     minZoom: 2,
-                    fullscreenControl: true,
-	                fullscreenControlOptions: {
-		                position: 'topleft'
-	                },
                 }).addTo(map);
 
                 const marker = L.marker([lat, lon], { draggable: true }).addTo(map);
