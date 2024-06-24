@@ -42,7 +42,7 @@
                 },
                 maxBounds: [
                     [40.0, -14.0], // Southwest corner of bounds (latitude, longitude)
-                    [64.0, 10.0]   // Northeast corner of bounds (latitude, longitude)
+                    [65.8, 10.0]   // Northeast corner of bounds (latitude, longitude)
                 ],
                 maxBoundsViscosity: 1.0 // Ensures the map cannot be dragged outside the bounds
             }).setView([lat, lon], zoom);
@@ -79,6 +79,8 @@
                             map.removeLayer(userMarker);
                         }
                         userMarker = L.marker([userLat, userLon]).addTo(map)
+                            .bindPopup('You are here!')
+                            .openPopup();
                     },
                     () => {
                         alert('Geolocation failed. Default location will be used.');
