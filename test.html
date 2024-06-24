@@ -790,75 +790,75 @@
             return { lat: lat, lng: lon };
         }
 
-        function updateMap(lat, lon, zoom = null) {
-            const mapElement = document.getElementById('map');
-            const currentZoom = zoom || (mapElement._leaflet_map ? mapElement._leaflet_map.getZoom() : 11); // Set default zoom to 11
+function updateMap(lat, lon, zoom = null) {
+    const mapElement = document.getElementById('map');
+    const currentZoom = zoom || (mapElement._leaflet_map ? mapElement._leaflet_map.getZoom() : 11); // Set default zoom to 11
 
-            if (mapElement._leaflet_map) {
-                mapElement._leaflet_map.setView([lat, lon], currentZoom);
-                if (mapElement._leaflet_marker) {
-                    mapElement._leaflet_marker.setLatLng([lat, lon]);
-                }
-            } else {
-                const map = L.map('map', { 
-			doubleClickZoom: false,
-			fullscreenControl: true,
-	                fullscreenControlOptions: {
-		                position: 'topleft'
-	                },
-		}).setView([lat, lon], currentZoom);
-                mapElement._leaflet_map = map;
+    let botaLayer; // Add a variable to store the BOTA layer state
 
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 19,
-                    minZoom: 2,
-                }).addTo(map);
-		    
-		L.easyButton('<svg aria-label="Toggle Maidenhead Squares" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M384 96V224H256V96H384zm0 192V416H256V288H384zM192 224H64V96H192V224zM64 288H192V416H64V288zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"/></svg>'
-			     , function(btn, map){
-			toggleMaidenheadGridSquare();
-			     }
-			    ).addTo(map);
-
-		L.easyButton('<img style="object-fit: contain; width:100%;" src="/bota.png"></src>'
-			     , function(btn, map){
-
-		if(!track){
-		// Load kml file
-            fetch('bota.kml')
-                .then(res => res.text())
-                .then(kmltext => {
-                    // Create new kml overlay
-                    const parser = new DOMParser();
-                    const kml = parser.parseFromString(kmltext, 'text/xml');
-                    const track = new L.KML(kml);
-                    map.addLayer(track);
-                });
-		}else{
-			map.removeLayer(track);
-		}
-			     }
-			    ).addTo(map);
-
-                const marker = L.marker([lat, lon], { draggable: true }).addTo(map);
-                mapElement._leaflet_marker = marker;
-
-                marker.on('dragend', function(event) {
-                    const newLatLng = normalizeLatLng(event.target.getLatLng());
-                    updateDisplay(newLatLng.lat, newLatLng.lng, 'N/A', 'N/A', 'N/A', 'N/A');
-                    // Reset the view to the new lat/lon without changing the zoom level
-                    mapElement._leaflet_map.setView(newLatLng, mapElement._leaflet_map.getZoom());
-                });
-
-                map.on('dblclick', function(event) {
-                    const newLatLng = normalizeLatLng(event.latlng);
-                    marker.setLatLng(newLatLng);
-                    updateDisplay(newLatLng.lat, newLatLng.lng, 'N/A', 'N/A', 'N/A', 'N/A');
-                });
-
-
-            }
+    if (mapElement._leaflet_map) {
+        mapElement._leaflet_map.setView([lat, lon], currentZoom);
+        if (mapElement._leaflet_marker) {
+            mapElement._leaflet_marker.setLatLng([lat, lon]);
         }
+    } else {
+        const map = L.map('map', { 
+            doubleClickZoom: false,
+            fullscreenControl: true,
+            fullscreenControlOptions: {
+                position: 'topleft'
+            },
+        }).setView([lat, lon], currentZoom);
+        mapElement._leaflet_map = map;
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            minZoom: 2,
+        }).addTo(map);
+
+        L.easyButton('<svg aria-label="Toggle Maidenhead Squares" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M384 96V224H256V96H384zm0 192V416H256V288H384zM192 224H64V96H192V224zM64 288H192V416H64V288zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"/></svg>'
+            , function(btn, map){
+                toggleMaidenheadGridSquare();
+            }
+        ).addTo(map);
+
+        // Toggle BOTA KML Layer
+        L.easyButton('<img style="object-fit: contain; width:100%;" src="/bota.png"></src>'
+            , function(btn, map){
+                if (botaLayer) {
+                    map.removeLayer(botaLayer);
+                    botaLayer = null;
+                } else {
+                    fetch('bota.kml')
+                        .then(res => res.text())
+                        .then(kmltext => {
+                            const parser = new DOMParser();
+                            const kml = parser.parseFromString(kmltext, 'text/xml');
+                            const track = new L.KML(kml);
+                            map.addLayer(track);
+                            botaLayer = track;
+                        });
+                }
+            }
+        ).addTo(map);
+
+        const marker = L.marker([lat, lon], { draggable: true }).addTo(map);
+        mapElement._leaflet_marker = marker;
+
+        marker.on('dragend', function(event) {
+            const newLatLng = normalizeLatLng(event.target.getLatLng());
+            updateDisplay(newLatLng.lat, newLatLng.lng, 'N/A', 'N/A', 'N/A', 'N/A');
+            // Reset the view to the new lat/lon without changing the zoom level
+            mapElement._leaflet_map.setView(newLatLng, mapElement._leaflet_map.getZoom());
+        });
+
+        map.on('dblclick', function(event) {
+            const newLatLng = normalizeLatLng(event.latlng);
+            marker.setLatLng(newLatLng);
+            updateDisplay(newLatLng.lat, newLatLng.lng, 'N/A', 'N/A', 'N/A', 'N/A');
+        });
+    }
+}
 
         function copyToClipboard(elementId) {
             const text = document.getElementById(elementId).innerText;
