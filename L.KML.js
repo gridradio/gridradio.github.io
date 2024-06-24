@@ -265,7 +265,7 @@ L.Util.extend(L.KML, {
     if (el.length && el[0].childNodes.length) {
       name = el[0].childNodes[0].nodeValue;
     }
-    el = place.getElementsByTagName('description');
+    el = place.getElementsByTagName('Bunker_Name');
     for (i = 0; i < el.length; i++) {
       for (j = 0; j < el[i].childNodes.length; j++) {
         descr = descr + el[i].childNodes[j].nodeValue;
