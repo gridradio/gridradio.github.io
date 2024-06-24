@@ -822,6 +822,8 @@
 
 		L.easyButton('<img style="object-fit: contain; width:100%;" src="/bota.png"></src>'
 			     , function(btn, map){
+
+		if(!track){
 		// Load kml file
             fetch('bota.kml')
                 .then(res => res.text())
@@ -832,6 +834,9 @@
                     const track = new L.KML(kml);
                     map.addLayer(track);
                 });
+		}else{
+			map.removeLayer(track);
+		}
 			     }
 			    ).addTo(map);
 
