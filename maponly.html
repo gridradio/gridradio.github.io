@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amateur Radio Map</title>
+    <title>BOTA Map</title>
     <link rel="stylesheet" href="/leaflet.css" />
     <link rel="stylesheet" href="/Control.FullScreen.css" />
     <style>
@@ -40,8 +40,8 @@
                     position: 'topleft'
                 },
                 maxBounds: [
-                    [49.5, -14.0], // Southwest corner of bounds (latitude, longitude)
-                    [61.0, 2.0]   // Northeast corner of bounds (latitude, longitude)
+                    [40.0, -14.0], // Southwest corner of bounds (latitude, longitude)
+                    [62.6, 10.0]   // Northeast corner of bounds (latitude, longitude)
                 ],
                 maxBoundsViscosity: 1.0 // Ensures the map cannot be dragged outside the bounds
             }).setView([lat, lon], zoom);
