@@ -45,7 +45,7 @@
 			<color>ff0000ff</color>
 			<scale>2</scale>
 			<Icon>
-				<href>C:/Users/Fix it up/Downloads/clipart-plane-ww2-6.png</href>
+				<href>/bota.png</href>
 			</Icon>
 			<hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/>
 		</IconStyle>
@@ -74,7 +74,7 @@
 			<color>ff0000ff</color>
 			<scale>2</scale>
 			<Icon>
-				<href>C:/Users/Fix it up/Downloads/clipart-plane-ww2-6.png</href>
+				<href>/bota.png</href>
 			</Icon>
 			<hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/>
 		</IconStyle>
