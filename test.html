@@ -795,6 +795,7 @@ function updateMap(lat, lon, zoom = null) {
     const currentZoom = zoom || (mapElement._leaflet_map ? mapElement._leaflet_map.getZoom() : 11); // Set default zoom to 11
 
     let botaLayer; // Add a variable to store the BOTA layer state
+    let botaKmlLayer; // Add a variable to store the parsed BOTA KML layer
 
     if (mapElement._leaflet_map) {
         mapElement._leaflet_map.setView([lat, lon], currentZoom);
@@ -829,15 +830,20 @@ function updateMap(lat, lon, zoom = null) {
                     map.removeLayer(botaLayer);
                     botaLayer = null;
                 } else {
-                    fetch('bota.kml')
-                        .then(res => res.text())
-                        .then(kmltext => {
-                            const parser = new DOMParser();
-                            const kml = parser.parseFromString(kmltext, 'text/xml');
-                            const track = new L.KML(kml);
-                            map.addLayer(track);
-                            botaLayer = track;
-                        });
+                    if (!botaKmlLayer) {
+                        fetch('bota.kml')
+                            .then(res => res.text())
+                            .then(kmltext => {
+                                const parser = new DOMParser();
+                                const kml = parser.parseFromString(kmltext, 'text/xml');
+                                botaKmlLayer = new L.KML(kml);
+                                map.addLayer(botaKmlLayer);
+                                botaLayer = botaKmlLayer;
+                            });
+                    } else {
+                        map.addLayer(botaKmlLayer);
+                        botaLayer = botaKmlLayer;
+                    }
                 }
             }
         ).addTo(map);
