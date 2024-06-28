@@ -276,7 +276,6 @@
                 </div>
                 <div class="copied-popup">Copied!</div>
                 <div class="failed-popup">Failed!</div>
-                <button class="btn btn-secondary nav-app-button" id="nav-app-button" onclick="openInNavigationApp()">Open in Navigation App</button>
             </div>
         </div>
         <div class="card" id="wab-square-card">
@@ -357,7 +356,6 @@
                 </div>
                 <div class="copied-popup">Copied!</div>
                 <div class="failed-popup">Failed!</div>
-                <button class="btn btn-secondary nav-app-button" id="nav-app-button-latlon" onclick="openInNavigationApp()">Open in Navigation App</button>
             </div>
         </div>
         <div class="card" id="altitude-card">
@@ -384,6 +382,7 @@
         <div class="copy-location-button-container">
             <button class="btn btn-secondary copy-location-button" onclick="copyLocationToClipboard()">Copy Location to Clipboard</button>
             <div class="copy-location-popup" id="copy-location-popup">Copied!</div>
+            <button class="btn btn-secondary nav-app-button" id="nav-app-button" onclick="openInNavigationApp()">Open in Navigation App</button>
         </div>
     </div>
     <footer>
@@ -774,7 +773,6 @@
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
             if (isMobile) {
                 document.getElementById('nav-app-button').style.display = 'block';
-                document.getElementById('nav-app-button-latlon').style.display = 'block';
             }
         }
 
@@ -808,81 +806,81 @@
             return { lat: lat, lng: lon };
         }
 
-function updateMap(lat, lon, zoom = null) {
-    const mapElement = document.getElementById('map');
-    const currentZoom = zoom || (mapElement._leaflet_map ? mapElement._leaflet_map.getZoom() : 11); // Set default zoom to 11
+        function updateMap(lat, lon, zoom = null) {
+            const mapElement = document.getElementById('map');
+            const currentZoom = zoom || (mapElement._leaflet_map ? mapElement._leaflet_map.getZoom() : 11); // Set default zoom to 11
 
-    let botaLayer; // Add a variable to store the BOTA layer state
-    let botaKmlLayer; // Add a variable to store the parsed BOTA KML layer
+            let botaLayer; // Add a variable to store the BOTA layer state
+            let botaKmlLayer; // Add a variable to store the parsed BOTA KML layer
 
-    if (mapElement._leaflet_map) {
-        mapElement._leaflet_map.setView([lat, lon], currentZoom);
-        if (mapElement._leaflet_marker) {
-            mapElement._leaflet_marker.setLatLng([lat, lon]);
-        }
-    } else {
-        const map = L.map('map', { 
-            doubleClickZoom: false,
-            fullscreenControl: true,
-            fullscreenControlOptions: {
-                position: 'topleft'
-            },
-        }).setView([lat, lon], currentZoom);
-        mapElement._leaflet_map = map;
+            if (mapElement._leaflet_map) {
+                mapElement._leaflet_map.setView([lat, lon], currentZoom);
+                if (mapElement._leaflet_marker) {
+                    mapElement._leaflet_marker.setLatLng([lat, lon]);
+                }
+            } else {
+                const map = L.map('map', { 
+                    doubleClickZoom: false,
+                    fullscreenControl: true,
+                    fullscreenControlOptions: {
+                        position: 'topleft'
+                    },
+                }).setView([lat, lon], currentZoom);
+                mapElement._leaflet_map = map;
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            minZoom: 2,
-        }).addTo(map);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    minZoom: 2,
+                }).addTo(map);
 
-        L.easyButton('<svg aria-label="Toggle Maidenhead Squares" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M384 96V224H256V96H384zm0 192V416H256V288H384zM192 224H64V96H192V224zM64 288H192V416H64V288zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"/></svg>'
-            , function(btn, map){
-                toggleMaidenheadGridSquare();
-            }
-        ).addTo(map);
+                L.easyButton('<svg aria-label="Toggle Maidenhead Squares" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M384 96V224H256V96H384zm0 192V416H256V288H384zM192 224H64V96H192V224zM64 288H192V416H64V288zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"/></svg>'
+                    , function(btn, map){
+                        toggleMaidenheadGridSquare();
+                    }
+                ).addTo(map);
 
-        // Toggle BOTA KML Layer
-        L.easyButton('<img style="object-fit: contain; width:100%;" src="/bota.png"></src>'
-            , function(btn, map){
-                if (botaLayer) {
-                    map.removeLayer(botaLayer);
-                    botaLayer = null;
-                } else {
-                    if (!botaKmlLayer) {
-                        fetch('bota.kml')
-                            .then(res => res.text())
-                            .then(kmltext => {
-                                const parser = new DOMParser();
-                                const kml = parser.parseFromString(kmltext, 'text/xml');
-                                botaKmlLayer = new L.KML(kml);
+                // Toggle BOTA KML Layer
+                L.easyButton('<img style="object-fit: contain; width:100%;" src="/bota.png"></src>'
+                    , function(btn, map){
+                        if (botaLayer) {
+                            map.removeLayer(botaLayer);
+                            botaLayer = null;
+                        } else {
+                            if (!botaKmlLayer) {
+                                fetch('bota.kml')
+                                    .then(res => res.text())
+                                    .then(kmltext => {
+                                        const parser = new DOMParser();
+                                        const kml = parser.parseFromString(kmltext, 'text/xml');
+                                        botaKmlLayer = new L.KML(kml);
+                                        map.addLayer(botaKmlLayer);
+                                        botaLayer = botaKmlLayer;
+                                    });
+                            } else {
                                 map.addLayer(botaKmlLayer);
                                 botaLayer = botaKmlLayer;
-                            });
-                    } else {
-                        map.addLayer(botaKmlLayer);
-                        botaLayer = botaKmlLayer;
+                            }
+                        }
                     }
-                }
+                ).addTo(map);
+
+                const marker = L.marker([lat, lon], { draggable: true }).addTo(map);
+                mapElement._leaflet_marker = marker;
+
+                marker.on('dragend', function(event) {
+                    const newLatLng = normalizeLatLng(event.target.getLatLng());
+                    updateDisplay(newLatLng.lat, newLatLng.lng, 'N/A', 'N/A', 'N/A', 'N/A');
+                    // Reset the view to the new lat/lon without changing the zoom level
+                    mapElement._leaflet_map.setView(newLatLng, mapElement._leaflet_map.getZoom());
+                });
+
+                map.on('dblclick', function(event) {
+                    const newLatLng = normalizeLatLng(event.latlng);
+                    marker.setLatLng(newLatLng);
+                    updateDisplay(newLatLng.lat, newLatLng.lng, 'N/A', 'N/A', 'N/A', 'N/A');
+                });
             }
-        ).addTo(map);
-
-        const marker = L.marker([lat, lon], { draggable: true }).addTo(map);
-        mapElement._leaflet_marker = marker;
-
-        marker.on('dragend', function(event) {
-            const newLatLng = normalizeLatLng(event.target.getLatLng());
-            updateDisplay(newLatLng.lat, newLatLng.lng, 'N/A', 'N/A', 'N/A', 'N/A');
-            // Reset the view to the new lat/lon without changing the zoom level
-            mapElement._leaflet_map.setView(newLatLng, mapElement._leaflet_map.getZoom());
-        });
-
-        map.on('dblclick', function(event) {
-            const newLatLng = normalizeLatLng(event.latlng);
-            marker.setLatLng(newLatLng);
-            updateDisplay(newLatLng.lat, newLatLng.lng, 'N/A', 'N/A', 'N/A', 'N/A');
-        });
-    }
-}
+        }
 
         function copyToClipboard(elementId) {
             const text = document.getElementById(elementId).innerText;
@@ -1109,7 +1107,7 @@ function updateMap(lat, lon, zoom = null) {
         
     </script>
 <!-- 100% privacy-first analytics -->
-<script data-collect-dnt="true async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<script data-collect-dnt="true" async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
 </body>
 </html>
