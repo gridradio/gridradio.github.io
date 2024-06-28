@@ -1103,7 +1103,17 @@
         });
 
         function openInNavigationApp() {
-            const geoUri = `geo:${currentLat},${currentLon}`;
+            let geoUri;
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            if (/iPhone|iPad|iPod/i.test(userAgent)) {
+                geoUri = `maps://maps.google.com/maps?daddr=${currentLat},${currentLon}&ll=`;
+            } else if (/Android/i.test(userAgent)) {
+                geoUri = `geo:${currentLat},${currentLon}?q=${currentLat},${currentLon}`;
+            } else {
+                geoUri = `geo:${currentLat},${currentLon}`;
+            }
+
             window.location.href = geoUri;
         }
 
@@ -1113,7 +1123,7 @@
         
     </script>
 <!-- 100% privacy-first analytics -->
-<script data-collect-dnt="true" async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
 </body>
 </html>
