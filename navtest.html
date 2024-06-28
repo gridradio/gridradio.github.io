@@ -651,8 +651,8 @@
             const accuracyText = accuracy ? `${accuracy.toFixed(2)} meters` : 'N/A';
 
             updateDisplay(latitude, longitude, altitudeMeters, altitudeFeet, pressure, accuracyText);
-            document.querySelector('.loading-screen').style.display = 'none';
-            document.querySelector('.content').style.display = 'block';
+            toggleDisplay('.loading-screen', 'none');
+            toggleDisplay('.content', 'block');
             updateMap(latitude, longitude, 11); // Zoomed out by a couple of levels
         }
 
@@ -661,9 +661,9 @@
         }
 
         function refreshLocation() {
-            document.querySelector('.loading-screen').style.display = 'flex';
-            document.querySelector('.content').style.display = 'none';
-            document.getElementById('geolocation-alert').style.display = 'none';
+            toggleDisplay('.loading-screen', 'flex');
+            toggleDisplay('.content', 'none');
+            toggleDisplay('#geolocation-alert', 'none');
 
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(handleGeolocationSuccess, handleGeolocationError, {
@@ -708,8 +708,8 @@
             errorMessage.style.display = 'block';
 
             updateDisplay(defaultLat, defaultLon, 'N/A', 'N/A', 'N/A', 'N/A');
-            document.querySelector('.loading-screen').style.display = 'none';
-            document.querySelector('.content').style.display = 'block';
+            toggleDisplay('.loading-screen', 'none');
+            toggleDisplay('.content', 'block');
             updateMap(defaultLat, defaultLon, 6); // More zoomed out
         }
 
@@ -717,65 +717,48 @@
             currentLat = lat; // Update global latitude variable
             currentLon = lon; // Update global longitude variable
 
-            document.getElementById('latitude-longitude').innerText = `${lat.toFixed(6)},${lon.toFixed(6)}`;
-            document.getElementById('location-accuracy').innerText = `Accuracy: ${accuracy}`;
-            document.getElementById('location-accuracy').style.display = accuracy !== 'N/A' ? 'block' : 'none';
+            updateText('#latitude-longitude', `${lat.toFixed(6)},${lon.toFixed(6)}`);
+            updateText('#location-accuracy', `Accuracy: ${accuracy}`);
+            toggleDisplay('#location-accuracy', accuracy !== 'N/A' ? 'block' : 'none');
 
             let altitudeText = `${altitudeFeet} ft | ${altitudeMeters} m`;
             if (pressure !== 'N/A') {
                 altitudeText += ` | ${pressure}`;
             }
 
-            document.getElementById('altitude-values').innerText = altitudeText;
-            document.getElementById('altitude-card').style.display = altitudeMeters !== 'N/A' ? 'block' : 'none';
+            updateText('#altitude-values', altitudeText);
+            toggleDisplay('#altitude-card', altitudeMeters !== 'N/A' ? 'block' : 'none');
 
             const osgb = latLonToOSGB(lat, lon);
             if (osgb) {
                 const osGridReference = toOSGridReference(osgb.easting, osgb.northing);
                 const wabSquare = osGridReferenceToWAB(osGridReference);
 
-                document.getElementById('os-grid').innerText = osGridReference;
-                document.getElementById('wab-square').innerText = wabSquare;
+                updateText('#os-grid', osGridReference);
+                updateText('#wab-square', wabSquare);
 
-                document.getElementById('os-grid-card').style.display = 'block';
-                document.getElementById('wab-square-card').style.display = 'block';
+                toggleDisplay('#os-grid-card', 'block');
+                toggleDisplay('#wab-square-card', 'block');
             } else {
-                document.getElementById('os-grid-card').style.display = 'none';
-                document.getElementById('wab-square-card').style.display = 'none';
+                toggleDisplay('#os-grid-card', 'none');
+                toggleDisplay('#wab-square-card', 'none');
             }
 
             const maidenheadLocator = latLonToMaidenhead(lat, lon);
-            document.getElementById('maidenhead-locator').innerText = maidenheadLocator;
+            updateText('#maidenhead-locator', maidenheadLocator);
 
-            if (showCQZoneCard) {
-                const cqZone = getCQZone(lat, lon);
-                document.getElementById('cq-zone').innerText = cqZone;
-                document.getElementById('cq-zone-card').style.display = cqZone !== "N/A" ? 'block' : 'none';
-            } else {
-                document.getElementById('cq-zone-card').style.display = 'none';
-            }
+            toggleDisplayConditionally('#cq-zone-card', showCQZoneCard, getCQZone(lat, lon), '#cq-zone');
+            toggleDisplayConditionally('#itu-zone-card', showITUZoneCard, getITUZone(lat, lon), '#itu-zone');
+            toggleDisplayConditionally('#itu-region-card', showITURegionCard, getITURegion(lat, lon), '#itu-region');
 
-            if (showITUZoneCard) {
-                const ituZone = getITUZone(lat, lon);
-                document.getElementById('itu-zone').innerText = ituZone;
-                document.getElementById('itu-zone-card').style.display = ituZone !== "N/A" ? 'block' : 'none';
-            } else {
-                document.getElementById('itu-zone-card').style.display = 'none';
-            }
-
-            if (showITURegionCard) {
-                const ituRegion = getITURegion(lat, lon);
-                document.getElementById('itu-region').innerText = ituRegion;
-                document.getElementById('itu-region-card').style.display = ituRegion !== "N/A" ? 'block' : 'none';
-            } else {
-                document.getElementById('itu-region-card').style.display = 'none';
-            }
-
-            if (document.getElementById('toggle-maidenhead-btn').innerText === 'Hide Maidenhead Square') {
+            if (getElementText('#toggle-maidenhead-btn') === 'Hide Maidenhead Square') {
                 updateMaidenheadGridSquare(lat, lon);
             }
 
-            // Show navigation button if on mobile or desktop
+            configureNavButton();
+        }
+
+        function configureNavButton() {
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
             const isDesktop = !isMobile;
             const navButton = document.getElementById('nav-app-button');
@@ -795,15 +778,13 @@
         function toggleMap() {
             const mapElement = document.getElementById('map');
             const maidenheadToggleBtn = document.getElementById('toggle-maidenhead-btn');
-            if (mapElement.style.display === 'none' || mapElement.style.display === '') {
-                mapElement.style.display = 'block';
-                maidenheadToggleBtn.style.display = 'block';
-                if (mapElement._leaflet_map) {
-                    mapElement._leaflet_map.invalidateSize();
-                }
-            } else {
-                mapElement.style.display = 'none';
-                maidenheadToggleBtn.style.display = 'none';
+            const isMapVisible = mapElement.style.display === 'block';
+
+            toggleDisplay('#map', isMapVisible ? 'none' : 'block');
+            toggleDisplay('#toggle-maidenhead-btn', isMapVisible ? 'none' : 'block');
+
+            if (mapElement._leaflet_map && !isMapVisible) {
+                mapElement._leaflet_map.invalidateSize();
             }
         }
 
@@ -908,7 +889,7 @@
         }
 
         function copyLocationToClipboard() {
-            const latLon = document.getElementById('latitude-longitude').innerText;
+            const latLon = getElementText('#latitude-longitude');
             const url = `https://grid.radio?latlong=${latLon.replace(/\s+/g, '')}`;
             navigator.clipboard.writeText(url).then(() => {
                 showCopyLocationPopup('copied');
@@ -920,17 +901,17 @@
         function showPopup(elementId, type) {
             const element = document.getElementById(elementId).parentElement;
             const popup = type === 'copied' ? element.querySelector('.copied-popup') : element.querySelector('.failed-popup');
-            popup.style.display = 'block';
+            toggleDisplay(popup, 'block');
             setTimeout(() => {
-                popup.style.display = 'none';
+                toggleDisplay(popup, 'none');
             }, 2000);
         }
 
         function showCopyLocationPopup(type) {
             const popup = document.getElementById('copy-location-popup');
-            popup.style.display = 'block';
+            toggleDisplay(popup, 'block');
             setTimeout(() => {
-                popup.style.display = 'none';
+                toggleDisplay(popup, 'none');
             }, 2000);
         }
 
@@ -940,10 +921,7 @@
             const editIcon = document.querySelector('.edit-icon-container .maidenhead-edit-icon');
 
             if (textElement.style.display === 'none') {
-                textElement.style.display = 'block';
-                inputElement.style.display = 'none';
-                editIcon.textContent = '✏️';
-                editIcon.style.color = ''; // Reset color
+                toggleElementDisplay(textElement, inputElement, editIcon, '✏️', '', true);
                 const maidenheadLocator = inputElement.value.trim().toUpperCase().slice(0, 2) + inputElement.value.trim().slice(2, 4).toUpperCase() + inputElement.value.trim().toLowerCase().slice(4);
                 if (/^[A-R]{2}\d{2}([a-x]{2})?$/.test(maidenheadLocator)) {
                     const { lat, lon } = maidenheadToLatLon(maidenheadLocator);
@@ -959,11 +937,7 @@
                     toggleLatLonEdit(); // Close the latitude/longitude editor if it's open
                 }
                 inputElement.value = textElement.innerText;
-                textElement.style.display = 'none';
-                inputElement.style.display = 'block';
-                inputElement.focus();
-                editIcon.textContent = '✅';
-                editIcon.style.color = 'green'; // Change the tick to green
+                toggleElementDisplay(inputElement, textElement, editIcon, '✅', 'green', false);
             }
         }
 
@@ -983,11 +957,8 @@
                     updateDisplay(lat, lon, 'N/A', 'N/A', 'N/A', 'N/A');
                     updateMap(lat, lon);
                 }
-                textElement.style.display = 'block';
-                latLonInputs.style.display = 'none';
-                editIcon.textContent = '✏️';
-                editIcon.style.color = ''; // Reset color
-                accuracyElement.style.display = 'none';
+                toggleElementDisplay(textElement, latLonInputs, editIcon, '✏️', '', true);
+                toggleDisplay('#location-accuracy', 'none');
             } else {
                 if (document.getElementById('maidenhead-locator').style.display === 'none') {
                     toggleMaidenheadEdit(); // Close the maidenhead editor if it's open
@@ -995,12 +966,8 @@
                 const [lat, lon] = textElement.innerText.split(',').map(Number);
                 latInput.value = lat.toFixed(6);
                 lonInput.value = lon.toFixed(6);
-                textElement.style.display = 'none';
-                latLonInputs.style.display = 'block';
-                latInput.focus();
-                editIcon.textContent = '✅';
-                editIcon.style.color = 'green'; // Change the tick to green
-                accuracyElement.style.display = 'none';
+                toggleElementDisplay(latLonInputs, textElement, editIcon, '✅', 'green', false);
+                toggleDisplay('#location-accuracy', 'none');
             }
         }
 
@@ -1012,7 +979,7 @@
                 }
                 maidenheadLayer = L.maidenhead({ color: 'rgba(255, 0, 0, 0.4)' }).addTo(mapElement._leaflet_map); // Add the Maidenhead layer
                 mapElement._leaflet_grid_square = maidenheadLayer;
-                if (document.getElementById('toggle-maidenhead-btn').innerText === 'Hide Maidenhead Square') {
+                if (getElementText('#toggle-maidenhead-btn') === 'Hide Maidenhead Square') {
                     mapElement._leaflet_map.addLayer(maidenheadLayer);
                 }
             }
@@ -1025,21 +992,15 @@
                 if (!maidenheadLayer) {
                     updateMaidenheadGridSquare(mapElement._leaflet_marker.getLatLng().lat, mapElement._leaflet_marker.getLatLng().lng);
                 }
-                if (maidenheadToggleBtn.innerText === 'Hide Maidenhead Square') {
-                    mapElement._leaflet_map.removeLayer(maidenheadLayer);
-                    maidenheadToggleBtn.innerText = 'Show Maidenhead Square';
-                } else {
-                    mapElement._leaflet_map.addLayer(maidenheadLayer);
-                    maidenheadToggleBtn.innerText = 'Hide Maidenhead Square';
-                }
+                const isShowing = maidenheadToggleBtn.innerText === 'Hide Maidenhead Square';
+                mapElement._leaflet_map[isShowing ? 'removeLayer' : 'addLayer'](maidenheadLayer);
+                maidenheadToggleBtn.innerText = isShowing ? 'Show Maidenhead Square' : 'Hide Maidenhead Square';
             }
         }
 
         function getQueryStringParams() {
             const params = new URLSearchParams(window.location.search);
-            const grid = params.get('grid');
-            const latlong = params.get('latlong');
-            return { grid, latlong };
+            return { grid: params.get('grid'), latlong: params.get('latlong') };
         }
 
         function initFromQueryString() {
@@ -1048,10 +1009,10 @@
                 const formattedGrid = grid.toUpperCase().slice(0, 2) + grid.slice(2, 4).toUpperCase() + (grid.length > 4 ? grid.slice(4).toLowerCase() : '');
                 if (/^[A-R]{2}\d{2}([a-x]{2})?$/.test(formattedGrid)) {
                     const { lat, lon } = maidenheadToLatLon(formattedGrid);
-                    document.getElementById('maidenhead-locator').innerText = formattedGrid; // Display the entered locator
+                    updateText('#maidenhead-locator', formattedGrid); // Display the entered locator
                     updateDisplay(lat, lon, 'N/A', 'N/A', 'N/A', 'N/A');
-                    document.querySelector('.loading-screen').style.display = 'none';
-                    document.querySelector('.content').style.display = 'block';
+                    toggleDisplay('.loading-screen', 'none');
+                    toggleDisplay('.content', 'block');
                     updateMap(lat, lon, 11);
                     toggleMap();
                 }
@@ -1059,12 +1020,56 @@
                 const [lat, lon] = latlong.split(',').map(Number);
                 if (!isNaN(lat) && !isNaN(lon)) {
                     updateDisplay(lat, lon, 'N/A', 'N/A', 'N/A', 'N/A');
-                    document.querySelector('.loading-screen').style.display = 'none';
-                    document.querySelector('.content').style.display = 'block';
+                    toggleDisplay('.loading-screen', 'none');
+                    toggleDisplay('.content', 'block');
                     updateMap(lat, lon, 11);
                     toggleMap();
                 }
             }
+        }
+
+        function openInNavigationApp() {
+            let geoUri;
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            if (/iPhone|iPad|iPod/i.test(userAgent)) {
+                geoUri = `maps://maps.google.com/maps?daddr=${currentLat},${currentLon}&ll=`;
+            } else if (/Android/i.test(userAgent)) {
+                geoUri = `geo:${currentLat},${currentLon}?q=${currentLat},${currentLon}`;
+            } else {
+                geoUri = `geo:${currentLat},${currentLon}`;
+            }
+
+            window.location.href = geoUri;
+        }
+
+        function toggleDisplay(selector, displayStyle) {
+            document.querySelector(selector).style.display = displayStyle;
+        }
+
+        function toggleDisplayConditionally(selector, condition, data, textSelector) {
+            if (condition) {
+                updateText(textSelector, data);
+                toggleDisplay(selector, data !== "N/A" ? 'block' : 'none');
+            } else {
+                toggleDisplay(selector, 'none');
+            }
+        }
+
+        function getElementText(selector) {
+            return document.querySelector(selector).innerText;
+        }
+
+        function updateText(selector, text) {
+            document.querySelector(selector).innerText = text;
+        }
+
+        function toggleElementDisplay(elementToShow, elementToHide, iconElement, iconText, iconColor, isShowing) {
+            elementToShow.style.display = isShowing ? 'block' : 'none';
+            elementToHide.style.display = isShowing ? 'none' : 'block';
+            iconElement.textContent = iconText;
+            iconElement.style.color = iconColor;
+            elementToShow.focus();
         }
 
         window.onload = function() {
@@ -1077,11 +1082,11 @@
                         if (result.state === 'granted') {
                             refreshLocation();
                         } else {
-                            document.querySelector('.loading-screen').style.display = 'flex';
+                            toggleDisplay('.loading-screen', 'flex');
                         }
                     });
                 } else {
-                    document.querySelector('.loading-screen').style.display = 'flex';
+                    toggleDisplay('.loading-screen', 'flex');
                 }
             }
         };
@@ -1112,25 +1117,9 @@
             this.value = this.value.replace(/[^\d.-]/g, '');
         });
 
-        function openInNavigationApp() {
-            let geoUri;
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-            if (/iPhone|iPad|iPod/i.test(userAgent)) {
-                geoUri = `maps://maps.google.com/maps?daddr=${currentLat},${currentLon}&ll=`;
-            } else if (/Android/i.test(userAgent)) {
-                geoUri = `geo:${currentLat},${currentLon}?q=${currentLat},${currentLon}`;
-            } else {
-                geoUri = `geo:${currentLat},${currentLon}`;
-            }
-
-            window.location.href = geoUri;
-        }
-
         if (typeof navigator.serviceWorker !== 'undefined') {
-            navigator.serviceWorker.register('sw.js')
+            navigator.serviceWorker.register('sw.js');
         }
-        
     </script>
 <!-- 100% privacy-first analytics -->
 <script data-collect-dnt="true" async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
