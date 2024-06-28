@@ -241,8 +241,12 @@
             transform: translateX(-50%);
             z-index: 10;
         }
-        .nav-app-button {
+        .nav-app-button-container {
+            display: flex;
+            justify-content: center;
             margin-top: 10px;
+        }
+        .nav-app-button {
             display: none;
         }
     </style>
@@ -382,6 +386,8 @@
         <div class="copy-location-button-container">
             <button class="btn btn-secondary copy-location-button" onclick="copyLocationToClipboard()">Copy Location to Clipboard</button>
             <div class="copy-location-popup" id="copy-location-popup">Copied!</div>
+        </div>
+        <div class="nav-app-button-container">
             <button class="btn btn-secondary nav-app-button" id="nav-app-button" onclick="openInNavigationApp()">Open in Navigation App</button>
         </div>
     </div>
