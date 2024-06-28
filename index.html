@@ -775,10 +775,20 @@
                 updateMaidenheadGridSquare(lat, lon);
             }
 
-            // Show navigation button if on mobile
+            // Show navigation button if on mobile or desktop
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            const isDesktop = !isMobile;
+            const navButton = document.getElementById('nav-app-button');
+
             if (isMobile) {
-                document.getElementById('nav-app-button').style.display = 'block';
+                navButton.style.display = 'block';
+                navButton.innerText = 'Open in Navigation App';
+            } else if (isDesktop) {
+                navButton.style.display = 'block';
+                navButton.innerText = 'Open on Google Maps';
+                navButton.onclick = function() {
+                    window.open(`https://www.google.com/maps?q=${currentLat},${currentLon}`, '_blank');
+                };
             }
         }
 
@@ -1102,20 +1112,20 @@
             this.value = this.value.replace(/[^\d.-]/g, '');
         });
 
-function openInNavigationApp() {
-    let geoUri;
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        function openInNavigationApp() {
+            let geoUri;
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-    if (/iPhone|iPad|iPod/i.test(userAgent)) {
-        geoUri = `maps://maps.google.com/maps?daddr=${currentLat},${currentLon}&ll=`;
-    } else if (/Android/i.test(userAgent)) {
-        geoUri = `geo:${currentLat},${currentLon}?q=${currentLat},${currentLon}`;
-    } else {
-        geoUri = `geo:${currentLat},${currentLon}`;
-    }
+            if (/iPhone|iPad|iPod/i.test(userAgent)) {
+                geoUri = `maps://maps.google.com/maps?daddr=${currentLat},${currentLon}&ll=`;
+            } else if (/Android/i.test(userAgent)) {
+                geoUri = `geo:${currentLat},${currentLon}?q=${currentLat},${currentLon}`;
+            } else {
+                geoUri = `geo:${currentLat},${currentLon}`;
+            }
 
-    window.location.href = geoUri;
-}
+            window.location.href = geoUri;
+        }
 
         if (typeof navigator.serviceWorker !== 'undefined') {
             navigator.serviceWorker.register('sw.js')
