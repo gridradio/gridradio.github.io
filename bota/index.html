@@ -27,13 +27,29 @@
     <script src="/L.Maidenhead.js"></script>
     <script src="/Control.FullScreen.js"></script>
     <script src="/L.KML.js"></script>
+    <script src="/jszip.min.js"></script>
     <script>
         let botaLayer; // Add a variable to store the BOTA layer state
         let botaKmlLayer; // Add a variable to store the parsed BOTA KML layer
         let maidenheadLayer; // Add a variable to store the Maidenhead layer
         let userMarker; // Add a variable to store the user's marker
 
-        function initMap(lat, lon, zoom = 9) { // Default zoom level set to 9
+        async function loadKMZFile(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Network response was not ok');
+
+                const blob = await response.blob();
+                const zip = await JSZip.loadAsync(blob);
+                const kmlFile = zip.file(/\.kml$/i)[0]; // Find the first .kml file
+                const kmlText = await kmlFile.async("text");
+                return new DOMParser().parseFromString(kmlText, 'text/xml');
+            } catch (error) {
+                console.error('Error loading KMZ file:', error);
+            }
+        }
+
+        async function initMap(lat, lon, zoom = 9) { // Default zoom level set to 9
             const map = L.map('map', { 
                 doubleClickZoom: false,
                 fullscreenControl: true,
@@ -55,16 +71,13 @@
             // Add Maidenhead grid layer by default
             maidenheadLayer = L.maidenhead({ color: 'rgba(255, 0, 0, 0.4)' }).addTo(map);
 
-            // Load BOTA KML layer by default
-            fetch('/bota.kml')
-                .then(res => res.text())
-                .then(kmltext => {
-                    const parser = new DOMParser();
-                    const kml = parser.parseFromString(kmltext, 'text/xml');
-                    botaKmlLayer = new L.KML(kml);
-                    map.addLayer(botaKmlLayer);
-                    botaLayer = botaKmlLayer;
-                });
+            // Load BOTA KMZ layer by default
+            const kmlDoc = await loadKMZFile('/bota.kmz');
+            if (kmlDoc) {
+                botaKmlLayer = new L.KML(kmlDoc);
+                map.addLayer(botaKmlLayer);
+                botaLayer = botaKmlLayer;
+            }
 
             // Geolocation to get the user's current position
             if (navigator.geolocation) {
