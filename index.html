@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -249,15 +250,21 @@
         .nav-app-button {
             display: none;
         }
-        .utc-time-card {
+        .clock-card {
             margin-top: 20px;
             position: relative;
         }
-        .utc-time-card .card-body {
+        .clock-card .card-body {
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
+        }
+        .clock-card h5 {
+            font-size: 1.2em;
+        }
+        .clock-card p {
+            font-size: 1em;
         }
     </style>
 </head>
@@ -276,11 +283,12 @@
         <div class="alert alert-warning" role="alert" id="geolocation-alert">
             Geolocation could not be completed. Please use the map to select a location or enter a locator value using the edit buttons.
         </div>
-    <div class="card utc-time-card">
-        <div class="card-body">
-            <h5 class="card-title">UTC Time</h5>
-            <p class="card-text" id="utc-time">Loading...</p>
-        </div>
+        <div class="card clock-card">
+            <div class="card-body">
+                <h5 class="card-title">Clock</h5>
+                <p class="card-text"><strong>UTC Time:</strong> <span id="utc-time">Loading...</span></p>
+                <p class="card-text"><strong>Current Time:</strong> <span id="current-time">Loading...</span></p>
+            </div>
         </div>
         <div class="card">
             <div class="card-body">
@@ -1114,7 +1122,9 @@
         function updateUtcTime() {
             const now = new Date();
             const utcTime = now.toUTCString().split(' ')[4];
+            const localTime = now.toLocaleTimeString();
             document.getElementById('utc-time').innerText = utcTime;
+            document.getElementById('current-time').innerText = localTime;
         }
 
         window.onload = function() {
