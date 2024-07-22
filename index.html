@@ -350,6 +350,7 @@
                     <input type="text" class="form-control" id="latitude-input" placeholder="Latitude">
                     <input type="text" class="form-control" id="longitude-input" placeholder="Longitude">
                 </div>
+				<p class="card-text" id="latitude-longitude-dms">Loading...</p>
                 <p class="card-text" id="location-accuracy">Accuracy: Loading...</p>
                 <div class="edit-icon-container" onclick="toggleLatLonEdit()">
                     <span class="edit-icon lat-lon-edit-icon">✏️</span>
@@ -716,8 +717,12 @@
         function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accuracy) {
             currentLat = lat; // Update global latitude variable
             currentLon = lon; // Update global longitude variable
+			
+			const latDMS = convertToDMS(lat, 'lat');
+            const lonDMS = convertToDMS(lon, 'lon');
 
             document.getElementById('latitude-longitude').innerText = `${lat.toFixed(6)},${lon.toFixed(6)}`;
+			document.getElementById('latitude-longitude-dms').innerText = `${latDMS}, ${lonDMS}`;
             document.getElementById('location-accuracy').innerText = `Accuracy: ${accuracy}`;
             document.getElementById('location-accuracy').style.display = accuracy !== 'N/A' ? 'block' : 'none';
 
@@ -785,11 +790,21 @@
                 navButton.innerText = 'Open in Navigation App';
             } else if (isDesktop) {
                 navButton.style.display = 'block';
-                navButton.innerText = 'Open on Google Maps';
+                navButton.innerText = 'Open in Google Maps';
                 navButton.onclick = function() {
                     window.open(`https://www.google.com/maps?q=${currentLat},${currentLon}`, '_blank');
                 };
             }
+        }
+
+        function convertToDMS(coordinate, type) {
+            const absolute = Math.abs(coordinate);
+            const degrees = Math.floor(absolute);
+            const minutes = Math.floor((absolute - degrees) * 60);
+            const seconds = ((absolute - degrees - minutes / 60) * 3600).toFixed(2);
+            const direction = type === 'lat' ? (coordinate >= 0 ? 'N' : 'S') : (coordinate >= 0 ? 'E' : 'W');
+
+            return `${degrees}°${minutes}'${seconds}" ${direction}`;
         }
 
         function toggleMap() {
