@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid.Radio Satellite Pass Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .card select, .card button {
+            margin: 10px 0;
+        }
+        .card canvas {
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="satelliteCard" class="card">
+        <h2>Satellite Pass Predictor</h2>
+        <label for="satelliteSelect">Select a Satellite:</label>
+        <select id="satelliteSelect">
+            <!-- Options will be populated by JavaScript -->
+        </select>
+        <button onclick="predictPass()">Predict Next Pass</button>
+        <div id="predictionResults"></div>
+        <canvas id="passCanvas" width="600" height="400"></canvas>
+    </div>
+
+    <script>
+        const satelliteUrl = 'https://celestrak.org/NORAD/elements/gp.php?GROUP=amateur&FORMAT=xml';
+
+        async function loadSatellites() {
+            const response = await fetch(satelliteUrl);
+            const xmlText = await response.text();
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlText, "application/xml");
+
+            const satellites = xmlDoc.getElementsByTagName("omm");
+            const satelliteSelect = document.getElementById("satelliteSelect");
+
+            for (let satellite of satellites) {
+                const name = satellite.getElementsByTagName("OBJECT_NAME")[0].textContent;
+                const option = document.createElement("option");
+                option.value = name;
+                option.textContent = name;
+                satelliteSelect.appendChild(option);
+            }
+        }
+
+        function predictPass() {
+            const selectedSatellite = document.getElementById("satelliteSelect").value;
+            const currentLocation = {
+                lat: 40.7128, // Replace with actual latitude
+                lon: -74.0060 // Replace with actual longitude
+            };
+            const currentTime = new Date();
+
+            // Mock prediction data for illustration purposes
+            const passPrediction = {
+                start: new Date(currentTime.getTime() + 5 * 60000),
+                end: new Date(currentTime.getTime() + 15 * 60000),
+                maxElevation: 45
+            };
+
+            displayPrediction(passPrediction);
+            drawPass(passPrediction, currentLocation);
+        }
+
+        function displayPrediction(prediction) {
+            const resultsDiv = document.getElementById("predictionResults");
+            resultsDiv.innerHTML = `
+                <p>Next pass starts at: ${prediction.start.toLocaleTimeString()}</p>
+                <p>Pass ends at: ${prediction.end.toLocaleTimeString()}</p>
+                <p>Max elevation: ${prediction.maxElevation} degrees</p>
+            `;
+        }
+
+        function drawPass(prediction, location) {
+            const canvas = document.getElementById("passCanvas");
+            const ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "#000";
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, canvas.height - 20, 10, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.fillText(`Observer (${location.lat}, ${location.lon})`, canvas.width / 2 - 30, canvas.height - 5);
+
+            const passDuration = (prediction.end - prediction.start) / 60000; // in minutes
+            const maxElevation = prediction.maxElevation;
+
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2, canvas.height - 20);
+            ctx.quadraticCurveTo(canvas.width / 2 - (passDuration / 2) * 20, canvas.height - 20 - maxElevation, canvas.width / 2 + (passDuration / 2) * 20, canvas.height - 20);
+            ctx.strokeStyle = "#00f";
+            ctx.stroke();
+        }
+
+        window.onload = loadSatellites;
+    </script>
+</body>
+</html>
