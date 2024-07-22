@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -249,6 +250,16 @@
         .nav-app-button {
             display: none;
         }
+        .utc-time-card {
+            margin-top: 20px;
+            position: relative;
+        }
+        .utc-time-card .card-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
     </style>
 </head>
 <body>
@@ -263,6 +274,12 @@
     </div>
     <div class="container content">
         <h1>Amateur Radio Locator</h1>
+        <div class="card utc-time-card">
+            <div class="card-body">
+                <h5 class="card-title">Current UTC Time</h5>
+                <p class="card-text" id="utc-time">Loading...</p>
+            </div>
+        </div>
         <div class="alert alert-warning" role="alert" id="geolocation-alert">
             Geolocation could not be completed. Please use the map to select a location or enter a locator value using the edit buttons.
         </div>
@@ -350,7 +367,7 @@
                     <input type="text" class="form-control" id="latitude-input" placeholder="Latitude">
                     <input type="text" class="form-control" id="longitude-input" placeholder="Longitude">
                 </div>
-				<p class="card-text" id="latitude-longitude-dms">Loading...</p>
+                <p class="card-text" id="latitude-longitude-dms">Loading...</p>
                 <p class="card-text" id="location-accuracy">Accuracy: Loading...</p>
                 <div class="edit-icon-container" onclick="toggleLatLonEdit()">
                     <span class="edit-icon lat-lon-edit-icon">✏️</span>
@@ -396,7 +413,7 @@
         <div class="footer-container">
             <p>Made by Rose <a href="https://www.qrz.com/db/2E0RXO" target="_blank">2E0RXO</a> 💖</p>
             <div class="kofi-widget">
-               <a href='https://ko-fi.com/Z8Z8ZKG4B' target='_blank'><img height='36' style='border:0px;height:36px;' src='/kofi4.webp' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+                <a href='https://ko-fi.com/Z8Z8ZKG4B' target='_blank'><img height='36' style='border:0px;height:36px;' src='/kofi4.webp' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
             </div>
         </div>
     </footer>
@@ -717,12 +734,12 @@
         function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accuracy) {
             currentLat = lat; // Update global latitude variable
             currentLon = lon; // Update global longitude variable
-			
-			const latDMS = convertToDMS(lat, 'lat');
+
+            const latDMS = convertToDMS(lat, 'lat');
             const lonDMS = convertToDMS(lon, 'lon');
 
             document.getElementById('latitude-longitude').innerText = `${lat.toFixed(6)},${lon.toFixed(6)}`;
-			document.getElementById('latitude-longitude-dms').innerText = `${latDMS}, ${lonDMS}`;
+            document.getElementById('latitude-longitude-dms').innerText = `${latDMS}, ${lonDMS}`;
             document.getElementById('location-accuracy').innerText = `Accuracy: ${accuracy}`;
             document.getElementById('location-accuracy').style.display = accuracy !== 'N/A' ? 'block' : 'none';
 
@@ -1082,6 +1099,12 @@
             }
         }
 
+        function updateUtcTime() {
+            const now = new Date();
+            const utcTime = now.toUTCString().split(' ')[4];
+            document.getElementById('utc-time').innerText = utcTime;
+        }
+
         window.onload = function() {
             const { grid, latlong } = getQueryStringParams();
             if (grid || latlong) {
@@ -1099,6 +1122,9 @@
                     document.querySelector('.loading-screen').style.display = 'flex';
                 }
             }
+
+            updateUtcTime();
+            setInterval(updateUtcTime, 1000);
         };
 
         document.getElementById('maidenhead-locator-input').addEventListener('keypress', function(event) {
@@ -1145,7 +1171,7 @@
         if (typeof navigator.serviceWorker !== 'undefined') {
             navigator.serviceWorker.register('sw.js')
         }
-        
+
     </script>
 <!-- 100% privacy-first analytics -->
 <script data-collect-dnt="true" async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
