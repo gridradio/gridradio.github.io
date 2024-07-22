@@ -285,8 +285,8 @@
         <div class="card clock-card">
             <div class="card-body">
                 <h5 class="card-title">Clock</h5>
-                <p class="card-text"><strong>UTC Time:</strong> <span id="utc-time">Loading...</span></p>
-                <p class="card-text"><strong>Current Time:</strong> <span id="current-time">Loading...</span></p>
+                <p class="card-text"><strong>UTC Time</strong></br><span id="utc-time">Loading...</span></p>
+                <p class="card-text"><strong>Current Time</strong></br><span id="current-time">Loading...</span></p>
             </div>
         </div>
         <div class="card">
@@ -429,7 +429,7 @@
     <script src="/Control.FullScreen.js"></script>
     <script src="/easy-button.js"></script>
     <script src="/L.KML.js"></script>
-    <script src="jszip.min.js"></script>
+    <script src="/jszip.min.js"></script>
     <script>
         // Redirect to HTTPS if not already using HTTPS
         if (location.protocol !== 'https:') {
@@ -936,7 +936,7 @@
                 // Toggle POTA KMZ Layer
                 L.easyButton('<img style="object-fit: contain; width:100%;" src="/pota.png"></src>'
                     , function(btn, map){
-                        toggleKMZLayer('pota', 'pota.kmz');
+                        toggleKMZLayer('pota', 'pota-uk.kmz');
                     }
                 ).addTo(map);
 
