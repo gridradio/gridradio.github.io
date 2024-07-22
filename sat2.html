@@ -10,7 +10,7 @@
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
-    <script src="https://cdn.jsdelivr.net/npm/tle@3.0.0/lib/tle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/satellite.js"></script>
 </head>
 <body>
     <h1>Satellite Tracker</h1>
@@ -62,13 +62,13 @@
             function updateSatellitePosition(satellite) {
                 const tleLine1 = satellite.TLE_LINE1;
                 const tleLine2 = satellite.TLE_LINE2;
-                const satrec = tle.twoline2satrec(tleLine1, tleLine2);
-                const positionAndVelocity = tle.propagate(satrec, new Date());
+                const satrec = satellite.twoline2satrec(tleLine1, tleLine2);
+                const positionAndVelocity = satellite.propagate(satrec, new Date());
                 const positionEci = positionAndVelocity.position;
-                const gmst = tle.gstime(new Date());
-                const positionGd = tle.eciToGeodetic(positionEci, gmst);
-                const longitude = tle.degreesLong(positionGd.longitude);
-                const latitude = tle.degreesLat(positionGd.latitude);
+                const gmst = satellite.gstime(new Date());
+                const positionGd = satellite.eciToGeodetic(positionEci, gmst);
+                const longitude = satellite.degreesLong(positionGd.longitude);
+                const latitude = satellite.degreesLat(positionGd.latitude);
 
                 if (satelliteMarker) {
                     map.removeLayer(satelliteMarker);
