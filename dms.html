@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -345,22 +345,19 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Latitude and Longitude</h5>
-                <p class="card-text" id="latitude-longitude-decimal">Loading...</p>
-                <p class="card-text" id="latitude-longitude-dms">Loading...</p>
+                <p class="card-text" id="latitude-longitude">Loading...</p>
                 <div class="latitude-longitude-inputs" style="display: none;">
                     <input type="text" class="form-control" id="latitude-input" placeholder="Latitude">
                     <input type="text" class="form-control" id="longitude-input" placeholder="Longitude">
                 </div>
+				<p class="card-text" id="latitude-longitude-dms">Loading...</p>
                 <p class="card-text" id="location-accuracy">Accuracy: Loading...</p>
                 <div class="edit-icon-container" onclick="toggleLatLonEdit()">
                     <span class="edit-icon lat-lon-edit-icon">✏️</span>
                 </div>
                 <div class="vertical-separator vertical-separator-left"></div>
-                <div class="copy-icon-container" onclick="copyToClipboard('latitude-longitude-decimal')">
-                    <span class="copy-icon">📋 Decimal</span>
-                </div>
-                <div class="copy-icon-container" onclick="copyToClipboard('latitude-longitude-dms')">
-                    <span class="copy-icon">📋 DMS</span>
+                <div class="copy-icon-container" onclick="copyToClipboard('latitude-longitude')">
+                    <span class="copy-icon">📋</span>
                 </div>
                 <div class="copied-popup">Copied!</div>
                 <div class="failed-popup">Failed!</div>
@@ -720,12 +717,12 @@
         function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accuracy) {
             currentLat = lat; // Update global latitude variable
             currentLon = lon; // Update global longitude variable
-
-            const latDMS = convertToDMS(lat, 'lat');
+			
+			const latDMS = convertToDMS(lat, 'lat');
             const lonDMS = convertToDMS(lon, 'lon');
 
-            document.getElementById('latitude-longitude-decimal').innerText = `${lat.toFixed(6)}, ${lon.toFixed(6)}`;
-            document.getElementById('latitude-longitude-dms').innerText = `${latDMS}, ${lonDMS}`;
+            document.getElementById('latitude-longitude').innerText = `${lat.toFixed(6)},${lon.toFixed(6)}`;
+			document.getElementById('latitude-longitude-dms').innerText = `${latDMS}, ${lonDMS}`;
             document.getElementById('location-accuracy').innerText = `Accuracy: ${accuracy}`;
             document.getElementById('location-accuracy').style.display = accuracy !== 'N/A' ? 'block' : 'none';
 
@@ -793,7 +790,7 @@
                 navButton.innerText = 'Open in Navigation App';
             } else if (isDesktop) {
                 navButton.style.display = 'block';
-                navButton.innerText = 'Open in Google Maps';
+                navButton.innerText = 'Open on Google Maps';
                 navButton.onclick = function() {
                     window.open(`https://www.google.com/maps?q=${currentLat},${currentLon}`, '_blank');
                 };
@@ -808,24 +805,6 @@
             const direction = type === 'lat' ? (coordinate >= 0 ? 'N' : 'S') : (coordinate >= 0 ? 'E' : 'W');
 
             return `${degrees}°${minutes}'${seconds}" ${direction}`;
-        }
-
-        function copyToClipboard(elementId) {
-            const text = document.getElementById(elementId).innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                showPopup(elementId, 'copied');
-            }).catch(err => {
-                showPopup(elementId, 'failed');
-            });
-        }
-
-        function showPopup(elementId, type) {
-            const element = document.getElementById(elementId).parentElement;
-            const popup = type === 'copied' ? element.querySelector('.copied-popup') : element.querySelector('.failed-popup');
-            popup.style.display = 'block';
-            setTimeout(() => {
-                popup.style.display = 'none';
-            }, 2000);
         }
 
         function toggleMap() {
@@ -871,7 +850,7 @@
                     mapElement._leaflet_marker.setLatLng([lat, lon]);
                 }
             } else {
-                const map = L.map('map', {
+                const map = L.map('map', { 
                     doubleClickZoom: false,
                     fullscreenControl: true,
                     fullscreenControlOptions: {
@@ -944,7 +923,7 @@
         }
 
         function copyLocationToClipboard() {
-            const latLon = document.getElementById('latitude-longitude-decimal').innerText;
+            const latLon = document.getElementById('latitude-longitude').innerText;
             const url = `https://grid.radio?latlong=${latLon.replace(/\s+/g, '')}`;
             navigator.clipboard.writeText(url).then(() => {
                 showCopyLocationPopup('copied');
@@ -991,7 +970,7 @@
                     updateMap(lat, lon);
                 }
             } else {
-                if (document.getElementById('latitude-longitude-decimal').style.display === 'none') {
+                if (document.getElementById('latitude-longitude').style.display === 'none') {
                     toggleLatLonEdit(); // Close the latitude/longitude editor if it's open
                 }
                 inputElement.value = textElement.innerText;
@@ -1004,38 +983,34 @@
         }
 
         function toggleLatLonEdit() {
-            const textElementDecimal = document.getElementById('latitude-longitude-decimal');
-            const textElementDMS = document.getElementById('latitude-longitude-dms');
+            const textElement = document.getElementById('latitude-longitude');
             const latLonInputs = document.querySelector('.latitude-longitude-inputs');
             const latInput = document.getElementById('latitude-input');
             const lonInput = document.getElementById('longitude-input');
             const editIcon = document.querySelector('.edit-icon-container .lat-lon-edit-icon');
             const accuracyElement = document.getElementById('location-accuracy');
 
-            if (latLonInputs.style.display === 'none') {
+            if (textElement.style.display === 'none') {
                 const lat = parseFloat(latInput.value);
                 const lon = parseFloat(lonInput.value);
                 if (!isNaN(lat) && !isNaN(lon) && lat >= -90 && lat <= 90 && lon >= -180 && lon <= 180) {
-                    textElementDecimal.innerText = `${lat.toFixed(6)}, ${lon.toFixed(6)}`;
-                    textElementDMS.innerText = `${convertToDMS(lat, 'lat')}, ${convertToDMS(lon, 'lon')}`;
+                    textElement.innerText = `${lat.toFixed(6)},${lon.toFixed(6)}`;
                     updateDisplay(lat, lon, 'N/A', 'N/A', 'N/A', 'N/A');
                     updateMap(lat, lon);
                 }
-                textElementDecimal.style.display = 'block';
-                textElementDMS.style.display = 'block';
+                textElement.style.display = 'block';
                 latLonInputs.style.display = 'none';
                 editIcon.textContent = '✏️';
                 editIcon.style.color = ''; // Reset color
-                accuracyElement.style.display = 'block';
+                accuracyElement.style.display = 'none';
             } else {
                 if (document.getElementById('maidenhead-locator').style.display === 'none') {
                     toggleMaidenheadEdit(); // Close the maidenhead editor if it's open
                 }
-                const [lat, lon] = textElementDecimal.innerText.split(',').map(Number);
+                const [lat, lon] = textElement.innerText.split(',').map(Number);
                 latInput.value = lat.toFixed(6);
                 lonInput.value = lon.toFixed(6);
-                textElementDecimal.style.display = 'none';
-                textElementDMS.style.display = 'none';
+                textElement.style.display = 'none';
                 latLonInputs.style.display = 'block';
                 latInput.focus();
                 editIcon.textContent = '✅';
@@ -1170,6 +1145,7 @@
         if (typeof navigator.serviceWorker !== 'undefined') {
             navigator.serviceWorker.register('sw.js')
         }
+        
     </script>
 <!-- 100% privacy-first analytics -->
 <script data-collect-dnt="true" async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
