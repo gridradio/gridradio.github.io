@@ -897,6 +897,8 @@
 
             let botaLayer; // Add a variable to store the BOTA layer state
             let botaKmlLayer; // Add a variable to store the parsed BOTA KML layer
+            let potaLayer; // Add a variable to store the POTA layer state
+            let potaKmlLayer; // Add a variable to store the parsed POTA KML layer
 
             if (mapElement._leaflet_map) {
                 mapElement._leaflet_map.setView([lat, lon], currentZoom);
@@ -928,6 +930,13 @@
                 L.easyButton('<img style="object-fit: contain; width:100%;" src="/bota.png"></src>'
                     , function(btn, map){
                         toggleKMZLayer('bota.kmz');
+                    }
+                ).addTo(map);
+
+                // Toggle POTA KMZ Layer
+                L.easyButton('<img style="object-fit: contain; width:100%;" src="/pota.png"></src>'
+                    , function(btn, map){
+                        toggleKMZLayer('pota-uk.kml');
                     }
                 ).addTo(map);
 
