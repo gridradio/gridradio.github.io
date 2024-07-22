@@ -876,17 +876,17 @@
             }
         }
 
-        async function toggleKMZLayer(url) {
+        async function toggleKMZLayer(layerName, url) {
             const mapElement = document.getElementById('map');
             if (mapElement._leaflet_map) {
-                if (mapElement._leaflet_kmz_layer) {
-                    mapElement._leaflet_map.removeLayer(mapElement._leaflet_kmz_layer);
-                    mapElement._leaflet_kmz_layer = null;
+                if (mapElement._leaflet_kmz_layers[layerName]) {
+                    mapElement._leaflet_map.removeLayer(mapElement._leaflet_kmz_layers[layerName]);
+                    delete mapElement._leaflet_kmz_layers[layerName];
                 } else {
                     const kmlDoc = await loadKMZFile(url);
                     const kmlLayer = new L.KML(kmlDoc);
                     mapElement._leaflet_map.addLayer(kmlLayer);
-                    mapElement._leaflet_kmz_layer = kmlLayer;
+                    mapElement._leaflet_kmz_layers[layerName] = kmlLayer;
                 }
             }
         }
@@ -929,14 +929,14 @@
                 // Toggle BOTA KMZ Layer
                 L.easyButton('<img style="object-fit: contain; width:100%;" src="/bota.png"></src>'
                     , function(btn, map){
-                        toggleKMZLayer('bota.kmz');
+                        toggleKMZLayer('bota', 'bota.kmz');
                     }
                 ).addTo(map);
 
                 // Toggle POTA KMZ Layer
                 L.easyButton('<img style="object-fit: contain; width:100%;" src="/pota.png"></src>'
                     , function(btn, map){
-                        toggleKMZLayer('pota-uk.kmz');
+                        toggleKMZLayer('pota', 'pota.kmz');
                     }
                 ).addTo(map);
 
@@ -955,6 +955,9 @@
                     marker.setLatLng(newLatLng);
                     updateDisplay(newLatLng.lat, newLatLng.lng, 'N/A', 'N/A', 'N/A', 'N/A');
                 });
+
+                // Initialize the kmz layers object
+                mapElement._leaflet_kmz_layers = {};
             }
         }
 
