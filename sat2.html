@@ -17,75 +17,70 @@
     <select id="satelliteDropdown">
         <option value="">Select a satellite</option>
     </select>
-    <button onclick="loadTLEData()">Load TLE Data</button>
+    <button id="loadTLEButton">Load TLE Data</button>
     <div id="map"></div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', () => {
             const apiUrl = 'https://celestrak.com/NORAD/elements/gp.php?GROUP=active&FORMAT=json';
             const dropdown = document.getElementById('satelliteDropdown');
+            const loadTLEButton = document.getElementById('loadTLEButton');
             let satelliteData = [];
             let map;
             let satelliteMarker;
 
-            async function loadTLEData() {
+            const loadTLEData = async () => {
                 try {
                     const response = await fetch(apiUrl);
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
+                    if (!response.ok) throw new Error(`Network response was not ok: ${response.statusText}`);
                     const data = await response.json();
                     satelliteData = data;
                     populateSatelliteDropdown(data);
                 } catch (error) {
-                    console.error('There has been a problem with your fetch operation:', error);
+                    console.error('Fetch operation failed:', error);
                 }
-            }
+            };
 
-            function populateSatelliteDropdown(data) {
+            const populateSatelliteDropdown = (data) => {
                 data.forEach(satellite => {
                     const option = document.createElement('option');
                     option.value = satellite.NORAD_CAT_ID;
                     option.textContent = satellite.OBJECT_NAME;
                     dropdown.appendChild(option);
                 });
-            }
+            };
 
-            dropdown.addEventListener('change', function() {
-                const selectedSatelliteId = this.value;
-                const selectedSatellite = satelliteData.find(sat => sat.NORAD_CAT_ID === selectedSatelliteId);
-                if (selectedSatellite) {
-                    updateSatellitePosition(selectedSatellite);
-                }
-            });
-
-            function updateSatellitePosition(satellite) {
-                const tleLine1 = satellite.TLE_LINE1;
-                const tleLine2 = satellite.TLE_LINE2;
-                const satrec = satellite.twoline2satrec(tleLine1, tleLine2);
-                const positionAndVelocity = satellite.propagate(satrec, new Date());
+            const updateSatellitePosition = (satellite) => {
+                const { TLE_LINE1, TLE_LINE2 } = satellite;
+                const satrec = satellitejs.twoline2satrec(TLE_LINE1, TLE_LINE2);
+                const positionAndVelocity = satellitejs.propagate(satrec, new Date());
                 const positionEci = positionAndVelocity.position;
-                const gmst = satellite.gstime(new Date());
-                const positionGd = satellite.eciToGeodetic(positionEci, gmst);
-                const longitude = satellite.degreesLong(positionGd.longitude);
-                const latitude = satellite.degreesLat(positionGd.latitude);
+                const gmst = satellitejs.gstime(new Date());
+                const positionGd = satellitejs.eciToGeodetic(positionEci, gmst);
+                const longitude = satellitejs.degreesLong(positionGd.longitude);
+                const latitude = satellitejs.degreesLat(positionGd.latitude);
 
-                if (satelliteMarker) {
-                    map.removeLayer(satelliteMarker);
-                }
+                if (satelliteMarker) map.removeLayer(satelliteMarker);
                 satelliteMarker = L.marker([latitude, longitude]).addTo(map);
                 map.setView([latitude, longitude], 4);
-            }
+            };
 
-            function initializeMap() {
+            const initializeMap = () => {
                 map = L.map('map').setView([51.505, -0.09], 2);
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(map);
-            }
+            };
 
-            // Load TLE data initially
-            loadTLEData();
+            dropdown.addEventListener('change', () => {
+                const selectedSatelliteId = dropdown.value;
+                const selectedSatellite = satelliteData.find(sat => sat.NORAD_CAT_ID === selectedSatelliteId);
+                if (selectedSatellite) updateSatellitePosition(selectedSatellite);
+            });
+
+            loadTLEButton.addEventListener('click', loadTLEData);
+
+            // Initialize map on load
             initializeMap();
         });
     </script>
