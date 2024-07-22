@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Satellite Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #app {
+            margin: 20px;
+        }
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .card h2 {
+            margin-top: 0;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/satellite.js/dist/satellite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div id="app">
+    <div id="map" class="card"></div>
+    <div class="card">
+        <h2>Satellite Tracker</h2>
+        <p>Enter your coordinates:</p>
+        <label for="latitude">Latitude:</label>
+        <input type="number" id="latitude" step="any"><br>
+        <label for="longitude">Longitude:</label>
+        <input type="number" id="longitude" step="any"><br>
+        <label for="altitude">Altitude (meters):</label>
+        <input type="number" id="altitude" step="any"><br><br>
+        <button onclick="predictNextPass()">Predict Next Pass</button>
+    </div>
+    <div class="card">
+        <h2>Satellite Pass Prediction</h2>
+        <p id="prediction"></p>
+        <canvas id="passChart" width="400" height="200"></canvas>
+    </div>
+    <div class="card">
+        <h2>Select Satellite</h2>
+        <select id="satelliteSelect"></select>
+        <button onclick="loadTLEData()">Load Satellites</button>
+    </div>
+</div>
+
+<script>
+    let map = L.map('map').setView([51.505, -0.09], 2);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    function loadTLEData() {
+        fetch('https://celestrak.org/NORAD/elements/gp.php?GROUP=amateur&FORMAT=xml')
+            .then(response => response.text())
+            .then(data => {
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(data, "application/xml");
+                const satelliteElements = xmlDoc.getElementsByTagName("omm");
+                const select = document.getElementById("satelliteSelect");
+                select.innerHTML = '';
+                for (let i = 0; i < satelliteElements.length; i++) {
+                    const satelliteName = satelliteElements[i].getElementsByTagName("OBJECT_NAME")[0].textContent;
+                    const tleLine1 = satelliteElements[i].getElementsByTagName("TLE_LINE1")[0].textContent;
+                    const tleLine2 = satelliteElements[i].getElementsByTagName("TLE_LINE2")[0].textContent;
+                    const option = document.createElement("option");
+                    option.value = JSON.stringify({tleLine1, tleLine2});
+                    option.textContent = satelliteName;
+                    select.appendChild(option);
+                }
+            });
+    }
+
+    function predictNextPass() {
+        const lat = parseFloat(document.getElementById("latitude").value);
+        const lon = parseFloat(document.getElementById("longitude").value);
+        const alt = parseFloat(document.getElementById("altitude").value);
+        const selectedSatellite = JSON.parse(document.getElementById("satelliteSelect").value);
+
+        const tleLine1 = selectedSatellite.tleLine1;
+        const tleLine2 = selectedSatellite.tleLine2;
+
+        const satrec = satellite.twoline2satrec(tleLine1, tleLine2);
+
+        const observerGd = {
+            longitude: satellite.degreesToRadians(lon),
+            latitude: satellite.degreesToRadians(lat),
+            height: alt / 1000
+        };
+
+        const date = new Date();
+        const time = (date.getTime() + date.getTimezoneOffset() * 60000) / 1000.0;
+        const gmst = satellite.gstime(new Date());
+
+        let passes = satellite.propagate(satrec, time);
+        let positionAndVelocity = satellite.eciToGeodetic(passes.position, gmst);
+        let lookAngles = satellite.ecfToLookAngles(observerGd, positionAndVelocity.position);
+
+        const azimuth = satellite.degreesLat(lookAngles.azimuth);
+        const elevation = satellite.degreesLat(lookAngles.elevation);
+        const rangeSat = lookAngles.rangeSat;
+
+        const passTimes = [];
+        const elevations = [];
+
+        for (let i = 0; i < 10; i++) {
+            const time = new Date();
+            time.setMinutes(time.getMinutes() + i * 10);
+            passTimes.push(time);
+            elevations.push(elevation);
+        }
+
+        const ctx = document.getElementById('passChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: passTimes,
+                datasets: [{
+                    label: 'Elevation (degrees)',
+                    data: elevations,
+                    fill: false,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'minute'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        document.getElementById("prediction").innerText = `Next pass prediction for selected satellite:
+        - Azimuth: ${azimuth.toFixed(2)}°
+        - Elevation: ${elevation.toFixed(2)}°
+        - Range: ${rangeSat.toFixed(2)} km`;
+    }
+
+    loadTLEData();
+</script>
+</body>
+</html>
