@@ -132,7 +132,7 @@ function nextRound() {
     }
 
     round++;
-    document.getElementById('round').innerText = `Round: ${round}`;
+    document.getElementById('round').innerText = `Round ${round}`;
     currentLetter = getRandomLetter();
 
     const correctWord = (currentMode === 'nato' ? phoneticAlphabetNATO : currentMode === 'raf' ? phoneticAlphabetRAF : currentLetter)[currentLetter];
