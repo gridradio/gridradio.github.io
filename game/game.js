@@ -119,6 +119,7 @@ function startGame(mode) {
     document.getElementById('breakdown-container').innerHTML = '';
     document.getElementById('start-container').style.display = 'none';
     document.getElementById('game-container').style.display = 'block';
+    document.getElementById('flashcard-container').style.display = 'none';
     document.getElementById('timer').style.display = 'block';
     document.getElementById('round').style.display = 'block';
     stopConfetti();
@@ -301,12 +302,39 @@ function stopConfetti() {
 function showStartOptions() {
     document.getElementById('start-container').style.display = 'block';
     document.getElementById('game-container').style.display = 'none';
+    document.getElementById('flashcard-container').style.display = 'none';
     document.getElementById('timer').style.display = 'none';
     document.getElementById('round').style.display = 'none';
     document.getElementById('score-container').innerText = '';
     document.getElementById('feedback').innerText = '';
     document.getElementById('play-again').style.display = 'none';
     document.getElementById('breakdown-container').innerHTML = '';
+}
+
+// Flashcard Mode
+let flashcardLetters = [];
+let flashcardIndex = 0;
+
+function startFlashcards(mode) {
+    currentMode = mode;
+    flashcardLetters = Object.keys(mode === 'nato' ? phoneticAlphabetNATO : morseCodeAlphabet);
+    flashcardIndex = 0;
+    document.getElementById('start-container').style.display = 'none';
+    document.getElementById('game-container').style.display = 'none';
+    document.getElementById('flashcard-container').style.display = 'flex';
+    showFlashcard();
+}
+
+function showFlashcard() {
+    const letter = flashcardLetters[flashcardIndex];
+    const displayText = currentMode === 'nato' ? phoneticAlphabetNATO[letter] : morseCodeAlphabet[letter];
+    document.getElementById('flashcard').innerText = letter;
+    document.getElementById('flashcard-code').innerText = displayText;
+}
+
+function nextFlashcard() {
+    flashcardIndex = (flashcardIndex + 1) % flashcardLetters.length;
+    showFlashcard();
 }
 
 // Ensure the game does not start automatically
