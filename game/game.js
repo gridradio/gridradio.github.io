@@ -149,7 +149,6 @@ function startGame(mode) {
     document.getElementById('start-container').style.display = 'none';
     document.getElementById('game-container').style.display = 'block';
     document.getElementById('flashcard-container').style.display = 'none';
-    document.getElementById('quiz-container').style.display = 'none';
     document.getElementById('quiz-question').style.display = 'none';
     document.getElementById('timer').style.display = 'block';
     document.getElementById('round').style.display = 'block';
@@ -166,6 +165,7 @@ function nextRound() {
     round++;
     document.getElementById('round').innerText = `Round ${round}`;
     if (currentMode === 'quiz') {
+        document.getElementById('quiz-question').style.display = 'block';
         if (quizIndices.length === 0) {
             quizIndices = Array.from({ length: quizQuestions.length }, (_, i) => i);
             quizIndices = quizIndices.sort(() => Math.random() - 0.5).slice(0, 10);
@@ -353,7 +353,6 @@ function showStartOptions() {
     document.getElementById('start-container').style.display = 'block';
     document.getElementById('game-container').style.display = 'none';
     document.getElementById('flashcard-container').style.display = 'none';
-    document.getElementById('quiz-container').style.display = 'none';
     document.getElementById('quiz-question').style.display = 'none';
     document.getElementById('timer').style.display = 'none';
     document.getElementById('round').style.display = 'none';
@@ -411,9 +410,8 @@ function startQuiz() {
     document.getElementById('play-again').style.display = 'none';
     document.getElementById('breakdown-container').innerHTML = '';
     document.getElementById('start-container').style.display = 'none';
-    document.getElementById('game-container').style.display = 'none';
+    document.getElementById('game-container').style.display = 'block';
     document.getElementById('flashcard-container').style.display = 'none';
-    document.getElementById('quiz-container').style.display = 'block';
     document.getElementById('quiz-question').style.display = 'block';
     document.getElementById('timer').style.display = 'block';
     document.getElementById('round').style.display = 'block';
