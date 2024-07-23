@@ -88,6 +88,21 @@
             height: 100%;
             pointer-events: none;
         }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+        }
+        table, th, td {
+            border: 1px solid #333;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f0f8ff;
+        }
     </style>
 </head>
 <body>
@@ -107,6 +122,7 @@
     <div id="score-container"></div>
     <div id="feedback"></div>
     <button id="play-again" style="display:none;" onclick="showStartOptions()">Play Again</button>
+    <div id="breakdown-container"></div>
     <canvas id="confetti-canvas"></canvas>
 
     <script src="game.js"></script>
