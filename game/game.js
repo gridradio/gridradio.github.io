@@ -27,6 +27,7 @@ let score = 0;
 let round = 0;
 let timer;
 let timeLeft;
+let confettiAnimationFrame;
 
 function getRandomLetter() {
     const letters = Object.keys(phoneticAlphabet);
@@ -76,6 +77,8 @@ function startGame() {
     document.getElementById('start-container').style.display = 'none';
     document.getElementById('game-container').style.display = 'block';
     document.getElementById('timer').style.display = 'block';
+    document.getElementById('round').style.display = 'block';
+    stopConfetti();
     nextRound();
 }
 
@@ -86,6 +89,7 @@ function nextRound() {
     }
 
     round++;
+    document.getElementById('round').innerText = `Round: ${round}`;
     currentLetter = getRandomLetter();
     const correctWord = phoneticAlphabet[currentLetter];
     const options = generateOptions(correctWord, currentLetter);
@@ -114,6 +118,7 @@ function endGame() {
     document.getElementById('letter-display').innerText = '';
     document.getElementById('options-container').innerHTML = '';
     document.getElementById('timer').style.display = 'none';
+    document.getElementById('round').style.display = 'none';
 
     const feedback = document.getElementById('feedback');
     if (score === 10) {
@@ -159,10 +164,24 @@ function startConfetti() {
                 piece.x = Math.random() * canvas.width;
             }
         });
-        requestAnimationFrame(drawConfetti);
+        confettiAnimationFrame = requestAnimationFrame(drawConfetti);
     }
 
     drawConfetti();
 }
 
-startGame();
+function stopConfetti() {
+    cancelAnimationFrame(confettiAnimationFrame);
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+// Ensure the game does not start automatically
+document.getElementById('start-container').style.display = 'block';
+document.getElementById('game-container').style.display = 'none';
+document.getElementById('timer').style.display = 'none';
+document.getElementById('round').style.display = 'none';
+document.getElementById('score-container').innerText = '';
+document.getElementById('feedback').innerText = '';
+document.getElementById('play-again').style.display = 'none';
