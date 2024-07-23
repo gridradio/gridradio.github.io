@@ -226,7 +226,7 @@ function playMorseCode(morseCode) {
 }
 
 function repeatMorseCode() {
-    playMorseCode(morseCodeAlphabet[currentLetter]);
+    playMorseCode(morseCodeAlphabet[flashcardLetters[flashcardIndex]]);
 }
 
 function endGame() {
