@@ -59,7 +59,7 @@
             top: 20px;
             left: 20px;
         }
-        #play-again, #start-button {
+        #play-again, .start-button {
             padding: 10px 20px;
             font-size: 1.5em;
             cursor: pointer;
@@ -67,8 +67,9 @@
             background-color: #6200ea;
             color: white;
             border-radius: 10px;
+            margin: 10px;
         }
-        #play-again:hover, #start-button:hover {
+        #play-again:hover, .start-button:hover {
             background-color: #3700b3;
         }
         #letter-display {
@@ -92,7 +93,8 @@
 <body>
     <div id="start-container">
         <h1>NATO Phonetic Alphabet Game</h1>
-        <button id="start-button" onclick="startGame()">Start</button>
+        <button class="start-button" onclick="startGame('nato')">Start NATO Mode</button>
+        <button class="start-button" onclick="startGame('raf')">Start 1940s Expert Mode</button>
     </div>
     <div id="game-container" style="display:none;">
         <div id="letter-display"></div>
@@ -103,7 +105,7 @@
     <div id="round" style="display:none;">Round: 1</div>
     <div id="score-container"></div>
     <div id="feedback"></div>
-    <button id="play-again" style="display:none;" onclick="startGame()">Play Again</button>
+    <button id="play-again" style="display:none;" onclick="startGame(currentMode)">Play Again</button>
     <canvas id="confetti-canvas"></canvas>
 
     <script src="game.js"></script>
