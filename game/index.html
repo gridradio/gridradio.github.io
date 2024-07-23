@@ -62,7 +62,7 @@
             top: 20px;
             left: 20px;
         }
-        #play-again, .start-button, .flashcard-button, .repeat-button {
+        #play-again, .start-button, .flashcard-button, .repeat-button, .back-button, .menu-button {
             padding: 10px 20px;
             font-size: 1.5em;
             cursor: pointer;
@@ -72,7 +72,7 @@
             border-radius: 10px;
             margin: 10px;
         }
-        #play-again:hover, .start-button:hover, .flashcard-button:hover, .repeat-button:hover {
+        #play-again:hover, .start-button:hover, .flashcard-button:hover, .repeat-button:hover, .back-button:hover, .menu-button:hover {
             background-color: #3700b3;
         }
         #letter-display {
@@ -124,10 +124,15 @@
         #flashcard {
             font-size: 8em;
             margin: 20px;
-            padding: 20px;
+            padding: 40px 60px;
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         #flashcard-code {
             font-size: 2em;
@@ -161,9 +166,10 @@
     <div id="flashcard-container">
         <div id="flashcard"></div>
         <div id="flashcard-code"></div>
+        <button class="flashcard-button back-button" onclick="previousFlashcard()">Back</button>
         <button class="flashcard-button" onclick="nextFlashcard()">Next</button>
-        <button class="repeat-button" onclick="repeatMorseCode()">Repeat Morse Code</button>
-        <button class="flashcard-button" onclick="showStartOptions()">Back</button>
+        <button class="repeat-button" style="display:none;" onclick="repeatMorseCode()">Repeat Morse Code</button>
+        <button class="menu-button" onclick="showStartOptions()">Menu</button>
     </div>
     <div id="timer" style="display:none;">10</div>
     <div id="round" style="display:none;">Round 1</div>
