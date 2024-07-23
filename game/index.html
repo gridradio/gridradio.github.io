@@ -122,7 +122,7 @@
             align-items: center;
         }
         #flashcard {
-            font-size: 8em;
+            font-size: 3em;
             margin: 20px;
             padding: 40px 60px;
             background-color: white;
@@ -135,8 +135,13 @@
             justify-content: center;
         }
         #flashcard-code {
-            font-size: 2em;
+            font-size: 1.5em;
             margin-top: 10px;
+        }
+        .flashcard-nav {
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
         }
     </style>
 </head>
@@ -166,8 +171,10 @@
     <div id="flashcard-container">
         <div id="flashcard"></div>
         <div id="flashcard-code"></div>
-        <button class="flashcard-button back-button" onclick="previousFlashcard()">Back</button>
-        <button class="flashcard-button" onclick="nextFlashcard()">Next</button>
+        <div class="flashcard-nav">
+            <button class="flashcard-button back-button" onclick="previousFlashcard()">Back</button>
+            <button class="flashcard-button" onclick="nextFlashcard()">Next</button>
+        </div>
         <button class="repeat-button" style="display:none;" onclick="repeatMorseCode()">Repeat Morse Code</button>
         <button class="menu-button" onclick="showStartOptions()">Menu</button>
     </div>
