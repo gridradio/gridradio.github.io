@@ -192,7 +192,7 @@ function renderOptions(options, correctWord) {
         optionElement.innerText = option;
         optionElement.onclick = () => {
             clearInterval(timer);
-            const result = { question: currentLetter, chosen: option, correctAnswer: currentMode === 'morse' ? currentLetter : correctWord, correct: false };
+            const result = { question: currentMode === 'quiz' ? quizQuestions[round - 1].question : currentLetter, chosen: option, correctAnswer: currentMode === 'morse' ? currentLetter : correctWord, correct: false };
             if (currentMode === 'morse' ? option === currentLetter : option === correctWord) {
                 score++;
                 result.correct = true;
@@ -286,7 +286,7 @@ function displayBreakdown() {
         </tr>`;
     results.forEach(result => {
         breakdownHTML += `<tr>
-            <td>${currentMode === 'morse' ? morseCodeAlphabet[result.question] : result.question}</td>
+            <td>${result.question}</td>
             <td>${result.chosen}</td>
             <td>${result.correct ? result.chosen : result.correctAnswer}</td>
             <td>${result.correct ? '✅' : '❌'}</td>
