@@ -19,7 +19,9 @@ const morseCodeAlphabet = {
     G: '--.', H: '....', I: '..', J: '.---', K: '-.-', L: '.-..', 
     M: '--', N: '-.', O: '---', P: '.--.', Q: '--.-', R: '.-.', 
     S: '...', T: '-', U: '..-', V: '...-', W: '.--', 
-    X: '-..-', Y: '-.--', Z: '--..'
+    X: '-..-', Y: '-.--', Z: '--..',
+    0: '-----', 1: '.----', 2: '..---', 3: '...--', 4: '....-', 
+    5: '.....', 6: '-....', 7: '--...', 8: '---..', 9: '----.'
 };
 
 const dictionary = {
@@ -134,7 +136,7 @@ function nextRound() {
     let options;
 
     if (currentMode === 'morse') {
-        options = generateMorseOptions(correctWord, currentLetter);
+        options = generateMorseOptions(currentLetter);
         document.getElementById('letter-display').innerText = morseCodeAlphabet[currentLetter];
         document.getElementById('morse-code').innerText = '';
         playMorseCode(morseCodeAlphabet[currentLetter]);
@@ -163,7 +165,7 @@ function nextRound() {
     startTimer();
 }
 
-function generateMorseOptions(correctWord, letter) {
+function generateMorseOptions(letter) {
     const letters = Object.keys(morseCodeAlphabet).filter(l => l !== letter);
     let options = [letter];
 
