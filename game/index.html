@@ -62,7 +62,7 @@
             top: 20px;
             left: 20px;
         }
-        #play-again, .start-button, .flashcard-button {
+        #play-again, .start-button, .flashcard-button, .repeat-button {
             padding: 10px 20px;
             font-size: 1.5em;
             cursor: pointer;
@@ -72,7 +72,7 @@
             border-radius: 10px;
             margin: 10px;
         }
-        #play-again:hover, .start-button:hover, .flashcard-button:hover {
+        #play-again:hover, .start-button:hover, .flashcard-button:hover, .repeat-button:hover {
             background-color: #3700b3;
         }
         #letter-display {
@@ -124,6 +124,10 @@
         #flashcard {
             font-size: 8em;
             margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         #flashcard-code {
             font-size: 2em;
@@ -138,6 +142,11 @@
             <img src="https://grid.radio/game/g0raf.png" alt="Logo">
         </div>
         <h1>Phonetic Alphabet and Morse Code Game</h1>
+        <label for="difficulty">Select Mode:</label>
+        <select id="difficulty">
+            <option value="normal">Normal</option>
+            <option value="easy">Easy</option>
+        </select>
         <button class="start-button" onclick="startGame('nato')">Start NATO Mode</button>
         <button class="start-button" onclick="startGame('raf')">Start 1940s Expert Mode</button>
         <button class="start-button" onclick="startGame('morse')">Start Morse Code Mode</button>
@@ -153,6 +162,7 @@
         <div id="flashcard"></div>
         <div id="flashcard-code"></div>
         <button class="flashcard-button" onclick="nextFlashcard()">Next</button>
+        <button class="repeat-button" onclick="repeatMorseCode()">Repeat Morse Code</button>
         <button class="flashcard-button" onclick="showStartOptions()">Back</button>
     </div>
     <div id="timer" style="display:none;">10</div>
