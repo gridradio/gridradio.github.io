@@ -436,6 +436,7 @@
     <script src="/easy-button.js"></script>
     <script src="/L.KML.js"></script>
     <script src="/jszip.min.js"></script>
+    <script src="/proj4.js"></script>
     <script>
         // Redirect to HTTPS if not already using HTTPS
         if (location.protocol !== 'https:') {
@@ -449,63 +450,16 @@
         let currentLat = null; // Global variable for latitude
         let currentLon = null; // Global variable for longitude
 
-        function degToRad(deg) {
-            return deg * Math.PI / 180;
-        }
+        proj4.defs([
+            ['EPSG:27700', '+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs'],
+            ['EPSG:4326', '+proj=longlat +datum=WGS84 +no_defs']
+        ]);
 
         function latLonToOSGB(lat, lon) {
             if (lat < 49.0 || lat > 61.0 || lon < -8.0 || lon > 2.0) {
                 return null;
             }
-
-            const a = 6377563.396;
-            const b = 6356256.909;
-            const F0 = 0.9996012717;
-            const lat0 = 49 * Math.PI / 180;
-            const lon0 = -2 * Math.PI / 180;
-            const N0 = -100000;
-            const E0 = 400000;
-            const e2 = 1 - (b * b) / (a * a);
-            const n = (a - b) / (a + b);
-            const n2 = n * n;
-            const n3 = n * n * n;
-
-            const phi = degToRad(lat);
-            const lambda = degToRad(lon);
-
-            const sinPhi = Math.sin(phi);
-            const cosPhi = Math.cos(phi);
-            const tanPhi = Math.tan(phi);
-
-            const nu = a * F0 / Math.sqrt(1 - e2 * sinPhi * sinPhi);
-            const rho = a * F0 * (1 - e2) / Math.pow(1 - e2 * sinPhi * sinPhi, 1.5);
-            const eta2 = nu / rho - 1;
-
-            const M = b * F0 * (
-                (1 + n + (5 / 4) * (n2 + n3)) * (phi - lat0)
-                - (3 * (n + n2 + (7 / 8) * n3)) * Math.sin(phi - lat0) * Math.cos(phi + lat0)
-                + (15 / 8) * (n2 + n3) * Math.sin(2 * (phi - lat0)) * Math.cos(2 * (phi + lat0))
-                - (35 / 24) * n3 * Math.sin(3 * (phi - lat0)) * Math.cos(3 * (phi + lat0))
-            );
-
-            const I = M + N0;
-            const II = (nu / 2) * sinPhi * cosPhi;
-            const III = (nu / 24) * sinPhi * cosPhi * cosPhi * cosPhi * (5 - tanPhi * tanPhi + 9 * eta2);
-            const IIIA = (nu / 720) * sinPhi * cosPhi * cosPhi * cosPhi * cosPhi * cosPhi * (61 - 58 * tanPhi * tanPhi + tanPhi * tanPhi * tanPhi * tanPhi);
-            const IV = nu * cosPhi;
-            const V = (nu / 6) * cosPhi * cosPhi * cosPhi * (nu / rho - tanPhi * tanPhi);
-            const VI = (nu / 120) * cosPhi * cosPhi * cosPhi * cosPhi * cosPhi * (5 - 18 * tanPhi * tanPhi + tanPhi * tanPhi * tanPhi * tanPhi + 14 * eta2 - 58 * tanPhi * tanPhi * eta2);
-
-            const deltaLambda = lambda - lon0;
-            const deltaLambda2 = deltaLambda * deltaLambda;
-            const deltaLambda3 = deltaLambda2 * deltaLambda;
-            const deltaLambda4 = deltaLambda3 * deltaLambda;
-            const deltaLambda5 = deltaLambda4 * deltaLambda;
-            const deltaLambda6 = deltaLambda5 * deltaLambda;
-
-            const northing = I + II * deltaLambda2 + III * deltaLambda4 + IIIA * deltaLambda6;
-            const easting = E0 + IV * deltaLambda + V * deltaLambda3 + VI * deltaLambda5;
-
+            const [easting, northing] = proj4('EPSG:4326', 'EPSG:27700', [lon, lat]);
             return { easting: easting, northing: northing };
         }
 
