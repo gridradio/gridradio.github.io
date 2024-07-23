@@ -151,7 +151,7 @@ function nextRound() {
         optionElement.innerText = option;
         optionElement.onclick = () => {
             clearInterval(timer);
-            if (option === correctWord) {
+            if (currentMode === 'morse' ? option === currentLetter : option === correctWord) {
                 score++;
             }
             nextRound();
