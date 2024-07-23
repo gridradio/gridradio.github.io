@@ -269,6 +269,7 @@ function endGame() {
     document.getElementById('options-container').innerHTML = '';
     document.getElementById('timer').style.display = 'none';
     document.getElementById('round').style.display = 'none';
+    document.getElementById('quiz-question').style.display = 'none'; // Hide quiz question on results screen
 
     const feedback = document.getElementById('feedback');
     if (score === 10) {
