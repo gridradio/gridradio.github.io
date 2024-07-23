@@ -150,6 +150,7 @@ function startGame(mode) {
     document.getElementById('game-container').style.display = 'block';
     document.getElementById('flashcard-container').style.display = 'none';
     document.getElementById('quiz-container').style.display = 'none';
+    document.getElementById('quiz-question').style.display = 'none';
     document.getElementById('timer').style.display = 'block';
     document.getElementById('round').style.display = 'block';
     stopConfetti();
@@ -171,6 +172,7 @@ function nextRound() {
         }
         showQuizQuestion();
     } else {
+        document.getElementById('quiz-question').style.display = 'none';
         currentLetter = getRandomLetter();
         const correctWord = (currentMode === 'nato' ? phoneticAlphabetNATO : currentMode === 'raf' ? phoneticAlphabetRAF : currentLetter)[currentLetter];
         let options;
@@ -352,6 +354,7 @@ function showStartOptions() {
     document.getElementById('game-container').style.display = 'none';
     document.getElementById('flashcard-container').style.display = 'none';
     document.getElementById('quiz-container').style.display = 'none';
+    document.getElementById('quiz-question').style.display = 'none';
     document.getElementById('timer').style.display = 'none';
     document.getElementById('round').style.display = 'none';
     document.getElementById('score-container').innerText = '';
@@ -408,9 +411,10 @@ function startQuiz() {
     document.getElementById('play-again').style.display = 'none';
     document.getElementById('breakdown-container').innerHTML = '';
     document.getElementById('start-container').style.display = 'none';
-    document.getElementById('game-container').style.display = 'block';
+    document.getElementById('game-container').style.display = 'none';
     document.getElementById('flashcard-container').style.display = 'none';
-    document.getElementById('quiz-container').style.display = 'none';
+    document.getElementById('quiz-container').style.display = 'block';
+    document.getElementById('quiz-question').style.display = 'block';
     document.getElementById('timer').style.display = 'block';
     document.getElementById('round').style.display = 'block';
     stopConfetti();
