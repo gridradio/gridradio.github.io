@@ -61,7 +61,7 @@ let usedLetters = [];
 let currentMode = 'nato';
 
 function getRandomLetter() {
-    const letters = Object.keys(currentMode === 'nato' ? phoneticAlphabetNATO : phoneticAlphabetRAF);
+    const letters = Object.keys(currentMode === 'nato' ? phoneticAlphabetNATO : currentMode === 'raf' ? phoneticAlphabetRAF : morseCodeAlphabet);
     let letter;
     do {
         letter = letters[Math.floor(Math.random() * letters.length)];
@@ -129,11 +129,20 @@ function nextRound() {
     round++;
     document.getElementById('round').innerText = `Round: ${round}`;
     currentLetter = getRandomLetter();
-    const correctWord = (currentMode === 'nato' ? phoneticAlphabetNATO : phoneticAlphabetRAF)[currentLetter];
-    const options = generateOptions(correctWord, currentLetter);
 
-    document.getElementById('letter-display').innerText = currentLetter;
-    document.getElementById('morse-code').innerText = morseCodeAlphabet[currentLetter];
+    const correctWord = (currentMode === 'nato' ? phoneticAlphabetNATO : currentMode === 'raf' ? phoneticAlphabetRAF : currentLetter)[currentLetter];
+    let options;
+
+    if (currentMode === 'morse') {
+        options = generateMorseOptions(correctWord, currentLetter);
+        document.getElementById('letter-display').innerText = morseCodeAlphabet[currentLetter];
+        document.getElementById('morse-code').innerText = '';
+    } else {
+        options = generateOptions(correctWord, currentLetter);
+        document.getElementById('letter-display').innerText = currentLetter;
+        document.getElementById('morse-code').innerText = morseCodeAlphabet[currentLetter];
+    }
+
     const optionsContainer = document.getElementById('options-container');
     optionsContainer.innerHTML = '';
     options.forEach(option => {
@@ -151,6 +160,20 @@ function nextRound() {
     });
 
     startTimer();
+}
+
+function generateMorseOptions(correctWord, letter) {
+    const letters = Object.keys(morseCodeAlphabet).filter(l => l !== letter);
+    let options = [letter];
+
+    while (options.length < 3) {
+        const randomLetter = letters[Math.floor(Math.random() * letters.length)];
+        if (!options.includes(randomLetter)) {
+            options.push(randomLetter);
+        }
+    }
+
+    return options.sort(() => Math.random() - 0.5);
 }
 
 function endGame() {
@@ -217,11 +240,15 @@ function stopConfetti() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
+function showStartOptions() {
+    document.getElementById('start-container').style.display = 'block';
+    document.getElementById('game-container').style.display = 'none';
+    document.getElementById('timer').style.display = 'none';
+    document.getElementById('round').style.display = 'none';
+    document.getElementById('score-container').innerText = '';
+    document.getElementById('feedback').innerText = '';
+    document.getElementById('play-again').style.display = 'none';
+}
+
 // Ensure the game does not start automatically
-document.getElementById('start-container').style.display = 'block';
-document.getElementById('game-container').style.display = 'none';
-document.getElementById('timer').style.display = 'none';
-document.getElementById('round').style.display = 'none';
-document.getElementById('score-container').innerText = '';
-document.getElementById('feedback').innerText = '';
-document.getElementById('play-again').style.display = 'none';
+showStartOptions();
