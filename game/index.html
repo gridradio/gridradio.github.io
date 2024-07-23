@@ -168,13 +168,14 @@
         <button class="start-button" onclick="startGame('nato')">Start NATO Mode</button>
         <button class="start-button" onclick="startGame('raf')">Start 1940s Expert Mode</button>
         <button class="start-button" onclick="startGame('morse')">Start Morse Code Mode</button>
+        <button class="quiz-button" onclick="startQuiz()">Start Quiz Mode</button>
         <button class="flashcard-button" onclick="startFlashcards('nato')">NATO Alphabet Flashcards</button>
         <button class="flashcard-button" onclick="startFlashcards('morse')">Morse Code Flashcards</button>
-        <button class="quiz-button" onclick="startQuiz()">Start Quiz Mode</button>
     </div>
     <div id="game-container" style="display:none;">
         <div id="letter-display"></div>
         <div id="morse-code"></div>
+        <div id="quiz-question"></div>
         <div id="options-container"></div>
     </div>
     <div id="flashcard-container">
@@ -188,10 +189,6 @@
         </div>
         <button class="repeat-button" style="display:none;" onclick="repeatMorseCode()">Repeat Morse Code</button>
         <button class="menu-button" onclick="showStartOptions()">Menu</button>
-    </div>
-    <div id="quiz-container" style="display:none;">
-        <div id="quiz-question"></div>
-        <div id="options-container"></div>
     </div>
     <div id="timer" style="display:none;">10</div>
     <div id="round" style="display:none;">Round 1</div>
