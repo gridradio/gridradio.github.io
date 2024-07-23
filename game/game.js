@@ -53,6 +53,19 @@ const dictionary = {
     Z: ['Zebra', 'Zoo', 'Zero', 'Zip', 'Zinc', 'Zephyr', 'Zipper', 'Zombie']
 };
 
+const quizQuestions = [
+    { question: "What was a type of Bomber in WW2?", correct: "Lancaster", wrong1: "Vulcan", wrong2: "Nimrod" },
+    { question: "How many crew members did Lancaster's have?", correct: "7", wrong1: "6", wrong2: "8" },
+    { question: "What job really existed in a WW2 Bomber?", correct: "Bomb aimer", wrong1: "Bomb dropper", wrong2: "Bomb controller" },
+    { question: "What is the job that did not exist in a Lancaster?", correct: "Co-Pilot", wrong1: "Flight engineer", wrong2: "Wireless Operator" },
+    { question: "How many Lancasters are there that can still fly?", correct: "2", wrong1: "1", wrong2: "3" },
+    { question: "Which one of these was not a WW2 Bomber?", correct: "Spitfire", wrong1: "Wellington", wrong2: "Swordfish" },
+    { question: "What is 617 Squadron famous for?", correct: "Dams raid", wrong1: "Berlin raid", wrong2: "Frankfurt raid" },
+    { question: "When did the IBCC open?", correct: "2018", wrong1: "1978", wrong2: "1948" },
+    { question: "How many names are on the memorial walls?", correct: "58000", wrong1: "580", wrong2: "5800" },
+    { question: "What is Lincolnshire called?", correct: "Bomber County", wrong1: "Fighter County", wrong2: "RAF County" }
+];
+
 let currentLetter = '';
 let score = 0;
 let round = 0;
@@ -62,6 +75,7 @@ let confettiAnimationFrame;
 let usedLetters = [];
 let currentMode = 'nato';
 let gameDifficulty = 'normal';
+let currentQuizIndex = 0;
 const results = [];
 
 function getRandomLetter() {
@@ -132,6 +146,7 @@ function startGame(mode) {
     document.getElementById('start-container').style.display = 'none';
     document.getElementById('game-container').style.display = 'block';
     document.getElementById('flashcard-container').style.display = 'none';
+    document.getElementById('quiz-container').style.display = 'none';
     document.getElementById('timer').style.display = 'block';
     document.getElementById('round').style.display = 'block';
     stopConfetti();
@@ -321,6 +336,7 @@ function showStartOptions() {
     document.getElementById('start-container').style.display = 'block';
     document.getElementById('game-container').style.display = 'none';
     document.getElementById('flashcard-container').style.display = 'none';
+    document.getElementById('quiz-container').style.display = 'none';
     document.getElementById('timer').style.display = 'none';
     document.getElementById('round').style.display = 'none';
     document.getElementById('score-container').innerText = '';
@@ -362,6 +378,96 @@ function nextFlashcard() {
 function previousFlashcard() {
     flashcardIndex = (flashcardIndex - 1 + flashcardLetters.length) % flashcardLetters.length;
     showFlashcard();
+}
+
+// Quiz Mode
+function startQuiz() {
+    score = 0;
+    currentQuizIndex = 0;
+    results.length = 0;
+    document.getElementById('score-container').innerText = '';
+    document.getElementById('feedback').innerText = '';
+    document.getElementById('play-again').style.display = 'none';
+    document.getElementById('breakdown-container').innerHTML = '';
+    document.getElementById('start-container').style.display = 'none';
+    document.getElementById('game-container').style.display = 'none';
+    document.getElementById('flashcard-container').style.display = 'none';
+    document.getElementById('quiz-container').style.display = 'block';
+    stopConfetti();
+    showQuizQuestion();
+}
+
+function showQuizQuestion() {
+    if (currentQuizIndex >= quizQuestions.length) {
+        endQuiz();
+        return;
+    }
+
+    const quizQuestion = quizQuestions[currentQuizIndex];
+    document.getElementById('quiz-question').innerText = quizQuestion.question;
+
+    const options = [quizQuestion.correct, quizQuestion.wrong1, quizQuestion.wrong2].sort(() => Math.random() - 0.5);
+    const optionsContainer = document.getElementById('options-container');
+    optionsContainer.innerHTML = '';
+
+    options.forEach(option => {
+        const optionElement = document.createElement('button');
+        optionElement.className = 'option';
+        optionElement.innerText = option;
+        optionElement.onclick = () => {
+            const result = { question: quizQuestion.question, chosen: option, correctAnswer: quizQuestion.correct, correct: false };
+            if (option === quizQuestion.correct) {
+                score++;
+                result.correct = true;
+            }
+            results.push(result);
+            currentQuizIndex++;
+            showQuizQuestion();
+        };
+        optionsContainer.appendChild(optionElement);
+    });
+}
+
+function endQuiz() {
+    document.getElementById('quiz-question').innerText = '';
+    document.getElementById('options-container').innerHTML = '';
+
+    const feedback = document.getElementById('feedback');
+    if (score === quizQuestions.length) {
+        feedback.innerText = "Perfect! You got 10/10!";
+        startConfetti();
+    } else if (score >= 7) {
+        feedback.innerText = `Great job! You got ${score}/10.`;
+    } else if (score >= 4) {
+        feedback.innerText = `Not bad! You got ${score}/10.`;
+    } else {
+        feedback.innerText = `Better luck next time! You got ${score}/10.`;
+    }
+
+    document.getElementById('score-container').innerText = `Your score: ${score} / ${quizQuestions.length}`;
+    document.getElementById('play-again').style.display = 'block';
+    displayQuizBreakdown();
+}
+
+function displayQuizBreakdown() {
+    const breakdownContainer = document.getElementById('breakdown-container');
+    let breakdownHTML = `<table>
+        <tr>
+            <th>Question</th>
+            <th>Chosen Option</th>
+            <th>Correct Answer</th>
+            <th>Result</th>
+        </tr>`;
+    results.forEach(result => {
+        breakdownHTML += `<tr>
+            <td>${result.question}</td>
+            <td>${result.chosen}</td>
+            <td>${result.correct ? result.chosen : result.correctAnswer}</td>
+            <td>${result.correct ? '✅' : '❌'}</td>
+        </tr>`;
+    });
+    breakdownHTML += '</table>';
+    breakdownContainer.innerHTML = breakdownHTML;
 }
 
 // Ensure the game does not start automatically
