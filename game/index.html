@@ -122,7 +122,7 @@
             align-items: center;
         }
         #flashcard {
-            font-size: 3em;
+            font-size: 6em;
             margin: 20px;
             padding: 40px 60px;
             background-color: white;
@@ -133,15 +133,19 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
         }
         #flashcard-code {
-            font-size: 1.5em;
-            margin-top: 10px;
+            font-size: 3em;
+            margin-top: 20px;
         }
         .flashcard-nav {
             display: flex;
             justify-content: space-between;
             width: 300px;
+        }
+        #difficulty-container {
+            margin: 20px 0;
         }
     </style>
 </head>
@@ -152,11 +156,13 @@
             <img src="https://grid.radio/game/g0raf.png" alt="Logo">
         </div>
         <h1>Phonetic Alphabet and Morse Code Game</h1>
-        <label for="difficulty">Select Mode:</label>
-        <select id="difficulty">
-            <option value="normal">Normal</option>
-            <option value="easy">Easy</option>
-        </select>
+        <div id="difficulty-container">
+            <label for="difficulty">Select Mode:</label>
+            <select id="difficulty">
+                <option value="normal">Normal</option>
+                <option value="easy">Easy</option>
+            </select>
+        </div>
         <button class="start-button" onclick="startGame('nato')">Start NATO Mode</button>
         <button class="start-button" onclick="startGame('raf')">Start 1940s Expert Mode</button>
         <button class="start-button" onclick="startGame('morse')">Start Morse Code Mode</button>
@@ -169,8 +175,10 @@
         <div id="options-container"></div>
     </div>
     <div id="flashcard-container">
-        <div id="flashcard"></div>
-        <div id="flashcard-code"></div>
+        <div id="flashcard">
+            <div id="flashcard-letter"></div>
+            <div id="flashcard-code"></div>
+        </div>
         <div class="flashcard-nav">
             <button class="flashcard-button back-button" onclick="previousFlashcard()">Back</button>
             <button class="flashcard-button" onclick="nextFlashcard()">Next</button>
