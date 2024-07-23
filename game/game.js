@@ -75,8 +75,8 @@ let confettiAnimationFrame;
 let usedLetters = [];
 let currentMode = 'nato';
 let gameDifficulty = 'normal';
-let currentQuizIndex = 0;
 const results = [];
+let currentQuizIndex = 0;
 
 function getRandomLetter() {
     const letters = Object.keys(currentMode === 'nato' ? phoneticAlphabetNATO : currentMode === 'raf' ? phoneticAlphabetRAF : morseCodeAlphabet);
@@ -171,12 +171,19 @@ function nextRound() {
         document.getElementById('letter-display').innerText = morseCodeAlphabet[currentLetter];
         document.getElementById('morse-code').innerText = '';
         playMorseCode(morseCodeAlphabet[currentLetter]);
+    } else if (currentMode === 'quiz') {
+        showQuizQuestion();
     } else {
         options = generateOptions(correctWord, currentLetter);
         document.getElementById('letter-display').innerText = currentLetter;
         document.getElementById('morse-code').innerText = morseCodeAlphabet[currentLetter];
+        renderOptions(options, correctWord);
     }
 
+    startTimer();
+}
+
+function renderOptions(options, correctWord) {
     const optionsContainer = document.getElementById('options-container');
     optionsContainer.innerHTML = '';
     options.forEach(option => {
@@ -195,8 +202,6 @@ function nextRound() {
         };
         optionsContainer.appendChild(optionElement);
     });
-
-    startTimer();
 }
 
 function generateMorseOptions(letter) {
@@ -383,91 +388,36 @@ function previousFlashcard() {
 // Quiz Mode
 function startQuiz() {
     score = 0;
-    currentQuizIndex = 0;
+    round = 0;
     results.length = 0;
+    currentMode = 'quiz';
+    gameDifficulty = document.getElementById('difficulty').value;
     document.getElementById('score-container').innerText = '';
     document.getElementById('feedback').innerText = '';
     document.getElementById('play-again').style.display = 'none';
     document.getElementById('breakdown-container').innerHTML = '';
     document.getElementById('start-container').style.display = 'none';
-    document.getElementById('game-container').style.display = 'none';
+    document.getElementById('game-container').style.display = 'block';
     document.getElementById('flashcard-container').style.display = 'none';
-    document.getElementById('quiz-container').style.display = 'block';
+    document.getElementById('quiz-container').style.display = 'none';
+    document.getElementById('timer').style.display = 'block';
+    document.getElementById('round').style.display = 'block';
     stopConfetti();
-    showQuizQuestion();
+    nextRound();
 }
 
 function showQuizQuestion() {
-    if (currentQuizIndex >= quizQuestions.length) {
-        endQuiz();
+    if (round >= quizQuestions.length) {
+        endGame();
         return;
     }
 
-    const quizQuestion = quizQuestions[currentQuizIndex];
+    const quizQuestion = quizQuestions[round];
+    document.getElementById('letter-display').innerText = '';
     document.getElementById('quiz-question').innerText = quizQuestion.question;
 
     const options = [quizQuestion.correct, quizQuestion.wrong1, quizQuestion.wrong2].sort(() => Math.random() - 0.5);
-    const optionsContainer = document.getElementById('options-container');
-    optionsContainer.innerHTML = '';
-
-    options.forEach(option => {
-        const optionElement = document.createElement('button');
-        optionElement.className = 'option';
-        optionElement.innerText = option;
-        optionElement.onclick = () => {
-            const result = { question: quizQuestion.question, chosen: option, correctAnswer: quizQuestion.correct, correct: false };
-            if (option === quizQuestion.correct) {
-                score++;
-                result.correct = true;
-            }
-            results.push(result);
-            currentQuizIndex++;
-            showQuizQuestion();
-        };
-        optionsContainer.appendChild(optionElement);
-    });
-}
-
-function endQuiz() {
-    document.getElementById('quiz-question').innerText = '';
-    document.getElementById('options-container').innerHTML = '';
-
-    const feedback = document.getElementById('feedback');
-    if (score === quizQuestions.length) {
-        feedback.innerText = "Perfect! You got 10/10!";
-        startConfetti();
-    } else if (score >= 7) {
-        feedback.innerText = `Great job! You got ${score}/10.`;
-    } else if (score >= 4) {
-        feedback.innerText = `Not bad! You got ${score}/10.`;
-    } else {
-        feedback.innerText = `Better luck next time! You got ${score}/10.`;
-    }
-
-    document.getElementById('score-container').innerText = `Your score: ${score} / ${quizQuestions.length}`;
-    document.getElementById('play-again').style.display = 'block';
-    displayQuizBreakdown();
-}
-
-function displayQuizBreakdown() {
-    const breakdownContainer = document.getElementById('breakdown-container');
-    let breakdownHTML = `<table>
-        <tr>
-            <th>Question</th>
-            <th>Chosen Option</th>
-            <th>Correct Answer</th>
-            <th>Result</th>
-        </tr>`;
-    results.forEach(result => {
-        breakdownHTML += `<tr>
-            <td>${result.question}</td>
-            <td>${result.chosen}</td>
-            <td>${result.correct ? result.chosen : result.correctAnswer}</td>
-            <td>${result.correct ? '✅' : '❌'}</td>
-        </tr>`;
-    });
-    breakdownHTML += '</table>';
-    breakdownContainer.innerHTML = breakdownHTML;
+    renderOptions(options, quizQuestion.correct);
 }
 
 // Ensure the game does not start automatically
