@@ -137,6 +137,7 @@ function nextRound() {
         options = generateMorseOptions(correctWord, currentLetter);
         document.getElementById('letter-display').innerText = morseCodeAlphabet[currentLetter];
         document.getElementById('morse-code').innerText = '';
+        playMorseCode(morseCodeAlphabet[currentLetter]);
     } else {
         options = generateOptions(correctWord, currentLetter);
         document.getElementById('letter-display').innerText = currentLetter;
@@ -174,6 +175,33 @@ function generateMorseOptions(correctWord, letter) {
     }
 
     return options.sort(() => Math.random() - 0.5);
+}
+
+function playMorseCode(morseCode) {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const dotDuration = 0.1; // Duration of a dot in seconds
+    const dashDuration = dotDuration * 3; // Duration of a dash in seconds
+    const gapDuration = dotDuration; // Gap between symbols in seconds
+
+    let currentTime = audioContext.currentTime;
+
+    morseCode.split('').forEach(symbol => {
+        const oscillator = audioContext.createOscillator();
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(700, currentTime);
+
+        if (symbol === '.') {
+            oscillator.start(currentTime);
+            oscillator.stop(currentTime + dotDuration);
+            currentTime += dotDuration + gapDuration;
+        } else if (symbol === '-') {
+            oscillator.start(currentTime);
+            oscillator.stop(currentTime + dashDuration);
+            currentTime += dashDuration + gapDuration;
+        }
+
+        oscillator.connect(audioContext.destination);
+    });
 }
 
 function endGame() {
