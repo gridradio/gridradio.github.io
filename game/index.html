@@ -20,7 +20,9 @@
             text-align: center;
         }
         .option {
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin: 30px;
             padding: 30px 80px;
             background-color: #6200ea;
@@ -32,6 +34,7 @@
             width: 250px;
             height: 100px;
             box-sizing: border-box;
+            text-align: center;
         }
         .option:hover {
             background-color: #3700b3;
@@ -103,7 +106,7 @@
         th {
             background-color: #f0f8ff;
         }
-        #logo {
+        #logo-container img {
             max-width: 200px;
             margin-bottom: 20px;
         }
@@ -111,7 +114,10 @@
 </head>
 <body>
     <div id="start-container">
-        <img id="logo" src="https://internationalbcc.co.uk/wp-content/themes/IBCC/assets/images/IBCC.svg" alt="Logo">
+        <div id="logo-container">
+            <img src="https://internationalbcc.co.uk/wp-content/themes/IBCC/assets/images/IBCC.svg" alt="Logo">
+            <img src="https://grid.radio/game/g0raf.png" alt="Logo">
+        </div>
         <h1>Phonetic Alphabet and Morse Code Game</h1>
         <button class="start-button" onclick="startGame('nato')">Start NATO Mode</button>
         <button class="start-button" onclick="startGame('raf')">Start 1940s Expert Mode</button>
@@ -123,7 +129,7 @@
         <div id="options-container"></div>
     </div>
     <div id="timer" style="display:none;">10</div>
-    <div id="round" style="display:none;">Round: 1</div>
+    <div id="round" style="display:none;">Round 1</div>
     <div id="score-container"></div>
     <div id="feedback"></div>
     <button id="play-again" style="display:none;" onclick="showStartOptions()">Play Again</button>
