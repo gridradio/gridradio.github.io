@@ -110,8 +110,8 @@ function startTimer() {
     timer = setInterval(() => {
         timeLeft--;
         timerElement.innerText = timeLeft;
-        if (gameDifficulty === 'easy' && timeLeft < 5 && currentMode !== 'morse') {
-            showHint();
+        if (gameDifficulty === 'easy' && timeLeft === 5 && currentMode !== 'morse') {
+            removeOneIncorrectOption();
         }
         if (timeLeft <= 3) {
             timerElement.style.color = 'red';
@@ -125,11 +125,14 @@ function startTimer() {
     }, 1000);
 }
 
-function showHint() {
-    const correctWord = currentMode === 'nato' ? phoneticAlphabetNATO[currentLetter] : phoneticAlphabetRAF[currentLetter];
-    const hintLength = 10 - timeLeft;
-    const hint = correctWord.slice(0, hintLength);
-    document.getElementById('morse-code').innerText = hint;
+function removeOneIncorrectOption() {
+    const optionsContainer = document.getElementById('options-container');
+    const buttons = Array.from(optionsContainer.getElementsByTagName('button'));
+    const incorrectButtons = buttons.filter(button => !button.classList.contains('correct'));
+    if (incorrectButtons.length > 0) {
+        const randomIndex = Math.floor(Math.random() * incorrectButtons.length);
+        optionsContainer.removeChild(incorrectButtons[randomIndex]);
+    }
 }
 
 function startGame(mode) {
@@ -194,6 +197,9 @@ function renderOptions(options, correctWord) {
         const optionElement = document.createElement('button');
         optionElement.className = 'option';
         optionElement.innerText = option;
+        if (option === correctWord) {
+            optionElement.classList.add('correct');
+        }
         optionElement.onclick = () => {
             clearInterval(timer);
             const result = { question: currentMode === 'quiz' ? quizQuestions[quizIndices[round - 1]].question : currentLetter, chosen: option, correctAnswer: currentMode === 'morse' ? currentLetter : correctWord, correct: false };
