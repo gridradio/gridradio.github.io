@@ -76,7 +76,7 @@ let usedLetters = [];
 let currentMode = 'nato';
 let gameDifficulty = 'normal';
 const results = [];
-let currentQuizIndex = 0;
+let quizIndices = [];
 
 function getRandomLetter() {
     const letters = Object.keys(currentMode === 'nato' ? phoneticAlphabetNATO : currentMode === 'raf' ? phoneticAlphabetRAF : morseCodeAlphabet);
@@ -161,22 +161,26 @@ function nextRound() {
 
     round++;
     document.getElementById('round').innerText = `Round ${round}`;
-    currentLetter = getRandomLetter();
-
-    const correctWord = (currentMode === 'nato' ? phoneticAlphabetNATO : currentMode === 'raf' ? phoneticAlphabetRAF : currentLetter)[currentLetter];
-    let options;
-
-    if (currentMode === 'morse') {
-        options = generateMorseOptions(currentLetter);
-        document.getElementById('letter-display').innerText = morseCodeAlphabet[currentLetter];
-        document.getElementById('morse-code').innerText = '';
-        playMorseCode(morseCodeAlphabet[currentLetter]);
-    } else if (currentMode === 'quiz') {
+    if (currentMode === 'quiz') {
+        if (quizIndices.length === 0) {
+            quizIndices = Array.from({ length: quizQuestions.length }, (_, i) => i);
+            quizIndices = quizIndices.sort(() => Math.random() - 0.5).slice(0, 10);
+        }
         showQuizQuestion();
     } else {
-        options = generateOptions(correctWord, currentLetter);
-        document.getElementById('letter-display').innerText = currentLetter;
-        document.getElementById('morse-code').innerText = morseCodeAlphabet[currentLetter];
+        currentLetter = getRandomLetter();
+        const correctWord = (currentMode === 'nato' ? phoneticAlphabetNATO : currentMode === 'raf' ? phoneticAlphabetRAF : currentLetter)[currentLetter];
+        let options;
+        if (currentMode === 'morse') {
+            options = generateMorseOptions(currentLetter);
+            document.getElementById('letter-display').innerText = morseCodeAlphabet[currentLetter];
+            document.getElementById('morse-code').innerText = '';
+            playMorseCode(morseCodeAlphabet[currentLetter]);
+        } else {
+            options = generateOptions(correctWord, currentLetter);
+            document.getElementById('letter-display').innerText = currentLetter;
+            document.getElementById('morse-code').innerText = morseCodeAlphabet[currentLetter];
+        }
         renderOptions(options, correctWord);
     }
 
@@ -192,7 +196,7 @@ function renderOptions(options, correctWord) {
         optionElement.innerText = option;
         optionElement.onclick = () => {
             clearInterval(timer);
-            const result = { question: currentMode === 'quiz' ? quizQuestions[round - 1].question : currentLetter, chosen: option, correctAnswer: currentMode === 'morse' ? currentLetter : correctWord, correct: false };
+            const result = { question: currentMode === 'quiz' ? quizQuestions[quizIndices[round - 1]].question : currentLetter, chosen: option, correctAnswer: currentMode === 'morse' ? currentLetter : correctWord, correct: false };
             if (currentMode === 'morse' ? option === currentLetter : option === correctWord) {
                 score++;
                 result.correct = true;
@@ -390,6 +394,7 @@ function startQuiz() {
     score = 0;
     round = 0;
     results.length = 0;
+    quizIndices = [];
     currentMode = 'quiz';
     gameDifficulty = document.getElementById('difficulty').value;
     document.getElementById('score-container').innerText = '';
@@ -407,13 +412,13 @@ function startQuiz() {
 }
 
 function showQuizQuestion() {
-    if (round >= quizQuestions.length) {
+    if (round > quizIndices.length) {
         endGame();
         return;
     }
 
-    const quizQuestion = quizQuestions[round];
-    document.getElementById('letter-display').innerText = '';
+    const quizIndex = quizIndices[round - 1];
+    const quizQuestion = quizQuestions[quizIndex];
     document.getElementById('quiz-question').innerText = quizQuestion.question;
 
     const options = [quizQuestion.correct, quizQuestion.wrong1, quizQuestion.wrong2].sort(() => Math.random() - 0.5);
