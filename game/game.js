@@ -1,9 +1,17 @@
-const phoneticAlphabet = {
+const phoneticAlphabetNATO = {
     A: 'Alpha', B: 'Bravo', C: 'Charlie', D: 'Delta', E: 'Echo', F: 'Foxtrot', 
     G: 'Golf', H: 'Hotel', I: 'India', J: 'Juliett', K: 'Kilo', L: 'Lima', 
     M: 'Mike', N: 'November', O: 'Oscar', P: 'Papa', Q: 'Quebec', R: 'Romeo', 
     S: 'Sierra', T: 'Tango', U: 'Uniform', V: 'Victor', W: 'Whiskey', 
     X: 'X-ray', Y: 'Yankee', Z: 'Zulu'
+};
+
+const phoneticAlphabetRAF = {
+    A: 'Ace', B: 'Beer', C: 'Charlie', D: 'Don', E: 'Edward', F: 'Freddie', 
+    G: 'George', H: 'Harry', I: 'Ink', J: 'Johnnie', K: 'King', L: 'London', 
+    M: 'Monkey', N: 'Nuts', O: 'Orange', P: 'Pip', Q: 'Queen', R: 'Robert', 
+    S: 'Sugar', T: 'Toc', U: 'Uncle', V: 'Vic', W: 'William', 
+    X: 'X-ray', Y: 'Yorker', Z: 'Zebra'
 };
 
 const morseCodeAlphabet = {
@@ -50,9 +58,10 @@ let timer;
 let timeLeft;
 let confettiAnimationFrame;
 let usedLetters = [];
+let currentMode = 'nato';
 
 function getRandomLetter() {
-    const letters = Object.keys(phoneticAlphabet);
+    const letters = Object.keys(currentMode === 'nato' ? phoneticAlphabetNATO : phoneticAlphabetRAF);
     let letter;
     do {
         letter = letters[Math.floor(Math.random() * letters.length)];
@@ -95,10 +104,11 @@ function startTimer() {
     }, 1000);
 }
 
-function startGame() {
+function startGame(mode) {
     score = 0;
     round = 0;
     usedLetters = [];
+    currentMode = mode;
     document.getElementById('score-container').innerText = '';
     document.getElementById('feedback').innerText = '';
     document.getElementById('play-again').style.display = 'none';
@@ -119,7 +129,7 @@ function nextRound() {
     round++;
     document.getElementById('round').innerText = `Round: ${round}`;
     currentLetter = getRandomLetter();
-    const correctWord = phoneticAlphabet[currentLetter];
+    const correctWord = (currentMode === 'nato' ? phoneticAlphabetNATO : phoneticAlphabetRAF)[currentLetter];
     const options = generateOptions(correctWord, currentLetter);
 
     document.getElementById('letter-display').innerText = currentLetter;
