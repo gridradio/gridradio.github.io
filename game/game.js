@@ -61,6 +61,7 @@ let timeLeft;
 let confettiAnimationFrame;
 let usedLetters = [];
 let currentMode = 'nato';
+const results = [];
 
 function getRandomLetter() {
     const letters = Object.keys(currentMode === 'nato' ? phoneticAlphabetNATO : currentMode === 'raf' ? phoneticAlphabetRAF : morseCodeAlphabet);
@@ -110,10 +111,12 @@ function startGame(mode) {
     score = 0;
     round = 0;
     usedLetters = [];
+    results.length = 0;
     currentMode = mode;
     document.getElementById('score-container').innerText = '';
     document.getElementById('feedback').innerText = '';
     document.getElementById('play-again').style.display = 'none';
+    document.getElementById('breakdown-container').innerHTML = '';
     document.getElementById('start-container').style.display = 'none';
     document.getElementById('game-container').style.display = 'block';
     document.getElementById('timer').style.display = 'block';
@@ -154,9 +157,14 @@ function nextRound() {
         optionElement.innerText = option;
         optionElement.onclick = () => {
             clearInterval(timer);
+            const result = { question: currentLetter, chosen: option, correct: currentMode === 'morse' ? currentLetter : correctWord };
             if (currentMode === 'morse' ? option === currentLetter : option === correctWord) {
                 score++;
+                result.correct = true;
+            } else {
+                result.correct = false;
             }
+            results.push(result);
             nextRound();
         };
         optionsContainer.appendChild(optionElement);
@@ -227,6 +235,28 @@ function endGame() {
 
     document.getElementById('score-container').innerText = `Your score: ${score} / 10`;
     document.getElementById('play-again').style.display = 'block';
+    displayBreakdown();
+}
+
+function displayBreakdown() {
+    const breakdownContainer = document.getElementById('breakdown-container');
+    let breakdownHTML = `<table>
+        <tr>
+            <th>Question</th>
+            <th>Chosen Option</th>
+            <th>Correct Answer</th>
+            <th>Result</th>
+        </tr>`;
+    results.forEach(result => {
+        breakdownHTML += `<tr>
+            <td>${result.question}</td>
+            <td>${result.chosen}</td>
+            <td>${result.correct ? result.chosen : result.correct}</td>
+            <td>${result.correct ? '✅' : '❌'}</td>
+        </tr>`;
+    });
+    breakdownHTML += '</table>';
+    breakdownContainer.innerHTML = breakdownHTML;
 }
 
 function startConfetti() {
@@ -278,6 +308,7 @@ function showStartOptions() {
     document.getElementById('score-container').innerText = '';
     document.getElementById('feedback').innerText = '';
     document.getElementById('play-again').style.display = 'none';
+    document.getElementById('breakdown-container').innerHTML = '';
 }
 
 // Ensure the game does not start automatically
