@@ -226,7 +226,8 @@ function playMorseCode(morseCode) {
 }
 
 function repeatMorseCode() {
-    playMorseCode(morseCodeAlphabet[flashcardLetters[flashcardIndex]]);
+    const currentLetter = flashcardLetters[flashcardIndex];
+    playMorseCode(morseCodeAlphabet[currentLetter]);
 }
 
 function endGame() {
@@ -345,7 +346,7 @@ function startFlashcards(mode) {
 function showFlashcard() {
     const letter = flashcardLetters[flashcardIndex];
     const displayText = currentMode === 'nato' ? phoneticAlphabetNATO[letter] : morseCodeAlphabet[letter];
-    document.getElementById('flashcard').innerText = letter;
+    document.getElementById('flashcard-letter').innerText = letter;
     document.getElementById('flashcard-code').innerText = displayText;
     if (currentMode === 'morse') {
         playMorseCode(displayText);
