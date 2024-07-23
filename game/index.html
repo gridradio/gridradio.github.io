@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NATO Phonetic Alphabet Game</title>
+    <title>Phonetic Alphabet and Morse Code Game</title>
     <style>
         body {
             font-family: 'Comic Sans MS', cursive, sans-serif;
@@ -92,9 +92,10 @@
 </head>
 <body>
     <div id="start-container">
-        <h1>NATO Phonetic Alphabet Game</h1>
+        <h1>Phonetic Alphabet and Morse Code Game</h1>
         <button class="start-button" onclick="startGame('nato')">Start NATO Mode</button>
         <button class="start-button" onclick="startGame('raf')">Start 1940s Expert Mode</button>
+        <button class="start-button" onclick="startGame('morse')">Start Morse Code Mode</button>
     </div>
     <div id="game-container" style="display:none;">
         <div id="letter-display"></div>
@@ -105,7 +106,7 @@
     <div id="round" style="display:none;">Round: 1</div>
     <div id="score-container"></div>
     <div id="feedback"></div>
-    <button id="play-again" style="display:none;" onclick="startGame(currentMode)">Play Again</button>
+    <button id="play-again" style="display:none;" onclick="showStartOptions()">Play Again</button>
     <canvas id="confetti-canvas"></canvas>
 
     <script src="game.js"></script>
