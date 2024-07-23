@@ -6,6 +6,22 @@ const phoneticAlphabet = {
     X: 'X-ray', Y: 'Yankee', Z: 'Zulu'
 };
 
+const dictionary = {
+    A: ['Apple', 'Ant', 'Anchor'], B: ['Banana', 'Boat', 'Button'], 
+    C: ['Cat', 'Car', 'Castle'], D: ['Dog', 'Door', 'Dart'], 
+    E: ['Egg', 'Elephant', 'Engine'], F: ['Fish', 'Fan', 'Fork'], 
+    G: ['Goat', 'Guitar', 'Garden'], H: ['Hat', 'Horse', 'Hammer'], 
+    I: ['Igloo', 'Insect', 'Iron'], J: ['Jam', 'Jacket', 'Jungle'], 
+    K: ['Kite', 'Key', 'King'], L: ['Lion', 'Lamp', 'Leaf'], 
+    M: ['Mouse', 'Moon', 'Mountain'], N: ['Nose', 'Nest', 'Nut'], 
+    O: ['Orange', 'Oven', 'Octopus'], P: ['Pen', 'Pencil', 'Plate'], 
+    Q: ['Queen', 'Quilt', 'Quiver'], R: ['Rat', 'Rabbit', 'Ring'], 
+    S: ['Sun', 'Snake', 'Star'], T: ['Table', 'Tiger', 'Train'], 
+    U: ['Umbrella', 'Unicorn', 'Uniform'], V: ['Van', 'Vase', 'Violin'], 
+    W: ['Water', 'Wheel', 'Window'], X: ['Xylophone', 'Xenon', 'Xerox'], 
+    Y: ['Yarn', 'Yak', 'Yacht'], Z: ['Zebra', 'Zoo', 'Zero']
+};
+
 let currentLetter = '';
 let score = 0;
 let round = 0;
@@ -17,12 +33,12 @@ function getRandomLetter() {
     return letters[Math.floor(Math.random() * letters.length)];
 }
 
-function generateOptions(correctWord) {
-    const allWords = Object.values(phoneticAlphabet);
+function generateOptions(correctWord, letter) {
+    const words = dictionary[letter].filter(word => word !== correctWord);
     let options = [correctWord];
 
     while (options.length < 3) {
-        const randomWord = allWords[Math.floor(Math.random() * allWords.length)];
+        const randomWord = words[Math.floor(Math.random() * words.length)];
         if (!options.includes(randomWord)) {
             options.push(randomWord);
         }
@@ -34,9 +50,15 @@ function generateOptions(correctWord) {
 function startTimer() {
     timeLeft = 10;
     document.getElementById('timer').innerText = timeLeft;
+    document.getElementById('timer').style.color = 'green';
     timer = setInterval(() => {
         timeLeft--;
         document.getElementById('timer').innerText = timeLeft;
+        if (timeLeft <= 3) {
+            document.getElementById('timer').style.color = 'red';
+        } else if (timeLeft <= 6) {
+            document.getElementById('timer').style.color = 'orange';
+        }
         if (timeLeft <= 0) {
             clearInterval(timer);
             nextRound();
@@ -61,13 +83,13 @@ function nextRound() {
     round++;
     currentLetter = getRandomLetter();
     const correctWord = phoneticAlphabet[currentLetter];
-    const options = generateOptions(correctWord);
+    const options = generateOptions(correctWord, currentLetter);
 
     document.getElementById('letter-display').innerText = currentLetter;
     const optionsContainer = document.getElementById('options-container');
     optionsContainer.innerHTML = '';
     options.forEach(option => {
-        const optionElement = document.createElement('div');
+        const optionElement = document.createElement('button');
         optionElement.className = 'option';
         optionElement.innerText = option;
         optionElement.onclick = () => {
