@@ -13,27 +13,53 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
+            background-color: #f4f4f9;
+            color: #333;
         }
         #game-container {
             text-align: center;
         }
         .option {
-            display: block;
-            margin: 10px;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
+            display: inline-block;
+            margin: 20px;
+            padding: 20px 40px;
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 1.5em;
             cursor: pointer;
         }
-        #score-container, #timer {
-            font-size: 1.5em;
+        .option:hover {
+            background-color: #3700b3;
+        }
+        #score-container {
+            font-size: 2em;
             margin: 20px;
+        }
+        #timer {
+            font-size: 2em;
+            margin: 20px;
+            position: fixed;
+            top: 20px;
+            right: 20px;
         }
         #play-again {
             display: none;
             padding: 10px 20px;
-            font-size: 1em;
+            font-size: 1.5em;
             cursor: pointer;
+            border: none;
+            background-color: #6200ea;
+            color: white;
+            border-radius: 10px;
+        }
+        #play-again:hover {
+            background-color: #3700b3;
+        }
+        #letter-display {
+            font-size: 5em;
+            margin: 20px;
         }
     </style>
 </head>
@@ -41,8 +67,8 @@
     <div id="game-container">
         <div id="letter-display"></div>
         <div id="options-container"></div>
-        <div id="timer">10</div>
     </div>
+    <div id="timer">10</div>
     <div id="score-container"></div>
     <button id="play-again" onclick="startGame()">Play Again</button>
 
