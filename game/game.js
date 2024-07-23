@@ -96,7 +96,7 @@ function startTimer() {
     timer = setInterval(() => {
         timeLeft--;
         timerElement.innerText = timeLeft;
-        if (timeLeft <= 5 && gameDifficulty === 'easy' && currentMode !== 'morse') {
+        if (gameDifficulty === 'easy' && timeLeft < 5 && currentMode !== 'morse') {
             showHint();
         }
         if (timeLeft <= 3) {
@@ -113,7 +113,8 @@ function startTimer() {
 
 function showHint() {
     const correctWord = currentMode === 'nato' ? phoneticAlphabetNATO[currentLetter] : phoneticAlphabetRAF[currentLetter];
-    const hint = correctWord.slice(0, 10 - timeLeft);
+    const hintLength = 10 - timeLeft;
+    const hint = correctWord.slice(0, hintLength);
     document.getElementById('morse-code').innerText = hint;
 }
 
