@@ -22,13 +22,16 @@
         .option {
             display: inline-block;
             margin: 20px;
-            padding: 20px 40px;
+            padding: 30px 60px;
             background-color: #6200ea;
             color: white;
             border: none;
             border-radius: 20px;
-            font-size: 1.5em;
+            font-size: 2em;
             cursor: pointer;
+            width: 200px;
+            height: 100px;
+            box-sizing: border-box;
         }
         .option:hover {
             background-color: #3700b3;
@@ -40,11 +43,13 @@
         #timer, #round {
             font-size: 3em;
             margin: 20px;
-            padding: 10px;
+            padding: 20px;
             background-color: #ffeb3b;
             border: 3px solid #333;
             border-radius: 10px;
             position: fixed;
+            width: 150px;
+            text-align: center;
         }
         #timer {
             top: 20px;
@@ -67,8 +72,12 @@
             background-color: #3700b3;
         }
         #letter-display {
-            font-size: 5em;
+            font-size: 8em;
             margin: 20px;
+        }
+        #morse-code {
+            font-size: 2em;
+            margin-top: 10px;
         }
         #confetti-canvas {
             position: fixed;
@@ -87,6 +96,7 @@
     </div>
     <div id="game-container" style="display:none;">
         <div id="letter-display"></div>
+        <div id="morse-code"></div>
         <div id="options-container"></div>
     </div>
     <div id="timer" style="display:none;">10</div>
