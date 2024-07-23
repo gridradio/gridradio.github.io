@@ -157,12 +157,10 @@ function nextRound() {
         optionElement.innerText = option;
         optionElement.onclick = () => {
             clearInterval(timer);
-            const result = { question: currentLetter, chosen: option, correct: currentMode === 'morse' ? currentLetter : correctWord };
+            const result = { question: currentLetter, chosen: option, correctAnswer: currentMode === 'morse' ? currentLetter : correctWord, correct: false };
             if (currentMode === 'morse' ? option === currentLetter : option === correctWord) {
                 score++;
                 result.correct = true;
-            } else {
-                result.correct = false;
             }
             results.push(result);
             nextRound();
@@ -249,9 +247,9 @@ function displayBreakdown() {
         </tr>`;
     results.forEach(result => {
         breakdownHTML += `<tr>
-            <td>${result.question}</td>
+            <td>${currentMode === 'morse' ? morseCodeAlphabet[result.question] : result.question}</td>
             <td>${result.chosen}</td>
-            <td>${result.correct ? result.chosen : result.correct}</td>
+            <td>${result.correct ? result.chosen : result.correctAnswer}</td>
             <td>${result.correct ? '✅' : '❌'}</td>
         </tr>`;
     });
