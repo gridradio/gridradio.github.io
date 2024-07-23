@@ -61,6 +61,7 @@ let timeLeft;
 let confettiAnimationFrame;
 let usedLetters = [];
 let currentMode = 'nato';
+let gameDifficulty = 'normal';
 const results = [];
 
 function getRandomLetter() {
@@ -95,6 +96,9 @@ function startTimer() {
     timer = setInterval(() => {
         timeLeft--;
         timerElement.innerText = timeLeft;
+        if (timeLeft <= 5 && gameDifficulty === 'easy') {
+            showHint();
+        }
         if (timeLeft <= 3) {
             timerElement.style.color = 'red';
         } else if (timeLeft <= 6) {
@@ -107,12 +111,18 @@ function startTimer() {
     }, 1000);
 }
 
+function showHint() {
+    const correctWord = currentMode === 'morse' ? morseCodeAlphabet[currentLetter] : phoneticAlphabetNATO[currentLetter];
+    document.getElementById('morse-code').innerText = correctWord;
+}
+
 function startGame(mode) {
     score = 0;
     round = 0;
     usedLetters = [];
     results.length = 0;
     currentMode = mode;
+    gameDifficulty = document.getElementById('difficulty').value;
     document.getElementById('score-container').innerText = '';
     document.getElementById('feedback').innerText = '';
     document.getElementById('play-again').style.display = 'none';
@@ -186,8 +196,9 @@ function generateMorseOptions(letter) {
     return options.sort(() => Math.random() - 0.5);
 }
 
+let audioContext;
 function playMorseCode(morseCode) {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
     const dotDuration = 0.1; // Duration of a dot in seconds
     const dashDuration = dotDuration * 3; // Duration of a dash in seconds
     const gapDuration = dotDuration; // Gap between symbols in seconds
@@ -211,6 +222,10 @@ function playMorseCode(morseCode) {
 
         oscillator.connect(audioContext.destination);
     });
+}
+
+function repeatMorseCode() {
+    playMorseCode(morseCodeAlphabet[currentLetter]);
 }
 
 function endGame() {
@@ -330,6 +345,9 @@ function showFlashcard() {
     const displayText = currentMode === 'nato' ? phoneticAlphabetNATO[letter] : morseCodeAlphabet[letter];
     document.getElementById('flashcard').innerText = letter;
     document.getElementById('flashcard-code').innerText = displayText;
+    if (currentMode === 'morse') {
+        playMorseCode(displayText);
+    }
 }
 
 function nextFlashcard() {
