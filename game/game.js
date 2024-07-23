@@ -6,6 +6,14 @@ const phoneticAlphabet = {
     X: 'X-ray', Y: 'Yankee', Z: 'Zulu'
 };
 
+const morseCodeAlphabet = {
+    A: '.-', B: '-...', C: '-.-.', D: '-..', E: '.', F: '..-.', 
+    G: '--.', H: '....', I: '..', J: '.---', K: '-.-', L: '.-..', 
+    M: '--', N: '-.', O: '---', P: '.--.', Q: '--.-', R: '.-.', 
+    S: '...', T: '-', U: '..-', V: '...-', W: '.--', 
+    X: '-..-', Y: '-.--', Z: '--..'
+};
+
 const dictionary = {
     A: ['Apple', 'Ant', 'Anchor'], B: ['Banana', 'Boat', 'Button'], 
     C: ['Cat', 'Car', 'Castle'], D: ['Dog', 'Door', 'Dart'], 
@@ -28,10 +36,16 @@ let round = 0;
 let timer;
 let timeLeft;
 let confettiAnimationFrame;
+let usedLetters = [];
 
 function getRandomLetter() {
     const letters = Object.keys(phoneticAlphabet);
-    return letters[Math.floor(Math.random() * letters.length)];
+    let letter;
+    do {
+        letter = letters[Math.floor(Math.random() * letters.length)];
+    } while (usedLetters.includes(letter));
+    usedLetters.push(letter);
+    return letter;
 }
 
 function generateOptions(correctWord, letter) {
@@ -71,6 +85,7 @@ function startTimer() {
 function startGame() {
     score = 0;
     round = 0;
+    usedLetters = [];
     document.getElementById('score-container').innerText = '';
     document.getElementById('feedback').innerText = '';
     document.getElementById('play-again').style.display = 'none';
@@ -95,6 +110,7 @@ function nextRound() {
     const options = generateOptions(correctWord, currentLetter);
 
     document.getElementById('letter-display').innerText = currentLetter;
+    document.getElementById('morse-code').innerText = morseCodeAlphabet[currentLetter];
     const optionsContainer = document.getElementById('options-container');
     optionsContainer.innerHTML = '';
     options.forEach(option => {
@@ -116,6 +132,7 @@ function nextRound() {
 
 function endGame() {
     document.getElementById('letter-display').innerText = '';
+    document.getElementById('morse-code').innerText = '';
     document.getElementById('options-container').innerHTML = '';
     document.getElementById('timer').style.display = 'none';
     document.getElementById('round').style.display = 'none';
