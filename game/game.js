@@ -49,15 +49,16 @@ function generateOptions(correctWord, letter) {
 
 function startTimer() {
     timeLeft = 10;
-    document.getElementById('timer').innerText = timeLeft;
-    document.getElementById('timer').style.color = 'green';
+    const timerElement = document.getElementById('timer');
+    timerElement.innerText = timeLeft;
+    timerElement.style.color = 'green';
     timer = setInterval(() => {
         timeLeft--;
-        document.getElementById('timer').innerText = timeLeft;
+        timerElement.innerText = timeLeft;
         if (timeLeft <= 3) {
-            document.getElementById('timer').style.color = 'red';
+            timerElement.style.color = 'red';
         } else if (timeLeft <= 6) {
-            document.getElementById('timer').style.color = 'orange';
+            timerElement.style.color = 'orange';
         }
         if (timeLeft <= 0) {
             clearInterval(timer);
@@ -70,7 +71,11 @@ function startGame() {
     score = 0;
     round = 0;
     document.getElementById('score-container').innerText = '';
+    document.getElementById('feedback').innerText = '';
     document.getElementById('play-again').style.display = 'none';
+    document.getElementById('start-container').style.display = 'none';
+    document.getElementById('game-container').style.display = 'block';
+    document.getElementById('timer').style.display = 'block';
     nextRound();
 }
 
@@ -108,9 +113,56 @@ function nextRound() {
 function endGame() {
     document.getElementById('letter-display').innerText = '';
     document.getElementById('options-container').innerHTML = '';
-    document.getElementById('timer').innerText = '';
+    document.getElementById('timer').style.display = 'none';
+
+    const feedback = document.getElementById('feedback');
+    if (score === 10) {
+        feedback.innerText = "Perfect! You got 10/10!";
+        startConfetti();
+    } else if (score >= 7) {
+        feedback.innerText = `Great job! You got ${score}/10.`;
+    } else if (score >= 4) {
+        feedback.innerText = `Not bad! You got ${score}/10.`;
+    } else {
+        feedback.innerText = `Better luck next time! You got ${score}/10.`;
+    }
+
     document.getElementById('score-container').innerText = `Your score: ${score} / 10`;
     document.getElementById('play-again').style.display = 'block';
+}
+
+function startConfetti() {
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const confettiPieces = Array.from({ length: 300 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+        size: Math.random() * 10 + 5,
+        speed: Math.random() * 3 + 2
+    }));
+
+    function drawConfetti() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        confettiPieces.forEach(piece => {
+            ctx.fillStyle = piece.color;
+            ctx.beginPath();
+            ctx.arc(piece.x, piece.y, piece.size, 0, 2 * Math.PI);
+            ctx.fill();
+
+            piece.y += piece.speed;
+            if (piece.y > canvas.height) {
+                piece.y = -piece.size;
+                piece.x = Math.random() * canvas.width;
+            }
+        });
+        requestAnimationFrame(drawConfetti);
+    }
+
+    drawConfetti();
 }
 
 startGame();
