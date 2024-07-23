@@ -450,6 +450,241 @@
             return { easting: osgbCoords[0], northing: osgbCoords[1] };
         }
 
+        function toOSGridReference(easting, northing) {
+            const e100k = Math.floor(easting / 100000);
+            const n100k = Math.floor(northing / 100000);
+
+            const gridLetters = [
+                ['SV', 'SW', 'SX', 'SY', 'SZ', 'TV', 'TW'],
+                ['SQ', 'SR', 'SS', 'ST', 'SU', 'TQ', 'TR'],
+                ['SL', 'SM', 'SN', 'SO', 'SP', 'TL', 'TM'],
+                ['SF', 'SG', 'SH', 'SJ', 'SK', 'TF', 'TG'],
+                ['SA', 'SB', 'SC', 'SD', 'SE', 'TA', 'TB'],
+                ['NV', 'NW', 'NX', 'NY', 'NZ', 'OV', 'OW'],
+                ['NQ', 'NR', 'NS', 'NT', 'NU', 'OQ', 'OR'],
+                ['NL', 'NM', 'NN', 'NO', 'NP', 'OL', 'OM'],
+                ['NF', 'NG', 'NH', 'NJ', 'NK', 'OF', 'OG'],
+                ['NA', 'NB', 'NC', 'ND', 'NE', 'OA', 'OB'],
+                ['HV', 'HW', 'HX', 'HY', 'HZ', 'JV', 'JW'],
+                ['HQ', 'HR', 'HS', 'HT', 'HU', 'JQ', 'JR'],
+                ['HL', 'HM', 'HN', 'HO', 'HP', 'JL', 'JM']
+            ];
+
+            const l1 = Math.floor(e100k);
+            const l2 = Math.floor(n100k);
+            const gridSquare = gridLetters[l2][l1];
+
+            const eastingWithin = Math.floor(easting % 100000);
+            const northingWithin = Math.floor(northing % 100000);
+
+            const easting6 = Math.floor(eastingWithin / 100).toString().padStart(3, '0');
+            const northing6 = Math.floor(northingWithin / 100).toString().padStart(3, '0');
+
+            return gridSquare + " " + easting6 + " " + northing6;
+        }
+
+        function osGridReferenceToWAB(gridReference) {
+            const letters = gridReference.slice(0, 2);
+            const eastingNorthing = gridReference.slice(2).replace(/\s+/g, '');
+
+            if (eastingNorthing.length !== 6) {
+                throw new Error('Grid reference must be a six-figure grid reference.');
+            }
+
+            const e1 = eastingNorthing[0];
+            const n1 = eastingNorthing[3];
+
+            const wabSquare = letters + e1 + n1;
+
+            return wabSquare;
+        }
+
+        function latLonToMaidenhead(lat, lon) {
+            lon = lon + 180;
+            lat = lat + 90;
+
+            const A = String.fromCharCode(Math.floor(lon / 20) + 65);
+            const B = String.fromCharCode(Math.floor(lat / 10) + 65);
+
+            lon = lon % 20;
+            lat = lat % 10;
+
+            const C = Math.floor(lon / 2);
+            const D = Math.floor(lat / 1);
+
+            lon = lon % 2;
+            lat = lat % 1;
+
+            const E = String.fromCharCode(Math.floor(lon * 12) + 97);
+            const F = String.fromCharCode(Math.floor(lat * 24) + 97);
+
+            const maidenheadLocator = `${A}${B}${C}${D}${E}${F}`;
+
+            return maidenheadLocator;
+        }
+
+        function maidenheadToLatLon(maidenhead) {
+            if (maidenhead.length === 4) {
+                const A = maidenhead.charCodeAt(0) - 65;
+                const B = maidenhead.charCodeAt(1) - 65;
+                const C = parseInt(maidenhead.charAt(2));
+                const D = parseInt(maidenhead.charAt(3));
+
+                const lon = A * 20 - 180 + C * 2 + 1;
+                const lat = B * 10 - 90 + D + 0.5;
+
+                return { lat: lat, lon: lon };
+            } else if (maidenhead.length === 6) {
+                const A = maidenhead.charCodeAt(0) - 65;
+                const B = maidenhead.charCodeAt(1) - 65;
+                const C = parseInt(maidenhead.charAt(2));
+                const D = parseInt(maidenhead.charAt(3));
+                const E = maidenhead.charCodeAt(4) - 97;
+                const F = maidenhead.charCodeAt(5) - 97;
+
+                const lon = A * 20 - 180 + C * 2 + E / 12 + 1/24;
+                const lat = B * 10 - 90 + D + F / 24 + 1/48;
+
+                return { lat: lat, lon: lon };
+            }
+            return null;
+        }
+
+        function pointInPolygon(point, polygon) {
+            let x = point[0], y = point[1];
+            let inside = false;
+            for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+                let xi = polygon[i][0], yi = polygon[i][1];
+                let xj = polygon[j][0], yj = polygon[j][1];
+
+                let intersect = ((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+                if (intersect) inside = !inside;
+            }
+            return inside;
+        }
+
+        function getCQZone(lat, lon) {
+            const point = [lon, lat];
+
+            const zones = [
+                { zone: 14, polygon: [[-10, 35], [-10, 60], [30, 60], [30, 35]] } // Western Europe
+            ];
+
+            for (let i = 0; i < zones.length; i++) {
+                if (pointInPolygon(point, zones[i].polygon)) {
+                    return zones[i].zone;
+                }
+            }
+
+            return "N/A"; // Default if no match
+        }
+
+        function getITUZone(lat, lon) {
+            const point = [lon, lat];
+
+            const zones = [
+                // Add detailed polygons for all 90 ITU zones
+                { zone: 27, polygon: [[-10, 35], [-10, 60], [30, 60], [30, 35]] }
+                // ... Add more detailed polygons here ...
+            ];
+
+            for (let i = 0; i < zones.length; i++) {
+                if (pointInPolygon(point, zones[i].polygon)) {
+                    return zones[i].zone;
+                }
+            }
+
+            return "N/A"; // Default if no match
+        }
+
+        function getITURegion(lat, lon) {
+            const point = [lon, lat];
+
+            const regions = [
+                { region: 'Region 1', polygon: [[-30, 70], [60, 70], [60, -35], [-30, -35]] }, // ITU Region 1
+                { region: 'Region 2', polygon: [[-180, 70], [-30, 70], [-30, -60], [-180, -60]] }, // ITU Region 2
+                { region: 'Region 3', polygon: [[60, 70], [180, 70], [180, -35], [60, -35]] } // ITU Region 3
+            ];
+
+            for (let i = 0; i < regions.length; i++) {
+                if (pointInPolygon(point, regions[i].polygon)) {
+                    return regions[i].region;
+                }
+            }
+
+            return "N/A"; // Default if no match
+        }
+
+        function handleGeolocationSuccess(position) {
+            const { latitude, longitude, altitude, altitudeAccuracy, accuracy } = position.coords;
+            const altitudeMeters = altitude ? altitude.toFixed(2) : 'N/A';
+            const altitudeFeet = altitude !== 'N/A' ? (altitude * 3.28084).toFixed(2) : 'N/A';
+            const pressure = altitudeAccuracy ? `${altitudeAccuracy.toFixed(2)} hPa` : 'N/A';
+            const accuracyText = accuracy ? `${accuracy.toFixed(2)} meters` : 'N/A';
+
+            updateDisplay(latitude, longitude, altitudeMeters, altitudeFeet, pressure, accuracyText);
+            document.querySelector('.loading-screen').style.display = 'none';
+            document.querySelector('.content').style.display = 'block';
+            updateMap(latitude, longitude, 11); // Zoomed out by a couple of levels
+        }
+
+        function handleGeolocationError(error) {
+            showGeolocationError(error);
+        }
+
+        function refreshLocation() {
+            document.querySelector('.loading-screen').style.display = 'flex';
+            document.querySelector('.content').style.display = 'none';
+            document.getElementById('geolocation-alert').style.display = 'none';
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(handleGeolocationSuccess, handleGeolocationError, {
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                    maximumAge: 0
+                });
+            } else {
+                showGeolocationError({ code: 0 });
+            }
+        }
+
+        function requestLocationAccess() {
+            refreshLocation();
+        }
+
+        function showGeolocationError(error) {
+            const defaultLat = 51.996594;
+            const defaultLon = -0.743028;
+            const errorMessage = document.getElementById('geolocation-alert');
+            let errorText = 'Geolocation could not be completed.';
+
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    errorText = "User denied the request for Geolocation.";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    errorText = "Location information is unavailable.";
+                    break;
+                case error.TIMEOUT:
+                    errorText = "The request to get user location timed out.";
+                    break;
+                case -1:
+                    errorText = "Use the Map to select a location or enter a locator value using the edit buttons.";
+                    break;
+                case error.UNKNOWN_ERROR:
+                    errorText = "An unknown error occurred.";
+                    break;
+            }
+
+            errorMessage.innerText = errorText;
+            errorMessage.style.display = 'block';
+
+            updateDisplay(defaultLat, defaultLon, 'N/A', 'N/A', 'N/A', 'N/A');
+            document.querySelector('.loading-screen').style.display = 'none';
+            document.querySelector('.content').style.display = 'block';
+            updateMap(defaultLat, defaultLon, 6); // More zoomed out
+        }
+
         function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accuracy) {
             currentLat = lat; // Update global latitude variable
             currentLon = lon; // Update global longitude variable
