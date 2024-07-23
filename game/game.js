@@ -15,19 +15,32 @@ const morseCodeAlphabet = {
 };
 
 const dictionary = {
-    A: ['Apple', 'Ant', 'Anchor'], B: ['Banana', 'Boat', 'Button'], 
-    C: ['Cat', 'Car', 'Castle'], D: ['Dog', 'Door', 'Dart'], 
-    E: ['Egg', 'Elephant', 'Engine'], F: ['Fish', 'Fan', 'Fork'], 
-    G: ['Goat', 'Guitar', 'Garden'], H: ['Hat', 'Horse', 'Hammer'], 
-    I: ['Igloo', 'Insect', 'Iron'], J: ['Jam', 'Jacket', 'Jungle'], 
-    K: ['Kite', 'Key', 'King'], L: ['Lion', 'Lamp', 'Leaf'], 
-    M: ['Mouse', 'Moon', 'Mountain'], N: ['Nose', 'Nest', 'Nut'], 
-    O: ['Orange', 'Oven', 'Octopus'], P: ['Pen', 'Pencil', 'Plate'], 
-    Q: ['Queen', 'Quilt', 'Quiver'], R: ['Rat', 'Rabbit', 'Ring'], 
-    S: ['Sun', 'Snake', 'Star'], T: ['Table', 'Tiger', 'Train'], 
-    U: ['Umbrella', 'Unicorn', 'Uniform'], V: ['Van', 'Vase', 'Violin'], 
-    W: ['Water', 'Wheel', 'Window'], X: ['Xylophone', 'Xenon', 'Xerox'], 
-    Y: ['Yarn', 'Yak', 'Yacht'], Z: ['Zebra', 'Zoo', 'Zero']
+    A: ['Apple', 'Ant', 'Anchor', 'Apricot', 'Axe', 'Airplane', 'Arrow', 'Armadillo'], 
+    B: ['Banana', 'Boat', 'Button', 'Basket', 'Bee', 'Ball', 'Book', 'Bread'], 
+    C: ['Cat', 'Car', 'Castle', 'Cup', 'Candle', 'Corn', 'Cow', 'Cloud'], 
+    D: ['Dog', 'Door', 'Dart', 'Duck', 'Drum', 'Doll', 'Dish', 'Desk'], 
+    E: ['Egg', 'Elephant', 'Engine', 'Envelope', 'Eagle', 'Earth', 'Elbow', 'Eraser'], 
+    F: ['Fish', 'Fan', 'Fork', 'Feather', 'Flag', 'Fruit', 'Frog', 'Fence'], 
+    G: ['Goat', 'Guitar', 'Garden', 'Grapes', 'Glass', 'Glove', 'Gate', 'Gold'], 
+    H: ['Hat', 'Horse', 'Hammer', 'Heart', 'Helicopter', 'House', 'Hose', 'Hill'], 
+    I: ['Igloo', 'Insect', 'Iron', 'Ice', 'Island', 'Ink', 'Ivory', 'Idea'], 
+    J: ['Jam', 'Jacket', 'Jungle', 'Juice', 'Jar', 'Jet', 'Jewel', 'Joke'], 
+    K: ['Kite', 'Key', 'King', 'Kangaroo', 'Kiwi', 'Knife', 'Kettle', 'Knot'], 
+    L: ['Lion', 'Lamp', 'Leaf', 'Lemon', 'Ladder', 'Lake', 'Lava', 'Log'], 
+    M: ['Mouse', 'Moon', 'Mountain', 'Mango', 'Map', 'Milk', 'Mug', 'Mud'], 
+    N: ['Nose', 'Nest', 'Nut', 'Nail', 'Net', 'Needle', 'Necklace', 'Noodle'], 
+    O: ['Orange', 'Oven', 'Octopus', 'Ostrich', 'Oil', 'Onion', 'Owl', 'Oak'], 
+    P: ['Pen', 'Pencil', 'Plate', 'Pineapple', 'Pig', 'Pot', 'Pan', 'Pizza'], 
+    Q: ['Queen', 'Quilt', 'Quiver', 'Quill', 'Quiz', 'Quart', 'Quartz', 'Queue'], 
+    R: ['Rat', 'Rabbit', 'Ring', 'Rope', 'Rug', 'River', 'Radio', 'Rose'], 
+    S: ['Sun', 'Snake', 'Star', 'Sand', 'Shell', 'Spoon', 'Shoe', 'Soup'], 
+    T: ['Table', 'Tiger', 'Train', 'Tree', 'Tomato', 'Tent', 'Tooth', 'Truck'], 
+    U: ['Umbrella', 'Unicorn', 'Uniform', 'Urchin', 'Utensil', 'Urn', 'Upgrade', 'Unit'], 
+    V: ['Van', 'Vase', 'Violin', 'Vine', 'Volcano', 'Vulture', 'Vest', 'Vacuum'], 
+    W: ['Water', 'Wheel', 'Window', 'Wolf', 'Whale', 'Worm', 'Wing', 'Wagon'], 
+    X: ['Xylophone', 'Xenon', 'Xerox', 'X-ray', 'Xenia', 'Xenial', 'Xenopus', 'Xyst'], 
+    Y: ['Yarn', 'Yak', 'Yacht', 'Yolk', 'Yam', 'Yogurt', 'Yellow', 'Yard'], 
+    Z: ['Zebra', 'Zoo', 'Zero', 'Zip', 'Zinc', 'Zephyr', 'Zipper', 'Zombie']
 };
 
 let currentLetter = '';
