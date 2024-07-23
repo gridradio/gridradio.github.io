@@ -96,7 +96,7 @@ function startTimer() {
     timer = setInterval(() => {
         timeLeft--;
         timerElement.innerText = timeLeft;
-        if (timeLeft <= 5 && gameDifficulty === 'easy') {
+        if (timeLeft <= 5 && gameDifficulty === 'easy' && currentMode !== 'morse') {
             showHint();
         }
         if (timeLeft <= 3) {
@@ -112,8 +112,9 @@ function startTimer() {
 }
 
 function showHint() {
-    const correctWord = currentMode === 'morse' ? morseCodeAlphabet[currentLetter] : phoneticAlphabetNATO[currentLetter];
-    document.getElementById('morse-code').innerText = correctWord;
+    const correctWord = currentMode === 'nato' ? phoneticAlphabetNATO[currentLetter] : phoneticAlphabetRAF[currentLetter];
+    const hint = correctWord.slice(0, 10 - timeLeft);
+    document.getElementById('morse-code').innerText = hint;
 }
 
 function startGame(mode) {
@@ -338,6 +339,7 @@ function startFlashcards(mode) {
     document.getElementById('game-container').style.display = 'none';
     document.getElementById('flashcard-container').style.display = 'flex';
     showFlashcard();
+    document.querySelector('.repeat-button').style.display = (mode === 'morse') ? 'inline-block' : 'none';
 }
 
 function showFlashcard() {
@@ -352,6 +354,11 @@ function showFlashcard() {
 
 function nextFlashcard() {
     flashcardIndex = (flashcardIndex + 1) % flashcardLetters.length;
+    showFlashcard();
+}
+
+function previousFlashcard() {
+    flashcardIndex = (flashcardIndex - 1 + flashcardLetters.length) % flashcardLetters.length;
     showFlashcard();
 }
 
