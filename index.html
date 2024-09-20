@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -323,18 +325,20 @@
                 <div class="failed-popup">Failed!</div>
             </div>
         </div>
-        <div class="card" id="os-grid-card">
-            <div class="card-body">
-                <h5 class="card-title">OS Grid Reference</h5>
-                <p class="card-text" id="os-grid">Loading...</p>
-                <div class="vertical-separator vertical-separator-left"></div>
-                <div class="copy-icon-container" onclick="copyToClipboard('os-grid')">
-                    <span class="copy-icon">📋</span>
-                </div>
-                <div class="copied-popup">Copied!</div>
-                <div class="failed-popup">Failed!</div>
-            </div>
+<div class="card" id="os-grid-card">
+    <div class="card-body">
+        <h5 class="card-title">OS Grid Reference</h5>
+        <p class="card-text" id="os-grid">Loading...</p>
+        <div class="vertical-separator vertical-separator-left"></div>
+        <div class="copy-icon-container" onclick="copyToClipboard('os-grid')">
+            <span class="copy-icon">📋</span>
         </div>
+        <div class="copied-popup">Copied!</div>
+        <div class="failed-popup">Failed!</div>
+        <!-- Defra Magic Map Button -->
+        <button class="btn btn-info mt-3" onclick="openDefraMagicMap()" aria-label="Open Defra Magic Map">Open in Defra Magic Map</button>
+    </div>
+</div>
         <div class="card" id="cq-zone-card">
             <div class="card-body">
                 <h5 class="card-title">CQ Zone</h5>
@@ -1026,6 +1030,31 @@
                 accuracyElement.style.display = 'none';
             }
         }
+
+      function openDefraMagicMap() {
+    if (!currentLat || !currentLon) {
+        alert("Location is not available yet. Please wait for location to be determined.");
+        return;
+    }
+
+    const center = [currentLon, currentLat]; // WGS84 coordinates [longitude, latitude]
+
+    // Convert the current map center coordinates to OSGB36 (EPSG:27700)
+    const osgbCenter = proj4('EPSG:4326', 'EPSG:27700', center);
+
+    const boxSize = 5000; // Size of the box around the center point in meters
+    const left = osgbCenter[0] - boxSize / 2;
+    const right = osgbCenter[0] + boxSize / 2;
+    const bottom = osgbCenter[1] - boxSize / 2;
+    const top = osgbCenter[1] + boxSize / 2;
+
+    const boxParam = `${left.toFixed(0)}:${bottom.toFixed(0)}:${right.toFixed(0)}:${top.toFixed(0)}`;
+
+    const magicMapUrl = `https://magic.defra.gov.uk/MagicMap.aspx?&startTopic=GreyRasters&chosenLayers=baseIndex,CSTsssiP,CSTsssi&box=${boxParam}&useDefaultbackgroundMapping=false`;
+
+    // Open the URL in a new tab
+    window.open(magicMapUrl, '_blank');
+}
 
         function updateMaidenheadGridSquare(lat, lon) {
             const mapElement = document.getElementById('map');
