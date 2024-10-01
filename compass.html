@@ -287,7 +287,6 @@
     justify-content: center;
     align-items: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    position: relative;
     padding: 0;
 }
 
@@ -330,6 +329,7 @@
     transition: transform 0.3s ease;
     position: absolute; /* Ensures the arrow is centered */
 }
+
 
         /* Button for toggling compass */
         .toggle-buttons {
@@ -552,9 +552,9 @@ if (window.DeviceOrientationEvent) {
         // The compass heading (alpha) represents the device's rotation around the z-axis
         let alpha = event.alpha;
 
-        // Rotate the arrow directly to the north heading without any adjustment
+        // Rotate the arrow, but subtract 180 degrees to correct for the inverted rotation
         if (alpha !== null) {
-            compassArrow.style.transform = `rotate(${alpha}deg)`; // Rotate exactly by alpha
+            compassArrow.style.transform = `rotate(${alpha - 180}deg)`; // Correcting the compass by subtracting 180 degrees
             compassUnavailable.style.display = 'none';  // Hide the unavailable message
         } else {
             compassUnavailable.style.display = 'block';  // Show the unavailable message
@@ -563,6 +563,7 @@ if (window.DeviceOrientationEvent) {
 } else {
     document.getElementById('compass-unavailable').style.display = 'block';
 }
+
 
         // Function to toggle the compass visibility
         function toggleCompass() {
