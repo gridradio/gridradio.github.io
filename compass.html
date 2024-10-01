@@ -294,12 +294,12 @@
     position: absolute;
     width: 100%;
     height: 100%;
+    pointer-events: none; /* Prevent indicators from being affected by clicks */
     display: flex;
     justify-content: center;
     align-items: center;
-    color: black;
     font-weight: bold;
-    font-size: 12px; /* Smaller font size */
+    font-size: 12px;
 }
 
 .compass-n {
@@ -325,9 +325,9 @@
 .compass-arrow {
     font-size: 30px; /* Smaller arrow */
     color: red;
-    transform: rotate(0deg); /* No initial rotation */
+    transform: rotate(0deg); /* Initial rotation */
     transition: transform 0.3s ease;
-    position: absolute; /* Ensures the arrow is centered */
+    position: absolute;
 }
 
 
@@ -552,9 +552,9 @@ if (window.DeviceOrientationEvent) {
         // The compass heading (alpha) represents the device's rotation around the z-axis
         let alpha = event.alpha;
 
-        // Rotate the arrow, but subtract 180 degrees to correct for the inverted rotation
+        // Invert rotation to correct the direction (add 360 to handle negative rotations)
         if (alpha !== null) {
-            compassArrow.style.transform = `rotate(${alpha - 180}deg)`; // Correcting the compass by subtracting 180 degrees
+            compassArrow.style.transform = `rotate(${-alpha}deg)`; // Rotate inversely by alpha
             compassUnavailable.style.display = 'none';  // Hide the unavailable message
         } else {
             compassUnavailable.style.display = 'block';  // Show the unavailable message
@@ -563,6 +563,7 @@ if (window.DeviceOrientationEvent) {
 } else {
     document.getElementById('compass-unavailable').style.display = 'block';
 }
+
 
 
         // Function to toggle the compass visibility
