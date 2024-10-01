@@ -21,7 +21,7 @@
 <body>
     <div id="globe-container"></div>
 
-    <!-- Include Globe.gl from CDN (no need to import Three.js separately) -->
+    <!-- Include Globe.gl from CDN -->
     <script src="https://unpkg.com/globe.gl"></script>
 
     <script>
@@ -31,22 +31,33 @@
             .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
             .showAtmosphere(true)
             .atmosphereColor('lightblue')
-            .atmosphereAltitude(0.25)
+            .atmosphereAltitude(0.1)
+            .atmosphereRadiusScale(0.9)
             .width(window.innerWidth)
             .height(window.innerHeight)
             (document.getElementById('globe-container'));
 
+        // Reduce light intensity to avoid blowout
+        globe.scene().add(new THREE.AmbientLight(0xffffff, 0.3));
+        globe.scene().add(new THREE.DirectionalLight(0xffffff, 0.5));
+
         let userLat = 0;
         let userLon = 0;
         let userHeading = 0;
+        let userMarker = []; // To store the user's position marker
+        let directionLine = []; // To store the direction line
 
-        // Function to update the user's position on the globe
+        // Function to update the user's position on the globe and plot a point
         function updateGlobePosition(lat, lon) {
             userLat = lat;
             userLon = lon;
 
+            // Add or update the user's position marker
+            userMarker = [{ lat: userLat, lng: userLon, size: 1, color: 'red' }];
+            globe.pointsData(userMarker);
+
             // Center the globe on the user's location
-            globe.pointOfView({ lat: userLat, lng: userLon, altitude: 2.5 }, 500); // Zoom out a bit
+            globe.pointOfView({ lat: userLat, lng: userLon, altitude: 2.5 }, 500);
         }
 
         // Function to calculate the destination point along the great circle
@@ -77,14 +88,15 @@
 
             // Calculate the point 10,000 meters ahead in the direction the user is facing
             const destination = calculateGreatCirclePoint(userLat, userLon, userHeading, 10000);
-            
+
             // Draw or update the direction line
-            globe.pathsData([{
+            directionLine = [{
                 startLat: userLat,
                 startLng: userLon,
                 endLat: destination.lat,
                 endLng: destination.lon
-            }]);
+            }];
+            globe.pathsData(directionLine);
         }
 
         // Function to rotate the globe based on the heading
@@ -92,7 +104,8 @@
             const headingRad = heading * Math.PI / 180; // Convert heading to radians
 
             // Rotate the camera around the Y-axis (longitude)
-            globe.controls().rotateLeft(headingRad);
+            globe.controls().autoRotate = false;  // Disable auto-rotation
+            globe.controls().rotateLeft(headingRad - Math.PI / 2);  // Rotate by heading
             globe.controls().update();
         }
 
