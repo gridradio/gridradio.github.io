@@ -21,8 +21,7 @@
 <body>
     <div id="globe-container"></div>
 
-    <!-- Include Globe.gl and Three.js from CDN -->
-    <script src="https://unpkg.com/three@0.128.0/build/three.min.js"></script>
+    <!-- Include Globe.gl from CDN (no need to import Three.js separately) -->
     <script src="https://unpkg.com/globe.gl"></script>
 
     <script>
@@ -36,10 +35,6 @@
             .width(window.innerWidth)
             .height(window.innerHeight)
             (document.getElementById('globe-container'));
-
-        // Set up camera and globe position
-        const scene = globe.scene();
-        const camera = globe.camera();
 
         let userLat = 0;
         let userLon = 0;
@@ -58,10 +53,10 @@
         function calculateGreatCirclePoint(lat, lon, heading, distance) {
             const R = 6371e3; // Earth radius in meters
             const angularDistance = distance / R;
-            const headingRad = THREE.MathUtils.degToRad(heading);
+            const headingRad = heading * Math.PI / 180; // Convert to radians
 
-            const latRad = THREE.MathUtils.degToRad(lat);
-            const lonRad = THREE.MathUtils.degToRad(lon);
+            const latRad = lat * Math.PI / 180;
+            const lonRad = lon * Math.PI / 180;
 
             const newLatRad = Math.asin(Math.sin(latRad) * Math.cos(angularDistance) +
                 Math.cos(latRad) * Math.sin(angularDistance) * Math.cos(headingRad));
@@ -71,8 +66,8 @@
             );
 
             return {
-                lat: THREE.MathUtils.radToDeg(newLatRad),
-                lon: THREE.MathUtils.radToDeg(newLonRad)
+                lat: newLatRad * 180 / Math.PI,
+                lon: newLonRad * 180 / Math.PI
             };
         }
 
@@ -94,14 +89,11 @@
 
         // Function to rotate the globe based on the heading
         function rotateGlobeWithHeading(heading) {
-            const rotationY = THREE.MathUtils.degToRad(-heading); // Rotate the globe by heading
+            const headingRad = heading * Math.PI / 180; // Convert heading to radians
 
-            // Update globe rotation
-            globe.controls().autoRotate = false;  // Disable auto-rotation
-            globe.controls().enableDamping = true;
+            // Rotate the camera around the Y-axis (longitude)
+            globe.controls().rotateLeft(headingRad);
             globe.controls().update();
-
-            globe.controls().rotateLeft(rotationY);
         }
 
         // Geolocation to get the user's position and center the globe
