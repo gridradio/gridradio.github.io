@@ -278,8 +278,8 @@
     bottom: 20px;
     right: 20px;
     z-index: 1000;
-    width: 150px;
-    height: 150px;
+    width: 100px; /* Smaller circle */
+    height: 100px; /* Smaller circle */
     background-color: rgba(255, 255, 255, 0.9);
     border: 2px solid black;
     border-radius: 50%;
@@ -288,6 +288,7 @@
     align-items: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     position: relative;
+    padding: 0;
 }
 
 .compass-indicators {
@@ -299,7 +300,7 @@
     align-items: center;
     color: black;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 12px; /* Smaller font size */
 }
 
 .compass-n {
@@ -323,11 +324,13 @@
 }
 
 .compass-arrow {
-    font-size: 40px;
+    font-size: 30px; /* Smaller arrow */
     color: red;
-    transform: rotate(-45deg); /* Initial rotation correction for north */
+    transform: rotate(0deg); /* No initial rotation */
     transition: transform 0.3s ease;
+    position: absolute; /* Ensures the arrow is centered */
 }
+
         /* Button for toggling compass */
         .toggle-buttons {
             display: flex;
@@ -549,9 +552,9 @@ if (window.DeviceOrientationEvent) {
         // The compass heading (alpha) represents the device's rotation around the z-axis
         let alpha = event.alpha;
 
-        // Adjust the rotation to align with true north
+        // Rotate the arrow directly to the north heading without any adjustment
         if (alpha !== null) {
-            compassArrow.style.transform = `rotate(${alpha - 45}deg)`; // Adjust for the arrow pointing upwards (North)
+            compassArrow.style.transform = `rotate(${alpha}deg)`; // Rotate exactly by alpha
             compassUnavailable.style.display = 'none';  // Hide the unavailable message
         } else {
             compassUnavailable.style.display = 'block';  // Show the unavailable message
