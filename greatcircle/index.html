@@ -103,10 +103,13 @@
         function rotateGlobeWithHeading(heading) {
             const headingRad = heading * Math.PI / 180; // Convert heading to radians
 
-            // Rotate the camera around the Y-axis (longitude)
-            globe.controls().autoRotate = false;  // Disable auto-rotation
-            globe.controls().rotateLeft(headingRad - Math.PI / 2);  // Rotate by heading
+            // Adjust the camera's rotation to align with the compass
+            globe.controls().autoRotate = false; // Disable auto-rotation
+            globe.controls().enableDamping = true;
+
+            // Set the correct rotation of the camera to reflect heading
             globe.controls().update();
+            globe.controls().object.rotation.y = headingRad;  // Rotate the camera around the globe
         }
 
         // Geolocation to get the user's position and center the globe
