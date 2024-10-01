@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/leaflet.css" />
     <link rel="stylesheet" href="/Control.FullScreen.css" />
     <link rel="stylesheet" href="/easy-button.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="grid.radio">
@@ -283,12 +284,12 @@
             border-radius: 50%;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        .compass-arrow {
-            width: 50px;
-            height: 50px;
-            transform: rotate(0deg);
-            transition: transform 0.3s ease;
-        }
+.compass-arrow {
+    font-size: 50px;
+    color: black;
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+}
         .compass-unavailable {
             position: fixed;
             bottom: 20px;
@@ -442,9 +443,9 @@
             </div>
         </div>
     <!-- Compass UI -->
-    <div class="compass-container" id="compass-container">
-        <img src="/compass-arrow.png" alt="Compass Arrow" class="compass-arrow" id="compass-arrow">
-    </div>
+  <div class="compass-container" id="compass-container">
+    <i class="fas fa-location-arrow compass-arrow" id="compass-arrow"></i>
+</div>
 
     <!-- Fallback message if compass is unavailable -->
     <div class="compass-unavailable" id="compass-unavailable" style="display: none;">
