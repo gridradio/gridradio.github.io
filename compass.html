@@ -273,34 +273,61 @@
         .clock-card p {
             font-size: 1em;
         }
-              /* Compass styling */
-        .compass-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 10px;
-            border-radius: 50%;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-.compass-arrow {
-    font-size: 50px;
+.compass-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 150px;
+    height: 150px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.compass-indicators {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: black;
-    transform: rotate(0deg);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.compass-n {
+    position: absolute;
+    top: 5px;
+}
+
+.compass-s {
+    position: absolute;
+    bottom: 5px;
+}
+
+.compass-e {
+    position: absolute;
+    right: 5px;
+}
+
+.compass-w {
+    position: absolute;
+    left: 5px;
+}
+
+.compass-arrow {
+    font-size: 40px;
+    color: red;
+    transform: rotate(-45deg); /* Initial rotation correction for north */
     transition: transform 0.3s ease;
 }
-        .compass-unavailable {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 10px;
-            border-radius: 50%;
-            text-align: center;
-            font-size: 14px;
-            z-index: 1000;
-        }
         /* Button for toggling compass */
         .toggle-buttons {
             display: flex;
@@ -443,7 +470,13 @@
             </div>
         </div>
     <!-- Compass UI -->
-  <div class="compass-container" id="compass-container">
+<div class="compass-container" id="compass-container">
+    <div class="compass-indicators">
+        <span class="compass-n">N</span>
+        <span class="compass-s">S</span>
+        <span class="compass-e">E</span>
+        <span class="compass-w">W</span>
+    </div>
     <i class="fas fa-location-arrow compass-arrow" id="compass-arrow"></i>
 </div>
 
@@ -508,25 +541,25 @@
         ]);
 
      // DeviceOrientation API to display the compass
-        if (window.DeviceOrientationEvent) {
-            window.addEventListener('deviceorientation', function(event) {
-                let compassArrow = document.getElementById('compass-arrow');
-                let compassUnavailable = document.getElementById('compass-unavailable');
+if (window.DeviceOrientationEvent) {
+    window.addEventListener('deviceorientation', function(event) {
+        let compassArrow = document.getElementById('compass-arrow');
+        let compassUnavailable = document.getElementById('compass-unavailable');
 
-                // The compass heading (alpha) represents the device's rotation around the z-axis
-                let alpha = event.alpha;
+        // The compass heading (alpha) represents the device's rotation around the z-axis
+        let alpha = event.alpha;
 
-                // Apply a transformation to rotate the compass arrow
-                if (alpha !== null) {
-                    compassArrow.style.transform = `rotate(${alpha}deg)`;
-                    compassUnavailable.style.display = 'none';  // Hide the unavailable message
-                } else {
-                    compassUnavailable.style.display = 'block';  // Show the unavailable message
-                }
-            });
+        // Adjust the rotation to align with true north
+        if (alpha !== null) {
+            compassArrow.style.transform = `rotate(${alpha - 45}deg)`; // Adjust for the arrow pointing upwards (North)
+            compassUnavailable.style.display = 'none';  // Hide the unavailable message
         } else {
-            document.getElementById('compass-unavailable').style.display = 'block';
+            compassUnavailable.style.display = 'block';  // Show the unavailable message
         }
+    });
+} else {
+    document.getElementById('compass-unavailable').style.display = 'block';
+}
 
         // Function to toggle the compass visibility
         function toggleCompass() {
