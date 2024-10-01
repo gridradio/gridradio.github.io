@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Globe</title>
+    <title>3D Globe with Compass - Globe.gl</title>
     <style>
         body, html {
             margin: 0;
@@ -41,37 +41,20 @@
         const scene = globe.scene();
         const camera = globe.camera();
 
-        // Initial variables
         let userLat = 0;
         let userLon = 0;
         let userHeading = 0;
 
-        // Function to update user position on the globe
+        // Function to update the user's position on the globe
         function updateGlobePosition(lat, lon) {
             userLat = lat;
             userLon = lon;
 
             // Center the globe on the user's location
-            globe.pointOfView({ lat: userLat, lng: userLon, altitude: 2.5 }, 500); // Zoomed out a bit
+            globe.pointOfView({ lat: userLat, lng: userLon, altitude: 2.5 }, 500); // Zoom out a bit
         }
 
-        // Function to update direction based on compass heading
-        function updateDirectionLine(heading) {
-            userHeading = heading;
-
-            // Calculate the point 10,000 meters ahead in the direction the user is facing
-            const destination = calculateGreatCirclePoint(userLat, userLon, userHeading, 10000);
-            
-            // Clear any existing lines, then draw the new direction line
-            globe.pathsData([{
-                startLat: userLat,
-                startLng: userLon,
-                endLat: destination.lat,
-                endLng: destination.lon
-            }]);
-        }
-
-        // Function to calculate the great circle point
+        // Function to calculate the destination point along the great circle
         function calculateGreatCirclePoint(lat, lon, heading, distance) {
             const R = 6371e3; // Earth radius in meters
             const angularDistance = distance / R;
@@ -93,7 +76,35 @@
             };
         }
 
-        // Geolocation to get the user's position
+        // Function to update the line direction
+        function updateDirectionLine(heading) {
+            userHeading = heading;
+
+            // Calculate the point 10,000 meters ahead in the direction the user is facing
+            const destination = calculateGreatCirclePoint(userLat, userLon, userHeading, 10000);
+            
+            // Draw or update the direction line
+            globe.pathsData([{
+                startLat: userLat,
+                startLng: userLon,
+                endLat: destination.lat,
+                endLng: destination.lon
+            }]);
+        }
+
+        // Function to rotate the globe based on the heading
+        function rotateGlobeWithHeading(heading) {
+            const rotationY = THREE.MathUtils.degToRad(-heading); // Rotate the globe by heading
+
+            // Update globe rotation
+            globe.controls().autoRotate = false;  // Disable auto-rotation
+            globe.controls().enableDamping = true;
+            globe.controls().update();
+
+            globe.controls().rotateLeft(rotationY);
+        }
+
+        // Geolocation to get the user's position and center the globe
         if (navigator.geolocation) {
             navigator.geolocation.watchPosition(function(position) {
                 const lat = position.coords.latitude;
@@ -104,12 +115,13 @@
             alert("Geolocation is not supported by this browser.");
         }
 
-        // Device orientation to get the heading
+        // Device orientation to get the heading and update the direction
         if (window.DeviceOrientationEvent) {
             window.addEventListener('deviceorientation', function(event) {
-                const alpha = event.alpha;
+                const alpha = event.alpha;  // Compass heading
                 if (alpha !== null) {
-                    updateDirectionLine(alpha);
+                    rotateGlobeWithHeading(alpha);  // Rotate the globe with heading
+                    updateDirectionLine(alpha);     // Draw the line in the direction faced
                 }
             });
         } else {
