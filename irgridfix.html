@@ -702,27 +702,27 @@ proj4.defs([
             updateMap(defaultLat, defaultLon, 6); // More zoomed out
         }
 
-        function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accuracy) {
-            currentLat = lat; // Update global latitude variable
-            currentLon = lon; // Update global longitude variable
+function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accuracy) {
+    currentLat = lat; // Update global latitude variable
+    currentLon = lon; // Update global longitude variable
 
-            const latDMS = convertToDMS(lat, 'lat');
-            const lonDMS = convertToDMS(lon, 'lon');
+    const latDMS = convertToDMS(lat, 'lat');
+    const lonDMS = convertToDMS(lon, 'lon');
 
-            document.getElementById('latitude-longitude').innerText = `${lat.toFixed(6)},${lon.toFixed(6)}`;
-            document.getElementById('latitude-longitude-dms').innerText = `${latDMS}, ${lonDMS}`;
-            document.getElementById('location-accuracy').innerText = `Accuracy: ${accuracy}`;
-            document.getElementById('location-accuracy').style.display = accuracy !== 'N/A' ? 'block' : 'none';
+    document.getElementById('latitude-longitude').innerText = `${lat.toFixed(6)},${lon.toFixed(6)}`;
+    document.getElementById('latitude-longitude-dms').innerText = `${latDMS}, ${lonDMS}`;
+    document.getElementById('location-accuracy').innerText = `Accuracy: ${accuracy}`;
+    document.getElementById('location-accuracy').style.display = accuracy !== 'N/A' ? 'block' : 'none';
 
-            let altitudeText = `${altitudeFeet} ft | ${altitudeMeters} m`;
-            if (pressure !== 'N/A') {
-                altitudeText += ` | ${pressure}`;
-            }
+    let altitudeText = `${altitudeFeet} ft | ${altitudeMeters} m`;
+    if (pressure !== 'N/A') {
+        altitudeText += ` | ${pressure}`;
+    }
 
-            document.getElementById('altitude-values').innerText = altitudeText;
-            document.getElementById('altitude-card').style.display = altitudeMeters !== 'N/A' ? 'block' : 'none';
+    document.getElementById('altitude-values').innerText = altitudeText;
+    document.getElementById('altitude-card').style.display = altitudeMeters !== 'N/A' ? 'block' : 'none';
 
-   // Check if the location is in Ireland
+    // Check if the location is in Ireland
     if (isInIreland(lat, lon)) {
         // Use Irish Grid (EPSG:29903)
         const irishGrid = proj4('EPSG:4326', 'EPSG:29903', [lon, lat]);
@@ -730,21 +730,32 @@ proj4.defs([
         document.getElementById('os-grid').innerText = irishGridReference;
         document.getElementById('os-grid-card').style.display = 'block';
         document.querySelector('#os-grid-card .card-title').innerText = 'Irish Grid Reference';
+
+        // Hide WAB Square as it's not relevant for Ireland
+        document.getElementById('wab-square-card').style.display = 'none';
+
     } else {
         // Use OSGB Grid (EPSG:27700)
         const osgb = latLonToOSGB(lat, lon);
         if (osgb) {
             const osGridReference = toOSGridReference(osgb.easting, osgb.northing);
+            const wabSquare = osGridReferenceToWAB(osGridReference);
+
             document.getElementById('os-grid').innerText = osGridReference;
+            document.getElementById('wab-square').innerText = wabSquare;
+            
             document.getElementById('os-grid-card').style.display = 'block';
+            document.getElementById('wab-square-card').style.display = 'block';
             document.querySelector('#os-grid-card .card-title').innerText = 'OS Grid Reference';
         } else {
             document.getElementById('os-grid-card').style.display = 'none';
+            document.getElementById('wab-square-card').style.display = 'none';
         }
     }
 
     const maidenheadLocator = latLonToMaidenhead(lat, lon);
     document.getElementById('maidenhead-locator').innerText = maidenheadLocator;
+
 
             if (showCQZoneCard) {
                 const cqZone = getCQZone(lat, lon);
@@ -792,9 +803,7 @@ proj4.defs([
         }
 
 function toIrishGridReference(easting, northing) {
-    const e100k = Math.floor(easting / 100000);
-    const n100k = Math.floor(northing / 100000);
-
+    // Define the Irish grid letters matrix
     const gridLetters = [
         ['V', 'W', 'X'],
         ['N', 'O', 'P'],
@@ -802,8 +811,17 @@ function toIrishGridReference(easting, northing) {
         ['F', 'G', 'I']
     ];
 
-    const l1 = e100k - 3; // Irish grid offset for easting
-    const l2 = n100k - 2; // Irish grid offset for northing
+    const e100k = Math.floor(easting / 100000);
+    const n100k = Math.floor(northing / 100000);
+
+    // Ensure the indices stay within bounds
+    const l1 = e100k - 1; // Correct offset for Irish grid easting
+    const l2 = n100k - 2; // Correct offset for Irish grid northing
+
+    if (l1 < 0 || l1 >= gridLetters[0].length || l2 < 0 || l2 >= gridLetters.length) {
+        return "Invalid Grid Reference";
+    }
+
     const gridSquare = gridLetters[l2][l1];
 
     const eastingWithin = Math.floor(easting % 100000);
@@ -814,6 +832,7 @@ function toIrishGridReference(easting, northing) {
 
     return gridSquare + " " + easting6 + " " + northing6;
 }
+
 
       
         function convertToDMS(coordinate, type) {
