@@ -824,9 +824,9 @@ function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accurac
             }
         }
 
-// Function to convert the easting and northing to the Irish Grid reference format
+// Function to format Irish Grid Reference (Grid Letter + Easting/Northing)
 function toIrishGridReference(easting, northing) {
-    // Define the Irish grid letters matrix
+    // Define the Irish grid letters matrix (adjust based on the map of Ireland)
     const gridLetters = [
         ['V', 'W', 'X'],  // Top row (North)
         ['N', 'O', 'P'],  // Second row
@@ -835,12 +835,17 @@ function toIrishGridReference(easting, northing) {
     ];
 
     // Get the 100k digit of easting and northing
-    const e100k = Math.floor(easting / 100000);
-    const n100k = Math.floor(northing / 100000);
+    const e100k = Math.floor(easting / 100000);  // Get the 100k block for easting
+    const n100k = Math.floor(northing / 100000); // Get the 100k block for northing
 
-    // Adjust to match the Irish grid origin (shift the rows and columns properly)
-    const l1 = e100k - 2;  // Adjust the easting to the Irish grid system (200km+ starts at O)
-    const l2 = 3 - n100k;  // Adjust the northing to the Irish grid system (from bottom to top)
+    // Validate the easting and northing ranges for the Irish Grid
+    if (e100k < 2 || e100k > 4 || n100k < 0 || n100k > 3) {
+        return "Invalid Grid Reference"; // Return error if out of bounds
+    }
+
+    // Adjust the grid letters based on the valid range
+    const l1 = e100k - 2;  // Adjust for easting blocks (since letters start at 'O' for 200k)
+    const l2 = 3 - n100k;  // Adjust northing to reverse from top to bottom grid letters
 
     // Ensure the indices are within bounds of the grid letters array
     if (l1 < 0 || l1 >= gridLetters[0].length || l2 < 0 || l2 >= gridLetters.length) {
@@ -861,15 +866,6 @@ function toIrishGridReference(easting, northing) {
 }
 
 
-
-
-
-
-
-
-
-
-      
         function convertToDMS(coordinate, type) {
             const absolute = Math.abs(coordinate);
             const degrees = Math.floor(absolute);
