@@ -825,36 +825,38 @@ function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accurac
         }
 
 // Function to format Irish Grid Reference (Grid Letter + Easting/Northing)
+        // Format Irish Grid Reference (including grid letter)
 function toIrishGridReference(easting, northing) {
-    // Irish Grid Letters
+    // Irish Grid Letters matrix
     const gridLetters = [
-        ['V', 'W', 'X'],
-        ['N', 'O', 'P'],
-        ['H', 'J', 'K'],
-        ['F', 'G', 'I']
+        ['V', 'W', 'X'], // Top row (North)
+        ['N', 'O', 'P'], // Second row
+        ['H', 'J', 'K'], // Third row
+        ['F', 'G', 'I']  // Bottom row (South)
     ];
 
     // Get the 100k digit of easting and northing
     const e100k = Math.floor(easting / 100000);
     const n100k = Math.floor(northing / 100000);
 
-    // Validate easting/northing range
- //   if (e100k < 2 || e100k > 4 || n100k < 0 || n100k > 3) {
-   //     return "Invalid Grid Reference";
-    //}
+    // Validate the easting and northing ranges
+    if (e100k < 2 || e100k > 4 || n100k < 0 || n100k > 3) {
+        return "Invalid Grid Reference";
+    }
 
-    // Calculate letter index (adjust grid origin)
+    // Adjust grid letter indexes (from 200km origin in the Irish Grid system)
     const l1 = e100k - 2;
     const l2 = 3 - n100k;
-    
-    // If out of bounds
-  //  if (l1 < 0 || l1 >= gridLetters[0].length || l2 < 0 || l2 >= gridLetters.length) {
-    //    return "Invalid Grid Reference";
-    //}
 
+    // Check if indexes are out of bounds
+    if (l1 < 0 || l1 >= gridLetters[0].length || l2 < 0 || l2 >= gridLetters.length) {
+        return "Invalid Grid Reference";
+    }
+
+    // Get grid letter
     const gridSquare = gridLetters[l2][l1];
 
-    // Remainder within 100k square
+    // Calculate remainder within the 100k grid square
     const eastingWithin = Math.floor(easting % 100000);
     const northingWithin = Math.floor(northing % 100000);
 
@@ -864,7 +866,6 @@ function toIrishGridReference(easting, northing) {
 
     return `${gridSquare} ${easting5} ${northing5}`;
 }
-
 
 
         function convertToDMS(coordinate, type) {
