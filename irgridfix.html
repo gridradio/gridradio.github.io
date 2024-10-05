@@ -747,17 +747,15 @@ function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accurac
 
     // Check if the location is in Ireland
     if (isInIreland(lat, lon)) {
-        // Use Irish Grid (EPSG:29903)
-        const irishGrid = latLonToIrishGrid(lat, lon);
-        const irishGridReference = toIrishGridReference(irishGrid.easting, irishGrid.northing);
-        document.getElementById('os-grid').innerText = irishGridReference;
-        document.getElementById('os-grid-card').style.display = 'block';
-        document.querySelector('#os-grid-card .card-title').innerText = 'Irish Grid Reference';
-
-        // Calculate WAB square for Irish grid (first letter, 1st and 4th numbers)
-        const wabSquare = calculateWABForIrishGrid(irishGridReference);
-        document.getElementById('wab-square').innerText = wabSquare;
-        document.getElementById('wab-square-card').style.display = 'block';
+    const irishGrid = latLonToIrishGrid(lat, lon); // Convert WGS84 to Irish Grid
+    const irishGridReference = toIrishGridReference(irishGrid.easting, irishGrid.northing); // Format the Irish Grid reference
+    document.getElementById('os-grid').innerText = irishGridReference;
+    document.getElementById('os-grid-card').style.display = 'block';
+    document.querySelector('#os-grid-card .card-title').innerText = 'Irish Grid Reference';
+    
+    const wabSquare = calculateWABForIrishGrid(irishGridReference);
+    document.getElementById('wab-square').innerText = wabSquare;
+    document.getElementById('wab-square-card').style.display = 'block';
 
     } else {
         // Use OSGB Grid (EPSG:27700)
@@ -836,27 +834,32 @@ function toIrishGridReference(easting, northing) {
         ['F', 'G', 'I']
     ];
 
-    const e100k = Math.floor(easting / 100000);  // Get the 100k digit of easting
-    const n100k = Math.floor(northing / 100000); // Get the 100k digit of northing
+    // Get the 100k digit of easting and northing
+    const e100k = Math.floor(easting / 100000);
+    const n100k = Math.floor(northing / 100000);
 
-    // Ensure valid indices for grid letters
+    // Adjust the offset for the Irish Grid
     const l1 = e100k - 1; // Adjusted to match the Irish grid easting offset
     const l2 = n100k - 1; // Adjusted to match the Irish grid northing offset
 
+    // Check if indices are valid for the grid letter lookup
     if (l1 < 0 || l1 >= gridLetters[0].length || l2 < 0 || l2 >= gridLetters.length) {
-        return "Invalid Grid Reference"; // Return if out of bounds
+        return "Invalid Grid Reference"; // Return error if out of bounds
     }
 
     const gridSquare = gridLetters[l2][l1]; // Get the correct grid letter
 
+    // Calculate the remainder within the 100k grid square
     const eastingWithin = Math.floor(easting % 100000);
     const northingWithin = Math.floor(northing % 100000);
 
-    const easting6 = Math.floor(eastingWithin / 100).toString().padStart(3, '0');
-    const northing6 = Math.floor(northingWithin / 100).toString().padStart(3, '0');
+    // Convert to six-digit precision (similar to OS Grid references)
+    const easting6 = Math.floor(eastingWithin / 10).toString().padStart(5, '0');
+    const northing6 = Math.floor(northingWithin / 10).toString().padStart(5, '0');
 
     return `${gridSquare} ${easting6} ${northing6}`;
 }
+
 
 
 
