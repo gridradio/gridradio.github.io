@@ -500,6 +500,24 @@ proj4.defs([
             return gridSquare + " " + easting6 + " " + northing6;
         }
 
+        function calculateWABForIrishGrid(irishGridReference) {
+    // Irish grid reference format is typically like "N 12345 67890"
+    // We need the first letter and the 1st and 4th numbers of the easting and northing
+
+    const parts = irishGridReference.split(' ');
+    const gridLetter = parts[0];
+    const easting = parts[1];
+    const northing = parts[2];
+
+    // Extract the first number from easting and the fourth number from northing
+    const wabEastingDigit = easting[0];  // First digit of easting
+    const wabNorthingDigit = northing[3]; // Fourth digit of northing
+
+    // Combine them into the WAB square format
+    return `${gridLetter}${wabEastingDigit}${wabNorthingDigit}`;
+}
+
+
         function osGridReferenceToWAB(gridReference) {
             const letters = gridReference.slice(0, 2);
             const eastingNorthing = gridReference.slice(2).replace(/\s+/g, '');
@@ -731,8 +749,10 @@ function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accurac
         document.getElementById('os-grid-card').style.display = 'block';
         document.querySelector('#os-grid-card .card-title').innerText = 'Irish Grid Reference';
 
-        // Hide WAB Square as it's not relevant for Ireland
-        document.getElementById('wab-square-card').style.display = 'none';
+        // Calculate WAB square for Irish grid (first letter, 1st and 4th numbers)
+        const wabSquare = calculateWABForIrishGrid(irishGridReference);
+        document.getElementById('wab-square').innerText = wabSquare;
+        document.getElementById('wab-square-card').style.display = 'block';
 
     } else {
         // Use OSGB Grid (EPSG:27700)
