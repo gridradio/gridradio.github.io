@@ -832,11 +832,12 @@ function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accurac
         }
 
 function toIrishGridReference(easting, northing) {
+    // Irish Grid Letters matrix (for 100k grid squares)
     const gridLetters = [
-        ['V', 'W', 'X'], // Top row (North)
-        ['N', 'O', 'P'], // Second row
+        ['V', 'W', 'X'], // Northernmost row
+        ['N', 'O', 'P'], // Second row from top
         ['H', 'J', 'K'], // Third row
-        ['F', 'G', 'I']  // Bottom row (South)
+        ['F', 'G', 'I']  // Southernmost row
     ];
 
     // Get the 100k digit of easting and northing
@@ -853,14 +854,11 @@ function toIrishGridReference(easting, northing) {
         return "Invalid Grid Reference";
     }
 
-    // Adjust grid letter indexes (from 200km origin in the Irish Grid system)
-    const l1 = e100k;  // Adjust for Irish Grid
-    const l2 = 3 - n100k;
+    // Adjust grid letter indexes based on the matrix origin
+    const l1 = e100k;  // Adjust for the Irish Grid (0,1,2)
+    const l2 = 3 - n100k; // Flip northing to match Irish Grid origin
 
-    // Debugging logs for grid letter calculation
-    console.log('l1 (Easting Index):', l1, 'l2 (Northing Index):', l2);
-
-    // Check if indexes are out of bounds
+    // Check if indexes are valid
     if (l1 < 0 || l1 >= gridLetters[0].length || l2 < 0 || l2 >= gridLetters.length) {
         console.log('Invalid Grid Reference due to out-of-bounds grid letter indexes');
         return "Invalid Grid Reference";
@@ -869,7 +867,7 @@ function toIrishGridReference(easting, northing) {
     // Get grid letter
     const gridSquare = gridLetters[l2][l1];
 
-    // Calculate remainder within the 100k grid square
+    // Calculate the remainder within the 100k grid square
     const eastingWithin = Math.floor(easting % 100000);
     const northingWithin = Math.floor(northing % 100000);
 
@@ -881,6 +879,7 @@ function toIrishGridReference(easting, northing) {
 
     return `${gridSquare} ${easting5} ${northing5}`;
 }
+
 
 
 
