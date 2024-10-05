@@ -458,10 +458,47 @@ proj4.defs([
     ['EPSG:4326', '+proj=longlat +datum=WGS84 +no_defs']
 ]);
 
+// Function to apply the Helmert transformation (WGS84 to IRE65)
+function applyHelmertTransformation(lat, lon) {
+    // Helmert transformation parameters (WGS84 to IRE65)
+    const dX = -482.530;
+    const dY = 130.596;
+    const dZ = -564.557;
 
-        // Function to convert latitude/longitude to Irish Grid (EPSG:29903)
+    // Convert latitude and longitude to radians
+    const latRad = lat * Math.PI / 180;
+    const lonRad = lon * Math.PI / 180;
+
+    // Approximate values for the WGS84 ellipsoid
+    const a = 6378137.0; // Semi-major axis
+    const f = 1 / 298.257223563; // Flattening
+    const eSq = f * (2 - f); // Square of eccentricity
+
+    const N = a / Math.sqrt(1 - eSq * Math.sin(latRad) * Math.sin(latRad));
+
+    const X = (N + 0) * Math.cos(latRad) * Math.cos(lonRad);
+    const Y = (N + 0) * Math.cos(latRad) * Math.sin(lonRad);
+    const Z = ((1 - eSq) * N + 0) * Math.sin(latRad);
+
+    // Apply translation
+    const X_ire65 = X + dX;
+    const Y_ire65 = Y + dY;
+    const Z_ire65 = Z + dZ;
+
+    // Convert back to lat/lon
+    const p = Math.sqrt(X_ire65 * X_ire65 + Y_ire65 * Y_ire65);
+    const latIre65 = Math.atan2(Z_ire65, p * (1 - eSq)) * 180 / Math.PI;
+    const lonIre65 = Math.atan2(Y_ire65, X_ire65) * 180 / Math.PI;
+
+    return [latIre65, lonIre65];
+}
+// Function to convert WGS84 to Irish Grid using the Helmert transformation
 function latLonToIrishGrid(lat, lon) {
-    const irishGrid = proj4('EPSG:4326', 'EPSG:29903', [lon, lat]);
+    // Apply Helmert transformation to shift to IRE65 datum
+    const [latIre65, lonIre65] = applyHelmertTransformation(lat, lon);
+
+    // Convert from shifted IRE65 lat/lon to Irish Grid (EPSG:29903)
+    const irishGrid = proj4('EPSG:4326', 'EPSG:29903', [lonIre65, latIre65]);
     return { easting: irishGrid[0], northing: irishGrid[1] };
 }
 
