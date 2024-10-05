@@ -458,6 +458,7 @@ proj4.defs([
     ['EPSG:4326', '+proj=longlat +datum=WGS84 +no_defs']
 ]);
 
+
         // Function to convert latitude/longitude to Irish Grid (EPSG:29903)
 function latLonToIrishGrid(lat, lon) {
     const irishGrid = proj4('EPSG:4326', 'EPSG:29903', [lon, lat]);
@@ -838,15 +839,16 @@ function toIrishGridReference(easting, northing) {
     const e100k = Math.floor(easting / 100000);
     const n100k = Math.floor(northing / 100000);
 
-    // Ensure the indices stay within bounds
-    const l1 = e100k - 3; // Correct offset for Irish grid easting
-    const l2 = n100k - 2; // Correct offset for Irish grid northing
+    // Ensure the indices stay within bounds (Irish grid is smaller than OS grid)
+    const l1 = e100k - 1; // Adjusted to match the Irish grid easting offset
+    const l2 = n100k - 1; // Adjusted to match the Irish grid northing offset
 
+    // Ensure valid indices for grid letters
     if (l1 < 0 || l1 >= gridLetters[0].length || l2 < 0 || l2 >= gridLetters.length) {
-        return "Invalid Grid Reference";
+        return "Invalid Grid Reference"; // Return if out of bounds
     }
 
-    const gridSquare = gridLetters[l2][l1];
+    const gridSquare = gridLetters[l2][l1]; // Get the correct grid letter
 
     const eastingWithin = Math.floor(easting % 100000);
     const northingWithin = Math.floor(northing % 100000);
@@ -854,8 +856,9 @@ function toIrishGridReference(easting, northing) {
     const easting6 = Math.floor(eastingWithin / 100).toString().padStart(3, '0');
     const northing6 = Math.floor(northingWithin / 100).toString().padStart(3, '0');
 
-    return gridSquare + " " + easting6 + " " + northing6;
+    return `${gridSquare} ${easting6} ${northing6}`;
 }
+
 
 
       
