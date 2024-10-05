@@ -463,13 +463,12 @@ function latLonToIrishGrid(lat, lon) {
     // Convert latitude and longitude to Irish Grid using EPSG:29903 (TM75)
     const irishGrid = proj4('EPSG:4326', 'EPSG:29903', [lon, lat]);
 
-    // Debugging logs
-    console.log('Latitude:', lat, 'Longitude:', lon);
-    console.log('Easting:', irishGrid[0], 'Northing:', irishGrid[1]);
+    const easting = Math.floor(irishGrid[0]);
+    const northing = Math.floor(irishGrid[1]);
 
-    return { easting: irishGrid[0], northing: irishGrid[1] };
+    // Pass the easting and northing to toIrishGridReference to handle grid letter and formatting
+    return toIrishGridReference(easting, northing);
 }
-
 
 
         function latLonToOSGB(lat, lon) {
@@ -832,13 +831,8 @@ function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accurac
             }
         }
 
-function latLonToIrishGrid(lat, lon) {
-    // Use EPSG:29903 for Irish Grid Reference
-    const irishGrid = proj4('EPSG:4326', 'EPSG:29903', [lon, lat]);
 
-    const easting = Math.floor(irishGrid[0]);
-    const northing = Math.floor(irishGrid[1]);
-
+function toIrishGridReference(easting, northing) {
     // 5x5 grid letters, missing I
     const gridLetters = [
         ['V', 'W', 'X', 'Y', 'Z'], // Row 1 (top row)
