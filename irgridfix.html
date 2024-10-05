@@ -458,6 +458,11 @@ proj4.defs([
     ['EPSG:4326', '+proj=longlat +datum=WGS84 +no_defs']
 ]);
 
+        // Function to convert latitude/longitude to Irish Grid (EPSG:29903)
+function latLonToIrishGrid(lat, lon) {
+    const irishGrid = proj4('EPSG:4326', 'EPSG:29903', [lon, lat]);
+    return { easting: irishGrid[0], northing: irishGrid[1] };
+}
 
         function latLonToOSGB(lat, lon) {
             if (lat < 49.0 || lat > 61.0 || lon < -8.0 || lon > 2.0) {
@@ -743,8 +748,8 @@ function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accurac
     // Check if the location is in Ireland
     if (isInIreland(lat, lon)) {
         // Use Irish Grid (EPSG:29903)
-        const irishGrid = proj4('EPSG:4326', 'EPSG:29903', [lon, lat]);
-        const irishGridReference = toIrishGridReference(irishGrid[0], irishGrid[1]);
+        const irishGrid = latLonToIrishGrid(lat, lon);
+        const irishGridReference = toIrishGridReference(irishGrid.easting, irishGrid.northing);
         document.getElementById('os-grid').innerText = irishGridReference;
         document.getElementById('os-grid-card').style.display = 'block';
         document.querySelector('#os-grid-card .card-title').innerText = 'Irish Grid Reference';
@@ -835,7 +840,7 @@ function toIrishGridReference(easting, northing) {
     const n100k = Math.floor(northing / 100000);
 
     // Ensure the indices stay within bounds
-    const l1 = e100k - 1; // Correct offset for Irish grid easting
+    const l1 = e100k - 3; // Correct offset for Irish grid easting
     const l2 = n100k - 2; // Correct offset for Irish grid northing
 
     if (l1 < 0 || l1 >= gridLetters[0].length || l2 < 0 || l2 >= gridLetters.length) {
