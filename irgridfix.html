@@ -833,12 +833,13 @@ function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accurac
         }
 
 function toIrishGridReference(easting, northing) {
-    const gridLetters = [
-        ['V', 'W', 'X'], // Top row (North)
-        ['N', 'O', 'P'], // Second row
-        ['H', 'J', 'K'], // Third row
-        ['F', 'G', 'I']  // Bottom row (South)
-    ];
+const gridLetters = [
+    ['V', 'W', 'X', 'Y', 'Z'],  // Row 1 (top row)
+    ['Q', 'R', 'S', 'T', 'U'],  // Row 2
+    ['L', 'M', 'N', 'O', 'P'],  // Row 3
+    ['F', 'G', 'H', 'J', 'K'],  // Row 4
+    ['A', 'B', 'C', 'D', 'E']   // Row 5 (bottom row)
+];
 
     // Get the 100k digit of easting and northing
     const e100k = Math.floor(easting / 100000);
