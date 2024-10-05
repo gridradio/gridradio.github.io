@@ -454,7 +454,7 @@
 
 proj4.defs([
     ['EPSG:27700', '+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs'],
-    ['EPSG:29903', '+proj=tmerc +lat_0=53.5 +lon_0=-8 +k=1.000035 +x_0=200000 +y_0=250000 +ellps=mod_airy +datum=ire65 +units=m +no_defs'],
+    ['EPSG:29903', '+proj=tmerc +lat_0=53.5 +lon_0=-8 +k=1.000035 +x_0=200000 +y_0=250000 +ellps=mod_airy +towgs84=-482.530,130.596,-564.557,1.042,0.214,0.631,-8.15 +datum=ire65 +units=m +no_defs',
     ['EPSG:4326', '+proj=longlat +datum=WGS84 +no_defs']
 ]);
 
@@ -862,7 +862,7 @@ function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accurac
             }
         }
 
-// Function to convert easting/northing to Irish Grid reference
+// Function to convert the easting and northing to the Irish Grid reference format
 function toIrishGridReference(easting, northing) {
     // Define the Irish grid letters matrix
     const gridLetters = [
@@ -875,6 +875,11 @@ function toIrishGridReference(easting, northing) {
     // Get the 100k digit of easting and northing
     const e100k = Math.floor(easting / 100000);  // Get the 100k block for easting
     const n100k = Math.floor(northing / 100000); // Get the 100k block for northing
+
+    // Check for valid grid positions
+    if (e100k < 2 || e100k > 4 || n100k < 0 || n100k > 3) {
+        return "Invalid Grid Reference";
+    }
 
     // Adjust to match the Irish grid origin (shift the rows and columns properly)
     const l1 = e100k - 2;  // Adjust the easting to the Irish grid system (200km+ starts at O)
