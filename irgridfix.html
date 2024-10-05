@@ -839,18 +839,18 @@ function toIrishGridReference(easting, northing) {
     const n100k = Math.floor(northing / 100000);
 
     // Validate easting/northing range
-    if (e100k < 2 || e100k > 4 || n100k < 0 || n100k > 3) {
-        return "Invalid Grid Reference";
-    }
+ //   if (e100k < 2 || e100k > 4 || n100k < 0 || n100k > 3) {
+   //     return "Invalid Grid Reference";
+    //}
 
     // Calculate letter index (adjust grid origin)
     const l1 = e100k - 2;
     const l2 = 3 - n100k;
-
+    
     // If out of bounds
-    if (l1 < 0 || l1 >= gridLetters[0].length || l2 < 0 || l2 >= gridLetters.length) {
-        return "Invalid Grid Reference";
-    }
+  //  if (l1 < 0 || l1 >= gridLetters[0].length || l2 < 0 || l2 >= gridLetters.length) {
+    //    return "Invalid Grid Reference";
+    //}
 
     const gridSquare = gridLetters[l2][l1];
 
