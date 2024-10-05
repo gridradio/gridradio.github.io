@@ -832,19 +832,18 @@ function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accurac
         }
 
 function toIrishGridReference(easting, northing) {
-    // Irish Grid Letters matrix (for 100k grid squares)
     const gridLetters = [
-        ['V', 'W', 'X'], // Northernmost row
-        ['N', 'O', 'P'], // Second row from top
+        ['V', 'W', 'X'], // Top row (North)
+        ['N', 'O', 'P'], // Second row
         ['H', 'J', 'K'], // Third row
-        ['F', 'G', 'I']  // Southernmost row
+        ['F', 'G', 'I']  // Bottom row (South)
     ];
 
     // Get the 100k digit of easting and northing
     const e100k = Math.floor(easting / 100000);
     const n100k = Math.floor(northing / 100000);
 
-    // Debugging logs
+    // Debugging logs to check 100k values
     console.log('Easting:', easting, 'Northing:', northing);
     console.log('100k Easting:', e100k, '100k Northing:', n100k);
 
@@ -854,31 +853,26 @@ function toIrishGridReference(easting, northing) {
         return "Invalid Grid Reference";
     }
 
-    // Adjust grid letter indexes based on the matrix origin
-    const l1 = e100k;  // Adjust for the Irish Grid (0,1,2)
-    const l2 = 3 - n100k; // Flip northing to match Irish Grid origin
+    const l1 = e100k;
+    const l2 = 3 - n100k; // Adjust northing index
 
-    // Check if indexes are valid
-    if (l1 < 0 || l1 >= gridLetters[0].length || l2 < 0 || l2 >= gridLetters.length) {
-        console.log('Invalid Grid Reference due to out-of-bounds grid letter indexes');
-        return "Invalid Grid Reference";
-    }
+    // Debugging logs for the letter mapping
+    console.log('Letter Index (l1, l2):', l1, l2);
 
-    // Get grid letter
     const gridSquare = gridLetters[l2][l1];
 
-    // Calculate the remainder within the 100k grid square
     const eastingWithin = Math.floor(easting % 100000);
     const northingWithin = Math.floor(northing % 100000);
 
-    // Convert to 5-digit precision
     const easting5 = Math.floor(eastingWithin / 10).toString().padStart(5, '0');
     const northing5 = Math.floor(northingWithin / 10).toString().padStart(5, '0');
 
-    console.log('Final Irish Grid Reference:', `${gridSquare} ${easting5} ${northing5}`);
+    // Debugging logs for the final reference
+    console.log('Irish Grid Reference:', `${gridSquare} ${easting5} ${northing5}`);
 
     return `${gridSquare} ${easting5} ${northing5}`;
 }
+
 
 
 
