@@ -828,37 +828,38 @@ function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accurac
 function toIrishGridReference(easting, northing) {
     // Define the Irish grid letters matrix
     const gridLetters = [
-        ['V', 'W', 'X'],
-        ['N', 'O', 'P'],
-        ['H', 'J', 'K'],
-        ['F', 'G', 'I']
+        ['V', 'W', 'X'],  // Row 1
+        ['N', 'O', 'P'],  // Row 2
+        ['H', 'J', 'K'],  // Row 3
+        ['F', 'G', 'I']   // Row 4
     ];
 
     // Get the 100k digit of easting and northing
     const e100k = Math.floor(easting / 100000);
     const n100k = Math.floor(northing / 100000);
 
-    // Adjust the offsets for the Irish grid (1-based indices)
-    const l1 = e100k - 1;
-    const l2 = n100k - 2;
+    // Adjust the indices to account for the grid square's southwest origin
+    const l1 = e100k - 1;  // Adjusted for Irish grid easting (X=3 is too far right, so minus 1)
+    const l2 = 3 - (n100k - 2); // Adjusted for Irish grid northing (grid rows go from bottom to top)
 
-    // Validate that the grid letter indices are within bounds
+    // Ensure the indices are within bounds
     if (l1 < 0 || l1 >= gridLetters[0].length || l2 < 0 || l2 >= gridLetters.length) {
         return "Invalid Grid Reference";
     }
 
     const gridSquare = gridLetters[l2][l1]; // Get the correct grid letter
 
-    // Get the remainder within the 100k grid square
+    // Calculate the remainder within the 100k grid square
     const eastingWithin = Math.floor(easting % 100000);
     const northingWithin = Math.floor(northing % 100000);
 
-    // Convert easting and northing to six-digit precision
+    // Convert easting and northing to five-digit precision
     const easting5 = Math.floor(eastingWithin / 10).toString().padStart(5, '0');
     const northing5 = Math.floor(northingWithin / 10).toString().padStart(5, '0');
 
     return `${gridSquare} ${easting5} ${northing5}`;
 }
+
 
 
 
