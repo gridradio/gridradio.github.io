@@ -828,26 +828,27 @@ function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accurac
 function toIrishGridReference(easting, northing) {
     // Define the Irish grid letters matrix
     const gridLetters = [
-        ['V', 'W', 'X'],  // Row 1
+        ['V', 'W', 'X'],  // Row 1 (North)
         ['N', 'O', 'P'],  // Row 2
         ['H', 'J', 'K'],  // Row 3
-        ['F', 'G', 'I']   // Row 4
+        ['F', 'G', 'I']   // Row 4 (South)
     ];
 
     // Get the 100k digit of easting and northing
     const e100k = Math.floor(easting / 100000);
     const n100k = Math.floor(northing / 100000);
 
-    // Adjust the indices to account for the grid square's southwest origin
-    const l1 = e100k - 1;  // Adjusted for Irish grid easting (X=3 is too far right, so minus 1)
-    const l2 = 3 - (n100k - 2); // Adjusted for Irish grid northing (grid rows go from bottom to top)
+    // Adjust to match the Irish grid origin (shift the rows and columns properly)
+    const l1 = e100k;  // No adjustment for easting
+    const l2 = 3 - n100k; // Inverse the rows as northing increases from bottom to top
 
-    // Ensure the indices are within bounds
+    // Ensure the indices are within bounds of the grid letters array
     if (l1 < 0 || l1 >= gridLetters[0].length || l2 < 0 || l2 >= gridLetters.length) {
-        return "Invalid Grid Reference";
+        return "Invalid Grid Reference"; // Return error if the coordinates are out of bounds
     }
 
-    const gridSquare = gridLetters[l2][l1]; // Get the correct grid letter
+    // Get the grid letter based on the calculated indices
+    const gridSquare = gridLetters[l2][l1];
 
     // Calculate the remainder within the 100k grid square
     const eastingWithin = Math.floor(easting % 100000);
@@ -859,6 +860,7 @@ function toIrishGridReference(easting, northing) {
 
     return `${gridSquare} ${easting5} ${northing5}`;
 }
+
 
 
 
