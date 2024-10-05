@@ -461,12 +461,18 @@ proj4.defs([
 function latLonToIrishGrid(lat, lon) {
     const irishGrid = proj4('EPSG:4326', 'EPSG:19972', [lon, lat]);
 
+    // Manually adjust the easting and northing by subtracting the false easting and northing
+    const adjustedEasting = irishGrid[0] - 600000;
+    const adjustedNorthing = irishGrid[1] - 750000;
+
     // Debugging logs
     console.log('Latitude:', lat, 'Longitude:', lon);
-    console.log('Easting:', irishGrid[0], 'Northing:', irishGrid[1]);
+    console.log('Original Easting:', irishGrid[0], 'Original Northing:', irishGrid[1]);
+    console.log('Adjusted Easting:', adjustedEasting, 'Adjusted Northing:', adjustedNorthing);
 
-    return { easting: irishGrid[0], northing: irishGrid[1] };
+    return { easting: adjustedEasting, northing: adjustedNorthing };
 }
+
 
         function latLonToOSGB(lat, lon) {
             if (lat < 49.0 || lat > 61.0 || lon < -8.0 || lon > 2.0) {
@@ -828,7 +834,6 @@ function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accurac
             }
         }
 
-// Format Irish Grid Reference (including grid letter)
 function toIrishGridReference(easting, northing) {
     // Irish Grid Letters matrix
     const gridLetters = [
@@ -838,22 +843,22 @@ function toIrishGridReference(easting, northing) {
         ['F', 'G', 'I']  // Bottom row (South)
     ];
 
-    // Get the 100k digit of easting and northing
+    // Calculate the 100k digit of easting and northing
     const e100k = Math.floor(easting / 100000);
     const n100k = Math.floor(northing / 100000);
 
     // Debugging logs
-    console.log('Easting:', easting, 'Northing:', northing);
+    console.log('Adjusted Easting:', easting, 'Adjusted Northing:', northing);
     console.log('100k Easting:', e100k, '100k Northing:', n100k);
 
     // Validate the easting and northing ranges
-    if (e100k < 2 || e100k > 4 || n100k < 0 || n100k > 3) {
+    if (e100k < 0 || e100k > 2 || n100k < 0 || n100k > 3) {
         console.log('Invalid Grid Reference due to out-of-bounds easting/northing');
         return "Invalid Grid Reference";
     }
 
     // Adjust grid letter indexes (from 200km origin in the Irish Grid system)
-    const l1 = e100k - 2;
+    const l1 = e100k;  // Adjust for Irish Grid
     const l2 = 3 - n100k;
 
     // Debugging logs for grid letter calculation
@@ -868,15 +873,9 @@ function toIrishGridReference(easting, northing) {
     // Get grid letter
     const gridSquare = gridLetters[l2][l1];
 
-    // Debugging log for grid letter
-    console.log('Grid Letter:', gridSquare);
-
     // Calculate remainder within the 100k grid square
     const eastingWithin = Math.floor(easting % 100000);
     const northingWithin = Math.floor(northing % 100000);
-
-    // Debugging logs for easting/northing within 100k
-    console.log('Easting within 100k:', eastingWithin, 'Northing within 100k:', northingWithin);
 
     // Convert to 5-digit precision
     const easting5 = Math.floor(eastingWithin / 10).toString().padStart(5, '0');
@@ -886,6 +885,7 @@ function toIrishGridReference(easting, northing) {
 
     return `${gridSquare} ${easting5} ${northing5}`;
 }
+
 
 
         function convertToDMS(coordinate, type) {
