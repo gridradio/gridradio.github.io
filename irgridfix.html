@@ -504,23 +504,22 @@ function latLonToIrishGrid(lat, lon) {
 
             return gridSquare + " " + easting6 + " " + northing6;
         }
-
-        function calculateWABForIrishGrid(irishGridReference) {
-    // Irish grid reference format is typically like "N 12345 67890"
-    // We need the first letter and the 1st and 4th numbers of the easting and northing
-
+        
+function calculateWABForIrishGrid(irishGridReference) {
+    // Irish grid reference format is typically like "P 188 426"
     const parts = irishGridReference.split(' ');
-    const gridLetter = parts[0];
-    const easting = parts[1];
-    const northing = parts[2];
+    const gridLetter = parts[0];   // The letter of the grid
+    const easting = parts[1];      // easting part
+    const northing = parts[2];     // northing part
 
-    // Extract the first number from easting and the fourth number from northing
-    const wabEastingDigit = easting[0];  // First digit of easting
-    const wabNorthingDigit = northing[3]; // Fourth digit of northing
+    // Extract the first digit of easting and the fourth digit of northing (if it exists)
+    const wabEastingDigit = easting[0];   // First digit of easting
+    const wabNorthingDigit = northing[2]; // Fourth digit of northing (index 2 for "426")
 
-    // Combine them into the WAB square format
+    // Combine them into the WAB square format: letter + 1st digit of easting + 4th digit of northing
     return `${gridLetter}${wabEastingDigit}${wabNorthingDigit}`;
 }
+
 
 
         function osGridReferenceToWAB(gridReference) {
