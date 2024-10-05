@@ -744,20 +744,20 @@ function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accurac
     document.getElementById('altitude-values').innerText = altitudeText;
     document.getElementById('altitude-card').style.display = altitudeMeters !== 'N/A' ? 'block' : 'none';
 
-    // Check if the location is in Ireland
+    // Check if the location is in Ireland or Northern Ireland
     if (isInIreland(lat, lon)) {
-    const irishGrid = latLonToIrishGrid(lat, lon); // Convert WGS84 to Irish Grid
-    const irishGridReference = toIrishGridReference(irishGrid.easting, irishGrid.northing); // Format the Irish Grid reference
-    document.getElementById('os-grid').innerText = irishGridReference;
-    document.getElementById('os-grid-card').style.display = 'block';
-    document.querySelector('#os-grid-card .card-title').innerText = 'Irish Grid Reference';
-    
-    const wabSquare = calculateWABForIrishGrid(irishGridReference);
-    document.getElementById('wab-square').innerText = wabSquare;
-    document.getElementById('wab-square-card').style.display = 'block';
+        const irishGrid = latLonToIrishGrid(lat, lon);
+        const irishGridReference = toIrishGridReference(irishGrid.easting, irishGrid.northing);
+        
+        document.getElementById('os-grid').innerText = irishGridReference;
+        document.getElementById('os-grid-card').style.display = 'block';
+        document.querySelector('#os-grid-card .card-title').innerText = 'Irish Grid Reference';
+        
+        const wabSquare = calculateWABForIrishGrid(irishGridReference);
+        document.getElementById('wab-square').innerText = wabSquare;
+        document.getElementById('wab-square-card').style.display = 'block';
 
     } else {
-        // Use OSGB Grid (EPSG:27700)
         const osgb = latLonToOSGB(lat, lon);
         if (osgb) {
             const osGridReference = toOSGridReference(osgb.easting, osgb.northing);
@@ -774,7 +774,7 @@ function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accurac
             document.getElementById('wab-square-card').style.display = 'none';
         }
     }
-
+    
     const maidenheadLocator = latLonToMaidenhead(lat, lon);
     document.getElementById('maidenhead-locator').innerText = maidenheadLocator;
 
@@ -835,13 +835,8 @@ function toIrishGridReference(easting, northing) {
     ];
 
     // Get the 100k digit of easting and northing
-    const e100k = Math.floor(easting / 100000);  // Get the 100k block for easting
-    const n100k = Math.floor(northing / 100000); // Get the 100k block for northing
-
-    // Check for valid grid positions
-    if (e100k < 2 || e100k > 4 || n100k < 0 || n100k > 3) {
-        return "Invalid Grid Reference";
-    }
+    const e100k = Math.floor(easting / 100000);
+    const n100k = Math.floor(northing / 100000);
 
     // Adjust to match the Irish grid origin (shift the rows and columns properly)
     const l1 = e100k - 2;  // Adjust the easting to the Irish grid system (200km+ starts at O)
@@ -864,6 +859,7 @@ function toIrishGridReference(easting, northing) {
 
     return `${gridSquare} ${easting5} ${northing5}`;
 }
+
 
 
 
