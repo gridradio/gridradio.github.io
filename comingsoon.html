@@ -724,6 +724,10 @@
     document.getElementById('altitude-values').innerText = altitudeText;
     document.getElementById('altitude-card').style.display = altitudeMeters !== 'N/A' ? 'block' : 'none';
 
+    // Update the Maidenhead locator
+    const maidenheadLocator = latLonToMaidenhead(lat, lon);
+    document.getElementById('maidenhead-locator').innerText = maidenheadLocator;
+            
     // Updated latitude and longitude ranges for Ireland, Northern Ireland, and the Channel Islands
     const inIreland = (lat >= 51.4 && lat <= 54.0) && (lon >= -10.5 && lon <= -5.5); // Ireland
     const inNorthernIreland = (lat >= 54.0 && lat <= 55.3) && (lon >= -8.0 && lon <= -5.8); // Northern Ireland
@@ -755,9 +759,7 @@
         }
     }
 
-    // Update the Maidenhead locator
-    const maidenheadLocator = latLonToMaidenhead(lat, lon);
-    document.getElementById('maidenhead-locator').innerText = maidenheadLocator;
+
 
             if (showCQZoneCard) {
                 const cqZone = getCQZone(lat, lon);
