@@ -512,7 +512,8 @@ function toOSGridReference(easting, northing) {
             const eastingNorthing = gridReference.slice(2).replace(/\s+/g, '');
 
             if (eastingNorthing.length !== 6) {
-                throw new Error('Grid reference must be a six-figure grid reference.');
+                console.log('Grid reference must be a six-figure grid reference.');
+                return null;
             }
 
             const e1 = eastingNorthing[0];
