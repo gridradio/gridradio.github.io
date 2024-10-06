@@ -465,38 +465,47 @@
             return { easting: easting, northing: northing };
         }
 
-        function toOSGridReference(easting, northing) {
-            const e100k = Math.floor(easting / 100000);
-            const n100k = Math.floor(northing / 100000);
+function toOSGridReference(easting, northing) {
+    const e100k = Math.floor(easting / 100000);
+    const n100k = Math.floor(northing / 100000);
 
-            const gridLetters = [
-                ['SV', 'SW', 'SX', 'SY', 'SZ', 'TV', 'TW'],
-                ['SQ', 'SR', 'SS', 'ST', 'SU', 'TQ', 'TR'],
-                ['SL', 'SM', 'SN', 'SO', 'SP', 'TL', 'TM'],
-                ['SF', 'SG', 'SH', 'SJ', 'SK', 'TF', 'TG'],
-                ['SA', 'SB', 'SC', 'SD', 'SE', 'TA', 'TB'],
-                ['NV', 'NW', 'NX', 'NY', 'NZ', 'OV', 'OW'],
-                ['NQ', 'NR', 'NS', 'NT', 'NU', 'OQ', 'OR'],
-                ['NL', 'NM', 'NN', 'NO', 'NP', 'OL', 'OM'],
-                ['NF', 'NG', 'NH', 'NJ', 'NK', 'OF', 'OG'],
-                ['NA', 'NB', 'NC', 'ND', 'NE', 'OA', 'OB'],
-                ['HV', 'HW', 'HX', 'HY', 'HZ', 'JV', 'JW'],
-                ['HQ', 'HR', 'HS', 'HT', 'HU', 'JQ', 'JR'],
-                ['HL', 'HM', 'HN', 'HO', 'HP', 'JL', 'JM']
-            ];
+    const gridLetters = [
+        ['SV', 'SW', 'SX', 'SY', 'SZ', 'TV', 'TW'],
+        ['SQ', 'SR', 'SS', 'ST', 'SU', 'TQ', 'TR'],
+        ['SL', 'SM', 'SN', 'SO', 'SP', 'TL', 'TM'],
+        ['SF', 'SG', 'SH', 'SJ', 'SK', 'TF', 'TG'],
+        ['SA', 'SB', 'SC', 'SD', 'SE', 'TA', 'TB'],
+        ['NV', 'NW', 'NX', 'NY', 'NZ', 'OV', 'OW'],
+        ['NQ', 'NR', 'NS', 'NT', 'NU', 'OQ', 'OR'],
+        ['NL', 'NM', 'NN', 'NO', 'NP', 'OL', 'OM'],
+        ['NF', 'NG', 'NH', 'NJ', 'NK', 'OF', 'OG'],
+        ['NA', 'NB', 'NC', 'ND', 'NE', 'OA', 'OB'],
+        ['HV', 'HW', 'HX', 'HY', 'HZ', 'JV', 'JW'],
+        ['HQ', 'HR', 'HS', 'HT', 'HU', 'JQ', 'JR'],
+        ['HL', 'HM', 'HN', 'HO', 'HP', 'JL', 'JM']
+    ];
 
-            const l1 = Math.floor(e100k);
-            const l2 = Math.floor(n100k);
-            const gridSquare = gridLetters[l2][l1];
+    const l1 = Math.floor(e100k);
+    const l2 = Math.floor(n100k);
 
-            const eastingWithin = Math.floor(easting % 100000);
-            const northingWithin = Math.floor(northing % 100000);
+    // Ensure that l1 and l2 are within bounds
+    if (l1 < 0 || l2 < 0 || l1 >= gridLetters[0].length || l2 >= gridLetters.length) {
+        console.log("Invalid grid letter indices: l1 =", l1, "l2 =", l2);
+        return "Invalid Grid Reference";
+    }
 
-            const easting6 = Math.floor(eastingWithin / 100).toString().padStart(3, '0');
-            const northing6 = Math.floor(northingWithin / 100).toString().padStart(3, '0');
+    const gridSquare = gridLetters[l2][l1];
 
-            return gridSquare + " " + easting6 + " " + northing6;
-        }
+    // Ensure eastingWithin and northingWithin are initialized properly
+    const eastingWithin = Math.floor(easting % 100000);
+    const northingWithin = Math.floor(northing % 100000);
+
+    const easting6 = Math.floor(eastingWithin / 100).toString().padStart(3, '0');
+    const northing6 = Math.floor(northingWithin / 100).toString().padStart(3, '0');
+
+    return gridSquare + " " + easting6 + " " + northing6;
+}
+
 
         function osGridReferenceToWAB(gridReference) {
             const letters = gridReference.slice(0, 2);
