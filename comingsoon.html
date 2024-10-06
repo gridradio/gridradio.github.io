@@ -480,12 +480,6 @@ function latLonToOSGB(lat, lon) {
 }
 
 function toOSGridReference(easting, northing) {
-    // Channel Islands grid square references
-    if (easting < 100000 && northing < 100000) {
-        return `WA ${Math.floor(easting / 100).toString().padStart(3, '0')} ${Math.floor(northing / 100).toString().padStart(3, '0')}`;
-    }
-
-    // Default mainland OS grid reference system for the UK
     const e100k = Math.floor(easting / 100000);
     const n100k = Math.floor(northing / 100000);
 
@@ -509,8 +503,9 @@ function toOSGridReference(easting, northing) {
     const l2 = Math.floor(n100k);
     const gridSquare = gridLetters[l2][l1];
 
+    // Ensure eastingWithin and northingWithin are initialized properly
     const eastingWithin = Math.floor(easting % 100000);
-    const northingWithin = Math.floor(northingWithin % 100000);
+    const northingWithin = Math.floor(northing % 100000);
 
     const easting6 = Math.floor(eastingWithin / 100).toString().padStart(3, '0');
     const northing6 = Math.floor(northingWithin / 100).toString().padStart(3, '0');
