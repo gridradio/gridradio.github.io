@@ -720,11 +720,12 @@
     document.getElementById('altitude-values').innerText = altitudeText;
     document.getElementById('altitude-card').style.display = altitudeMeters !== 'N/A' ? 'block' : 'none';
 
-    // Add the latitude and longitude ranges for Ireland, Northern Ireland, and the Channel Islands
-    const inIreland = (lat >= 51.5 && lat <= 55.5) && (lon >= -10.5 && lon <= -5.5);
-    const inChannelIslands = (lat >= 49 && lat <= 49.7) && (lon >= -2.7 && lon <= -1.5);
+    // Updated latitude and longitude ranges for Ireland, Northern Ireland, and the Channel Islands
+    const inIreland = (lat >= 51.4 && lat <= 54.0) && (lon >= -10.5 && lon <= -5.5); // Ireland
+    const inNorthernIreland = (lat >= 54.0 && lat <= 55.4) && (lon >= -8.0 && lon <= -5.5); // Northern Ireland
+    const inChannelIslands = (lat >= 49.0 && lat <= 49.5) && (lon >= -2.7 && lon <= -1.5); // Channel Islands
     
-    if (inIreland) {
+    if (inIreland || inNorthernIreland) {
         document.getElementById('wab-square').innerText = 'NI and Ireland Grid coming soon';
         document.getElementById('wab-square-card').style.display = 'block';
         document.getElementById('os-grid-card').style.display = 'none'; // Hide OS Grid as it doesn't apply to Ireland
