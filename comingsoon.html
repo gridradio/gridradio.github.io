@@ -707,6 +707,10 @@
     const latDMS = convertToDMS(lat, 'lat');
     const lonDMS = convertToDMS(lon, 'lon');
 
+    // Always reset cards before applying specific region logic
+    document.getElementById('os-grid-card').style.display = 'none';
+    document.getElementById('wab-square-card').style.display = 'none';
+
     document.getElementById('latitude-longitude').innerText = `${lat.toFixed(6)},${lon.toFixed(6)}`;
     document.getElementById('latitude-longitude-dms').innerText = `${latDMS}, ${lonDMS}`;
     document.getElementById('location-accuracy').innerText = `Accuracy: ${accuracy}`;
@@ -724,7 +728,7 @@
     const inIreland = (lat >= 51.4 && lat <= 54.0) && (lon >= -10.5 && lon <= -5.5); // Ireland
     const inNorthernIreland = (lat >= 54.0 && lat <= 55.3) && (lon >= -8.0 && lon <= -5.8); // Northern Ireland
     const inChannelIslands = (lat >= 49.0 && lat <= 49.5) && (lon >= -2.7 && lon <= -1.9); // Refined Channel Islands bounds
-    
+
     if (inIreland || inNorthernIreland) {
         document.getElementById('wab-square').innerText = 'NI and Ireland Grid coming soon';
         document.getElementById('wab-square-card').style.display = 'block';
@@ -751,6 +755,7 @@
         }
     }
 
+    // Update the Maidenhead locator
     const maidenheadLocator = latLonToMaidenhead(lat, lon);
     document.getElementById('maidenhead-locator').innerText = maidenheadLocator;
 
