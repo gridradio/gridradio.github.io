@@ -457,78 +457,46 @@
             ['EPSG:4326', '+proj=longlat +datum=WGS84 +no_defs']
         ]);
 
-function latLonToOSGB(lat, lon) {
-    // Extend range to include Channel Islands
-    if (lat < 49.0 || lat > 61.0 || lon < -9.5 || lon > 2.0) {
-        return null;
-    }
+        function latLonToOSGB(lat, lon) {
+            if (lat < 49.0 || lat > 61.0 || lon < -8.0 || lon > 2.0) {
+                return null;
+            }
+            const [easting, northing] = proj4('EPSG:4326', 'EPSG:27700', [lon, lat]);
+            return { easting: easting, northing: northing };
+        }
 
-    const [easting, northing] = proj4('EPSG:4326', 'EPSG:27700', [lon, lat]);
+        function toOSGridReference(easting, northing) {
+            const e100k = Math.floor(easting / 100000);
+            const n100k = Math.floor(northing / 100000);
 
-    // Handle Channel Islands special case
-    if (lat >= 49.0 && lat <= 50.0 && lon >= -3.0 && lon <= -1.5) {
-        // Use specific grid squares for different parts of the Channel Islands
-        let gridSquare = getChannelIslandsGrid(lat, lon);
-        const eastingWithin = Math.floor(easting % 100000);
-        const northingWithin = Math.floor(northing % 100000);
-        const easting6 = Math.floor(eastingWithin / 100).toString().padStart(3, '0');
-        const northing6 = Math.floor(northingWithin / 100).toString().padStart(3, '0');
-        return gridSquare + " " + easting6 + " " + northing6;
-    }
+            const gridLetters = [
+                ['SV', 'SW', 'SX', 'SY', 'SZ', 'TV', 'TW'],
+                ['SQ', 'SR', 'SS', 'ST', 'SU', 'TQ', 'TR'],
+                ['SL', 'SM', 'SN', 'SO', 'SP', 'TL', 'TM'],
+                ['SF', 'SG', 'SH', 'SJ', 'SK', 'TF', 'TG'],
+                ['SA', 'SB', 'SC', 'SD', 'SE', 'TA', 'TB'],
+                ['NV', 'NW', 'NX', 'NY', 'NZ', 'OV', 'OW'],
+                ['NQ', 'NR', 'NS', 'NT', 'NU', 'OQ', 'OR'],
+                ['NL', 'NM', 'NN', 'NO', 'NP', 'OL', 'OM'],
+                ['NF', 'NG', 'NH', 'NJ', 'NK', 'OF', 'OG'],
+                ['NA', 'NB', 'NC', 'ND', 'NE', 'OA', 'OB'],
+                ['HV', 'HW', 'HX', 'HY', 'HZ', 'JV', 'JW'],
+                ['HQ', 'HR', 'HS', 'HT', 'HU', 'JQ', 'JR'],
+                ['HL', 'HM', 'HN', 'HO', 'HP', 'JL', 'JM']
+            ];
 
-    return { easting: easting, northing: northing };
-}
+            const l1 = Math.floor(e100k);
+            const l2 = Math.floor(n100k);
+            const gridSquare = gridLetters[l2][l1];
 
-function toOSGridReference(easting, northing) {
-    const e100k = Math.floor(easting / 100000);
-    const n100k = Math.floor(northing / 100000);
+            const eastingWithin = Math.floor(easting % 100000);
+            const northingWithin = Math.floor(northing % 100000);
 
-    const gridLetters = [
-        ['SV', 'SW', 'SX', 'SY', 'SZ', 'TV', 'TW'],
-        ['SQ', 'SR', 'SS', 'ST', 'SU', 'TQ', 'TR'],
-        ['SL', 'SM', 'SN', 'SO', 'SP', 'TL', 'TM'],
-        ['SF', 'SG', 'SH', 'SJ', 'SK', 'TF', 'TG'],
-        ['SA', 'SB', 'SC', 'SD', 'SE', 'TA', 'TB'],
-        ['NV', 'NW', 'NX', 'NY', 'NZ', 'OV', 'OW'],
-        ['NQ', 'NR', 'NS', 'NT', 'NU', 'OQ', 'OR'],
-        ['NL', 'NM', 'NN', 'NO', 'NP', 'OL', 'OM'],
-        ['NF', 'NG', 'NH', 'NJ', 'NK', 'OF', 'OG'],
-        ['NA', 'NB', 'NC', 'ND', 'NE', 'OA', 'OB'],
-        ['HV', 'HW', 'HX', 'HY', 'HZ', 'JV', 'JW'],
-        ['HQ', 'HR', 'HS', 'HT', 'HU', 'JQ', 'JR'],
-        ['HL', 'HM', 'HN', 'HO', 'HP', 'JL', 'JM']
-    ];
+            const easting6 = Math.floor(eastingWithin / 100).toString().padStart(3, '0');
+            const northing6 = Math.floor(northingWithin / 100).toString().padStart(3, '0');
 
-    const l1 = Math.floor(e100k);
-    const l2 = Math.floor(n100k);
-    const gridSquare = gridLetters[l2][l1];
-
-    // Ensure eastingWithin and northingWithin are initialized properly
-    const eastingWithin = Math.floor(easting % 100000);
-    const northingWithin = Math.floor(northing % 100000);
-
-    const easting6 = Math.floor(eastingWithin / 100).toString().padStart(3, '0');
-    const northing6 = Math.floor(northingWithin / 100).toString().padStart(3, '0');
-
-    return gridSquare + " " + easting6 + " " + northing6;
-}
-
-// Function to return the correct grid square for the Channel Islands
-function getChannelIslandsGrid(lat, lon) {
-    // The Channel Islands consist of several grid squares
-    // Use the latitude and longitude to return the appropriate grid square
-    if (lat >= 49.5 && lat <= 49.7 && lon >= -2.7 && lon <= -2.0) {
-        return 'WA'; // Example for Jersey
-    } else if (lat >= 49.4 && lat <= 49.6 && lon >= -2.2 && lon <= -1.8) {
-        return 'WR'; // Example for Guernsey
-    } else if (lat >= 49.1 && lat <= 49.3 && lon >= -2.5 && lon <= -2.0) {
-        return 'WV'; // Example for Alderney
-    } else if (lat >= 49.2 && lat <= 49.4 && lon >= -2.3 && lon <= -1.9) {
-        return 'WX'; // Example for Sark
-    }
-
-    return 'WA'; // Default to 'WA' if no specific grid is matched
-}
+            return gridSquare + " " + easting6 + " " + northing6;
+        }
 
         function osGridReferenceToWAB(gridReference) {
             const letters = gridReference.slice(0, 2);
@@ -733,42 +701,57 @@ function getChannelIslandsGrid(lat, lon) {
         }
 
         function updateDisplay(lat, lon, altitudeMeters, altitudeFeet, pressure, accuracy) {
-            currentLat = lat; // Update global latitude variable
-            currentLon = lon; // Update global longitude variable
+    currentLat = lat; // Update global latitude variable
+    currentLon = lon; // Update global longitude variable
 
-            const latDMS = convertToDMS(lat, 'lat');
-            const lonDMS = convertToDMS(lon, 'lon');
+    const latDMS = convertToDMS(lat, 'lat');
+    const lonDMS = convertToDMS(lon, 'lon');
 
-            document.getElementById('latitude-longitude').innerText = `${lat.toFixed(6)},${lon.toFixed(6)}`;
-            document.getElementById('latitude-longitude-dms').innerText = `${latDMS}, ${lonDMS}`;
-            document.getElementById('location-accuracy').innerText = `Accuracy: ${accuracy}`;
-            document.getElementById('location-accuracy').style.display = accuracy !== 'N/A' ? 'block' : 'none';
+    document.getElementById('latitude-longitude').innerText = `${lat.toFixed(6)},${lon.toFixed(6)}`;
+    document.getElementById('latitude-longitude-dms').innerText = `${latDMS}, ${lonDMS}`;
+    document.getElementById('location-accuracy').innerText = `Accuracy: ${accuracy}`;
+    document.getElementById('location-accuracy').style.display = accuracy !== 'N/A' ? 'block' : 'none';
 
-            let altitudeText = `${altitudeFeet} ft | ${altitudeMeters} m`;
-            if (pressure !== 'N/A') {
-                altitudeText += ` | ${pressure}`;
-            }
+    let altitudeText = `${altitudeFeet} ft | ${altitudeMeters} m`;
+    if (pressure !== 'N/A') {
+        altitudeText += ` | ${pressure}`;
+    }
 
-            document.getElementById('altitude-values').innerText = altitudeText;
-            document.getElementById('altitude-card').style.display = altitudeMeters !== 'N/A' ? 'block' : 'none';
+    document.getElementById('altitude-values').innerText = altitudeText;
+    document.getElementById('altitude-card').style.display = altitudeMeters !== 'N/A' ? 'block' : 'none';
 
-            const osgb = latLonToOSGB(lat, lon);
-            if (osgb) {
-                const osGridReference = toOSGridReference(osgb.easting, osgb.northing);
-                const wabSquare = osGridReferenceToWAB(osGridReference);
+    // Add the latitude and longitude ranges for Ireland, Northern Ireland, and the Channel Islands
+    const inIreland = (lat >= 51.5 && lat <= 55.5) && (lon >= -10.5 && lon <= -5.5);
+    const inChannelIslands = (lat >= 49 && lat <= 49.7) && (lon >= -2.7 && lon <= -1.5);
+    
+    if (inIreland) {
+        document.getElementById('wab-square').innerText = 'NI and Ireland Grid coming soon';
+        document.getElementById('wab-square-card').style.display = 'block';
+        document.getElementById('os-grid-card').style.display = 'none'; // Hide OS Grid as it doesn't apply to Ireland
+    } else if (inChannelIslands) {
+        document.getElementById('wab-square').innerText = 'Channel Islands coming soon';
+        document.getElementById('os-grid').innerText = 'Channel Islands coming soon';
+        document.getElementById('wab-square-card').style.display = 'block';
+        document.getElementById('os-grid-card').style.display = 'block';
+    } else {
+        const osgb = latLonToOSGB(lat, lon);
+        if (osgb) {
+            const osGridReference = toOSGridReference(osgb.easting, osgb.northing);
+            const wabSquare = osGridReferenceToWAB(osGridReference);
 
-                document.getElementById('os-grid').innerText = osGridReference;
-                document.getElementById('wab-square').innerText = wabSquare;
+            document.getElementById('os-grid').innerText = osGridReference;
+            document.getElementById('wab-square').innerText = wabSquare;
 
-                document.getElementById('os-grid-card').style.display = 'block';
-                document.getElementById('wab-square-card').style.display = 'block';
-            } else {
-                document.getElementById('os-grid-card').style.display = 'none';
-                document.getElementById('wab-square-card').style.display = 'none';
-            }
+            document.getElementById('os-grid-card').style.display = 'block';
+            document.getElementById('wab-square-card').style.display = 'block';
+        } else {
+            document.getElementById('os-grid-card').style.display = 'none';
+            document.getElementById('wab-square-card').style.display = 'none';
+        }
+    }
 
-            const maidenheadLocator = latLonToMaidenhead(lat, lon);
-            document.getElementById('maidenhead-locator').innerText = maidenheadLocator;
+    const maidenheadLocator = latLonToMaidenhead(lat, lon);
+    document.getElementById('maidenhead-locator').innerText = maidenheadLocator;
 
             if (showCQZoneCard) {
                 const cqZone = getCQZone(lat, lon);
