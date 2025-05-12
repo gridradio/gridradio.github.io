@@ -1110,7 +1110,7 @@
 		const bottom = osgbCenter[1] - boxSize / 2;
 		const top = osgbCenter[1] + boxSize / 2;
 		const boxParam = `${left.toFixed(0)}:${bottom.toFixed(0)}:${right.toFixed(0)}:${top.toFixed(0)}`;
-		const magicMapUrl = `https://magic.defra.gov.uk/MagicMap.html?&startTopic=GreyRasters&chosenLayers=pathrouteIndex,aonbIndex,lnrPIndex,lnrIndex,nnrPIndex,nnrIndex,nnrscoPIndex,nnrscoIndex,nnrwalPIndex,nnrwalIndex,npkIndex,ramPIndex,ramIndex,ramscoPIndex,ramscoIndex,ramwalPIndex,ramwalIndex,wildBirdGenLcnZone,baseIndex,CSTsssiP,CSTsssi&box=${boxParam}&useDefaultbackgroundMapping=false`;
+		const magicMapUrl = `https://magic.defra.gov.uk/MagicMap.html?&startTopic=GreyRasters&chosenLayers=natcycleIndex,pathrouteIndex,pathmarginIndex,sssiPIndex,sssiIndex,sssiscoPIndex,sssiscoIndex,sssiwalPIndex,sssiwalIndex,wtsPIndex,wtsIndex,CSTsssiP,CSTsssi&box=${boxParam}&useDefaultbackgroundMapping=false`;
 		// Open the URL in a new tab
 		window.open(magicMapUrl, '_blank');
 	}
